@@ -1,4 +1,5 @@
-*.iws
+# Grails .gitignore
+
 *Db.properties
 *Db.script
 .settings
@@ -17,6 +18,28 @@ stacktrace.log
 /target-eclipse/
 
 # Intellij
-.idea/
+.idea
 *.iml
 *.iws
+*.ipr
+
+#Heroku .gitignore
+.classpath
+.project
+eclipse
+target
+/plugins
+web-app/WEB-INF/tld/c.tld
+web-app/WEB-INF/tld/fmt.tld
+
+# Created by http://www.gitignore.io
+
+# default HSQL database files for production mode
+/prodDb.*
+
+# logs
+/test/reports
+/logs
+
+# project release file
+/*.war
