@@ -1,0 +1,1 @@
+package com.billmateabstract class User {    String name;    String email;    static constraints = {        name        email email: true, blank: false, unique: true, nullable: false    }    String toString(){        name ? name : email    }}
