@@ -1,16 +1,12 @@
 package com.billmate
 
-abstract class Circle {
+class CustomizedDebt {
 
-    String name
+    Integer percentage
     Date createdAt
 
     static constraints = {
-        name blank: false, nullable: false
+        percentage min: 0, nullable: false
         createdAt nullable: false, defaultValue: new Date(), min: new Date()
-    }
-
-    String toString(){
-        name
     }
 }

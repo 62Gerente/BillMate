@@ -1,6 +1,6 @@
 package com.billmate
 
-class House extends Circle {
+class SystemNotification extends Notification{
 
     static constraints = {
     }

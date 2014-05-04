@@ -1,6 +1,6 @@
 package com.billmate
 
-class House extends Circle {
+class OccasionalExpense extends Expense {
 
     static constraints = {
     }
