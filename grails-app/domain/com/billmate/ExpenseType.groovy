@@ -1,13 +1,13 @@
 package com.billmate
 
-abstract class Circle {
+class ExpenseType {
 
     String name
-    Date createdAt
+    byte[] icon
 
     static constraints = {
         name blank: false, nullable: false
-        createdAt nullable: false, defaultValue: new Date(), min: new Date()
+        icon maxSize: 1024 * 1024, nullable: false
     }
 
     String toString(){

@@ -1,16 +1,18 @@
 package com.billmate
 
-abstract class Circle {
+abstract class Notification {
 
-    String name
+    String title
+    String body
     Date createdAt
 
     static constraints = {
-        name blank: false, nullable: false
+        title blank: false, nullable: false
+        body blank: false, nullable: false
         createdAt nullable: false, defaultValue: new Date(), min: new Date()
     }
 
     String toString(){
-        name
+        title
     }
 }

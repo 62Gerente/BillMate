@@ -1,1 +1,18 @@
-package com.billmateabstract class User {    String name;    String email;    static constraints = {        name        email email: true, blank: false, unique: true, nullable: false    }    String toString(){        name ? name : email    }}
+package com.billmate
+
+abstract class User {
+
+    String name
+    String email
+    Date createdAt
+
+    static constraints = {
+        name blank: true, nullable: true
+        email email: true, blank: false, unique: true, nullable: false
+        createdAt nullable: false, defaultValue: new Date(), min: new Date()
+    }
+
+    String toString() {
+        name ? name : email
+    }
+}
