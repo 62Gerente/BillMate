@@ -1,6 +1,8 @@
 package com.billmate
 
 abstract class User {
+    static belongsTo = Circle
+    static hasMany = [circles: Circle]
 
     String name
     String email

@@ -1,6 +1,8 @@
 package com.billmate
 
 abstract class Expense {
+    static belongsTo = Circle
+    static hasMany = [expenseTypes: ExpenseType]
 
     String title
     String description
@@ -14,7 +16,7 @@ abstract class Expense {
     static constraints = {
         title nullable: false, blank: false
         description maxSize: 2000, nullable: true, blank: true
-        value min: 0, nullable: false
+        value min: 0D, nullable: false
         paymentDeadline nullable: true
         receptionDeadline nullable: true
         createdAt nullable: false, defaultValue: new Date(), min: new Date()

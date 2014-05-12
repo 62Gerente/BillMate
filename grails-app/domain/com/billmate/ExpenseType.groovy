@@ -1,13 +1,17 @@
 package com.billmate
 
+import com.lucastex.grails.fileuploader.UFile
+
 class ExpenseType {
+    static belongsTo = [Circle, Expense]
+    static hasMany = [circles: Circle, expenses: Expense]
 
     String name
-    byte[] icon
+    UFile icon
 
     static constraints = {
         name blank: false, nullable: false
-        icon maxSize: 1024 * 1024, nullable: false
+        icon nullable: false
     }
 
     String toString(){

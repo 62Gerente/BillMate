@@ -1,6 +1,7 @@
 package com.billmate
 
 abstract class Circle {
+    static hasMany = [users: User, expenseTypes: ExpenseType, expenses: Expense]
 
     String name
     Date createdAt

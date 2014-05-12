@@ -119,3 +119,16 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+fileuploader {
+    avatar {
+        maxSize = 1024 * 1024 * 3
+        allowedExtensions = ["jpg","jpeg","gif","png"]
+        path = "/tmp/avatar/"
+    }
+    docs {
+        maxSize = 1000 * 1024 * 4
+        allowedExtensions = ["doc", "docx", "pdf", "rtf"]
+        path = "/tmp/docs/"
+    }
+}

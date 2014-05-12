@@ -9,9 +9,9 @@ class Payment {
     Boolean validated
 
     static constraints = {
-        value min: 0, nullable: false
+        value min: 0D, nullable: false
         date defaultValue: new Date(), nullable: false
-        date validationDate, nullable: true
+        validationDate nullable: true
         validated defaultValue: false, nullable: true
         createdAt nullable: false, defaultValue: new Date(), min: new Date()
     }
