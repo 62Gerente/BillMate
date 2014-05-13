@@ -1,9 +1,10 @@
 package com.billmate
 
-class RegularExpense extends Expense{
-    static belongsTo = DirectDebit
+class RegularExpense {
+    static belongsTo = [DirectDebit, Expense]
 
     DirectDebit directDebit
+    Expense expense
 
     Date receptionBeginDate
     Date receptionEndDate
@@ -12,6 +13,7 @@ class RegularExpense extends Expense{
 
     static constraints = {
         directDebit nullable: true
+        expense nullable: true
 
         receptionBeginDate nullable: true
         receptionEndDate nullable: true

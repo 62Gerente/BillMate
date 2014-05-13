@@ -1,7 +1,11 @@
 package com.billmate
 
-class CustomExpenseType extends ExpenseType{
+class CustomExpenseType{
+    static belongsTo = ExpenseType
+
+    ExpenseType expenseType
 
     static constraints = {
+        expenseType nullable: false
     }
 }

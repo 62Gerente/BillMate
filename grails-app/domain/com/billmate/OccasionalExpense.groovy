@@ -1,7 +1,11 @@
 package com.billmate
 
-class OccasionalExpense extends Expense {
+class OccasionalExpense {
+    static belongsTo = Expense
+
+    Expense expense
 
     static constraints = {
+        expense nullable: true
     }
 }

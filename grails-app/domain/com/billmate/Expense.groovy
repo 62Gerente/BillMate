@@ -2,10 +2,11 @@ package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
 
-abstract class Expense {
+class Expense {
     static belongsTo = [Circle, RegisteredUser]
     static hasMany = [expenseTypes: ExpenseType, payments: Payment,
                       customizedDebts: CustomDebt, actions: Action]
+    static hasOne = [regularExpense: RegularExpense, occasionalExpense: OccasionalExpense]
 
     RegisteredUser responsible
     UFile invoice
@@ -26,6 +27,9 @@ abstract class Expense {
         responsible nullable: false
         invoice nullable: true
         receipt nullable: true
+
+        regularExpense nullable: true
+        occasionalExpense nullable: true
 
         title nullable: false, blank: false
         description maxSize: 2000, nullable: true, blank: true
