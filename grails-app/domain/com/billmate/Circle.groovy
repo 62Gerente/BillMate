@@ -1,7 +1,8 @@
 package com.billmate
 
 abstract class Circle {
-    static hasMany = [users: User, expenseTypes: ExpenseType, expenses: Expense]
+    static hasMany = [users: User, expenseTypes: ExpenseType,
+                      expenses: Expense, actions: Action]
 
     String name
     String description

@@ -1,6 +1,6 @@
 package com.billmate
 
-class CustomizedDebt {
+class CustomDebt {
     static belongsTo = [Expense, User]
 
     Expense expense

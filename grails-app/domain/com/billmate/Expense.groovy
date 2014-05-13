@@ -5,7 +5,7 @@ import com.lucastex.grails.fileuploader.UFile
 abstract class Expense {
     static belongsTo = [Circle, RegisteredUser]
     static hasMany = [expenseTypes: ExpenseType, payments: Payment,
-                      customizedDebts: CustomizedDebt, actions: Action]
+                      customizedDebts: CustomDebt, actions: Action]
 
     RegisteredUser responsible
     UFile invoice
