@@ -2,7 +2,7 @@ package com.billmate
 
 abstract class User {
     static belongsTo = Circle
-    static hasMany = [circles: Circle]
+    static hasMany = [circles: Circle, payments: Payment, customizedDebts: CustomizedDebt]
 
     String name
     String email

@@ -2,7 +2,7 @@ package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
 
-class ExpenseType {
+abstract class ExpenseType {
     static belongsTo = [Circle, Expense]
     static hasMany = [circles: Circle, expenses: Expense]
 

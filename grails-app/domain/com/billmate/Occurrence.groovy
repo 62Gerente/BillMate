@@ -1,7 +1,6 @@
 package com.billmate
 
 class Occurrence {
-
     Date beginDate
     Date endDate
 

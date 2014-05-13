@@ -1,7 +1,6 @@
 package com.billmate
 
 abstract class Notification {
-
     String title
     String body
     Date createdAt
