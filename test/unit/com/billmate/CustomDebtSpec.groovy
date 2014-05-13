@@ -6,7 +6,7 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.domain.DomainClassUnitTestMixin} for usage instructions
  */
-@TestFor(Debt)
+@TestFor(CustomDebt)
 class CustomDebtSpec extends Specification {
 
     def setup() {

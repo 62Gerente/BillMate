@@ -1,7 +1,11 @@
 package com.billmate
 
-class ReferredUser extends User {
+class ReferredUser  {
+    static belongsTo = User
+
+    User user
 
     static constraints = {
+        user nullable: false
     }
 }
