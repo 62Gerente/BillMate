@@ -1,7 +1,7 @@
 package com.billmate
 
 class CircleType {
-    static hasMany = [defaultExpenseTypes: DefaultExpenseType]
+    static hasMany = [expenseTypes: ExpenseType]
 
     Integer identifier
     String name

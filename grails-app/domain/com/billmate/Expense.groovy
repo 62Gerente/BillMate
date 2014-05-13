@@ -31,7 +31,7 @@ abstract class Expense {
         description maxSize: 2000, nullable: true, blank: true
         value min: 0D, nullable: false
         beginDate nullable: false, defaultValue: new Date()
-        endDate nullable: true, min: beginDate
+        endDate nullable: true
         paymentDeadline nullable: true
         receptionDeadline nullable: true
         createdAt nullable: false, defaultValue: new Date()
