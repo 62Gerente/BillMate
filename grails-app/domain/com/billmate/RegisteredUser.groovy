@@ -3,7 +3,7 @@ package com.billmate
 import com.lucastex.grails.fileuploader.UFile
 
 class RegisteredUser extends User {
-    static hasMany = [responsibleExpenses: Expense, realizedActions: Action]
+    static hasMany = [responsibleExpenses: Expense, realizedActions: Action, systemNotifications: SystemNotification]
     static mappedBy = [responsibleExpenses: "responsible", realizedActions: "actor"]
 
     UFile photo
