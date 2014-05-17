@@ -74,11 +74,12 @@ grails.project.dependency.resolution = {
         compile ":asset-pipeline:1.6.1"
 
         // Uncomment these to enable additional asset-pipeline capabilities
-        compile ":sass-asset-pipeline:1.5.5"
+        compile ":sass-asset-pipeline:1.7.4"
         //compile ":less-asset-pipeline:1.5.3"
         compile ":coffee-asset-pipeline:1.5.0"
         //compile ":handlebars-asset-pipeline:1.3.0.1"
 
         compile ":file-uploader:1.2.1"
+        compile ':locale-configuration:1.0'
     }
 }

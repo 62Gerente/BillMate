@@ -132,3 +132,6 @@ fileuploader {
         path = "/tmp/docs/"
     }
 }
+
+grails.plugins.localeConfiguration.supportedLocales = [new Locale("pt","PT")]
+grails.plugins.localeConfiguration.defaultLocale = new Locale("pt","PT")
