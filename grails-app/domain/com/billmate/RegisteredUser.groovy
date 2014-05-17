@@ -17,6 +17,6 @@ class RegisteredUser {
         photo nullable: true
 
         phoneNumber matches: '\\d{9}', unique: true, nullable: true
-        password password: true, size: 5..20, blank: false, nullable: false
+        password password: true, size: 6..20, blank: false, nullable: false
     }
 }

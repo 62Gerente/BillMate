@@ -1,8 +1,8 @@
 <div class="signin-container">
     <div class="signin-info">
         <a href="index.html" class="logo">
-            <img src="${assetPath(src: 'logo.png')}" class="logo" alt="">&nbsp;
-            <g:message code="com.billmate.application.name" default="BillMate"/>
+            <img src="${assetPath(src: 'logo.png')}" class="logo" alt="">
+            <span><g:message code="com.billmate.application.name" default="BillMate"/></span>
         </a>
         <ul>
             <li><i class="fa fa-group signin-icon"></i> <g:message code="com.billmate.authentication.sigin.feature.create.circle" default="Create a circle of friends."/></li>
@@ -11,9 +11,9 @@
             <li><i class="fa fa-rocket signin-icon"></i> <g:message code="com.billmate.authentication.sigin.feature.relax.study" default="Relax, study and have fun!"/></li>
         </ul>
     </div>
-    <div class="signin-form">
+    <div class="signin-form" id="signin-form">
 
-        <form action="index.html" id="signin-form-id">
+        <form action="index.html" id="signin-form_id">
             <div class="signin-text">
                 <span><g:message code="com.billmate.authentication.sigin.intro" default="Sign In to your account"/></span>
             </div>
@@ -46,7 +46,7 @@
                 </div>
             </div>
 
-            <form id="password-reset-form-id">
+            <form id="password-reset-form_id">
                 <div class="form-group w-icon">
                     <input type="text" name="email" id="reset_email" class="form-control input-lg" placeholder="<g:message code="com.billmate.user.email" default="Email"/>">
                     <span class="fa fa-envelope signin-form-icon"></span>
@@ -58,4 +58,8 @@
             </form>
         </div>
     </div>
+</div>
+
+<div class="not-a-member">
+    <g:message code="com.billmate.authentication.sigin.not.member" default="Not a member?"/> <a href="#"><g:message code="com.billmate.authentication.sigin.signup.now" default="Sign up now"/></a>
 </div>

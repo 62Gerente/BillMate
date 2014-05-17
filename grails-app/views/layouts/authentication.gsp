@@ -11,20 +11,22 @@
 
     <!-- Open Sans font from Google CDN -->
     <link href="http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,600,700,300&subset=latin" rel="stylesheet" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Rock+Salt' rel='stylesheet' type='text/css'>
 
     <asset:stylesheet href="application.css"/>
     <asset:stylesheet href="authentication.css"/>
+    <asset:javascript src="application.js"/>
+
     <!--[if lt IE 9]>
         <asset:javascript src="ie.min.js"/>
 	<![endif]-->
 </head>
 <body class="theme-default page-signin">
-    <div id="page-signin-bg">
-        <div class="overlay"></div>
-    </div>
+
+    <g:render template="/shared/messages"/>
 
     <g:layoutBody/>
 
-    <asset:javascript src="application.js"/>
+    <asset:javascript src="authentication.js"/>
 </body>
 </html>
