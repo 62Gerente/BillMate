@@ -13,9 +13,9 @@ class User {
         referredUser nullable: true
         registeredUser nullable: true
 
-        name blank: true, nullable: true
+        name blank: false, nullable: false
         email email: true, blank: false, unique: true, nullable: false
-        createdAt nullable: false, defaultValue: new Date(), min: new Date()
+        createdAt nullable: true, defaultValue: new Date()
     }
 
     String toString() {

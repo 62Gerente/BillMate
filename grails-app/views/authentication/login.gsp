@@ -13,7 +13,7 @@
     </div>
     <div class="signin-form" id="signin-form">
 
-        <form action="index.html" id="signin-form_id">
+        <g:form url="[action: 'doLogin', controller: 'authentication']" id="signin-form_id">
             <div class="signin-text">
                 <span><g:message code="com.billmate.authentication.sigin.intro" default="Sign In to your account"/></span>
             </div>
@@ -32,7 +32,7 @@
                 <input type="submit" value="<g:message code="com.billmate.authentication.sigin.button" default="SIGN IN"/>" class="signin-btn bg-primary">
                 <a href="#" class="forgot-password" id="forgot-password"><g:message code="com.billmate.authentication.sigin.forgot.password" default="Forgot your password?"/></a>
             </div>
-        </form>
+        </g:form>
 
         <div class="signin-with">
             <a href="#" class="signin-with-btn" style="background:#4f6faa;background:rgba(79, 111, 170, .8);"><g:message code="com.billmate.authentication.sigin.with" default="Sign In with"/> <span><g:message code="com.billmate.authentication.sigin.with.facebook" default="Facebook"/></span></a>
