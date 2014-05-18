@@ -41,7 +41,7 @@
         <div class="password-reset-form" id="password-reset-form">
             <div class="header">
                 <div class="signin-text">
-                    <span><g:message code="com.billmate.authentication.sigin.password.reset" default="Password reset"/></span>
+                    <span><g:message code="com.billmate.authentication.sigin.forgot.password" default="Forgot your password?"/></span>
                     <div class="close">&times;</div>
                 </div>
             </div>

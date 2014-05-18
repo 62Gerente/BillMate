@@ -27,8 +27,7 @@ init.push(function () {
 
     // Validate password
     $("#password").rules("add", {
-        required: true,
-        minlength: 6
+        required: true
     });
 });
 
