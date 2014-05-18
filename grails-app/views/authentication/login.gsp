@@ -5,17 +5,17 @@
             <span><g:message code="com.billmate.application.name" default="BillMate"/></span>
         </a>
         <ul>
-            <li><i class="fa fa-group signin-icon"></i> <g:message code="com.billmate.authentication.sigin.feature.create.circle" default="Create a circle of friends."/></li>
-            <li><i class="fa fa-share signin-icon"></i> <g:message code="com.billmate.authentication.sigin.feature.add.expenses" default="Add your shared expenses."/></li>
-            <li><i class="fa fa-credit-card signin-icon"></i> <g:message code="com.billmate.authentication.sigin.feature.pay.debts" default="Pay your debts on time."/></li>
-            <li><i class="fa fa-rocket signin-icon"></i> <g:message code="com.billmate.authentication.sigin.feature.relax.study" default="Relax, study and have fun!"/></li>
+            <li><i class="fa fa-group signin-icon"></i> <g:message code="com.billmate.authentication.signin.feature.create.circle" default="Create a circle of friends."/></li>
+            <li><i class="fa fa-share signin-icon"></i> <g:message code="com.billmate.authentication.signin.feature.add.expenses" default="Add your shared expenses."/></li>
+            <li><i class="fa fa-credit-card signin-icon"></i> <g:message code="com.billmate.authentication.signin.feature.pay.debts" default="Pay your debts on time."/></li>
+            <li><i class="fa fa-rocket signin-icon"></i> <g:message code="com.billmate.authentication.signin.feature.relax.study" default="Relax, study and have fun!"/></li>
         </ul>
     </div>
     <div class="signin-form" id="signin-form">
 
         <g:form url="[action: 'doLogin', controller: 'authentication']" id="signin-form_id">
             <div class="signin-text">
-                <span><g:message code="com.billmate.authentication.sigin.intro" default="Sign In to your account"/></span>
+                <span><g:message code="com.billmate.authentication.signin.intro" default="Sign In to your account"/></span>
             </div>
 
             <div class="form-group w-icon">
@@ -29,19 +29,19 @@
             </div>
 
             <div class="form-actions">
-                <input type="submit" value="<g:message code="com.billmate.authentication.sigin.button" default="SIGN IN"/>" class="signin-btn bg-primary">
-                <a href="#" class="forgot-password" id="forgot-password"><g:message code="com.billmate.authentication.sigin.forgot.password" default="Forgot your password?"/></a>
+                <input type="submit" value="<g:message code="com.billmate.authentication.signin.button" default="SIGN IN"/>" class="signin-btn bg-primary">
+                <a href="#" class="forgot-password" id="forgot-password"><g:message code="com.billmate.authentication.signin.forgot.password" default="Forgot your password?"/></a>
             </div>
         </g:form>
 
         <div class="signin-with">
-            <a href="#" class="signin-with-btn" style="background:#4f6faa;background:rgba(79, 111, 170, .8);"><g:message code="com.billmate.authentication.sigin.with" default="Sign In with"/> <span><g:message code="com.billmate.authentication.sigin.with.facebook" default="Facebook"/></span></a>
+            <a href="#" class="signin-with-btn" style="background:#4f6faa;background:rgba(79, 111, 170, .8);"><g:message code="com.billmate.authentication.signin.with" default="Sign In with"/> <span><g:message code="com.billmate.authentication.signin.with.facebook" default="Facebook"/></span></a>
         </div>
 
         <div class="password-reset-form" id="password-reset-form">
             <div class="header">
                 <div class="signin-text">
-                    <span><g:message code="com.billmate.authentication.sigin.password.reset" default="Password reset"/></span>
+                    <span><g:message code="com.billmate.authentication.signin.forgot.password" default="Forgot your password?"/></span>
                     <div class="close">&times;</div>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="form-actions">
-                    <input type="submit" value="<g:message code="com.billmate.authentication.sigin.password.reset.button" default="SEND PASSWORD RESET LINK"/>" class="signin-btn bg-primary">
+                    <input type="submit" value="<g:message code="com.billmate.authentication.signin.password.reset.button" default="SEND PASSWORD RESET LINK"/>" class="signin-btn bg-primary">
                 </div>
             </form>
         </div>
@@ -61,5 +61,5 @@
 </div>
 
 <div class="not-a-member">
-    <g:message code="com.billmate.authentication.sigin.not.member" default="Not a member?"/> <a href="#"><g:message code="com.billmate.authentication.sigin.signup.now" default="Sign up now"/></a>
+    <g:message code="com.billmate.authentication.signin.not.member" default="Not a member?"/> <a href="#"><g:message code="com.billmate.authentication.signin.signup.now" default="Sign up now"/></a>
 </div>
