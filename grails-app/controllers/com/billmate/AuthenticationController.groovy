@@ -4,11 +4,14 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 
 class AuthenticationController extends BaseController {
     static layout = "authentication"
-    def beforeIntercept = [action: this.&checkUser, except: ['login']]
+
+    def beforeInterceptor = [action: this.&alreadyAuthenticated, except: ['login']]
 
     def login() {
         if(session.user) {
-            flash.message = message(code: "com.billmate.authentication.sigin.already.authenticated", default: "You are already signed in.")
+            flash.message = "com.billmate.authentication.sigin.already.authenticated"
+            flash.m_args = ["#"]
+            flash.m_default = "You are already signed in. <a href='{0}'>Logout?</a>"
         }
     }
 
@@ -19,20 +22,14 @@ class AuthenticationController extends BaseController {
 
             if (registeredUser && registeredUser.password == new Sha256Hash(params['password']).toHex()) {
                 session.user = registeredUser
-                flash.message = message(code: "com.billmate.authentication.sigin.success", default: "Signed in successfully.")
-                redirect(uri: '/')
-                return
+                flash.message = "com.billmate.authentication.sigin.success"
+                flash.m_default = "Signed in successfully."
+                return redirect(uri: '/')
             }
         }
 
-        flash.error = message(code: "com.billmate.authentication.sigin.failure", default: "Invalid email or password.")
-        redirect(controller: 'authentication', action: 'login')
-    }
-
-    def checkUser() {
-        if(session.user) {
-            flash.error = message(code: "com.billmate.authentication.sigin.already.authenticated", default: "You are already signed in.")
-            redirect(controller: 'user', action: 'login')
-        }
+        flash.error = "com.billmate.authentication.sigin.failure"
+        flash.e_default = "Invalid email or password."
+        return redirect(controller: 'authentication', action: 'login')
     }
 }
