@@ -9,7 +9,7 @@ $(".notifs-right .lab").click(function(){
 	var $count = $(this).parents("div[class^=comment-recent]").siblings().filter(function() {
 			return $(this).css('display') != 'none';
 		}).length;
-	var $text = $(this).parents("div[class^=comment-text]").siblings().text();
+	var $text = $(this).parents("div[class^=comment-text]").siblings("div[class^=comment-by]").children(".next-notifs-title").text();
 	
 	if($bool){
 		$(this).parents("div[class^=comment-recent]").siblings().filter(function() {
@@ -26,7 +26,6 @@ $(".notifs-right .lab").click(function(){
 	if($count == 0)
 	{
 		$(this).parents("div[class^=panel]").hide("slow");
-		$.growl.notice({ title: "Aviso", message: "Todas as despesas foram recebidas" });
 	}
 
 });
