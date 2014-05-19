@@ -15,13 +15,7 @@
 .next-notifs-title {
   font-size: 1.15em;
   color: rgb( 88, 138, 201 );
-}
-
-.adjust-next-notifs{
-	text-align: right;
-	border: 1px solid black;
-	display: inline-block;
-	text-align: right;
+  font-style: normal;
 }
 
 .notifs-left{
@@ -48,4 +42,34 @@
 
 .btnCriar:hover{
 	color:white!important;	
+}
+
+.paddingCheck{
+	margin-right: 5px;
+	font-size: 1.8em;
+	vertical-align: top;
+	padding: 2px;
+}
+
+.fontCheck{
+	font-size: 1.2em;
+	vertical-align: center;
+}
+
+.icon-homepage{
+	margin-left: 15px;
+}
+
+.panel-title-primary-dashboard{
+	color: white;
+	padding: 0px;
+}
+
+.label:hover{
+	opacity: 0.8;
+}
+
+#nameMenu{
+	cursor: pointer;
+	cursor: hand;
 }

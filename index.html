@@ -23,7 +23,7 @@
 	<![endif]-->
 </head>
 
-<body class="theme-default main-menu-animated">
+<body class="theme-default main-menu-animated main-navbar-fixed main-menu-fixed">
 
 <script>var init = [];</script>
 
@@ -146,15 +146,16 @@
 					 Javascript: html/assets/demo/demo.js
 				 -->
 				<div>
-					<div class="text-bg text-no-wrap-break text-wrap-break"><span class="text-slim">Bem-vindo, John Doe</span></div>
 
+					<div class="text-bg text-no-wrap-break text-wrap-break" id="nameMenu"><span class="text-slim">Bem-vindo, John Doe</span></div>
+					
 					<img src="assets/demo/avatars/1.jpg" alt="" class="">
 					<div class="btn-group">
 						<a href="index.html#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-user"></i></a>
 						<a href="index.html#" class="btn btn-xs btn-primary btn-outline dark"><i class="fa fa-cog"></i></a>
 						<a href="index.html#" class="btn btn-xs btn-danger btn-outline dark"><i class="fa fa-power-off"></i></a>
 					</div>
-					<a href="index.html#" class="close">&times;</a>
+					<a href="index.html#" class="close" id="closeMenu">&times;</a>
 				</div>
 			</div>
 			<ul class="navigation">
@@ -229,6 +230,10 @@
 			<li class="active"><a href="index.html#">Dashboard</a></li>
 		</ul>
 
+		<div class="page-header">
+			<h1><i class="icon-homepage fa fa-dashboard page-header-icon"></i>&nbsp;&nbsp;Dashboard</h1>
+		</div>
+
 		<div class="row">
 			<script>
 				init.push(function () {
@@ -236,10 +241,254 @@
 				})
 			</script>
 
+			<!-- Já recebeste estas faturas? - Panel -->
 			<div class="col-md-12">
 				<div class="panel panel-warning" id="dashboard-recent">
 					<div class="panel-heading">
 						<span class="panel-title"><i class="panel-title-icon text-danger"></i>Já recebeste estas faturas?</span>
+						<button type="button" class="close" id="close-fast-notif">×</button>
+					</div> <!-- / .panel-heading -->
+					<div class="tab-content">
+
+						<!-- Comments widget -->
+
+						<!-- Without padding -->
+						<div class="widget-comments panel-body tab-pane no-padding fade active in" id="dashboard-recent-comments">
+							<!-- Panel padding, without vertical padding -->
+							<div class="panel-padding no-padding-vr">
+								<div class="comment-recent comment first">
+									<img src="assets/demo/avatars/5.jpg" alt="" class="comment-avatar">
+									<div class="comment-body">
+										<div class="comment-by">
+											<p class="next-notifs-title">Luz</p>
+										</div>
+										<div class="comment-text notifs-left">
+											Período entre 12 de Setembro a 5 de Outubro.
+											<div class="label label-danger label-tag">Expirado há 2 dias</div>
+											<div class="notifs-right">
+												<a href="#">
+													<span class="lab label label-success">
+														<i class="fa fa-check paddingCheck"></i>
+														<span class="fontCheck">Já recebi</span>
+													</span>
+												</a>
+											</div>
+										</div>
+									</div> <!-- / .comment-body -->
+								</div> <!-- / .comment -->
+								<div class="comment-recent comment">
+									<img src="assets/demo/avatars/3.jpg" alt="" class="comment-avatar">
+									<div class="comment-body">
+										<div class="comment-by">
+											<p class="next-notifs-title">Gás</p>
+										</div>
+										<div class="comment-text">
+											Período entre 18 de Setembro a 1 de Outubro.
+											<div class="label label-warning label-tag">Expira em 2 dias</div>
+											<div class=" notifs-right">
+												<a href="#">
+													<span class="lab label label-success">
+														<i class="fa fa-check paddingCheck"></i>
+														<span class="fontCheck">Já recebi</span>
+													</span>
+												</a>
+											</div>
+										</div>
+									</div> <!-- / .comment-body -->
+								</div> <!-- / .comment -->
+								<div class="comment-recent comment">
+									<img src="assets/demo/avatars/2.jpg" alt="" class="comment-avatar">
+									<div class="comment-body">
+										<div class="comment-by">
+											<p class="next-notifs-title">Internet</p>
+										</div>
+										<div class="comment-text">
+											Período entre 22 de Setembro a 29 de Setembro.
+											<div class="label label-warning label-tag">Expira em 5 dias</div>
+											<div class=" notifs-right">
+												<a href="#">
+													<span class="lab label label-success">
+														<i class="fa fa-check paddingCheck"></i>
+														<span class="fontCheck">Já recebi</span>
+													</span>
+												</a>
+											</div>
+										</div>
+									</div> <!-- / .comment-body -->
+								</div> <!-- / .comment -->
+							</div>
+						</div> <!-- / .widget-comments -->
+					</div>
+				</div> <!-- / .widget-threads -->
+			</div>
+			<!-- / .Já recebeste estas faturas? - Panel -->
+
+			<!-- Stat Gastos Deste Mês -->
+
+			<script>
+				init.push(function () {
+					var uploads_data = [
+						{ day: '2014-05-01', v: 20 },
+						{ day: '2014-05-02', v: 10 },
+						{ day: '2014-05-03', v: 0 },
+						{ day: '2014-05-04', v: 30 },
+						{ day: '2014-05-05', v: 40 },
+						{ day: '2014-05-06', v: 10 },
+						{ day: '2014-05-07', v: 0 },
+						{ day: '2014-05-08', v: 20 },
+						{ day: '2014-05-09', v: 10 },
+						{ day: '2014-05-10', v: 0 },
+						{ day: '2014-05-11', v: 30 },
+						{ day: '2014-05-12', v: 40 },
+						{ day: '2014-05-13', v: 10 },
+						{ day: '2014-05-14', v: 0 },
+						{ day: '2014-05-15', v: 20 },
+						{ day: '2014-05-16', v: 10 },
+						{ day: '2014-05-17', v: 0 },
+						{ day: '2014-05-18', v: 30 },
+						{ day: '2014-05-19', v: 40 },
+						{ day: '2014-05-20', v: 10 },
+						{ day: '2014-05-21', v: 0 },
+						{ day: '2014-05-22', v: 20 },
+						{ day: '2014-05-23', v: 10 },
+						{ day: '2014-05-24', v: 0 },
+						{ day: '2014-05-25', v: 30 },
+						{ day: '2014-05-26', v: 40 },
+						{ day: '2014-05-27', v: 10 },
+						{ day: '2014-05-28', v: 0 },
+						{ day: '2014-05-29', v: 0 },
+						{ day: '2014-05-30', v: 30 },
+						{ day: '2014-05-31', v: 0 },
+					];
+					Morris.Line({
+						element: 'hero-graph',
+						data: uploads_data,
+						xkey: 'day',
+						ykeys: ['v'],
+						labels: ['Valor (€)'],
+						lineColors: ['#fff'],
+						lineWidth: 2,
+						pointSize: 4,
+						gridLineColor: 'rgba(255,255,255,.5)',
+						resize: true,
+						gridTextColor: '#fff',
+						xLabels: "day",
+						xLabelFormat: function(d) {
+							return ['Janeiro','Fevereiro','Março','Abril','Maio','Jun','Jul','Aug','Sep','Oct','Nov', 'Dec'][d.getMonth()] + ' ' + d.getDate(); 
+						},
+					});
+				});
+			</script>
+
+			
+
+			<div class="stat-panel">
+				<div class="stat-row">
+					<!-- Primary background, small padding, vertically centered text -->
+					<div class="stat-cell col-sm-9 bg-primary padding-sm valign-middle">
+						<div id="hero-graph" class="graph" style="height: 180px;"></div>
+					</div>
+					<!-- Bordered, without right border, top aligned text -->
+					<div class="stat-cell col-sm-3 bordered no-border-r padding-sm-hr valign-top">
+						<!-- Small padding, without top padding, extra small horizontal padding -->
+						<h4 class="padding-sm no-padding-t padding-xs-hr"><i class="fa fa-money text-primary"></i>&nbsp;&nbsp;Gastos do Mês de Maio</h4>
+						<!-- Without margin -->
+						<ul class="list-group no-margin">
+							<!-- Without left and right borders, extra small horizontal padding -->
+							<li class="list-group-item no-border-hr padding-xs-hr">
+								Quantidade de Despesas <span class="label pull-right">12</span>
+							</li> <!-- / .list-group-item -->
+							<!-- Without left and right borders, extra small horizontal padding -->
+							<li class="list-group-item no-border-hr padding-xs-hr">
+								Deves <span class="label pull-right">128 €</span>
+							</li> <!-- / .list-group-item -->
+							<!-- Without left and right borders, without bottom border, extra small horizontal padding -->
+							<li class="list-group-item no-border-hr no-border-b padding-xs-hr">
+								Devem-te <span class="label pull-right">12 €</span>
+							</li> <!-- / .list-group-item -->
+							<li class="list-group-item no-border-hr no-border-b padding-xs-hr">
+								<b>Já recebeste</b> <span class="label pull-right">12 €</span>
+							</li> <!-- / .list-group-item -->
+						</ul>
+					</div> <!-- /.stat-cell -->
+			<!-- / .Stat Gastos Deste Mês -->
+				</div>
+			</div> <!-- / #content-wrapper -->
+
+
+			<!-- Amigos a quem deves -->
+
+			<div class="col-md-12">
+				<div class="panel panel-primary" id="dashboard-recent">
+					<div class="panel-heading">
+						<span class="panel-title"><i class="panel-title-icon text-danger"></i><span class="panel-title-primary-dashboard">Amigos a quem deves</span></span>
+						<div class=" notifs-right"><b>Total:</b> 2 dívidas</div>
+					</div> <!-- / .panel-heading -->
+					<div class="tab-content">
+						<div class="widget-comments panel-body tab-pane no-padding fade active in" id="dashboard-recent-comments">
+							<!-- Panel padding, without vertical padding -->
+							<div class="panel-padding no-padding-vr">
+								<div class="comment first">
+									<img src="assets/demo/avatars/5.jpg" alt="" class="comment-avatar">
+									<div class="comment-body">
+										<div class="comment-by">
+											<p class="next-notifs-title">Luz</p>
+										</div>
+										<div class="comment-text notifs-left">
+											Deves <b>15€</b> ao <b>Pedro Leite</b>
+											<div class="label label-danger label-tag">Em atraso</div>
+											<div class=" notifs-right">
+												<a href="#">
+													<span class="label label-info">
+														<i class="fa fa-clock-o paddingCheck"></i>
+														<span class="fontCheck">Por Confirmar</span>
+													</span>
+												</a>
+											</div>
+										</div>
+										<div class="comment-text notifs-left">
+											Mês de Agosto - Deves pagar até 12 de Setembro
+										</div>
+									</div> <!-- / .comment-body -->
+								</div> <!-- / .comment -->
+								<div class="comment first">
+									<img src="assets/demo/avatars/3.jpg" alt="" class="comment-avatar">
+									<div class="comment-body">
+										<div class="comment-by">
+											<p class="next-notifs-title">Água</p>
+										</div>
+										<div class="comment-text notifs-left">
+											Deves <b>23€</b> ao <b>André Santos</b>
+											<div class="label label-warning label-tag">Expira em 1 dia</div>
+											<div class=" notifs-right">
+												<a href="#">
+													<span class="label label-success">
+														<i class="fa fa-check paddingCheck"></i>
+														<span class="fontCheck">Já paguei</span>
+													</span>
+												</a>
+											</div>
+										</div>
+										<div class="comment-text notifs-left">
+											Mês de Agosto - Deves pagar até 12 de Setembro
+										</div>
+									</div> <!-- / .comment-body -->
+								</div> <!-- / .comment -->
+							</div>
+						</div> <!-- / .widget-comments -->
+					</div>
+				</div> <!-- / .widget-threads -->
+			</div>
+
+			<!-- / .Amigos a quem deves -->
+
+			<!-- Amigos que te devem -->
+
+			<div class="col-md-12">
+				<div class="panel panel-primary" id="dashboard-recent">
+					<div class="panel-heading">
+						<span class="panel-title"><i class="panel-title-icon text-danger"></i><span class="panel-title-primary-dashboard">Amigos que te devem</span></span>
+						<div class=" notifs-right"><b>Total:</b> 2 dívidas</div>
 					</div> <!-- / .panel-heading -->
 					<div class="tab-content">
 
@@ -253,202 +502,55 @@
 									<img src="assets/demo/avatars/5.jpg" alt="" class="comment-avatar">
 									<div class="comment-body">
 										<div class="comment-by">
-											<p class="next-notifs-title">Luz</p>
+											<p class="next-notifs-title">Internet</p>
 										</div>
 										<div class="comment-text notifs-left">
-											Período entre 12 de Setembro a 5 de Outubro.
-											<div class="adjust-next-notifs notifs-right">
-												<span class="label label-warning">Já recebi</span>
-											</div>
+											O <b>Pedro Leite</b> deve-te <b>15€</b>
+											<div class="label label-warning label-tag">Expira em 3 dias</div>
+										</div>
+										<div class="comment-text notifs-left">
+											Mês de Agosto - Deves pagar-te até 16 de Setembro
 										</div>
 									</div> <!-- / .comment-body -->
 								</div> <!-- / .comment -->
-
 								<div class="comment">
 									<img src="assets/demo/avatars/3.jpg" alt="" class="comment-avatar">
 									<div class="comment-body">
 										<div class="comment-by">
-											<p class="next-notifs-title">Gás</p>
+											<p class="next-notifs-title">Variadas</p>
 										</div>
-										<div class="comment-text">
-											Período entre 18 de Setembro a 1 de Outubro.
+										<div class="comment-text notifs-left">
+											O <b>André Santos</b> deve-te <b>23€</b>
+											<div class="label label-info label-tag">Marcado como pago</div>
+											<div class=" notifs-right">
+												<a href="#">
+													<span class="label label-success">
+														<i class="fa fa-check paddingCheck"></i>
+														<span class="fontCheck">Já pagou</span>
+													</span>
+													<span class="label label-danger">
+														<i class="fa fa-times paddingCheck"></i>
+														<span class="fontCheck">Não pagou</span>
+													</span>
+												</a>
+											</div>
 										</div>
-										<div class="comment-actions">
-											<a href="index.html#"><i class="fa fa-pencil"></i>Edit</a>
-											<a href="index.html#"><i class="fa fa-times"></i>Remove</a>
-											<span class="pull-right">2 hours ago</span>
-										</div>
-									</div> <!-- / .comment-body -->
-								</div> <!-- / .comment -->
-
-								<div class="comment">
-									<img src="assets/demo/avatars/2.jpg" alt="" class="comment-avatar">
-									<div class="comment-body">
-										<div class="comment-by">
-											<p class="next-notifs-title">Internet</p>
-										</div>
-										<div class="comment-text">
-											Período entre 22 de Setembro a 29 de Setembro.
-										</div>
-										<div class="comment-actions">
-											<a href="index.html#"><i class="fa fa-pencil"></i>Edit</a>
-											<a href="index.html#"><i class="fa fa-times"></i>Remove</a>
-											<span class="pull-right">2 hours ago</span>
+										<div class="comment-text notifs-left">
+											Mês de Agosto - Deves pagar até 12 de Setembro
 										</div>
 									</div> <!-- / .comment-body -->
 								</div> <!-- / .comment -->
 							</div>
 						</div> <!-- / .widget-comments -->
-
-						<!-- Threads widget -->
-
-						<!-- Without padding -->
-						<div class="widget-threads panel-body tab-pane no-padding fade" id="dashboard-recent-threads">
-							<div class="panel-padding no-padding-vr">
-								<div class="thread">
-									<img src="assets/demo/avatars/2.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Robert Jang</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/3.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Michelle Bortz</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/4.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Timothy Owens</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/5.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Denise Steiner</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/2.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Robert Jang</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/2.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Robert Jang</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/3.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Michelle Bortz</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/4.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Timothy Owens</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/5.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Denise Steiner</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/2.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Robert Jang</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-								<div class="thread">
-									<img src="assets/demo/avatars/2.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Robert Jang</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/3.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Michelle Bortz</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/4.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Timothy Owens</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/5.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Denise Steiner</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-
-								<div class="thread">
-									<img src="assets/demo/avatars/2.jpg" alt="" class="thread-avatar">
-									<div class="thread-body">
-										<span class="thread-time">14h</span>
-										<a href="index.html#" class="thread-title">Lorem ipsum dolor sit amet</a>
-										<div class="thread-info">started by <a href="index.html#" title="">Robert Jang</a> in <a href="index.html#" title="">Forum name</a></div>
-									</div> <!-- / .thread-body -->
-								</div> <!-- / .thread -->
-							</div>
-						</div> <!-- / .panel-body -->
 					</div>
 				</div> <!-- / .widget-threads -->
 			</div>
 
+			<!-- / .Amigos que te devem -->
 
-		</div>
-	</div> <!-- / #content-wrapper -->
-	<div id="main-menu-bg"></div>
-</div> <!-- / #main-wrapper -->
+
+		<div id="main-menu-bg"></div>
+	</div> <!-- / #main-wrapper -->
 
 <!-- Get jQuery from Google CDN -->
 <!--[if !IE]> -->
@@ -460,6 +562,7 @@
 
 <script src="assets/javascripts/bootstrap.min.js"></script>
 <script src="assets/javascripts/pixel-admin.min.js"></script>
+<script src="assets/javascripts/billmate.js"></script>
 
 <script type="text/javascript">
 	init.push(function () {
