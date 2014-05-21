@@ -14,8 +14,8 @@ class ExpenseTypeSpec extends ConstraintUnitSpec {
         mockForConstraintsTests(ExpenseType, [new ExpenseType()])
     }
 
-    @Unroll("test expense all constraints #field is #error")
-    def "test expense all constraints"() {
+    @Unroll("test expenseType all constraints #field is #error")
+    def "test expenseType all constraints"() {
         when:
         def obj = new ExpenseType("$field": val)
 
