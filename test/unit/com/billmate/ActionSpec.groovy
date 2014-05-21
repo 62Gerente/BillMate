@@ -17,7 +17,7 @@ class ActionSpec extends ConstraintUnitSpec {
     @Unroll("test action all constraints #field is #error")
     def "test action all constraints"() {
         when:
-        def obj = new User("$field": val)
+        def obj = new Action("$field": val)
 
         then:
         validateConstraints(obj, field, error)
