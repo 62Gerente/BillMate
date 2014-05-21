@@ -1,4 +1,2 @@
-//= require jquery.min.js
-//= require bootstrap.min.js
-//= require pixel-admin.min.js
-//= require_self
+//= require ../plugins/jquery-1.8.3.min.js
+//= require ../plugins/jquery-lazyload/jquery.lazyload.min.js

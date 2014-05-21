@@ -1,65 +1,58 @@
-<div class="signin-container">
-    <div class="signin-info">
-        <a href="index.html" class="logo">
-            <img src="${assetPath(src: 'logo.png')}" class="logo" alt="">
-            <span><g:message code="com.billmate.application.name" default="BillMate"/></span>
-        </a>
-        <ul>
-            <li><i class="fa fa-group signin-icon"></i> <g:message code="com.billmate.authentication.signin.feature.create.circle" default="Create a circle of friends."/></li>
-            <li><i class="fa fa-share signin-icon"></i> <g:message code="com.billmate.authentication.signin.feature.add.expenses" default="Add your shared expenses."/></li>
-            <li><i class="fa fa-credit-card signin-icon"></i> <g:message code="com.billmate.authentication.signin.feature.pay.debts" default="Pay your debts on time."/></li>
-            <li><i class="fa fa-rocket signin-icon"></i> <g:message code="com.billmate.authentication.signin.feature.relax.study" default="Relax, study and have fun!"/></li>
-        </ul>
-    </div>
-    <div class="signin-form" id="signin-form">
-
-        <g:form url="[action: 'doLogin', controller: 'authentication']" id="signin-form_id">
-            <div class="signin-text">
-                <span><g:message code="com.billmate.authentication.signin.intro" default="Sign In to your account"/></span>
-            </div>
-
-            <div class="form-group w-icon">
-                <input type="text" name="email" id="email" class="form-control input-lg" placeholder="<g:message code="com.billmate.user.email" default="Email"/>">
-                <span class="fa fa-envelope signin-form-icon"></span>
-            </div>
-
-            <div class="form-group w-icon">
-                <input type="password" name="password" id="password" class="form-control input-lg" placeholder="<g:message code="com.billmate.registered.user.password" default="Password"/>">
-                <span class="fa fa-lock signin-form-icon"></span>
-            </div>
-
-            <div class="form-actions">
-                <input type="submit" value="<g:message code="com.billmate.authentication.signin.button" default="SIGN IN"/>" class="signin-btn bg-primary">
-                <a href="#" class="forgot-password" id="forgot-password"><g:message code="com.billmate.authentication.signin.forgot.password" default="Forgot your password?"/></a>
-            </div>
-        </g:form>
-
-        <div class="signin-with">
-            <a href="#" class="signin-with-btn" style="background:#4f6faa;background:rgba(79, 111, 170, .8);"><g:message code="com.billmate.authentication.signin.with" default="Sign In with"/> <span><g:message code="com.billmate.authentication.signin.with.facebook" default="Facebook"/></span></a>
+<div class="container">
+    <div class="row login-container animated fadeInUp">
+        <div class="col-md-6 col-md-offset-3 p-b-20 text-center">
+            <a href="${createLink(action: 'index', controller: 'base')}"><img class="logo" src="${assetPath(src: 'logo-full.svg')}" class="logo" alt="<g:message code="com.billmate.application.name" default="BillMate"/>" onerror="this.src=${assetPath(src: 'logo-full.png')}"></a>
         </div>
-
-        <div class="password-reset-form" id="password-reset-form">
-            <div class="header">
-                <div class="signin-text">
-                    <span><g:message code="com.billmate.authentication.signin.forgot.password" default="Forgot your password?"/></span>
-                    <div class="close">&times;</div>
+        <div class="col-md-6 col-md-offset-3 no-padding">
+            <g:render template="/shared/messages" />
+        </div>
+        <div class="col-md-6 col-md-offset-3 tiles white no-padding">
+            <div class="p-t-30 p-l-40 p-b-20 xs-p-t-10 xs-p-l-10 xs-p-b-10">
+                <h2 class="normal">
+                    <g:message code="com.billmate.authentication.signin.signin.to" default="Sign In to" />
+                    <g:message code="com.billmate.application.name" default="BillMate" />
+                </h2>
+                <p>
+                    <g:message code="com.billmate.authentication.signin.signin.intro" default="Fill fields with your account's info and get inside" />
+                    <br/>
+                </p>
+            </div>
+            <div class="tiles grey p-t-20 p-b-20 text-black">
+                <g:form url="[action: 'doLogin', controller: 'authentication']" id="login-form" class="animated fadeIn form-icon-validate">
+                    <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
+                        <div class="col-md-6 col-sm-6">
+                            <div class="input right">
+                                <input name="email" id="email" type="text" class="form-control" placeholder="<g:message code="com.billmate.user.email" default="Email "/>">
+                            </div>
+                        </div>
+                        <div class="col-md-6 col-sm-6">
+                            <div class="input right">
+                                <input name="password" id="password" type="password" class="form-control" placeholder="<g:message code="com.billmate.registered.user.password" default="Password "/>">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
+                        <div class="control-group  col-md-12">
+                            <div class="forgot-password pull-left">
+                                <a href="login_v2.html#" class="text-grey">
+                                    <g:message code="com.billmate.authentication.signin.forgot.password" default="Forgot your password?" />
+                                </a>
+                            </div>
+                            <div class="pull-right">
+                                <input type="submit" name="login-submit" class="btn btn-primary btn-cons" value="<g:message code="com.billmate.authentication.signin.button" default="Sign in "/>"/>
+                            </div>
+                        </div>
+                    </div>
+                </g:form>
+            </div>
+            <div class="col-md-12 white text-right">
+                <div class="p-t-30 p-r-20 p-b-20 xs-p-t-10 xs-p-r-20 xs-p-b-10">
+                    <g:message code="com.billmate.authentication.signin.not.member" default="Not a member?" />
+                    <a href="">
+                        <g:message code="com.billmate.authentication.signin.create.account" default="Create an account" />
+                    </a>
                 </div>
             </div>
-
-            <form id="password-reset-form_id">
-                <div class="form-group w-icon">
-                    <input type="text" name="email" id="reset_email" class="form-control input-lg" placeholder="<g:message code="com.billmate.user.email" default="Email"/>">
-                    <span class="fa fa-envelope signin-form-icon"></span>
-                </div>
-
-                <div class="form-actions">
-                    <input type="submit" value="<g:message code="com.billmate.authentication.signin.password.reset.button" default="SEND PASSWORD RESET LINK"/>" class="signin-btn bg-primary">
-                </div>
-            </form>
         </div>
     </div>
-</div>
-
-<div class="not-a-member">
-    <g:message code="com.billmate.authentication.signin.not.member" default="Not a member?"/> <a href="#"><g:message code="com.billmate.authentication.signin.signup.now" default="Sign up now"/></a>
 </div>
