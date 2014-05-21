@@ -1,0 +1,21 @@
+/* line 1, authentication.sass */
+body {
+  font-family: "Open Sans";
+  background-color: #1b1e24;
+  height: 100%;
+}
+
+/* line 6, authentication.sass */
+.login-container {
+  margin-top: 5%;
+}
+
+/* line 9, authentication.sass */
+img.logo {
+  height: 75px;
+}
+
+/* line 12, authentication.sass */
+.forgot-password {
+  margin-top: 10px;
+}
