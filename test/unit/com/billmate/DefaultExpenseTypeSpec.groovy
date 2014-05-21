@@ -11,7 +11,7 @@ class DefaultExpenseTypeSpec extends ConstraintUnitSpec {
 
     def setup() {
         //mock a person with some data (put unique violations in here so they can be tested, the others aren't needed)
-        mockForConstraintsTests(User, [new DefaultExpenseType()])
+        mockForConstraintsTests(DefaultExpenseType, [new DefaultExpenseType()])
     }
 
     @Unroll("test defaultExpenseType all constraints #field is #error")
