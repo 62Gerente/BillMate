@@ -5597,7 +5597,6 @@ form legend,
   border: none;
   text-shadow: none;
   box-shadow: none;
-  transition: all 0.12s linear 0s !important;
   font: 14px/20px "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 .btn:focus {
