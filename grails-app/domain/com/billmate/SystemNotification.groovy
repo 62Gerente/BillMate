@@ -1,6 +1,6 @@
 package com.billmate
 
-class SystemNotification extends Notification{
+class SystemNotification {
     static belongsTo = [Action, RegisteredUser, Notification]
 
     Action action
