@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>BillMate</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <link href="assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen" />
+    <link href="assets/plugins/jquery-slider/css/jquery.sidr.light.css" rel="stylesheet" type="text/css" media="screen" />
+
+    <!-- BEGIN CORE CSS FRAMEWORK -->
+    <link href="assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css" />
+    <link href="assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/animate.min.css" rel="stylesheet" type="text/css" />
+    <!-- END CORE CSS FRAMEWORK -->
+
+    <!-- BEGIN CSS TEMPLATE -->
+    <link href="assets/css/style.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/responsive.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/custom-icon-set.css" rel="stylesheet" type="text/css" />
+    <link href="assets/css/billmate.css" rel="stylesheet" type="text/css" />
+    <!-- END CSS TEMPLATE -->
+</head>
+
+<!-- BEGIN BODY -->
+
+<body>
+    <!-- BEGIN HEADER -->
+    <div class="header navbar navbar-inverse ">
+        <!-- BEGIN TOP NAVIGATION BAR -->
+        <div class="navbar-inner">
+            <div class="header-seperation">
+                <ul class="nav pull-left notifcation-center" id="main-menu-toggle-wrapper">
+                    <li class="dropdown">
+                        <a id="main-menu-toggle" href="blank_template.html#main-menu" class="">
+                            <div class="iconset top-menu-toggle-white"></div>
+                        </a>
+                    </li>
+                </ul>
+                <!-- BEGIN LOGO -->
+                <a href="#">
+                    <img class="logo" src="assets/img/logo-full.svg" class="logo" alt="" onerror="this.src=assets/img/logo-full.png" />
+                </a>
+                <!-- END LOGO -->
+                <ul class="nav pull-right notifcation-center">
+                    <li class="dropdown" id="portrait-chat-toggler">
+                        <a href="blank_template.html#sidr" class="chat-menu-toggle">
+                            <div class="iconset top-chat-white "></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <!-- END RESPONSIVE MENU TOGGLER -->
+            <div class="header-quick-nav">
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="pull-left">
+                    <ul class="nav quick-section">
+                        <li class="quicklinks">
+                            <a href="blank_template.html#" class="" id="layout-condensed-toggle">
+                                <div class="iconset top-menu-toggle-dark"></div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav quick-section">
+                        <li class="m-r-10 input-prepend inside search-form no-boarder">
+                            <span class="add-on">
+                                <span class="iconset top-search"></span>
+                            </span>
+                            <input name="" type="text" class="no-boarder" placeholder="Procurar...">
+                        </li>
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+                <!-- BEGIN CHAT TOGGLER -->
+                <div class="pull-right">
+                    <div class="chat-toggler">
+                        <a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" data-content="" data-toggle="dropdown" data-original-title="">
+                            <div class="user-details">
+                                <div class="username">
+                                    John Smith
+                                </div>
+                            </div>
+                            <div class="iconset top-down-arrow"></div>
+                        </a>
+                        <div id="notification-list" style="display:none">
+                            <div>
+                                <div class="single-notification-messages">
+                                    <a href="#"><i class="fa fa-user p-r-15"></i>Conta</a>
+                                </div>
+                                <!--<div class="single-notification-messages">
+                                    <a href="#"><i class="fa fa-user p-r-15"></i>Conta</a>
+                                </div>-->
+                                <div class="single-notification-messages">
+                                    <a href="#"><i class="fa fa-sign-out p-r-15"></i>Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-pic">
+                            <img src="assets/img/profiles/avatar_small.jpg" alt="" data-src="assets/img/profiles/avatar_small.jpg" data-src-retina="assets/img/profiles/avatar_small2x.jpg" width="35" height="35">
+                        </div>
+                    </div>
+                    <ul class="nav quick-section ">
+                        <li class="quicklinks">
+                            <span class="h-seperate"></span>
+                        </li>
+                        <li class="quicklinks">
+                            <a id="chat-menu-toggle" href="#sidr" class="chat-menu-toggle">
+                                <div class="iconset top-chat-dark ">
+                                    <span class="badge badge-important animated bounceIn" id="chat-message-count">1</span>
+                                </div>
+                            </a>
+                            <div class="simple-chat-popup chat-menu-toggle hide animated fadeOut">
+                                <div class="simple-chat-popup-arrow"></div>
+                                <div class="simple-chat-popup-inner">
+                                    <div style="width:100px">
+                                        <div class="semi-bold">Pedro Leite</div>
+                                        <div class="message">Tem novas notificações</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <!-- END CHAT TOGGLER -->
+            </div>
+            <!-- END TOP NAVIGATION MENU -->
+
+        </div>
+        <!-- END TOP NAVIGATION BAR -->
+    </div>
+    <!-- END HEADER -->
+    <!-- BEGIN CONTAINER -->
+    <div class="page-container row-fluid">
+        <!-- BEGIN SIDEBAR -->
+        <div class="page-sidebar" id="main-menu">
+            <!-- BEGIN MINI-PROFILE -->
+            <div class="page-sidebar-wrapper" id="main-menu-wrapper">
+                <div class="user-info-wrapper">
+                    <div class="profile-wrapper">
+                        <img src="assets/img/profiles/avatar.jpg" alt="" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar2x.jpg" width="69" height="69" />
+                    </div>
+                    <div class="user-info m-t-15">
+                        <div class="greeting">Welcome</div>
+                        <div class="username">John Smith
+                        </div>
+
+                    </div>
+                </div>
+                <!-- END MINI-PROFILE -->
+                <!-- BEGIN SIDEBAR MENU -->
+                <p class="menu-title"></p>
+                <ul id="home-sidebar-menu">
+                    <li class="start active ">
+                        <a href="#"> <i class="fa fa-dashboard"></i> 
+                            <span class="title">Painel do Utilizador</span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#"> <i class="fa fa-file-text"></i> 
+                            <span class="title">Relatórios</span>
+                        </a>
+                    </li>
+                    <li class="">
+                        <a href="#"> <i class="fa fa-clock-o"></i> 
+                            <span class="title">Histórico</span>
+                        </a>
+                    </li>
+                    <li class="hidden-lg hidden-md hidden-xs" id="more-widgets">
+                        <a href="javascript:;"> <i class="fa fa-plus"></i>
+                        </a>
+                        <ul class="sub-menu" style="overflow: hidden; display: none;">
+                            <li class="side-bar-widgets">
+                                <p class="menu-title">Casas
+                                    <span class="pull-right">
+                                        <a href="index.html#" class="create-folder"> <i class="fa fa-plus"></i>
+                                        </a>
+                                    </span>
+                                </p>
+                                <ul class="folders">
+                                    <li>
+                                        <a href="blank_template.html#">
+                                            <div class="status-icon green"></div>Casa Braga</a>
+                                    </li>
+                                    <li class="folder-input" style="display:none">
+                                        <input type="text" placeholder="Name of folder" class="no-boarder folder-name" name="">
+                                    </li>
+                                </ul>
+                            </li>
+                            <li class="side-bar-widgets">
+                                <p class="menu-title">Grupos
+                                    <span class="pull-right">
+                                        <a href="blank_template.html#" class="create-folder"> <i class="fa fa-plus"></i>
+                                        </a>
+                                    </span>
+                                </p>
+                                <ul class="folders">
+                                    <li>
+                                        <a href="blank_template.html#">
+                                            <div class="status-icon green"></div>Futeboladas CeSIUM</a>
+                                    </li>
+                                    <li>
+                                        <a href="blank_template.html#">
+                                            <div class="status-icon red"></div>Amigos Secundário</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <div class="side-bar-widgets">
+                    <p class="menu-title">Casas
+                        <span class="pull-right">
+                            <a href="index.html#" class="create-folder"> <i class="fa fa-plus"></i>
+                            </a>
+                        </span>
+                    </p>
+                    <ul class="folders">
+                        <li>
+                            <a href="blank_template.html#">
+                                <div class="status-icon green"></div>Casa Braga</a>
+                        </li>
+                        <li class="folder-input" style="display:none">
+                            <input type="text" placeholder="Name of folder" class="no-boarder folder-name" name="">
+                        </li>
+                    </ul>
+                </div>
+                <div class="side-bar-widgets">
+                    <p class="menu-title">Grupos
+                        <span class="pull-right">
+                            <a href="blank_template.html#" class="create-folder"> <i class="fa fa-plus"></i>
+                            </a>
+                        </span>
+                    </p>
+                    <ul class="folders">
+                        <li>
+                            <a href="blank_template.html#">
+                                <div class="status-icon green"></div>Futeboladas CeSIUM</a>
+                        </li>
+                        <li>
+                            <a href="blank_template.html#">
+                                <div class="status-icon red"></div>Amigos Secundário</a>
+                        </li>
+                        <li>
+                            <a href="blank_template.html#">
+                                <div class="status-icon blue"></div>Jantaradas EA</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="clearfix"></div>
+                <!-- END SIDEBAR MENU -->
+            </div>
+        </div>
+        <a href="#" class="scrollup"></a>
+        <div class="footer-widget">
+            <button type="button" class="btn btn-primary btn-cons">Adicionar Despesa</button>
+        </div>
+        <!-- END SIDEBAR -->
+        <!-- BEGIN PAGE CONTAINER-->
+        <div class="page-content">
+            <!-- BEGIN SAMPLE PORTLET CONFIGURATION MODAL FORM-->
+            <div class="clearfix"></div>
+            <div class="content">
+                <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
+
+                    <div class="row tiles-container tiles white hidden-xlg m-b-20">
+                        <div class="col-md-12 b-grey b-r no-padding">
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <h4 class="text-black bold inline">CONFIRMA OS PAGAMENTOS DOS TEUS AMIGOS</h4>
+                                <div class="pull-right p-r-15" id="home-button-primary-confirm">
+                                    <h4>
+                                        <button type="button" class="inline btn btn-default btn-small">Confirmar</button>
+                                    </h4>
+                                </div>
+                            </div>
+                            <div class="p-l-20 p-r-20">
+                                <table class="table table-home-box table-home-box-fixed">
+                                    <tbody>
+                                        <tr>
+                                            <td class="home-img-list-confs">
+                                                <div class="friend-profile-pic">
+                                                    <div class="user-profile-pic-normal">
+                                                        <img width="35" height="35" src="assets/img/profiles/c.jpg" data-src="assets/img/profiles/c.jpg" data-src-retina="assets/img/profiles/d2x.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="unseen">André Santos</td>
+                                            <td class="unseen">Casa de Braga</td>
+                                            <td class="text-left">Eletricidade</td>
+                                            <td class="text-left">€ 30.00</td>
+                                            <td id="home-check-list">
+                                                <div class="row-fluid home-check-confirm">
+                                                    <div class="checkbox check-success" id="home-check-list">
+                                                        <input type="checkbox" id="id1" class="todo-list">
+                                                        <label for="id1"></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="home-img-list-confs">
+                                                <div class="friend-profile-pic">
+                                                    <div class="user-profile-pic-normal">
+                                                        <img width="35" height="35" src="assets/img/profiles/c.jpg" data-src="assets/img/profiles/c.jpg" data-src-retina="assets/img/profiles/d2x.jpg" alt="">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td class="unseen">Pedro Leite</td>
+                                            <td class="unseen">Casa do Porto</td>
+                                            <td class="text-left">Eletricidade</td>
+                                            <td class="text-left">€ 30.00</td>
+                                            <td>
+                                                <div class="row-fluid home-check-confirm">
+                                                    <div class="checkbox check-success" id="home-check-list">
+                                                        <input type="checkbox" id="id2" class="todo-list">
+                                                        <label for="id2"></label>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                <div class="pull-right p-r-15" id="home-button-secondary-confirm">
+                                    <h4>
+                                        <button type="button" class="inline btn btn-default btn-small">Confirmar</button>
+                                    </h4>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row tiles-container tiles white hidden-xlg m-b-20">
+                        <div class="col-md-12 b-grey b-r no-padding">
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <h4 class="text-black bold inline">QUEM TE DEVE</h4>
+                                <div class="pull-right p-r-15">
+                                    <h4 class="text-danger bold inline">€ 15,58</h4>
+                                </div>
+                            </div>
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <div class="user-info-wrapper home-margin-list">
+                                    <img class="profile-wrapper user-profile-pic-2x white-border home-img-list" src="assets/img/profiles/avatar.jpg" alt="" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar.jpg">
+                                    <div class="col-md-8 user-info user-info-photo user-info-name-price no-padding" >
+                                        <div class="username inline p-t-15" style="width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">André Santos</div>
+                                    </div>
+                                    <div class="col-md-4 pull-right no-padding m-t-15"  id="home-button-divida-primary-confirm" style="width:125px">
+                                        <button type="button" class="inline btn btn-default btn-small btn-cons pull-right">Efetuar pagamento</button>
+                                    </div>
+                                </div>
+                                <table class="table table-home-box">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left text-primary">TIPO DE DESPESA</th>
+                                            <th class="text-left unseen text-primary">CÍRCULO</th>
+                                            <th class="unseen text-primary">DATA LIMITE</th>
+                                            <th class="text-right text-primary">VALOR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fa fa-flash"></i> Eletricidade</td>
+                                            <td class="unseen">Casa de Braga</td>
+                                            <td class="unseen">20/06/2014</td>
+                                            <td class="text-right">€ 30.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fa fa-flash"></i> Eletricidade</td>
+                                            <td class="unseen">Jantaradas de LEI</td>
+                                            <td class="unseen">20/06/2014</td>
+                                            <td class="text-right">€ 30.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <div class="col-md-4 pull-right no-padding m-t-15"  id="home-button-divida-secondary-confirm" style="width:125px">
+                                                    <button type="button" class="inline btn btn-default btn-small btn-cons pull-right">Efetuar pagamento</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <div class="user-info-wrapper home-margin-list">
+                                    <img class="profile-wrapper user-profile-pic-2x white-border home-img-list" src="assets/img/profiles/avatar.jpg" alt="" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar.jpg">
+                                    <div class="col-md-8 user-info user-info-photo user-info-name-price no-padding" >
+                                        <div class="username inline p-t-15" style="width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">André Santos</div>
+                                    </div>
+                                    <div class="col-md-4 pull-right no-padding m-t-15"  id="home-button-divida-primary-confirm" style="width:125px">
+                                        <button type="button" class="inline btn btn-default btn-small btn-cons pull-right">Efetuar pagamento</button>
+                                    </div>
+                                </div>
+                                <table class="table table-home-box">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left text-primary">TIPO DE DESPESA</th>
+                                            <th class="text-left unseen text-primary">CÍRCULO</th>
+                                            <th class="unseen text-primary">DATA LIMITE</th>
+                                            <th class="text-right text-primary">VALOR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fa fa-flash"></i> Eletricidade</td>
+                                            <td class="unseen">Casa de Braga</td>
+                                            <td class="unseen">20/06/2014</td>
+                                            <td class="text-right">€ 30.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fa fa-flash"></i> Eletricidade</td>
+                                            <td class="unseen">Jantaradas de LEI</td>
+                                            <td class="unseen">20/06/2014</td>
+                                            <td class="text-right">€ 30.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <div class="col-md-4 pull-right no-padding m-t-15"  id="home-button-divida-secondary-confirm" style="width:125px">
+                                                    <button type="button" class="inline btn btn-default btn-small btn-cons pull-right">Efetuar pagamento</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row tiles-container tiles white hidden-xlg m-b-20">
+                        <div class="col-md-12 b-grey b-r no-padding">
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <h4 class="text-black bold inline">A QUEM DEVES</h4>
+                                <div class="pull-right p-r-15">
+                                    <h4 class="text-success bold inline">€ 15,58</h4>
+                                </div>
+                            </div>
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <div class="user-info-wrapper home-margin-list">
+                                    <img class="profile-wrapper user-profile-pic-2x white-border home-img-list" src="assets/img/profiles/avatar.jpg" alt="" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar.jpg">
+                                    <div class="col-md-8 user-info user-info-photo user-info-name-price no-padding" >
+                                        <div class="username inline p-t-15" style="width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">André Santos</div>
+                                    </div>
+                                    <div class="col-md-4 pull-right no-padding m-t-15"  id="home-button-divida-primary-confirm" style="width:125px">
+                                        <button type="button" class="inline btn btn-default btn-small btn-cons pull-right">Efetuar pagamento</button>
+                                    </div>
+                                </div>
+                                <table class="table table-home-box">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left text-primary">TIPO DE DESPESA</th>
+                                            <th class="text-left unseen text-primary">CÍRCULO</th>
+                                            <th class="unseen text-primary">DATA LIMITE</th>
+                                            <th class="text-right text-primary">VALOR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fa fa-flash"></i> Eletricidade</td>
+                                            <td class="unseen">Casa de Braga</td>
+                                            <td class="unseen">20/06/2014</td>
+                                            <td class="text-right">€ 30.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fa fa-flash"></i> Eletricidade</td>
+                                            <td class="unseen">Jantaradas de LEI</td>
+                                            <td class="unseen">20/06/2014</td>
+                                            <td class="text-right">€ 30.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <div class="col-md-4 pull-right no-padding m-t-15"  id="home-button-divida-secondary-confirm" style="width:125px">
+                                                    <button type="button" class="inline btn btn-default btn-small btn-cons pull-right">Efetuar pagamento</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <div class="user-info-wrapper home-margin-list">
+                                    <img class="profile-wrapper user-profile-pic-2x white-border home-img-list" src="assets/img/profiles/avatar.jpg" alt="" data-src="assets/img/profiles/avatar.jpg" data-src-retina="assets/img/profiles/avatar.jpg">
+                                    <div class="col-md-8 user-info user-info-photo user-info-name-price no-padding" >
+                                        <div class="username inline p-t-15" style="width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">André Santos</div>
+                                    </div>
+                                    <div class="col-md-4 pull-right no-padding m-t-15"  id="home-button-divida-primary-confirm" style="width:125px">
+                                        <button type="button" class="inline btn btn-default btn-small btn-cons pull-right">Efetuar pagamento</button>
+                                    </div>
+                                </div>
+                                <table class="table table-home-box">
+                                    <thead>
+                                        <tr>
+                                            <th class="text-left text-primary">TIPO DE DESPESA</th>
+                                            <th class="text-left unseen text-primary">CÍRCULO</th>
+                                            <th class="unseen text-primary">DATA LIMITE</th>
+                                            <th class="text-right text-primary">VALOR</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><i class="fa fa-flash"></i> Eletricidade</td>
+                                            <td class="unseen">Casa de Braga</td>
+                                            <td class="unseen">20/06/2014</td>
+                                            <td class="text-right">€ 30.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td><i class="fa fa-flash"></i> Eletricidade</td>
+                                            <td class="unseen">Jantaradas de LEI</td>
+                                            <td class="unseen">20/06/2014</td>
+                                            <td class="text-right">€ 30.00</td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="4">
+                                                <div class="col-md-4 pull-right no-padding m-t-15"  id="home-button-divida-secondary-confirm" style="width:125px">
+                                                    <button type="button" class="inline btn btn-default btn-small btn-cons pull-right">Efetuar pagamento</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="grid simple no-border">
+                                <div class="grid-title no-border descriptive clickable">
+                                    <h4 class="semi-bold"><i class="fa fa-flash p-r-5"></i>Eletricidade de Março</h4>
+                                    <p>
+                                        <span class="muted">Introduza os dados até dia 20 de Maio</span>
+                                    </p>
+                                    <div class="actions home-next-facts-angle-down"> <a class="view" href="javascript:;"><i class="fa fa-angle-down"></i></a>
+                                    </div>
+
+                                </div>
+                                <div class="grid-body no-border">
+                                    <div class="post">
+                                        <div class="info-wrapper">
+                                            <div class="info">
+                                                <i class="fa fa-home"></i>
+                                                <span class="p-r-10">Casa de Braga</span>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <br>
+                                    <div class="form-actions">
+                                        <div class="post col-md-12">
+                                            <div class="user-profile-pic-wrapper">
+                                                <div class="user-profile-pic-normal">
+                                                    <img width="35" height="35" data-src-retina="assets/img/profiles/c2x.jpg" data-src="assets/img/profiles/c.jpg" src="assets/img/profiles/c.jpg" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="info-wrapper">
+                                                <div class="info">Hi,
+
+                                                    <p class="small-text">Posted on 10/29/13 at 07:21</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="grid simple no-border">
+                                <div class="grid-title no-border descriptive clickable">
+                                    <h4 class="semi-bold"><i class="fa fa-bullhorn p-r-5"></i>Gás de Abril</h4>
+                                    <p>
+                                        <span class="muted">Introduza os dados até dia 20 de Maio</span>
+                                    </p>
+                                    <div class="actions home-next-facts-angle-down"> <a class="view" href="javascript:;"><i class="fa fa-angle-down"></i></a>
+                                    </div>
+
+                                </div>
+                                <div class="grid-body no-border">
+                                    <div class="post">
+                                        <div class="info-wrapper">
+                                            <div class="info">
+                                                <i class="fa fa-home"></i>
+                                                <span class="p-r-10">Casa de Braga</span>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <br>
+                                    <div class="form-actions">
+                                        <div class="post col-md-12">
+                                            <div class="user-profile-pic-wrapper">
+                                                <div class="user-profile-pic-normal">
+                                                    <img width="35" height="35" data-src-retina="assets/img/profiles/c2x.jpg" data-src="assets/img/profiles/c.jpg" src="assets/img/profiles/c.jpg" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="info-wrapper">
+                                                <div class="info">Hi,
+
+                                                    <p class="small-text">Posted on 10/29/13 at 07:21</p>
+
+
+
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="grid simple no-border">
+                                <div class="grid-title no-border descriptive clickable">
+                                    <h4 class="semi-bold"><i class="fa fa-tint p-r-5"></i>Água de Abril</h4>
+                                    <p>
+                                        <span class="muted">Introduza os dados até dia 20 de Maio</span>
+                                    </p>
+                                    <div class="actions home-next-facts-angle-down"> <a class="view" href="javascript:;"><i class="fa fa-angle-down"></i></a>
+                                    </div>
+
+                                </div>
+                                <div class="grid-body no-border">
+                                    <div class="post">
+                                        <div class="info-wrapper">
+                                            <div class="info">
+                                                <i class="fa fa-home"></i>
+                                                <span class="p-r-10">Casa de Braga</span>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <br>
+                                    <div class="form-actions">
+                                        <div class="post col-md-12">
+                                            <div class="user-profile-pic-wrapper">
+                                                <div class="user-profile-pic-normal">
+                                                    <img width="35" height="35" data-src-retina="assets/img/profiles/c2x.jpg" data-src="assets/img/profiles/c.jpg" src="assets/img/profiles/c.jpg" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="info-wrapper">
+                                                <div class="info">Hi,
+
+                                                    <p class="small-text">Posted on 10/29/13 at 07:21</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12">
+                            <div class="grid simple no-border">
+                                <div class="grid-title no-border descriptive clickable">
+                                    <h4 class="semi-bold"><i class="fa fa-flash p-r-5"></i>Eletricidade de Março</h4>
+                                    <p>
+                                        <span class="muted">Introduza os dados até dia 20 de Maio</span>
+                                    </p>
+                                    <div class="actions home-next-facts-angle-down"> <a class="view" href="javascript:;"><i class="fa fa-angle-down"></i></a>
+                                    </div>
+
+                                </div>
+                                <div class="grid-body no-border">
+                                    <div class="post">
+                                        <div class="info-wrapper">
+                                            <div class="info">
+                                                <i class="fa fa-home"></i>
+                                                <span class="p-r-10">Casa de Braga</span>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                    <br>
+                                    <div class="form-actions">
+                                        <div class="post col-md-12">
+                                            <div class="user-profile-pic-wrapper">
+                                                <div class="user-profile-pic-normal">
+                                                    <img width="35" height="35" data-src-retina="assets/img/profiles/c2x.jpg" data-src="assets/img/profiles/c.jpg" src="assets/img/profiles/c.jpg" alt="">
+                                                </div>
+                                            </div>
+                                            <div class="info-wrapper">
+                                                <div class="info">Hi,
+
+                                                    <p class="small-text">Posted on 10/29/13 at 07:21</p>
+                                                </div>
+                                                <div class="clearfix"></div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tiles white m-b-20 m-t-15 p-b-10">
+                        <div class="tiles-body no-padding">
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <h4 class="text-black bold inline">ÚLTIMOS EVENTOS</h4>
+                            </div>
+                            <br>
+                            <div class="m-l-20 notification-messages">
+                                <div class="user-profile">
+                                    <img src="assets/img/profiles/c.jpg" alt="" data-src="assets/img/profiles/c.jpg" data-src-retina="assets/img/profiles/c2x.jpg" width="35" height="35">
+                                </div>
+                                <div class="message-wrapper">
+                                    <div class="heading">André Santos</div>
+                                    <div class="description">Pagou dívida da água de Setembro</div>
+                                    <div class="date">21/09/2014</div>
+                                </div>
+                            </div>
+                            <div class="m-l-20 notification-messages">
+                                <div class="user-profile">
+                                    <img src="assets/img/profiles/c.jpg" alt="" data-src="assets/img/profiles/c.jpg" data-src-retina="assets/img/profiles/c2x.jpg" width="35" height="35">
+                                </div>
+                                <div class="message-wrapper">
+                                    <div class="heading">André Santos</div>
+                                    <div class="description">Pagou dívida da água de Setembro</div>
+                                    <div class="date">21/09/2014</div>
+                                </div>
+                            </div>
+                            <div class="m-l-20 notification-messages">
+                                <div class="user-profile">
+                                    <img src="assets/img/profiles/c.jpg" alt="" data-src="assets/img/profiles/c.jpg" data-src-retina="assets/img/profiles/c2x.jpg" width="35" height="35">
+                                </div>
+                                <div class="message-wrapper">
+                                    <div class="heading">André Santos</div>
+                                    <div class="description">Pagou dívida da água de Setembro</div>
+                                    <div class="date">21/09/2014</div>
+                                </div>
+                            </div>
+                            <div class="m-l-20 notification-messages">
+                                <div class="user-profile">
+                                    <img src="assets/img/profiles/d.jpg" alt="" data-src="assets/img/profiles/d.jpg" data-src-retina="assets/img/profiles/d2x.jpg" width="35" height="35">
+                                </div>
+                                <div class="message-wrapper">
+                                    <div class="heading">André Santos</div>
+                                    <div class="description">Pagou dívida da água de Setembro</div>
+                                    <div class="date">21/09/2014</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tiles white m-t-15">
+                        <div class="tiles-body no-padding">
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <h4 class="text-black bold inline">GASTOS DO MÊS</h4>
+                            </div>
+                            <div class="notification-messages no-padding">
+                                <div class="grid simple">
+                                    <div class="grid-body no-border">
+                                        <div class="tiles-title text-black"></div>
+                                        <br>
+                                        <div id="placeholder-bar-chart"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- END CONTAINER -->
+        <!-- BEGIN CHAT -->
+        <div id="sidr" class="chat-window-wrapper">
+            <div id="main-chat-wrapper">
+                <div class="chat-window-wrapper fadeIn" id="chat-users">
+                    <div class="side-widget">
+                        <div class="header-seperation" style="display: block; height: 61px; background-color:#1b1e24; margin-top:-16px">
+                            <div class="side-widget-title text-white bold inline p-t-20" style="margin-left:-15px; font-size:12px">NOTIFICAÇÕES</div>
+                            <ul class="nav pull-right notifcation-center">
+                                <li class="dropdown" id="portrait-chat-toggler">
+                                    <a href="blank_template.html#sidr" class="chat-menu-toggle">
+                                        <div class="iconset top-chat-white "></div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="side-widget-content" id="friends-list">
+                            <div class="user-details-wrapper" data-chat-status="busy" data-chat-user-pic="assets/img/profiles/d.jpg" data-chat-user-pic-retina="assets/img/profiles/d2x.jpg" data-user-name="David Nester">
+                                <div class="user-profile">
+                                    <img src="assets/img/profiles/h.jpg" alt="" data-src="assets/img/profiles/h.jpg" data-src-retina="assets/img/profiles/h2x.jpg" width="35" height="35">
+                                </div>
+                                <div class="user-details">
+                                    <div class="user-name">
+                                        André Santos
+                                    </div>
+                                    <div class="user-more">
+                                        Adicionou fatura da Luz do mês de Abril
+                                    </div>
+                                </div>
+                                <div class="user-details-status-wrapper">
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="user-details-count-wrapper">
+                                    <div class="status-icon green"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                        <div class="side-widget-content" id="friends-list">
+                            <div class="user-details-wrapper" data-chat-status="busy" data-chat-user-pic="assets/img/profiles/d.jpg" data-chat-user-pic-retina="assets/img/profiles/d2x.jpg" data-user-name="David Nester">
+                                <div class="user-profile">
+                                    <img src="assets/img/profiles/h.jpg" alt="" data-src="assets/img/profiles/h.jpg" data-src-retina="assets/img/profiles/h2x.jpg" width="35" height="35">
+                                </div>
+                                <div class="user-details">
+                                    <div class="user-name">
+                                        Pedro Leite
+                                    </div>
+                                    <div class="user-more">
+                                        Confirmou pagamento do gás do mês de Junho
+                                    </div>
+                                </div>
+                                <div class="user-details-status-wrapper">
+                                    <div class="clearfix"></div>
+                                </div>
+                                <div class="user-details-count-wrapper">
+                                    <div class="status-icon"></div>
+                                </div>
+                                <div class="clearfix"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input-wrapper" style="display:none">
+                    <textarea id="chat-message-input" rows="1" placeholder="Type your message"></textarea>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <!-- END CHAT -->
+        <!-- END CONTAINER -->
+
+        <!-- BEGIN CORE JS FRAMEWORK-->
+        <script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/breakpoints.js" type="text/javascript"></script>
+        <!-- END CORE JS FRAMEWORK -->
+        <!-- BEGIN PAGE LEVEL JS -->
+        <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-slider/jquery.sidr.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.js"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.time.min.js"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.selection.min.js"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.animator.min.js"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.orderBars.js"></script>
+        <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+
+        <!-- END PAGE LEVEL PLUGINS -->
+        <script src="assets/js/homeCharts.js" type="text/javascript"></script>
+        <script src="assets/js/support_ticket.js" type="text/javascript"></script>
+        <!-- BEGIN CORE TEMPLATE JS -->
+        <script src="assets/js/core.js" type="text/javascript"></script>
+        <script src="assets/js/demo.js" type="text/javascript"></script>
+        <script src="assets/js/billmate.js" type="text/javascript"></script>
+        <!-- END CORE TEMPLATE JS -->
+
+        <!-- BEGIN CORE JS FRAMEWORK
+        <script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/breakpoints.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-block-ui/jqueryblockui.js" type="text/javascript"></script>
+        
+        <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-slider/jquery.sidr.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-numberAnimate/jquery.animateNumbers.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-ricksaw-chart/js/d3.v2.js"></script>
+        <script src="assets/plugins/jquery-ricksaw-chart/js/rickshaw.min.js"></script>
+        <script src="assets/plugins/jquery-morris-chart/js/morris.min.js"></script>
+        <script src="assets/plugins/jquery-easy-pie-chart/js/jquery.easypiechart.min.js"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.js"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.time.min.js"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.selection.min.js"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.animator.min.js"></script>
+        <script src="assets/plugins/jquery-flot/jquery.flot.orderBars.js"></script>
+        <script src="assets/plugins/jquery-sparkline/jquery-sparkline.js"></script>
+        <script src="assets/plugins/jquery-easy-pie-chart/js/jquery.easypiechart.min.js"></script>
+        <script src="assets/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
+        <script src="assets/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js" type="text/javascript"></script>
+        <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+
+        <script src="assets/js/charts.js" type="text/javascript"></script>
+        <script src="assets/js/support_ticket.js" type="text/javascript"></script>
+        
+        <script src="assets/js/core.js" type="text/javascript"></script>
+        <script src="assets/js/demo.js" type="text/javascript"></script>
+        <script src="assets/js/billmate.js" type="text/javascript"></script>
+        END CORE TEMPLATE JS -->
+
+
+</body>
+
+</html>
