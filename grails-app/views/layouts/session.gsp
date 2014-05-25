@@ -9,7 +9,8 @@
     <meta content="" name="author" />
 
     <asset:stylesheet href="application.css"/>
-    <asset:stylesheet href="authentication.css"/>
+    <asset:stylesheet href="session.css"/>
+    <g:layoutHead/>
 
 </head>
 <body class="no-top lazy">
@@ -17,6 +18,6 @@
     <g:layoutBody/>
 
     <asset:javascript src="application.js"/>
-    <asset:javascript src="authentication.js"/>
+    <asset:javascript src="session.js"/>
 </body>
 </html>
