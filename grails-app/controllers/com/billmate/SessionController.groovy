@@ -4,18 +4,16 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 
 class SessionController extends BaseController {
     static layout = "session"
+    static allowedMethods = [create: "GET", save: "POST"]
 
-    def beforeInterceptor = [action: this.&alreadyAuthenticated, except: ['login']]
+    def beforeInterceptor = [action: this.&alreadyAuthenticated]
 
     def create = {
-        if(session.user) {
-            flash.message = "com.billmate.session.save.already.authenticated"
-            flash.m_args = ["#"]
-            flash.m_default = "You are already signed in. <a href='{0}'>Logout?</a>"
-        }
     }
 
     def save = {
+        if(!checkRequiredParams()){ return }
+
         def user = User.findWhere(email: params['email'])
         if (user) {
             def registeredUser = RegisteredUser.findWhere(user: user)
@@ -31,5 +29,15 @@ class SessionController extends BaseController {
         flash.error = "com.billmate.session.save.failure"
         flash.e_default = "Invalid email or password."
         return redirect(controller: 'session', action: 'create')
+    }
+
+    private checkRequiredParams() {
+        if (!params['password'] || !params['email']) {
+            flash.error = "com.billmate.session.save.invalid.params"
+            flash.e_default = "Please fill out all fields below."
+            redirect(controller: 'session', action: 'create')
+            return false
+        }
+        return true
     }
 }

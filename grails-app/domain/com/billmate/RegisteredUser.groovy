@@ -34,14 +34,12 @@ class RegisteredUser {
 
     def beforeInsert() {
         encodePassword()
-        user.save()
     }
 
     def beforeUpdate() {
         if (isDirty('password')) {
             encodePassword()
         }
-        user.save()
     }
 
     def beforeValidate() {
@@ -62,5 +60,18 @@ class RegisteredUser {
 
     public void setEmail(String email){
         user.setEmail(email)
+    }
+
+    public boolean secureSave(){
+        withTransaction { status ->
+            try {
+                user.save(flush: true, failOnError: true)
+                this.save(flush: true, failOnError: true)
+                return true
+            }catch(Exception ignored){
+                status.setRollbackOnly()
+                return false
+            }
+        }
     }
 }
