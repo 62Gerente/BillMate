@@ -4,7 +4,7 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 
 class SessionController extends BaseController {
     static layout = "session"
-    static allowedMethods = [create: "GET", save: "POST"]
+    static allowedMethods = [create: "GET", save: "POST", delete: "DELETE"]
 
     def beforeInterceptor = [action: this.&alreadyAuthenticated]
 
@@ -28,6 +28,11 @@ class SessionController extends BaseController {
 
         flash.error = "com.billmate.session.save.failure"
         flash.e_default = "Invalid email or password."
+        return redirect(controller: 'session', action: 'create')
+    }
+
+    def delete = {
+        session.user = null
         return redirect(controller: 'session', action: 'create')
     }
 
