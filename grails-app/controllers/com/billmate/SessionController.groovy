@@ -6,7 +6,7 @@ class SessionController extends BaseController {
     static layout = "session"
     static allowedMethods = [create: "GET", save: "POST", delete: "DELETE"]
 
-    def beforeInterceptor = [action: this.&alreadyAuthenticated]
+    def beforeInterceptor = [action: this.&alreadyAuthenticated, except:['delete']]
 
     def create = {
     }

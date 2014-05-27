@@ -1,5 +1,3 @@
-//= require ../plugins/jquery-validation/js/jquery.validate.min.js
-
 $(document).ready(function() {
     $('#login-form').validate({
         errorElement: 'span',

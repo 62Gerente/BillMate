@@ -1,5 +1,7 @@
 package com.billmate
 
+import org.codehaus.groovy.grails.web.mapping.LinkGenerator
+
 class User {
     static belongsTo = Circle
     static hasMany = [circles: Circle, payments: Payment, customizedDebts: CustomDebt, referencedActions: Action]

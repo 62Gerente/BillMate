@@ -3,6 +3,7 @@ package com.billmate
 import com.lucastex.grails.fileuploader.UFile
 import org.apache.shiro.crypto.hash.Sha256Hash
 import org.springframework.validation.ObjectError
+import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 
 class RegisteredUser {
     static belongsTo = User
@@ -66,12 +67,25 @@ class RegisteredUser {
         withTransaction { status ->
             try {
                 user.save(flush: true, failOnError: true)
-                this.save(flush: true, failOnError: true)
+                save(flush: true, failOnError: true)
                 return true
             }catch(Exception ignored){
                 status.setRollbackOnly()
                 return false
             }
         }
+    }
+
+    public String getPhotoOrDefault(){
+        def linkGenerator = new RegisteredUser().domainClass.grailsApplication.mainContext.grailsLinkGenerator
+        if(photo){
+            return photo.getPath()
+        }else{
+            return linkGenerator.resource(dir: 'images',file: 'default-user.png', absolute: true)
+        }
+    }
+
+    public String toString() {
+       return user.toString();
     }
 }
