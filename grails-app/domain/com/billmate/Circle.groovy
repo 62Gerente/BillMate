@@ -15,10 +15,17 @@ class Circle {
 
         name blank: false, nullable: false
         description nullable: true, blank: true
-        createdAt nullable: false, defaultValue: new Date(), min: new Date()
+        createdAt nullable: true, defaultValue: new Date()
     }
 
-    String toString(){
+    public String toString(){
         name
+    }
+
+    public boolean isType(String type){
+        if(this.hasProperty(type)){
+            return true
+        }
+        return false
     }
 }

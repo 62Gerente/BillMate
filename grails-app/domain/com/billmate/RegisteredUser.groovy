@@ -63,6 +63,14 @@ class RegisteredUser {
         user.setEmail(email)
     }
 
+    public void addToCircles(Circle circle){
+        user.addToCircles(circle)
+    }
+
+    public String toString() {
+        return user.toString();
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {
@@ -77,7 +85,7 @@ class RegisteredUser {
     }
 
     public String getPhotoOrDefault(){
-        def linkGenerator = new RegisteredUser().domainClass.grailsApplication.mainContext.grailsLinkGenerator
+        def linkGenerator = this.domainClass.grailsApplication.mainContext.grailsLinkGenerator
         if(photo){
             return photo.getPath()
         }else{
@@ -85,7 +93,20 @@ class RegisteredUser {
         }
     }
 
-    public String toString() {
-       return user.toString();
+    public User getAttachedUser(){
+        if(!user.isAttached()){
+            user.attach()
+        }
+        return user
+    }
+
+    public Set<Circle> getCircles(Map map){
+        Set<Circle> result = getAttachedUser().getCircles()
+
+        if(map.containsKey('type')){
+            result = result.grep({ it.isType(map.get('type')) })
+        }
+
+        return result
     }
 }

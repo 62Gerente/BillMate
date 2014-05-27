@@ -67,18 +67,22 @@
                         <li class="side-bar-widgets">
                             <p class="menu-title"><g:message code="com.billmate.sidebar.group" default="Groups"/>
                                 <span class="pull-right">
-                                    <a href="blank_template.html#" class="create-folder"> <i class="fa fa-plus"></i>
+                                    <a href="#" class="create-folder"> <i class="fa fa-plus"></i>
                                     </a>
                                 </span>
                             </p>
                             <ul class="folders">
                                 <li>
                                     <a href="blank_template.html#">
-                                        <div class="status-icon green"></div>Futeboladas CeSIUM</a>
+                                        <div class="status-icon blue"></div>Futeboladas CeSIUM</a>
                                 </li>
                                 <li>
                                     <a href="blank_template.html#">
-                                        <div class="status-icon red"></div>Amigos Secundário</a>
+                                        <div class="status-icon blue"></div>Amigos Secundário</a>
+                                </li>
+                                <li>
+                                    <a href="blank_template.html#">
+                                        <div class="status-icon blue"></div>Jantaradas EA</a>
                                 </li>
                             </ul>
                         </li>
@@ -88,18 +92,19 @@
             <div class="side-bar-widgets">
                 <p class="menu-title"><g:message code="com.billmate.sidebar.house" default="House"/>
                     <span class="pull-right">
-                        <a href="index.html#" class="create-folder"> <i class="fa fa-plus"></i>
+                        <a href="#" class="create-folder"> <i class="fa fa-plus"></i>
                         </a>
                     </span>
                 </p>
                 <ul class="folders">
-                    <li>
-                        <a href="blank_template.html#">
-                            <div class="status-icon green"></div>Casa Braga</a>
-                    </li>
-                    <li class="folder-input" style="display:none">
-                        <input type="text" placeholder="Name of folder" class="no-boarder folder-name" name="">
-                    </li>
+                    <g:each var="house" in="${dashboard.getHouses()}">
+                        <li>
+                            <a href="#">
+                                <div class="status-icon green"></div>
+                                ${house}
+                            </a>
+                        </li>
+                    </g:each>
                 </ul>
             </div>
             <div class="side-bar-widgets">
@@ -112,11 +117,11 @@
                 <ul class="folders">
                     <li>
                         <a href="blank_template.html#">
-                            <div class="status-icon green"></div>Futeboladas CeSIUM</a>
+                            <div class="status-icon blue"></div>Futeboladas CeSIUM</a>
                     </li>
                     <li>
                         <a href="blank_template.html#">
-                            <div class="status-icon red"></div>Amigos Secundário</a>
+                            <div class="status-icon blue"></div>Amigos Secundário</a>
                     </li>
                     <li>
                         <a href="blank_template.html#">

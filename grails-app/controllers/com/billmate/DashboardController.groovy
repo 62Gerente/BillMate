@@ -11,6 +11,6 @@ class DashboardController extends RestrictedController {
     def index() {
         def userDashboard = new RegisteredUserDashboard(user: session.user)
 
-        return [user: session.user, dashboard: userDashboard]
+        return [user: (RegisteredUser) session.user, dashboard: userDashboard]
     }
 }

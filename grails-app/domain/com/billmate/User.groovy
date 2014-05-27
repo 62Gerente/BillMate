@@ -20,7 +20,7 @@ class User {
         createdAt nullable: true, defaultValue: new Date()
     }
 
-    String toString() {
+    public String toString() {
         name ? name : email
     }
 }
