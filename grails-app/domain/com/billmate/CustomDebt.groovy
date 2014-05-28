@@ -13,7 +13,7 @@ class CustomDebt {
         expense nullable: false
         user nullable: false
 
-        percentage min: 0, nullable: false
-        createdAt nullable: false, defaultValue: new Date(), min: new Date()
+        percentage range: 0..100, nullable: false
+        createdAt nullable: false, defaultValue: new Date()
     }
 }

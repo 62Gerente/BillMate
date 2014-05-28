@@ -28,6 +28,5 @@ class PaymentSpec extends ConstraintUnitSpec {
         'min'                  | 'value'        | -1
         'nullable'             | 'date'         | null
         'nullable'             | 'createdAt'    | null
-        'min'                  | 'createdAt'    | new Date() - 1
     }
 }

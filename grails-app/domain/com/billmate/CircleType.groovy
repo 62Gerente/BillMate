@@ -8,6 +8,6 @@ class CircleType {
 
     static constraints = {
         identifier nullable: false
-        name nullable: false, blank: false
+        name nullable: false
     }
 }

@@ -26,7 +26,6 @@ class ExpenseSpec extends ConstraintUnitSpec {
         error                  | field          | val
         'nullable'             | 'responsible'  | null
         'nullable'             | 'title'        | null
-        'blank'                | 'title'        | ""
         'maxSize'              | 'description'  | 'a'*2001
         'min'                  | 'value'        | -1
         'nullable'             | 'value'        | null

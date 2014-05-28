@@ -26,6 +26,5 @@ class CircleTypeSpec extends ConstraintUnitSpec {
         error                  | field        | val
         'nullable'             | 'identifier' | null
         'nullable'             | 'name'       | null
-        'blank'                | 'name'       | ''
     }
 }

@@ -25,7 +25,6 @@ class CircleSpec extends ConstraintUnitSpec {
         where:
         error                  | field        | val
         'nullable'             | 'name'       | null
-        'blank'                | 'name'       | ''
         'nullable'             | 'createdAt'  | null
     }
 

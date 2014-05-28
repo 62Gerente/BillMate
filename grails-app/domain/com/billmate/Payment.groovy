@@ -20,6 +20,6 @@ class Payment {
         date defaultValue: new Date(), nullable: false
         validationDate nullable: true
         validated defaultValue: false, nullable: true
-        createdAt nullable: false, defaultValue: new Date(), min: new Date()
+        createdAt nullable: false, defaultValue: new Date()
     }
 }

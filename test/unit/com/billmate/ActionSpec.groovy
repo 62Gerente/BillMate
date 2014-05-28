@@ -26,7 +26,5 @@ class ActionSpec extends ConstraintUnitSpec {
         error                  | field        | val
         'nullable'             | 'actionType' | null
         'nullable'             | 'actionDate' | null
-        'min'                  | 'actionDate' | new Date() - 1
-
     }
 }

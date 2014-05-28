@@ -14,8 +14,8 @@ class Circle {
         house nullable: true
 
         name blank: false, nullable: false
-        description nullable: true, blank: true
-        createdAt nullable: false, defaultValue: new Date(), min: new Date()
+        description nullable: true
+        createdAt nullable: false, defaultValue: new Date()
     }
 
     String toString(){

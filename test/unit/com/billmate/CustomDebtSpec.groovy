@@ -26,9 +26,9 @@ class CustomDebtSpec extends ConstraintUnitSpec {
         error                  | field        | val
         'nullable'             | 'expense'    | null
         'nullable'             | 'user'       | null
-        'min'                  | 'percentage' | -1
+        'range'                | 'percentage' | -1
+        'range'                | 'percentage' | 101
         'nullable'             | 'percentage' | null
         'nullable'             | 'createdAt'  | null
-        'min'                  | 'createdAt'  | new Date() - 1
     }
 }

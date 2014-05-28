@@ -28,7 +28,6 @@ class UserSpec extends ConstraintUnitSpec {
         'email'                | 'email'      | "john"
         'unique'               | 'email'      | "johndoe@mail.com"
         'nullable'             | 'createdAt'  | null
-        'min'                  | 'createdAt'  | new Date() - 1
 
     }
 

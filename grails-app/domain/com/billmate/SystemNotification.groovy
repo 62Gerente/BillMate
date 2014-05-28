@@ -7,13 +7,13 @@ class SystemNotification {
     RegisteredUser registeredUser
     Notification notification
 
-    Boolean read
+    Boolean isRead
 
     static constraints = {
         action nullable: false
         registeredUser nullable: false
         notification nullable: false
 
-        read nullable: false, defaultValue: false
+        isRead nullable: false, defaultValue: false
     }
 }

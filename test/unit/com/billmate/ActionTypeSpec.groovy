@@ -24,7 +24,6 @@ class ActionTypeSpec extends ConstraintUnitSpec {
 
         where:
         error                  | field        | val
-        'blank'                | 'type'       | ''
         'nullable'             | 'type'       | null
     }
 }

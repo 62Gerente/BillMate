@@ -31,8 +31,8 @@ class Expense {
         regularExpense nullable: true
         occasionalExpense nullable: true
 
-        title nullable: false, blank: false
-        description maxSize: 2000, nullable: true, blank: true
+        title nullable: false
+        description maxSize: 2000, nullable: true
         value min: 0D, nullable: false
         beginDate nullable: false, defaultValue: new Date()
         endDate nullable: true

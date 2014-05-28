@@ -27,6 +27,6 @@ class SystemNotificationSpec extends ConstraintUnitSpec {
         'nullable'             | 'action'         | null
         'nullable'             | 'registeredUser' | null
         'nullable'             | 'notification'   | null
-        'nullable'             | 'read'           | null
+        'nullable'             | 'isRead'         | null
     }
 }

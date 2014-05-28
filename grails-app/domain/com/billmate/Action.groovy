@@ -19,7 +19,7 @@ class Action {
         user nullable: true
         circle nullable: true
 
-        actionDate nullable: false, defaultValue: new Date(), min: new Date()
+        actionDate nullable: false, defaultValue: new Date()
     }
 
 }

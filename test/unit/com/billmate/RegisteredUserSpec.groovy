@@ -30,6 +30,5 @@ class RegisteredUserSpec extends ConstraintUnitSpec {
         'size'                 | 'password'     | "1234"
         'size'                 | 'password'     | "a"*21
         'nullable'             | 'password'     | null
-        'blank'                | 'password'     | ''
     }
 }
