@@ -7,13 +7,13 @@ class CustomDebt {
     User user
 
     Integer percentage
-    Date createdAt
+    Date createdAt = new Date()
 
     static constraints = {
         expense nullable: false
         user nullable: false
 
         percentage min: 0, nullable: false
-        createdAt nullable: false, defaultValue: new Date(), min: new Date()
+        createdAt nullable: false
     }
 }

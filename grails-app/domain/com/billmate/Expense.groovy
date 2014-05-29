@@ -15,11 +15,11 @@ class Expense {
     String title
     String description
     Double value
-    Date beginDate
+    Date beginDate = new Date()
     Date endDate
     Date paymentDeadline
     Date receptionDeadline
-    Date createdAt
+    Date createdAt = new Date()
     Date paymentDate
     Date receptionDate
 
@@ -31,14 +31,14 @@ class Expense {
         regularExpense nullable: true
         occasionalExpense nullable: true
 
-        title nullable: false, blank: false
-        description maxSize: 2000, nullable: true, blank: true
+        title nullable: false
+        description maxSize: 2000, nullable: true
         value min: 0D, nullable: false
-        beginDate nullable: false, defaultValue: new Date()
+        beginDate nullable: false
         endDate nullable: true
         paymentDeadline nullable: true
         receptionDeadline nullable: true
-        createdAt nullable: false, defaultValue: new Date()
+        createdAt nullable: false
         paymentDate nullable: true
         receptionDate nullable: true
     }

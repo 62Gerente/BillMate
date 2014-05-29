@@ -1,7 +1,5 @@
 package com.billmate
 
-import org.codehaus.groovy.grails.web.mapping.LinkGenerator
-
 class User {
     static belongsTo = Circle
     static hasMany = [circles: Circle, payments: Payment, customizedDebts: CustomDebt, referencedActions: Action]
@@ -9,15 +7,19 @@ class User {
 
     String name
     String email
-    Date createdAt
+    Date createdAt = new Date()
 
     static constraints = {
         referredUser nullable: true
         registeredUser nullable: true
 
-        name blank: false, nullable: false
-        email email: true, blank: false, unique: true, nullable: false
-        createdAt nullable: true, defaultValue: new Date()
+        name nullable: false
+        email email: true, unique: true, nullable: false
+        createdAt nullable: false
+    }
+
+    static mapping = {
+        table '`user`'
     }
 
     public String toString() {

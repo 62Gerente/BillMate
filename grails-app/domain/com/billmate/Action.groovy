@@ -10,7 +10,7 @@ class Action {
     User user
     Circle circle
 
-    Date actionDate
+    Date actionDate = new Date()
 
     static constraints = {
         actionType nullable: false
@@ -19,7 +19,7 @@ class Action {
         user nullable: true
         circle nullable: true
 
-        actionDate nullable: false, defaultValue: new Date(), min: new Date()
+        actionDate nullable: false
     }
 
 }

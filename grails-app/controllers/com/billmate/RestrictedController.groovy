@@ -9,4 +9,9 @@ abstract class RestrictedController extends BaseController {
             return false
         }
     }
+
+    private authenticatedUser(){
+        RegisteredUser sessionUser = session.user
+        return RegisteredUser.findWhere(id: sessionUser.getId())
+    }
 }

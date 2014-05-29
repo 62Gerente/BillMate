@@ -7,8 +7,8 @@ class Payment {
     User user
 
     Double value
-    Date date
-    Date createdAt
+    Date date = new Date()
+    Date createdAt = new Date()
     Date validationDate
     Boolean validated
 
@@ -17,9 +17,9 @@ class Payment {
         user nullable: false
 
         value min: 0D, nullable: false
-        date defaultValue: new Date(), nullable: false
+        date nullable: false
         validationDate nullable: true
         validated defaultValue: false, nullable: true
-        createdAt nullable: false, defaultValue: new Date(), min: new Date()
+        createdAt nullable: false
     }
 }

@@ -7,15 +7,15 @@ class Circle {
 
     String name
     String description
-    Date createdAt
+    Date createdAt = new Date()
 
     static constraints = {
         collective nullable: true
         house nullable: true
 
-        name blank: false, nullable: false
-        description nullable: true, blank: true
-        createdAt nullable: true, defaultValue: new Date()
+        name nullable: false
+        description nullable: true
+        createdAt nullable: false
     }
 
     public String toString(){
@@ -23,8 +23,10 @@ class Circle {
     }
 
     public boolean isType(String type){
-        if(this.hasProperty(type)){
-            return true
+        if(type.equals('House')){
+            return house
+        }else if(type.equals('Collective')){
+            return collective
         }
         return false
     }

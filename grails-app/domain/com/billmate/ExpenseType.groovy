@@ -14,7 +14,7 @@ class ExpenseType {
         customExpenseType nullable: true
         defaultExpenseType nullable: true
 
-        name blank: false, nullable: false
+        name nullable: false
         icon nullable: true
     }
 

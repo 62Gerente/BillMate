@@ -13,7 +13,11 @@
     <asset:javascript src="bm-application.js"/>
 </head>
 <body>
-    <g:render template="/shared/header" model="'user': ${user}"/>
+    <g:render template="/shared/header" model="[user: user]"/>
+
+    <div class="page-container row-fluid">
+        <g:render template="/shared/sidebar" model="[user: user]"/>
+    </div>
 
     <g:layoutBody/>
 </body>

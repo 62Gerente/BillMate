@@ -20,7 +20,7 @@ class RegisteredUser {
         photo nullable: true
 
         phoneNumber matches: '\\d{9}', unique: true, nullable: true
-        password password: true, blank: false, nullable: false
+        password password: true, nullable: false
     }
 
     public RegisteredUser() {
@@ -93,20 +93,21 @@ class RegisteredUser {
         }
     }
 
-    public User getAttachedUser(){
-        if(!user.isAttached()){
-            user.attach()
-        }
-        return user
-    }
-
     public Set<Circle> getCircles(Map map){
-        Set<Circle> result = getAttachedUser().getCircles()
+        Set<Circle> result = user.getCircles()
 
         if(map.containsKey('type')){
-            result = result.grep({ it.isType(map.get('type')) })
+            result = result.findAll({ ((Circle)it).isType(map.get('type').toString()) })
         }
 
         return result
+    }
+
+    public Set<Circle> getHouses(){
+        return getCircles(type: 'House')
+    }
+
+    public Set<Circle> getCollectives(){
+        return getCircles(type: 'Collective')
     }
 }

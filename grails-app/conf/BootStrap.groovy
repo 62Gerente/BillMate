@@ -1,4 +1,5 @@
 import com.billmate.Circle
+import com.billmate.Collective
 import com.billmate.House
 import com.billmate.User
 import com.billmate.RegisteredUser
@@ -15,15 +16,16 @@ class BootStrap {
             println(house.getErrors().getAllErrors().toString())
         }
 
+        def collective = new Collective(name: 'Futeboladas CeSIUM')
+        if(!collective.secureSave()){
+            println(collective.getErrors().getAllErrors().toString())
+        }
+
         user.addToCircles(house.circle)
+        user.addToCircles(collective.circle)
         if(!user.secureSave()){
             println(user.getErrors().getAllErrors().toString())
         }
-
-        assert User.count() == 1
-        assert RegisteredUser.count() == 1
-        assert House.count() == 1
-        assert Circle.count() == 1
     }
 
     def destroy = {
