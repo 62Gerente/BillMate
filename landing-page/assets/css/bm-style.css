@@ -1,7 +1,7 @@
-.tp-bgimg, #working-section{
+.tp-bgimg, #testomonials-wrapper{
 	background: #0aa699 !important;
 }
 
-#working-section{
-	height: 200px;
+.full-width{
+	width: 100%;
 }
