@@ -82,28 +82,7 @@
             </li>
         </ul>
         <g:render template="/house/sidebar" model="[houses: user.getHouses()]"/>
-        <div class="side-bar-widgets">
-            <p class="menu-title"><g:message code="com.billmate.sidebar.group" default="Groups"/>
-                <span class="pull-right">
-                    <a href="blank_template.html#" class="create-folder"> <i class="fa fa-plus"></i>
-                    </a>
-                </span>
-            </p>
-            <ul class="folders">
-                <li>
-                    <a href="blank_template.html#">
-                        <div class="status-icon blue"></div>Futeboladas CeSIUM</a>
-                </li>
-                <li>
-                    <a href="blank_template.html#">
-                        <div class="status-icon blue"></div>Amigos Secundário</a>
-                </li>
-                <li>
-                    <a href="blank_template.html#">
-                        <div class="status-icon blue"></div>Jantaradas EA</a>
-                </li>
-            </ul>
-        </div>
+        <g:render template="/collective/sidebar" model="[collectives: user.getCollectives()]"/>
         <div class="clearfix"></div>
     </div>
 </div>
