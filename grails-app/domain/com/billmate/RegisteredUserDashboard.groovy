@@ -5,4 +5,5 @@ class RegisteredUserDashboard {
 
     RegisteredUser user
     Set<Action> actions
+    int numero_notificacoes
 }

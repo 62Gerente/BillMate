@@ -9,7 +9,8 @@ class DashboardController extends RestrictedController {
     def index() {
         RegisteredUser user = authenticatedUser()
         Set<Action> action = user.getUser().getReferencedActions()
-        def userDashboard = new RegisteredUserDashboard(user: user, actions: action )
+        int contador = user.countNonReadNotifications()
+        def userDashboard = new RegisteredUserDashboard(user: user, actions: action, numero_notificacoes: contador)
         return [user: user, dashboard: userDashboard]
     }
 }
