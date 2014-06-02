@@ -35,10 +35,12 @@ class Action {
     }
 
     /*
-    * Se o resultado for true é porque não foi lida
+    * Se a lista não for vazia é porque há notificações por ler.
     * */
     public boolean isRead(Set<SystemNotification> listNotifications){
-        Set<Notification> resultList = listNotifications.findAll({((SystemNotification)it).getIs_read() && ((SystemNotification)it).getRegisteredUser().getUserId() == getUserId()})
+        int idD = getUserId()
+        List<SystemNotification> lista = SystemNotification.findAll()
+        Set<Notification> resultList = listNotifications.findAll({!((SystemNotification)it).getIs_read() && ((SystemNotification)it).getRegisteredUser().getUserId() == getUserId()})
         return resultList.isEmpty()
     }
 }
