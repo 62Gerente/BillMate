@@ -16,4 +16,12 @@ class RegisteredUserDashboard {
     public Set<RegisteredUser> whoIOwe(){
         getUser().whoIOwe()
     }
+
+    public Double totalAsset(){
+        registeredUser.totalAsset()
+    }
+
+    public Set<User> whoOweMe(){
+        registeredUser.whoOweMe()
+    }
 }

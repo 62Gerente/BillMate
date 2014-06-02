@@ -49,4 +49,13 @@ class User {
         Double total = unresolvedExpensesWhoResponsibleIs(registeredUserId).sum{ it.debtOf(this.id) }
         total ? total : 0D
     }
+
+    public String getPhotoOrDefault(){
+        def linkGenerator = this.domainClass.grailsApplication.mainContext.grailsLinkGenerator
+        if(registeredUser){
+            return registeredUser.getPhotoOrDefault()
+        }else{
+            return linkGenerator.resource(dir: 'images',file: 'default-user.png', absolute: true)
+        }
+    }
 }
