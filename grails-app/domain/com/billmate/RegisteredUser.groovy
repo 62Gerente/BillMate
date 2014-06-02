@@ -63,6 +63,14 @@ class RegisteredUser {
         user.setEmail(email)
     }
 
+    public String getName(){
+        user.getName()
+    }
+
+    public String getEmail(){
+        user.getEmail()
+    }
+
     public void addToCircles(Circle circle){
         user.addToCircles(circle)
     }
@@ -97,17 +105,17 @@ class RegisteredUser {
         Set<Circle> result = user.getCircles()
 
         if(map.containsKey('type')){
-            result = result.findAll({ ((Circle)it).isType(map.get('type').toString()) })
+            result = result.findAll{ it.isType(map.get('type')) }
         }
 
-        return result
+        result
     }
 
     public Set<Circle> getHouses(){
-        return getCircles(type: 'House')
+        getCircles(type: 'House')
     }
 
     public Set<Circle> getCollectives(){
-        return getCircles(type: 'Collective')
+        getCircles(type: 'Collective')
     }
 }

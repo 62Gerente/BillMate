@@ -30,4 +30,12 @@ class Circle {
         }
         return false
     }
+
+    public Set<Expense> unresolvedExpenses(){
+        return this.expenses.findAll{ !it.isResolved() }
+    }
+
+    public Set<Expense> resolvedExpenses(){
+        return this.expenses.findAll{ !it.isResolved() }
+    }
 }

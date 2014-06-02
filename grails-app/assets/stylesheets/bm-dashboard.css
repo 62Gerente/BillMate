@@ -326,7 +326,7 @@
 
 #home-button-divida-secondary-confirm{
     display: none;
-    margin-left: -50px;
+    width: 100%;
 }
 
 @media (max-width: 1180px){
@@ -383,6 +383,19 @@ button[type="submit"]:hover {
 }
 
 .profile-wrapper img{
-    width: 69px;
-    height: 69px;
+    width: 50px;
+    height: 50px;
+}
+
+.user-info-wrapper .profile-wrapper {
+    width: 50px;
+    height: 50px;
+}
+
+.user-info-wrapper .user-info .greeting {
+    font-size: 15px;
+}
+
+.user-info-wrapper .user-info .username {
+    font-size: 15px;
 }

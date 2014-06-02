@@ -9,7 +9,7 @@ class DashboardController extends RestrictedController {
     def beforeInterceptor = [action: this.&checkSession]
 
     def index() {
-        def userDashboard = new RegisteredUserDashboard(user: authenticatedUser())
+        def userDashboard = new RegisteredUserDashboard(registeredUser: authenticatedUser())
 
         return [user: authenticatedUser(), dashboard: userDashboard]
     }

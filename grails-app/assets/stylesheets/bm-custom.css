@@ -22,3 +22,7 @@ a {
 .alert a {
     color: #004264;
 }
+
+.uppercase{
+    text-transform: uppercase;
+}

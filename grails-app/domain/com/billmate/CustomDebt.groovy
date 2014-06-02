@@ -6,14 +6,18 @@ class CustomDebt {
     Expense expense
     User user
 
-    Integer percentage
+    Double percentage
     Date createdAt = new Date()
 
     static constraints = {
         expense nullable: false
         user nullable: false
 
-        percentage min: 0, nullable: false
+        percentage min: 0D, nullable: false
         createdAt nullable: false
+    }
+
+    public Double getPercentageInDecimal(){
+        return percentage/100
     }
 }

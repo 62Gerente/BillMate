@@ -3,12 +3,14 @@ package com.billmate
 import com.lucastex.grails.fileuploader.UFile
 
 class Expense {
-    static belongsTo = [Circle, RegisteredUser]
-    static hasMany = [expenseTypes: ExpenseType, payments: Payment,
-                      customizedDebts: CustomDebt, actions: Action]
+    static belongsTo = [Circle, RegisteredUser, ExpenseType]
+    static hasMany = [payments: Payment,
+                      customDebts: CustomDebt, actions: Action, assignedUsers: User]
     static hasOne = [regularExpense: RegularExpense, occasionalExpense: OccasionalExpense]
 
     RegisteredUser responsible
+    ExpenseType expenseType
+    Circle circle
     UFile invoice
     UFile receipt
 
@@ -27,6 +29,8 @@ class Expense {
         responsible nullable: false
         invoice nullable: true
         receipt nullable: true
+        circle nullable: false
+        expenseType nullable: false
 
         regularExpense nullable: true
         occasionalExpense nullable: true
@@ -43,7 +47,70 @@ class Expense {
         receptionDate nullable: true
     }
 
-    String toString(){
+    public String toString(){
         title
+    }
+
+    public boolean isResolved(){
+        receptionDate
+    }
+
+    public Double totalDebtOf(Long userId){
+        Double totalDebt
+        CustomDebt customDebt = customDebts.find{ it.getUserId() == userId && it.getExpenseId() == this.id }
+
+        if(customDebt){
+            totalDebt = value * customDebt.getPercentageInDecimal()
+        }else{
+            totalDebt = value * percentageAssignedToUsersWithoutCustomDebtsInDecimal()
+        }
+
+        totalDebt
+    }
+
+    public Double percentageOfCustomDebts(){
+        Double percentage = customDebts.sum{ it.getPercentage() }
+        percentage ? percentage : 0D
+    }
+
+    public Double percentageOfEquallyDividedDebts(){
+        100 - percentageOfCustomDebts()
+    }
+
+    public Integer numberOfCustomDebts(){
+        customDebts.size()
+    }
+
+    public Integer numberOfAssignedUsers(){
+        assignedUsers.size() + 1
+    }
+
+    public Integer numberOfAssignedUsersWithoutCustomDebts(){
+        numberOfAssignedUsers() - numberOfCustomDebts()
+    }
+
+    public Double percentageAssignedToUsersWithoutCustomDebts(){
+        percentageOfEquallyDividedDebts() / numberOfAssignedUsersWithoutCustomDebts()
+    }
+
+    public Double percentageAssignedToUsersWithoutCustomDebtsInDecimal(){
+        percentageAssignedToUsersWithoutCustomDebts() / 100
+    }
+
+    public Double amountPaidBy(Long userId){
+        Double amount = payments.findAll{ it.getUserId() == userId }.sum{ it.getValue() }
+        amount ? amount : 0D
+    }
+
+    public Double debtOf(Long userId){
+        totalDebtOf(userId) - amountPaidBy(userId)
+    }
+
+    public boolean isAssignedTo(Long userId){
+        assignedUsers.find{ it.getId() == userId }
+    }
+
+    public boolean isResolvedBy(Long userId){
+        isAssignedTo(userId) && debtOf(userId) == 0
     }
 }
