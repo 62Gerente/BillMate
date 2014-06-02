@@ -20,7 +20,7 @@ class RegisterController extends BaseController {
             session.user = registeredUser
             flash.message = "com.billmate.register.save.success"
             flash.m_default = "You have been successfully registered and logged in."
-            return redirect(uri: '/')
+            return redirect(controller: 'dashboard', action: 'index')
         }else{
             flash.error = "com.billmate.register.save.failure"
             flash.e_default = "Error creating your account, please try again."

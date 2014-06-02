@@ -19,7 +19,7 @@ class BootStrap {
         }
 
         if(House.count() == 0){
-            def house = new House(name: 'Casa BillMate')
+            def house = new House(name: 'BillMate House')
             house.secureSave()
 
             User.findWhere(email: 'bill@mate.com').addToCircles(house.circle)
@@ -30,7 +30,7 @@ class BootStrap {
         }
 
         if(Collective.count() == 0){
-            def collective = new Collective(name: 'Futeboladas CeSIUM')
+            def collective = new Collective(name: 'CeSIUM Soccer Games')
             collective.secureSave()
 
             User.findWhere(email: 'bill@mate.com').addToCircles(collective.circle)
@@ -57,11 +57,11 @@ class BootStrap {
         }
 
         if(OccasionalExpense.count == 0){
-            def friday_dinner = new OccasionalExpense(title: 'Friday Dinner', value: 25.25, expenseType: ExpenseType.findWhere(name: 'Meal'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')))
+            def friday_dinner = new OccasionalExpense(title: 'Friday Dinner', value: 25.25, expenseType: ExpenseType.findWhere(name: 'Meal'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
             friday_dinner.secureSave()
 
             friday_dinner.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
-            friday_dinner.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
+            friday_dinner.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))
             friday_dinner.addToAssignedUsers(User.findWhere(email: 'bill@mate.com'))
             friday_dinner.addToAssignedUsers(User.findWhere(email: '28.ricardobranco@gmail.com'))
 
@@ -72,11 +72,9 @@ class BootStrap {
             shopping.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))
             shopping.addToAssignedUsers(User.findWhere(email: '28.ricardobranco@gmail.com'))
 
-            def maid = new OccasionalExpense(title: 'Maid', value: 15.00, expenseType: ExpenseType.findWhere(name: 'Maid'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
+            def maid = new OccasionalExpense(title: 'Maid', value: 15.00, expenseType: ExpenseType.findWhere(name: 'Maid'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')))
             maid.secureSave()
 
-            maid.addToAssignedUsers(User.findWhere(email: 'bill@mate.com'))
-            maid.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
             maid.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))
             maid.addToAssignedUsers(User.findWhere(email: '28.ricardobranco@gmail.com'))
 

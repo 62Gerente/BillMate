@@ -52,10 +52,10 @@ class Expense {
     }
 
     public boolean isResolved(){
-        receptionDate
+        receptionDate || totalDebt() == 0
     }
 
-    public Double totalDebtOf(Long userId){
+    public Double valueAssignedTo(Long userId){
         Double totalDebt
         CustomDebt customDebt = customDebts.find{ it.getUserId() == userId && it.getExpenseId() == this.id }
 
@@ -66,6 +66,10 @@ class Expense {
         }
 
         totalDebt
+    }
+
+    public Double totalDebt(){
+        value - totalAmountPaid()
     }
 
     public Double percentageOfCustomDebts(){
@@ -97,13 +101,22 @@ class Expense {
         percentageAssignedToUsersWithoutCustomDebts() / 100
     }
 
+    public Double totalAmountPaid(){
+        Double amount = payments.sum{ it.getValue() }
+
+        if(!amount){ amount = 0D }
+
+        amount += valueAssignedTo(responsible.getUserId())
+        amount
+    }
+
     public Double amountPaidBy(Long userId){
         Double amount = payments.findAll{ it.getUserId() == userId }.sum{ it.getValue() }
         amount ? amount : 0D
     }
 
     public Double debtOf(Long userId){
-        totalDebtOf(userId) - amountPaidBy(userId)
+        valueAssignedTo(userId) - amountPaidBy(userId)
     }
 
     public boolean isAssignedTo(Long userId){
@@ -111,6 +124,10 @@ class Expense {
     }
 
     public boolean isResolvedBy(Long userId){
-        isAssignedTo(userId) && debtOf(userId) == 0
+        !isResolved() && isAssignedTo(userId) && debtOf(userId) == 0
+    }
+
+    public Set<User> assignedUsersWithDebts(){
+        assignedUsers.findAll{ !isResolvedBy(it.getId()) }
     }
 }

@@ -118,4 +118,27 @@ class RegisteredUser {
     public Set<Circle> getCollectives(){
         getCircles(type: 'Collective')
     }
+
+    public Set<Expense> unresolvedResponsibleExpenses(){
+        responsibleExpenses.findAll{ !it.isResolved() }
+    }
+
+    public Double totalAsset(){
+        Double total = unresolvedResponsibleExpenses().sum{ it.totalDebt() }
+        total ? total : 0D
+    }
+
+    public Double totalAssetOf(Double user_id){
+        unresolvedResponsibleExpensesBy(user_id).sum{ it.debtOf(user_id) }
+    }
+
+    public Set<Expense> unresolvedResponsibleExpensesBy(Long user_id){
+        unresolvedResponsibleExpenses().findAll{ !it.isResolvedBy(user_id) }
+    }
+
+    public Set<User> whoOweMe(){
+        Set<User> users = new HashSet<>()
+        unresolvedResponsibleExpenses().each { users.addAll( it.assignedUsersWithDebts() ) }
+        users
+    }
 }
