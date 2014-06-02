@@ -4,11 +4,9 @@
             <div class="profile-wrapper">
                 <img src="${user.getPhotoOrDefault()}">
             </div>
-            <div class="user-info m-t-15">
+            <div class="user-info" style="margin-top: 12px">
                 <div class="greeting"><g:message code="com.billmate.user.welcome" default="Welcome"/></div>
-                <div class="username">${user}
-                </div>
-
+                <div class="username">${user}</div>
             </div>
         </div>
         <p class="menu-title"></p>

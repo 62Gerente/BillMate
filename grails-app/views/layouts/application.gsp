@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 
@@ -16,9 +17,14 @@
     <g:render template="/shared/header" model="[user: user]"/>
 
     <div class="page-container row-fluid">
-        <g:render template="/shared/sidebar" model="[user: user]"/>
-    </div>
+      <g:render template="/shared/sidebar" model="[user: user]"/>
 
-    <g:layoutBody/>
+      <div class="page-content">
+        <div class="clearfix"></div>
+        <div class="content">
+          <g:layoutBody/>
+        </div>
+      </div>
+    </div>
 </body>
 </html>
