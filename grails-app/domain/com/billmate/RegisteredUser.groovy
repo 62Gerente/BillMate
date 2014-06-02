@@ -15,6 +15,10 @@ class RegisteredUser {
     String phoneNumber
     String password
 
+    public void getActionByNotification(SystemNotification sysNotification){
+        realizedActions.getA
+    }
+
     static constraints = {
         user nullable: false
         photo nullable: true
@@ -109,5 +113,13 @@ class RegisteredUser {
 
     public Set<Circle> getCollectives(){
         return getCircles(type: 'Collective')
+    }
+
+    /*
+    *Contar o número de notificações ainda não lidas para apresentar na topbar
+    * */
+    public int countNonReadNotifications(){
+        Set<Notification> list = SystemNotification.findAllByIs_read(false);
+        return list.size()
     }
 }

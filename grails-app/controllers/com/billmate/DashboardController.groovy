@@ -1,7 +1,5 @@
 package com.billmate
 
-import org.h2.engine.Session
-
 class DashboardController extends RestrictedController {
     static layout = "application"
     static allowedMethods = [index: "GET"]
@@ -9,8 +7,10 @@ class DashboardController extends RestrictedController {
     def beforeInterceptor = [action: this.&checkSession]
 
     def index() {
-        def userDashboard = new RegisteredUserDashboard(user: authenticatedUser())
-
-        return [user: authenticatedUser(), dashboard: userDashboard]
+        RegisteredUser user = authenticatedUser()
+        Set<Action> action = user.getUser().getReferencedActions()
+        int contador = user.countNonReadNotifications()
+        def userDashboard = new RegisteredUserDashboard(user: user, actions: action, numero_notificacoes: contador)
+        return [user: user, dashboard: userDashboard]
     }
 }
