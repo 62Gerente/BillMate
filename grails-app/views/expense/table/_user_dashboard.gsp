@@ -13,8 +13,16 @@
     </g:if>
     <g:else>
         <g:render template="/expense/table/user_dashboard/index" model="[user: user, unresolvedExpenses: unresolvedExpenses]"/>
-
     </g:else>
+    <g:if test="${unresolvedExpenses.size() > 1}">
+        <tr>
+            <td class="text-right text-grey" colspan="4">
+                <div class="inline b-t p-t-5">
+                    <g:formatNumber number="${unresolvedExpenses.sum{ it.debtOf(user.getId()) }}" type="currency" currencyCode="EUR" />
+                </div>
+            </td>
+        </tr>
+    </g:if>
     </tbody>
 </table>
 

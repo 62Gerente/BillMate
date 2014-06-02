@@ -6,6 +6,7 @@
 <body>
     <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
       <g:render template="/expense/widgets/who_i_owe" model="[user: dashboard.getUser(), totalDebt: dashboard.totalDebt(), whoIOwe: dashboard.whoIOwe()]"/>
+      <g:render template="/expense/widgets/who_owe_me" model="[registeredUser: dashboard.getRegisteredUser(), totalAsset: dashboard.totalAsset(), whoOweMe: dashboard.whoOweMe()]"/>
     </div>
 <asset:javascript src="bm-flot-chart.js"/>
 <asset:javascript src="bm-dashboard.js"/>

@@ -1,4 +1,4 @@
-<div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+<div class="p-l-20 p-r-20 p-t-10 b-b b-grey">
     <div class="user-info-wrapper home-margin-list">
         <img class="profile-wrapper user-profile-pic-2x white-border home-img-list" src="${registeredUser.getPhotoOrDefault()}"/>
         <div class="col-md-8 user-info user-info-photo user-info-name-price no-padding">
