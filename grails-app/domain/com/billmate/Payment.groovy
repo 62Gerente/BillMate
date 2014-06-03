@@ -10,7 +10,7 @@ class Payment {
     Date date = new Date()
     Date createdAt = new Date()
     Date validationDate
-    Boolean validated
+    Boolean isValidated = false
 
     static constraints = {
         expense nullable: false
@@ -19,7 +19,7 @@ class Payment {
         value min: 0D, nullable: false
         date nullable: false
         validationDate nullable: true
-        validated defaultValue: false, nullable: true
+        isValidated defaultValue: false, nullable: true
         createdAt nullable: false
     }
 }

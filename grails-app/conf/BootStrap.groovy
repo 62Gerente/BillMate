@@ -1,9 +1,11 @@
 import com.billmate.Collective
 import com.billmate.CustomExpenseType
 import com.billmate.DefaultExpenseType
+import com.billmate.Expense
 import com.billmate.ExpenseType
 import com.billmate.House
 import com.billmate.OccasionalExpense
+import com.billmate.Payment
 import com.billmate.User
 import com.billmate.RegisteredUser
 
@@ -85,6 +87,13 @@ class BootStrap {
             rental.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
             rental.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))
             rental.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
+        }
+
+        if(Payment.count() == 0){
+            def fn_maid_payment = new Payment(user: User.findWhere(email: 'fntneves@gmail.com'), expense: Expense.findWhere(title: 'Maid'), value: 3.50)
+            fn_maid_payment.save()
+            def rb_maid_payment = new Payment(user: User.findWhere(email: '28.ricardobranco@gmail.com'), expense: Expense.findWhere(title: 'Maid'), value: 1.00)
+            rb_maid_payment.save()
         }
     }
 

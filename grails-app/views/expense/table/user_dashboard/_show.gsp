@@ -1,5 +1,5 @@
 <tr>
-    <td><i style="width: 15px" class="${expense.getExpenseType().getCssClass()}"></i> ${expense.getExpenseType().getName()}</td>
+    <td><i style="width: 15px" class="${expense.getExpenseType().getCssClass()}"></i> ${expense}</td>
     <td class="unseen">${expense.getCircle()}</td>
     <td class="unseen">${expense.getPaymentDeadline()}
         <g:if test="${expense.getPaymentDeadline()}">
