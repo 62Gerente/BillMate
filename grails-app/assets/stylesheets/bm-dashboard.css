@@ -148,7 +148,7 @@
     margin-left: 43px;
 }
 
-.chat-toggler .profile-pic img{
+#friends-list .user-profile img, .chat-toggler .profile-pic img{
     width: 35px;
     height: 35px;
 }
@@ -399,3 +399,16 @@ button[type="submit"]:hover {
 .user-info-wrapper .user-info .username {
     font-size: 15px;
 }
+
+#chat-users .header-seperation{
+    display: block;
+    height: 61px;
+    background-color: #1b1e24;
+    margin-top:-16px;
+}
+
+#chat-users .side-widget-title{
+    margin-left: -15px;
+    font-size: 12px
+}
+

@@ -75,7 +75,7 @@
                     <li class="quicklinks">
                         <a id="chat-menu-toggle" href="#sidr" class="chat-menu-toggle">
                             <div class="iconset top-chat-dark ">
-                                <span class="badge badge-important animated bounceIn" id="chat-message-count">1</span>
+                                <span class="badge badge-important animated bounceIn" id="chat-message-count">${user.getNumberOfUnreadNotifications()}</span>
                             </div>
                         </a>
                     </li>

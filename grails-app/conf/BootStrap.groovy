@@ -1,9 +1,13 @@
+import com.billmate.Action
+import com.billmate.ActionType
 import com.billmate.Collective
 import com.billmate.CustomExpenseType
 import com.billmate.DefaultExpenseType
 import com.billmate.ExpenseType
 import com.billmate.House
 import com.billmate.OccasionalExpense
+import com.billmate.Notification
+import com.billmate.SystemNotification
 import com.billmate.User
 import com.billmate.RegisteredUser
 
@@ -56,7 +60,7 @@ class BootStrap {
             fieldRentalType.secureSave()
         }
 
-        if(OccasionalExpense.count == 0){
+        if(OccasionalExpense.count == 0) {
             def friday_dinner = new OccasionalExpense(title: 'Friday Dinner', value: 25.25, expenseType: ExpenseType.findWhere(name: 'Meal'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
             friday_dinner.secureSave()
 
@@ -85,6 +89,22 @@ class BootStrap {
             rental.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
             rental.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))
             rental.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
+        }
+
+        if(ActionType.count() == 0){
+            def actionType = new ActionType(type: 'com.billmate.notification.add_user_house')
+            actionType.save()
+        }
+
+        if(Action.count() == 0){
+            def action = new Action(actionType: ActionType.first(), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')), user: User.findWhere(email: 'pmcleite@gmail.com'), circle: House.first().getCircle())
+            action.save()
+            action
+        }
+
+        if(SystemNotification.count() == 0){
+            def systemNotification = new SystemNotification(action: Action.first(), registeredUser: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')))
+            systemNotification.secureSave()
         }
     }
 

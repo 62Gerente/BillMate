@@ -141,4 +141,8 @@ class RegisteredUser {
         unresolvedResponsibleExpenses().each { users.addAll( it.assignedUsersWithDebts() ) }
         users
     }
+
+    public Integer getNumberOfUnreadNotifications(){
+        systemNotifications.count{ !it.getIsRead() }
+    }
 }
