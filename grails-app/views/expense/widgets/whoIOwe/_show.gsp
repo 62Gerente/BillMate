@@ -8,5 +8,5 @@
             <button type="button" class="inline btn btn-default btn-small btn-cons pull-right"><g:message code="com.billmate.payment.new" default="Pay it now" /></button>
         </div>
     </div>
-    <g:render template="/expense/table/user_dashboard" model="[user: user, unresolvedExpenses: user.unresolvedExpensesWhoResponsibleIs(registeredUser.getId())]"/>
+    <g:render template="/expense/table/userDashboard" model="[user: user, unresolvedExpenses: user.unresolvedExpensesWhoResponsibleIs(registeredUser.getId())]"/>
 </div>

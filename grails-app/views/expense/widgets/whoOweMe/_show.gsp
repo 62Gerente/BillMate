@@ -5,5 +5,5 @@
             <div class="username inline p-t-15" style="width:100%; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${user.getName()}</div>
         </div>
     </div>
-    <g:render template="/expense/table/user_dashboard" model="[user: user, unresolvedExpenses: registeredUser.unresolvedResponsibleExpensesBy(user.getId())]"/>
+    <g:render template="/expense/table/userDashboard" model="[user: user, unresolvedExpenses: registeredUser.unresolvedResponsibleExpensesBy(user.getId())]"/>
 </div>
