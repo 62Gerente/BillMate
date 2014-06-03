@@ -1,7 +1,14 @@
-.tp-bgimg, #testomonials-wrapper{
-	background: #0aa699 !important;
+#testomonials-wrapper {
+	background-image: none !important;
+    background-color: #0aa699 !important;
 }
-
-.full-width{
-	width: 100%;
+.full-width {
+    width: 100%;
+}
+@media (max-width: 767px) {
+    .navbar-collapse.in {
+        position: fixed;
+        right: 15px;
+        left: 15px;
+    }
 }
