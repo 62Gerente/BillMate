@@ -102,7 +102,7 @@ class Expense {
     }
 
     public Double totalAmountPaid(){
-        Double amount = payments.sum{ it.getValue() }
+        Double amount = payments.findAll{ it.getIsValidated() || !it.getValidationDate() }.sum{ it.getValue() }
 
         if(!amount){ amount = 0D }
 
@@ -111,7 +111,7 @@ class Expense {
     }
 
     public Double amountPaidBy(Long userId){
-        Double amount = payments.findAll{ it.getUserId() == userId }.sum{ it.getValue() }
+        Double amount = payments.findAll{ it.getUserId() == userId && (it.getIsValidated() || !it.getValidationDate()) }.sum{ it.getValue() }
         amount ? amount : 0D
     }
 
@@ -129,5 +129,9 @@ class Expense {
 
     public Set<User> assignedUsersWithDebts(){
         assignedUsers.findAll{ !isResolvedBy(it.getId()) }
+    }
+
+    public Set<Payment> unconfirmedPayments(){
+        payments.findAll{ !it.getValidationDate() && !it.getIsValidated() }
     }
 }

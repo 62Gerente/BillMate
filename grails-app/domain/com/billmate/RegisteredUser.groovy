@@ -141,4 +141,10 @@ class RegisteredUser {
         unresolvedResponsibleExpenses().each { users.addAll( it.assignedUsersWithDebts() ) }
         users
     }
+
+    public Set<Payment> unconfirmedPaymentsOnResponsibleExpenses(){
+        Set<Payment> unconfirmedPayments = new HashSet<>()
+        unresolvedResponsibleExpenses().each{ unconfirmedPayments.addAll(it.unconfirmedPayments()) }
+        unconfirmedPayments
+    }
 }
