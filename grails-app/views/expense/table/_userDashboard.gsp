@@ -3,7 +3,7 @@
     <tr>
         <th class="text-left text-primary uppercase"><g:message code="com.billmate.expense_type" default="Expense type" /></th>
         <th class="text-left unseen text-primary uppercase"><g:message code="com.billmate.circle" default="Circle" /></th>
-        <th class="unseen text-primary uppercase"><g:message code="com.billmate.expense.payment_deadline" default="Payment deadline" /></th>
+        <th class="unseen text-primary uppercase"><g:message code="com.billmate.expense.paymentDeadline" default="Payment deadline" /></th>
         <th class="text-right text-primary uppercase"><g:message code="com.billmate.expense.value" default="Value" /></th>
     </tr>
     </thead>

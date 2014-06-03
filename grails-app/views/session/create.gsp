@@ -34,7 +34,7 @@
                     <div class="form-group col-md-12">
                         <div class="forgot-password pull-left">
                             <a href="#" class="text-grey">
-                                <g:message code="com.billmate.session.create.forgot.password" default="Forgot your password?" />
+                                <g:message code="com.billmate.session.create.forgotPassword" default="Forgot your password?" />
                             </a>
                         </div>
                         <div class="pull-right">
@@ -46,7 +46,7 @@
         </div>
         <div class="col-md-12 white text-right">
             <div class="p-t-30 p-r-20 p-b-20 xs-p-t-10 xs-p-r-20 xs-p-b-10">
-                <g:message code="com.billmate.session.create.not.member" default="Not a member?" />
+                <g:message code="com.billmate.session.create.notMember" default="Not a member?" />
                 <a href="${createLink(controller: 'register', action: 'create')}">
                     <g:message code="com.billmate.session.create.register" default="Create an account" />
                 </a>

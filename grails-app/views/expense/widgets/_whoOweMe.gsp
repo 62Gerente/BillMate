@@ -3,7 +3,7 @@
         <div class="col-md-12 b-grey b-r no-padding">
             <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
                 <h4 class="text-black bold inline uppercase">
-                    <g:message code="com.billmate.expense.widget.who_owe_me.title" default="Who owe me" />
+                    <g:message code="com.billmate.expense.widget.whoOweMe.title" default="Who owe me" />
                 </h4>
                 <div class="pull-right p-r-15">
                     <h4 class="text-success bold inline">

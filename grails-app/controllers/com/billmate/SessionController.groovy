@@ -38,7 +38,7 @@ class SessionController extends BaseController {
 
     private checkRequiredParams() {
         if (!params['password'] || !params['email']) {
-            flash.error = "com.billmate.session.save.invalid.params"
+            flash.error = "com.billmate.session.save.invalidParams"
             flash.e_default = "Please fill out all fields below."
             redirect(controller: 'session', action: 'create')
             return false

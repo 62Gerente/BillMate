@@ -47,7 +47,7 @@
         </div>
         <div class="col-md-12 white text-right">
             <div class="p-t-30 p-r-20 p-b-20 xs-p-t-10 xs-p-r-20 xs-p-b-10">
-                <g:message code="com.billmate.register.create.already.member" default="Already a member?" />
+                <g:message code="com.billmate.register.create.alreadyMember" default="Already a member?" />
                 <a href="${createLink(controller: 'session', action: 'create')}">
                     <g:message code="com.billmate.register.create.session" default="Sign in" />
                 </a>

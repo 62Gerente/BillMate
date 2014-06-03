@@ -6,7 +6,7 @@
                 <div class="pull-right p-r-15" id="home-button-primary-confirm">
                     <h4>
                         <button type="button" class="inline btn btn-default btn-small">
-                            <g:message code="com.billmate.payment.confirm_selected" default="Confirm" />
+                            <g:message code="com.billmate.payment.confirmSelected" default="Confirm" />
                         </button>
                     </h4>
                 </div>
@@ -16,7 +16,7 @@
 
                 <div id="home-button-divida-secondary-confirm" class="m-b-10">
                     <button type="button" class="btn btn-default btn-small" style="width: 100%">
-                        <g:message code="com.billmate.payment.confirm_selected" default="Confirm" />
+                        <g:message code="com.billmate.payment.confirmSelected" default="Confirm" />
                     </button>
                 </div>
             </div>

@@ -30,7 +30,7 @@ class RegisterController extends BaseController {
 
     private checkRequiredParams() {
         if (!params['name'] || !params['email'] || !params['password'] || !params['c_password']) {
-            flash.error = "com.billmate.register.save.invalid.params"
+            flash.error = "com.billmate.register.save.invalidParams"
             flash.e_default = "Please fill out all fields below."
             redirect(controller: 'register', action: 'create')
             return false
@@ -40,7 +40,7 @@ class RegisterController extends BaseController {
 
     private checkPasswordConfirmation() {
         if (params['password'] != params['c_password']) {
-            flash.error = "com.billmate.register.save.password.match"
+            flash.error = "com.billmate.register.save.passwordMatch"
             flash.e_default = "Given passwords do not match."
             redirect(controller: 'register', action: 'create')
             return false
@@ -50,7 +50,7 @@ class RegisterController extends BaseController {
 
     private checkPasswordSize() {
         if (params['password'].toString().length() < 5) {
-            flash.error = "com.billmate.register.save.password.short"
+            flash.error = "com.billmate.register.save.passwordShort"
             flash.e_default = "The password is too short, minimum length is 5 characters."
             redirect(controller: 'register', action: 'create')
             return false
@@ -61,7 +61,7 @@ class RegisterController extends BaseController {
     private checkEmail() {
         def emailPattern = /[_A-Za-z0-9-]+(\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\.[A-Za-z0-9]+)*(\.[A-Za-z]{2,})/
         if (!params['email'] ==~ emailPattern) {
-            flash.error = "com.billmate.register.save.invalid.email"
+            flash.error = "com.billmate.register.save.invalidEmail"
             flash.e_default = "Invalid email address."
             redirect(controller: 'register', action: 'create')
             return false
@@ -72,7 +72,7 @@ class RegisterController extends BaseController {
     private checkEmailUniqueness() {
         def user = User.findWhere(email: params['email'])
         if (user) {
-            flash.error = "com.billmate.register.save.email.uniqueness"
+            flash.error = "com.billmate.register.save.emailUniqueness"
             flash.e_default = "Email address already in use."
             redirect(controller: 'register', action: 'create')
             return false
