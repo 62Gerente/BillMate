@@ -147,4 +147,8 @@ class RegisteredUser {
         unresolvedResponsibleExpenses().each{ unconfirmedPayments.addAll(it.unconfirmedPayments()) }
         unconfirmedPayments
     }
+
+    public Integer getNumberOfUnreadNotifications(){
+        systemNotifications.count{ !it.getIsRead() }
+    }
 }
