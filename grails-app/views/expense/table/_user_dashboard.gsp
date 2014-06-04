@@ -26,8 +26,10 @@
     </tbody>
 </table>
 
-<div id="home-button-divida-secondary-confirm" class="m-b-10">
+<div id="home-button-divida-secondary-confirm" class="m-b-10 home-button-divida-secondary-confirm">
     <button type="button" class="btn btn-default btn-small" style="width: 100%">
         <g:message code="com.billmate.payment.new" default="Pay it now" />
     </button>
 </div>
+
+<div class="clearfix"></div>
