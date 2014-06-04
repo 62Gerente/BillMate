@@ -1,11 +1,12 @@
 package com.billmate
 
 class DirectDebit {
-    static hasOne = [regularExpense: RegularExpense]
-
+    RegularExpense regularExpense
     Date debitDate
 
     static constraints = {
+        regularExpense nullable: false
+
         debitDate nullable: false
     }
 }

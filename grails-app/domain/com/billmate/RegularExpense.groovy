@@ -1,88 +1,62 @@
 package com.billmate
 
-import org.springframework.validation.ObjectError
-
 class RegularExpense {
-    static belongsTo = [DirectDebit, Expense]
+    static belongsTo = [DirectDebit, Circle, RegisteredUser, ExpenseType]
+    static hasMany = [customDebts: CustomDebt, actions: Action, assignedUsers: User, expenses: Expense]
 
     DirectDebit directDebit
-    Expense expense
+    RegisteredUser responsible
+    ExpenseType expenseType
+    Circle circle
 
-    Date receptionBeginDate
+    String title
+    String description
+    Double value
+
+    Date beginDate
+    Date endDate
+
+    Date receptionBeginDate = new Date()
     Date receptionEndDate
     Date paymentBeginDate
     Date paymentEndDate
 
-    static constraints = {
-        directDebit nullable: true
-        expense nullable: true
+    Integer intervalDays = 0
+    Integer intervalMonths = 1
+    Integer intervalYears = 0
 
-        receptionBeginDate nullable: true
+    Boolean isActive = true
+
+    static constraints = {
+        responsible nullable: false
+        circle nullable: false
+        expenseType nullable: false
+        directDebit nullable: true, unique: true
+
+        title nullable: false
+        description maxSize: 2000, nullable: true
+        value min: 0D, nullable: true
+
+        beginDate nullable: true
+        endDate nullable: true
+
+        receptionBeginDate nullable: false
         receptionEndDate nullable: true
         paymentBeginDate nullable: true
         paymentEndDate nullable: true
-    }
 
-    public RegularExpense(){
-        super()
-        expense = new Expense()
-    }
+        intervalDays nullable: false, min: 0
+        intervalMonths nullable: false, min: 0
+        intervalYears nullable: false, min: 0
 
-    public RegularExpense(Map map){
-        super(map)
-        expense = new Expense(map)
-    }
-
-    def beforeValidate() {
-        expense.validate()
-        expense.errors.getAllErrors().each {
-            ObjectError objectError = (ObjectError) it
-            this.errors.reject(objectError.getCode(), objectError.toString())
-        }
-    }
-
-    public void setTitle(String name){
-        expense.setTitle(name)
-    }
-
-    public void setDescription(String description){
-        expense.setDescription(description)
-    }
-
-    public void setValue(Double value){
-        expense.setValue(value)
-    }
-
-    public void setResponsible(RegisteredUser registeredUser){
-        expense.setResponsible(registeredUser)
-    }
-
-    public void setExpenseType(ExpenseType expenseType){
-        expense.setExpenseType(expenseType)
-    }
-
-    public void setCircle(Circle circle){
-        expense.setCircle(circle)
+        isActive nullable: false
     }
 
     public String toString() {
-        expense.toString();
+        title
     }
 
-    public boolean secureSave(){
-        withTransaction { status ->
-            try {
-                expense.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
-                return true
-            }catch(Exception ignored){
-                status.setRollbackOnly()
-                return false
-            }
-        }
-    }
-
-    public void addToAssignedUsers(User user){
-        expense.addToAssignedUsers(user)
+    public boolean inReceptionTime(){
+        isActive && receptionBeginDate < new Date()
     }
 }

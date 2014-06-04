@@ -3,8 +3,8 @@ package com.billmate
 import groovy.time.TimeCategory
 
 class User {
-    static belongsTo = [Circle, Expense]
-    static hasMany = [circles: Circle, payments: Payment, customizedDebts: CustomDebt, referencedActions: Action, expenses: Expense]
+    static belongsTo = [Circle, Expense, RegularExpense]
+    static hasMany = [circles: Circle, payments: Payment, customizedDebts: CustomDebt, referencedActions: Action, expenses: Expense, regularExpenses: RegularExpense]
     static hasOne = [referredUser: ReferredUser, registeredUser: RegisteredUser]
 
     String name
@@ -109,8 +109,17 @@ class User {
         expenses
     }
 
-    public Double monthlySpendingOfExpenseType(Date date, ExpenseType expenseType){
-        Double monthlySpending = monthExpensesOfExpenseType(date, expenseType).sum {it.valueAssignedTo(this.id)}
+    public Double monthlySpendingOfExpenseType(Date date, ExpenseType expenseType) {
+        Double monthlySpending = monthExpensesOfExpenseType(date, expenseType).sum { it.valueAssignedTo(this.id) }
         monthlySpending ? monthlySpending : 0
+    }
+
+    public Set<RegularExpense> regularExpensesInReceptionTime(){
+        Set<RegularExpense> regularExpensesInReceptionTime = new HashSet<>()
+        regularExpensesInReceptionTime.addAll(regularExpenses.findAll{ it.inReceptionTime() })
+        if(registeredUser){
+            regularExpensesInReceptionTime.addAll(registeredUser.regularResponsibleExpensesInReceptionTime())
+        }
+        regularExpensesInReceptionTime
     }
 }

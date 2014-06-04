@@ -7,7 +7,7 @@ import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 
 class RegisteredUser {
     static belongsTo = User
-    static hasMany = [responsibleExpenses: Expense, realizedActions: Action, systemNotifications: SystemNotification]
+    static hasMany = [responsibleExpenses: Expense, realizedActions: Action, systemNotifications: SystemNotification, responsibleRegularExpenses: RegularExpense]
 
     User user
     UFile photo
