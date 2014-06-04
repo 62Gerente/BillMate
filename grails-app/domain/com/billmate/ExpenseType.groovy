@@ -4,7 +4,7 @@ import com.lucastex.grails.fileuploader.UFile
 
 class ExpenseType {
     static belongsTo = [Circle]
-    static hasMany = [circles: Circle, expenses: Expense]
+    static hasMany = [circles: Circle, expenses: Expense, regularExpenses: RegularExpense]
     static hasOne = [customExpenseType: CustomExpenseType, defaultExpenseType: DefaultExpenseType]
 
     String name

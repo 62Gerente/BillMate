@@ -6,6 +6,7 @@ class Action {
 
     ActionType actionType
     Expense expense
+    RegularExpense regularExpense
     RegisteredUser actor
     User user
     Circle circle
@@ -15,6 +16,7 @@ class Action {
     static constraints = {
         actionType nullable: false
         expense nullable: true
+        regularExpense nullable: true
         actor nullable: true
         user nullable: true
         circle nullable: true

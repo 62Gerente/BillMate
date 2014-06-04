@@ -2,7 +2,7 @@ package com.billmate
 
 class Circle {
     static hasMany = [users: User, expenseTypes: ExpenseType,
-                      expenses: Expense, actions: Action]
+                      expenses: Expense, actions: Action, regularExpenses: RegularExpense]
     static hasOne = [collective: Collective, house: House]
 
     String name

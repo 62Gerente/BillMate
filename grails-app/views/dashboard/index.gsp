@@ -10,7 +10,7 @@
         <g:render template="/expense/widgets/whoOweMe" model="[registeredUser: dashboard.getRegisteredUser(), totalAsset: dashboard.totalAsset(), whoOweMe: dashboard.whoOweMe()]"/>
     </div>
     <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
-        <g:render template="/regularExpense/widgets/upcoming" model="[]"/>
+        <g:render template="/regularExpense/widgets/upcoming" model="[regularExpenses: dashboard.regularExpensesInReceptionTime()]"/>
     </div>
 <asset:javascript src="bm-flot-chart.js"/>
 <asset:javascript src="bm-dashboard.js"/>

@@ -6,8 +6,8 @@ class Expense {
     static belongsTo = [Circle, RegisteredUser, ExpenseType]
     static hasMany = [payments: Payment,
                       customDebts: CustomDebt, actions: Action, assignedUsers: User]
-    static hasOne = [regularExpense: RegularExpense, occasionalExpense: OccasionalExpense]
 
+    RegularExpense regularExpense
     RegisteredUser responsible
     ExpenseType expenseType
     Circle circle
@@ -26,14 +26,12 @@ class Expense {
     Date receptionDate
 
     static constraints = {
+        regularExpense nullable: true
         responsible nullable: false
         invoice nullable: true
         receipt nullable: true
         circle nullable: false
         expenseType nullable: false
-
-        regularExpense nullable: true
-        occasionalExpense nullable: true
 
         title nullable: false
         description maxSize: 2000, nullable: true

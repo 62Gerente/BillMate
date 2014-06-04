@@ -7,7 +7,7 @@ import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 
 class RegisteredUser {
     static belongsTo = User
-    static hasMany = [responsibleExpenses: Expense, realizedActions: Action, systemNotifications: SystemNotification]
+    static hasMany = [responsibleExpenses: Expense, realizedActions: Action, systemNotifications: SystemNotification, responsibleRegularExpenses: RegularExpense]
 
     User user
     UFile photo
@@ -146,5 +146,9 @@ class RegisteredUser {
         Set<Payment> unconfirmedPayments = new HashSet<>()
         unresolvedResponsibleExpenses().each{ unconfirmedPayments.addAll(it.unconfirmedPayments()) }
         unconfirmedPayments
+    }
+
+    public Set<RegularExpense> regularResponsibleExpensesInReceptionTime(){
+        responsibleRegularExpenses.findAll{ it.inReceptionTime() }
     }
 }
