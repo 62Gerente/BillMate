@@ -21,4 +21,18 @@ $(document).ready(function(){
             }
         });
     });
+
+    $(".header-seperation").click(function(){
+        $.ajax({
+            type: "GET",
+            url: '../notification/makeAllRead',
+            dataType: 'json'
+        }).done(function(response){
+            if(response.notification){
+                $(".status-icon").removeClass("red");
+                $(".status-icon").addClass("green");
+                $(".chat-message-count").remove();
+            }
+        });
+    });
 });
