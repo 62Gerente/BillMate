@@ -1,4 +1,7 @@
 <%@ page import="com.billmate.SystemNotification" %>
+<g:javascript>
+    var remote = ${remoteFunction(action: 'ajaxMakeReadNotification.json', params="[id: 1]")};
+</g:javascript>
 <div class="side-widget-content" id="friends-list">
     <div class="user-details-wrapper">
         <div class="user-profile">
