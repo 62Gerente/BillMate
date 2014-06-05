@@ -1,23 +1,13 @@
 $(document).ready(function(){
-    $(".table.table-home-box").hide();
-    $(".home-button-divida-primary-confirm").hide();
-
-
+    $(".table.table-home-box").show();
+    $(".div-btn-widget-payments").hide();
+    $(".div-table-widget-payment").hide();
 
     $(".expenses-widget-more-details").click(function(){
-        $(this).children(".table-home-box").toggle();
-        $(this).children(".home-margin-list").children(".price-widget-dashboard").toggle();
-        var elem = $(this).children(".home-margin-list").siblings(".table-home-box");
-        if(elem.css("display") == "none"){
-            $(this).children(".home-margin-list").children(".home-button-divida-primary-confirm").hide();
-            $(this).children(".home-margin-list").siblings(".home-button-divida-secondary-confirm").hide();
-        }
-        else{
-            if($(document).width() > 480)
-                $(this).children(".home-margin-list").children(".home-button-divida-primary-confirm").show();
-            else
-                $(this).children(".home-margin-list").children(".home-button-divida-secondary-confirm").show();
-        }
-    });
+        $(this).children(".div-table-widget-payment").toggle();
 
+        $(this).children(".home-margin-list").children(".price-widget-dashboard").toggle();
+        $(this).children(".home-margin-list").children(".div-btn-widget-payments").toggle();
+        $(this).children(".home-margin-list").children(".div-btn-widget-payments").toggleClass('inline');
+    });
 });
