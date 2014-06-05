@@ -15,4 +15,18 @@ class NotificationController {
         def response = ['notification': notification?.getIsRead()]
         render response as JSON
     }
+
+    def makeAllRead(){
+        List<SystemNotification> notification = SystemNotification.findAll()
+        SystemNotification.withTransaction { status ->
+            try{
+                notification.each {it.setIsRead(true);it.secureSave();};
+            }catch(Exception e){
+                status.setRollbackOnly();
+                notification = null;
+            }
+        }
+        def response = ['notification':  notification]
+        render response as JSON
+    }
 }
