@@ -1,10 +1,11 @@
 $(document).ready(function(){
     $(".side-widget-content").click(function(){
         var $notification = $(this);
+        var id = $(this).children(".user-details-wrapper").children(".user-profile").children("input").val()
         $.ajax({
             type: "GET",
             url: '../notification/makeRead',
-            data: { id: 34 },
+            data: { id: id },
             dataType: 'json'
         }).done(function(response){
             if(response.notification){
@@ -35,4 +36,19 @@ $(document).ready(function(){
             }
         });
     });
+
+    var refreshId = setInterval( function()
+    {
+        $.ajax({
+            type: "GET",
+            url: '../notification/getAllNotifications?numberActualNotifications=',
+            dataType: 'json'
+        }).done(function(response){
+            if(response.notification){
+                $(".status-icon").removeClass("red");
+                $(".status-icon").addClass("green");
+                $(".chat-message-count").remove();
+            }
+        });
+    }, 10000);
 });
