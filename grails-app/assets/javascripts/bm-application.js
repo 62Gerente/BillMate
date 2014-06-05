@@ -13,3 +13,4 @@
 //= require ../plugins/jquery-validation/js/jquery.validate.min.js
 
 //= require bm-links.js
+//= require bm-ajax-notifications.js
