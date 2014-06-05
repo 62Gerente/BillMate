@@ -29,4 +29,15 @@ class NotificationController {
         def response = ['notification':  notification]
         render response as JSON
     }
+
+    def getAllNotifications(int numberActualNotifications){
+        int numberNotifications = SystemNotification.countByIsRead(false)
+        List<Notification> notificationList = null
+        if(numberActualNotifications != numberNotifications){
+            notificationList = SystemNotification.findAllByIsRead(false)
+        }
+
+        def response = ['notification': notificationList]
+        render response as JSON
+    }
 }
