@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $(".side-widget-content").click(function(){
+    $(".side-widget-content").not(':has(.status-icon.green)').click(function(){
         var $notification = $(this);
         var id = $(this).children(".user-details-wrapper").children(".user-profile").children("input").val()
         $.ajax({

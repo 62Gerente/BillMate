@@ -1,6 +1,6 @@
 <div id="sidr" class="chat-window-wrapper">
     <div id="main-chat-wrapper">
-        <div class="chat-window-wrapper fadeIn" id="chat-users">
+        <div class="fadeIn" id="chat-users">
             <div class="side-widget">
                 <div class="header-seperation">
                     <div class="side-widget-title text-white bold inline p-t-20">
