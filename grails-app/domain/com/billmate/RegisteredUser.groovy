@@ -149,6 +149,24 @@ class RegisteredUser {
     }
 
     public Integer getNumberOfUnreadNotifications(){
-        systemNotifications.count{ !it.getIsRead() }
+        int count = systemNotifications.count{ !it.getIsRead() }
+        count? count : 0
+    }
+
+    public boolean markNotificationsAsRead(){
+        Set<SystemNotification> notification = systemNotifications.findAll{!it.getIsRead()}
+
+        SystemNotification.withTransaction { status ->
+            try{
+                notification.each {
+                    it.setIsRead(true)
+                    it.secureSave()
+                }
+            }catch(Exception e){
+                status.setRollbackOnly();
+                return false
+            }
+        }
+        return true
     }
 }

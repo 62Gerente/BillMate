@@ -26,3 +26,13 @@ a {
 .uppercase{
     text-transform: uppercase;
 }
+
+.mark-read-notification{
+    font-size: 12px;
+    cursor: pointer;
+    cursor: hand;
+}
+
+.mark-read-notification:hover{
+    color: #fff !important;
+}

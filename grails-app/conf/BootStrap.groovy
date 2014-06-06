@@ -101,7 +101,7 @@ class BootStrap {
         }
 
         if(ActionType.count() == 0){
-            def actionType = new ActionType(type: 'com.billmate.notification.add_user_house')
+            def actionType = new ActionType(type: 'com.billmate.action.add_user_house')
             actionType.save()
         }
 
@@ -113,6 +113,10 @@ class BootStrap {
 
         if(SystemNotification.count() == 0){
             def systemNotification = new SystemNotification(action: Action.first(), registeredUser: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')))
+            systemNotification.secureSave()
+            systemNotification = new SystemNotification(action: Action.first(), registeredUser: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')))
+            systemNotification.secureSave()
+            systemNotification = new SystemNotification(action: Action.first(), registeredUser: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
             systemNotification.secureSave()
         }
     }
