@@ -9,5 +9,8 @@ $(document).ready(function(){
         $(this).children(".home-margin-list").children(".price-widget-dashboard").toggle();
         $(this).children(".home-margin-list").children(".div-btn-widget-payments").toggle();
         $(this).children(".home-margin-list").children(".div-btn-widget-payments").toggleClass('inline');
+
+        $(this).children(".home-margin-list").children("div").children("div").children("i").toggleClass("fa-angle-down");
+        $(this).children(".home-margin-list").children("div").children("div").children("i").toggleClass("fa-angle-up");
     });
 });
