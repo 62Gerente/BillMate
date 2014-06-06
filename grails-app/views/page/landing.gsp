@@ -39,7 +39,6 @@
                         </li>
                     </ul>
                 </div>
-                <!--/.nav-collapse -->
             </div>
 
         </div>
@@ -74,19 +73,14 @@
                         </li>
                     </ul>
                 </div>
-                <!--/.nav-collapse -->
             </div>
         </div>
     </div>
-    <!--BEGIN SLIDER -->
     <div class="tp-banner-container">
         <div class="tp-banner" id="tourSlider">
             <ul>
-                <!-- SLIDE  -->
                 <li data-transition="fade" data-slotamount="5" data-masterspeed="700">
-                    <!-- MAIN IMAGE -->
                     <img src="${assetPath(src: 'page/landing/bg/home_bg.png')}" alt="slidebg1" data-bgfit="cover" data-bgposition="center center" data-bgrepeat="no-repeat">
-                    <!-- LAYERS -->
                     <div class="tp-caption mediumlarge_light_white_center sft tp-resizeme slider" data-x="300" data-hoffset="0" data-y="130" data-speed="600" data-start="500" data-easing="Power4.easeOut" data-endspeed="600" data-endeasing="Power0.easeIn" style="z-index: 3">
                         <img src="${assetPath(src: 'page/landing/imac.png')}" alt="">
                     </div>
