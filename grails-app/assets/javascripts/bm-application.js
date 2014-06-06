@@ -15,3 +15,4 @@
 
 //= require bm-links.js
 //= require bm-ajax-notifications.js
+
