@@ -7,10 +7,6 @@ class UrlMappings {
             }
         }
 
-        readnotification:"/readnotification" {
-            controller = "notification"
-            action = "makeRead"
-        }
 
         "/"(view:"/index")
         "500"(view:'/error')

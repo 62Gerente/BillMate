@@ -86,11 +86,15 @@
 }
 
 .user-info-wrapper.home-margin-list .pull-right{
-    margin-right: -15px;
+    margin-right: -19px;
+}
+
+.widget-table-adjust-right-margin div.pull-right{
+    margin-right: 10px;
 }
 
 .home-margin-list .div-btn-widget-payments.pull-right{
-    margin-right: 17px;
+    margin-right: 12px;
 }
 
 .table.table-home-box .unseen.text-primary,
@@ -405,7 +409,7 @@ button[type="submit"]:hover {
 }
 
 #chat-users .header-seperation{
-    display: block;
+    display: block !important;
     height: 61px;
     background-color: #1b1e24;
     margin-top:-16px;
@@ -431,6 +435,7 @@ button[type="submit"]:hover {
 
 .home-button-divida-primary-confirm{
     width:125px;
+    margin-top: 17px;
 }
 
 .width-btn-payment{
@@ -451,4 +456,10 @@ button[type="submit"]:hover {
 
 .m-t-13{
     margin-top: 13px;
+}
+
+.widget-dashboard-arrow-down{
+    margin-left: 15px;
+    color: #8B8484;
+
 }

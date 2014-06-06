@@ -5,7 +5,7 @@
                 <h4 class="text-black bold inline uppercase">
                     <g:message code="com.billmate.expense.widget.who_i_owe.title" default="Who I owe" />
                 </h4>
-                <div class="pull-right p-r-15">
+                <div class="pull-right">
                     <span class="label label-important">
                         <h5 class="text-white bold inline p-t-2">
                             <g:formatNumber number="${totalDebt}" type="currency" currencyCode="EUR" />

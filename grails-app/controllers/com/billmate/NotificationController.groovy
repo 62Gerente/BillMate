@@ -6,17 +6,18 @@ class NotificationController {
 
     def index() {}
 
-    def makeRead(Long id){
+    def read(Long id){
         SystemNotification notification = SystemNotification.findById(id)
         if(notification) {
             notification.setIsRead(true)
             notification.secureSave()
         }
+
         def response = ['notification': notification?.getIsRead()]
         render response as JSON
     }
 
-    def makeAllRead(){
+    def read_all(){
         List<SystemNotification> notification = SystemNotification.findAll()
         SystemNotification.withTransaction { status ->
             try{

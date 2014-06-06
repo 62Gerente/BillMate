@@ -5,7 +5,7 @@
                 <h4 class="text-black bold inline uppercase">
                     <g:message code="com.billmate.expense.widget.who_owe_me.title" default="Who owe me" />
                 </h4>
-                <div class="pull-right p-r-15 p-t-2">
+                <div class="pull-right p-t-2">
                     <span class="label label-success">
                         <h5 class="text-white bold inline">
                             <g:formatNumber number="${totalAsset}" type="currency" currencyCode="EUR" />

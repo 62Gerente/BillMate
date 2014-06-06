@@ -6,6 +6,10 @@
                     <div class="side-widget-title text-white bold inline p-t-20">
                         <g:message code="com.billmate.notification.title" default="Notifications"/>
                     </div>
+                    <div class="inline">
+                        <i class="text-grey fa"><span class="inline mark-read-notification">&nbsp;Marcar como lido</span></i>
+                    </div>
+
                     <ul class="nav pull-right notifcation-center">
                         <li class="dropdown" id="portrait-chat-toggler">
                             <a href="#" class="chat-menu-toggle">
