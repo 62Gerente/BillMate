@@ -31,7 +31,7 @@ class RegularExpense {
         responsible nullable: false
         circle nullable: false
         expenseType nullable: false
-        directDebit nullable: true, unique: true
+        directDebit nullable: true
 
         title nullable: false
         description maxSize: 2000, nullable: true

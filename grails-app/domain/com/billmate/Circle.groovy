@@ -32,10 +32,18 @@ class Circle {
     }
 
     public Set<Expense> unresolvedExpenses(){
-        return this.expenses.findAll{ !it.isResolved() }
+        this.expenses.findAll{ !it.isResolved() }
     }
 
     public Set<Expense> resolvedExpenses(){
-        return this.expenses.findAll{ !it.isResolved() }
+        this.expenses.findAll{ !it.isResolved() }
+    }
+
+    public String getCssClass(){
+        if(collective){
+            return collective.getCssClass()
+        }else if(house){
+            return  house.getCssClass()
+        }
     }
 }
