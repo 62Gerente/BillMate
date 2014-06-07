@@ -53,4 +53,8 @@ class House{
             }
         }
     }
+
+    public String getCssClass(){
+        "fa fa-home"
+    }
 }

@@ -27,7 +27,7 @@
     margin-top: -10px;
 }
 
-.grid .grid-title .home-next-facts-angle-down{
+.grid .grid-title .upcoming-regular-expense-expand{
     margin-right: 0px;
     margin-top: -17px;
 }
@@ -458,8 +458,40 @@ button[type="submit"]:hover {
     margin-top: 13px;
 }
 
-.widget-dashboard-arrow-down{
+.widget-dashboard-arrow-down {
     margin-left: 15px;
     color: #8B8484;
+}
 
+.info-wrapper .info{
+    color: #898E91;
+    font-size: 12px;
+}
+
+.upcoming-regular-expense > .grid-title{
+    padding: 15px 26px 0 26px !important;
+}
+
+.upcoming-regular-expense .form-actions{
+    padding: 20px 26px;
+}
+
+.upcoming-regular-expense .grid-body{
+    padding: 0px 26px !important;
+    overflow: initial !important;
+}
+
+.input-group-addon.info {
+    background-color: #1f3853;
+    border: 1px solid #1f3853;
+    color: #ffffff;
+    display: table-cell;;
+}
+
+.input-focus {
+    background-color: #fff !important;
+}
+
+.upcoming-regular-expense .transparent .input-group-addon {
+    padding: 8px 0px 10px 14px;
 }

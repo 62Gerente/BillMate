@@ -53,4 +53,8 @@ class Collective {
             }
         }
     }
+
+    public String getCssClass(){
+        "fa fa-circle-o"
+    }
 }

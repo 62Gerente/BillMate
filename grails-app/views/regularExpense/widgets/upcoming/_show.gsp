@@ -1,41 +1,46 @@
 <div class="col-md-12">
-    <div class="grid simple no-border">
+    <div class="grid simple no-border upcoming-regular-expense">
         <div class="grid-title no-border descriptive clickable">
-            <h4 class="semi-bold"><i class="fa fa-flash p-r-5"></i>${regularExpense}</h4>
+            <h4 class="semi-bold"><i class="${regularExpense.getExpenseType().getCssClass()} p-r-5"></i>${regularExpense}</h4>
             <p>
-                <span class="muted">Introduza os dados até dia 20 de Maio</span>
+                <span class="muted"><g:message code="com.billmate.regularExpense.already_received" default="Have you already received the {0} bill?" args="${[regularExpense.getExpenseType()]}" /></span>
             </p>
-            <div class="actions home-next-facts-angle-down"> <a class="view" href="javascript:;"><i class="fa fa-angle-down"></i></a>
+            <div class="actions upcoming-regular-expense-expand"> <a class="view" href="javascript:;"><i class="fa fa-angle-down"></i></a>
             </div>
 
         </div>
-        <div class="grid-body no-border">
-            <div class="post">
+        <div class="grid-body no-border ">
+            <div class="post p-b-5">
                 <div class="info-wrapper">
                     <div class="info">
-                        <i class="fa fa-home"></i>
-                        <span class="p-r-10">Casa de Braga</span>
+                      <p class="small">
+                          <i class="${regularExpense.getCircle().getCssClass()}"></i>
+                          ${regularExpense.getCircle()}
+                      </p>
                     </div>
-                    <div class="clearfix"></div>
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <br>
             <div class="form-actions">
-                <div class="post col-md-12">
-                    <div class="user-profile-pic-wrapper">
-                        <div class="user-profile-pic-normal">
-                            <img width="35" height="35" data-src-retina="assets/img/profiles/c.jpg" data-src="assets/img/profiles/c.jpg" src="assets/img/profiles/c.jpg" alt="">
-                        </div>
+                <div class="input-group transparent">
+                    <span class="input-group-addon ">
+                        <i class="fa fa-euro"></i>
+                    </span>
+                    <input type="text" class="form-control" value="${regularExpense.getValue()}" placeholder="<g:message code="com.billmate.regularExpense.value" default="Value" />">
+                </div>
+            </div>
+            <div class="white text-right">
+                <div class="p-t-45 p-b-10">
+                    <div class="btn-group">
+                        <button class="btn btn-small btn-info btn-demo-space"><g:message code="com.billmate.expense.create" default="Add expense" /></button>
+                        <button class="btn btn-small btn-info dropdown-toggle btn-demo-space" data-toggle="dropdown"> <span class="caret"></span></button>
+                        <ul class="dropdown-menu">
+                            <li><a href="#"><g:message code="com.billmate.regularExpense.advanced_options" default="Advanced options" /></a></li>
+                            <li class="divider"></li>
+                            <li><a href="#"><g:message code="com.billmate.regularExpense.cancel" default="Cancel expense" /></a></li>
+                            <li><a href="#"><g:message code="com.billmate.regularExpense.settings" default="Settings" /></a></li>
+                        </ul>
                     </div>
-                    <div class="info-wrapper">
-                        <div class="info">Hi,
-
-                            <p class="small-text">Posted on 10/29/13 at 07:21</p>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div class="clearfix"></div>
                 </div>
             </div>
         </div>
