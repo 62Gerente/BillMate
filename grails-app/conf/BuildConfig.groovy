@@ -83,5 +83,8 @@ grails.project.dependency.resolution = {
         compile ":file-uploader:1.2.1"
         compile ':locale-configuration:1.0'
         compile ":shiro:1.2.1"
+
+        // Email plugin
+        compile ":mail:1.0.5"
     }
 }

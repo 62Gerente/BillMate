@@ -17,13 +17,13 @@ class SubscriptionController {
         if (!subscription.save()) {
             responseData.error = true;
             responseData.message = message(error: subscription.errors.getFieldError("email"));
+        } else {
+            notifierService.send(
+                    params.email,
+                    message(code: "com.billmate.Subscription.notify.subject"),
+                    message(code: "com.billmate.Subscription.notify.body")
+            )
         }
-
-        notifierService.send(
-                params.email,
-                message(code: "com.billmate.Subscription.notify.subject"),
-                message(code: "com.billmate.Subscription.notify.body")
-        )
 
         render responseData as JSON
     }
