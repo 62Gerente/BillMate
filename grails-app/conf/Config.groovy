@@ -135,3 +135,18 @@ fileuploader {
 
 grails.plugins.localeConfiguration.supportedLocales = [new Locale("pt","PT")]
 grails.plugins.localeConfiguration.defaultLocale = new Locale("pt","PT")
+
+
+// Email Configuration
+grails {
+    mail {
+        host = "localhost"
+        //port = 465
+        //username = "youracount@gmail.com"
+        //password = "yourpassword"
+        //props = ["mail.smtp.auth":"true",
+        //         "mail.smtp.socketFactory.port":"465",
+        //         "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+        //         "mail.smtp.socketFactory.fallback":"false"]
+    }
+}
