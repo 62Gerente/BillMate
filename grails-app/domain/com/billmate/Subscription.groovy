@@ -9,17 +9,4 @@ class Subscription {
         email email: true, unique: true, nullable: false
         createdAt nullable: false
     }
-
-    public boolean secureSave(){
-        withTransaction { status ->
-            try {
-                this.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
-                return true
-            }catch(Exception ignored){
-                status.setRollbackOnly()
-                return false
-            }
-        }
-    }
 }
