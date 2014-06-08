@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-md-12">
-      <g:render template="/shared/alert" model="[cssClass: 'regular-expense-alert', display: 'none']"/>
+      <g:render template="/shared/alert" model="[cssClass: 'upcoming-regular-expense-alert', display: 'none']"/>
   </div>
   <g:render template="/regularExpense/widgets/upcoming/index" model="[regularExpenses: regularExpenses]"/>
 </div>

@@ -68,6 +68,6 @@ $('#new-ticket-form').validate({
 
      $('.grid .clickable').on('click', function () {
           var el = jQuery(this).parents(".grid").children(".grid-body");
-		  el.slideToggle(200);
+		  el.toggle();
     });		
 });

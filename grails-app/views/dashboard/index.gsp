@@ -13,7 +13,6 @@
         <g:render template="/regularExpense/widgets/upcoming" model="[regularExpenses: dashboard.regularExpensesInReceptionTime()]"/>
         <g:render template="/expense/charts/monthlySpending" model="[user: dashboard.getUser(), expenseTypes: dashboard.expenseTypesWithMoreSpendingInLastMonths()]"/>
     </div>
-<asset:javascript src="bm-flot-chart.js"/>
 <asset:javascript src="bm-dashboard.js"/>
 </body>
 </html>
