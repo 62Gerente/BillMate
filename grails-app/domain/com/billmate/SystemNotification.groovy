@@ -65,13 +65,4 @@ class SystemNotification{
             }
         }
     }
-
-    public SystemNotification makeRead(Long id){
-        SystemNotification notification = SystemNotification.findById(id)
-        if(notification) {
-            notification.setIsRead(true)
-            notification.secureSave()
-        }
-        return notification
-    }
 }

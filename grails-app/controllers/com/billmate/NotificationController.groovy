@@ -17,7 +17,7 @@ class NotificationController {
         render response as JSON
     }
 
-    def read_all(){
+    def readAll(){
         List<SystemNotification> notification = SystemNotification.findAll()
         SystemNotification.withTransaction { status ->
             try{
@@ -27,7 +27,7 @@ class NotificationController {
                 notification = null;
             }
         }
-        def response = ['notification':  notification]
+        def response = ['notification':  !notification.isEmpty()]
         render response as JSON
     }
 

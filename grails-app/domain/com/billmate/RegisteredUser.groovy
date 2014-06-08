@@ -149,6 +149,7 @@ class RegisteredUser {
     }
 
     public Integer getNumberOfUnreadNotifications(){
-        systemNotifications.count{ !it.getIsRead() }
+        int count = systemNotifications.count{ !it.getIsRead() }
+        count? count : 0
     }
 }
