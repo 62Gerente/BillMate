@@ -147,4 +147,16 @@ class RegisteredUser {
         unresolvedResponsibleExpenses().each{ unconfirmedPayments.addAll(it.unconfirmedPayments()) }
         unconfirmedPayments
     }
+
+    public Set<RegularExpense> regularResponsibleExpensesInReceptionTime(){
+        responsibleRegularExpenses.findAll{ it.inReceptionTime() }
+    }
+
+    public Set<Expense> monthResponsibleExpenses(Date date){
+        responsibleExpenses.findAll{ it.getBeginDate().getMonth() == date.getMonth() && it.getBeginDate().getYear() == date.getYear()  }
+    }
+
+    public Set<Expense> monthResponsibleExpensesOfExpenseType(Date date, ExpenseType expenseType){
+        monthResponsibleExpenses(date).findAll{ it.getExpenseType().getId() == expenseType.getId() }
+    }
 }

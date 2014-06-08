@@ -11,6 +11,7 @@
     </div>
     <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
         <g:render template="/regularExpense/widgets/upcoming" model="[]"/>
+        <g:render template="/expense/charts/monthlySpending" model="[user: dashboard.getUser(), expenseTypes: dashboard.expenseTypesWithMoreSpendingInLastMonths()]"/>
     </div>
 <asset:javascript src="bm-flot-chart.js"/>
 <asset:javascript src="bm-dashboard.js"/>
