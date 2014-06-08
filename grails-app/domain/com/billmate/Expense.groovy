@@ -59,6 +59,8 @@ class Expense {
         if(!endDate) endDate = rExpense.getEndDate()
         if(!paymentDeadline) paymentDeadline = rExpense.getPaymentDeadline()
         if(!paymentDeadline) paymentDeadline = rExpense.getReceptionDeadline()
+        if(customDebts.isEmpty()) customDebts.addAll(rExpense.getCustomDebts())
+        if(assignedUsers.isEmpty()) assignedUsers.addAll(rExpense.getAssignedUsers())
     }
 
     public String toString(){
