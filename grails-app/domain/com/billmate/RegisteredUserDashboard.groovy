@@ -28,4 +28,12 @@ class RegisteredUserDashboard {
     public Set<Payment> unconfirmedPayments(){
         registeredUser.unconfirmedPaymentsOnResponsibleExpenses()
     }
+
+    public Set<RegularExpense> regularExpensesInReceptionTime(){
+        getUser().regularExpensesInReceptionTime()
+    }
+
+    public List<ExpenseType> expenseTypesWithMoreSpendingInLastMonths(){
+        getUser().expenseTypesWithMoreSpendingInLastMonths(4,5)
+    }
 }

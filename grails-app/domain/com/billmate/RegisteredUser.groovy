@@ -153,20 +153,32 @@ class RegisteredUser {
         count? count : 0
     }
 
-    public boolean markNotificationsAsRead(){
-        Set<SystemNotification> notification = systemNotifications.findAll{!it.getIsRead()}
+    public boolean markNotificationsAsRead() {
+        Set<SystemNotification> notification = systemNotifications.findAll { !it.getIsRead() }
 
         SystemNotification.withTransaction { status ->
-            try{
+            try {
                 notification.each {
                     it.setIsRead(true)
                     it.secureSave()
                 }
-            }catch(Exception e){
+            } catch (Exception e) {
                 status.setRollbackOnly();
                 return false
             }
         }
         return true
+    }
+
+    public Set<RegularExpense> regularResponsibleExpensesInReceptionTime(){
+        responsibleRegularExpenses.findAll{ it.inReceptionTime() }
+    }
+
+    public Set<Expense> monthResponsibleExpenses(Date date){
+        responsibleExpenses.findAll{ it.getBeginDate().getMonth() == date.getMonth() && it.getBeginDate().getYear() == date.getYear()  }
+    }
+
+    public Set<Expense> monthResponsibleExpensesOfExpenseType(Date date, ExpenseType expenseType){
+        monthResponsibleExpenses(date).findAll{ it.getExpenseType().getId() == expenseType.getId() }
     }
 }
