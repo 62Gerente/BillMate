@@ -56,7 +56,7 @@
                             </div>
                             <div class="single-notification-messages">
                                 <g:form controller="session" action="delete" method="DELETE">
-                                    <button type="submit">
+                                    <button class="logout-header" type="submit">
                                         <i class="fa fa-sign-out p-r-15"></i>
                                         <g:message code="com.billmate.session.logout" default="Logout"/>
                                     </button>

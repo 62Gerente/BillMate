@@ -1,4 +1,5 @@
 <div class="col-md-12">
+
     <div class="grid simple no-border upcoming-regular-expense">
         <div class="grid-title no-border descriptive clickable">
             <h4 class="semi-bold"><i class="${regularExpense.getExpenseType().getCssClass()} p-r-5"></i>${regularExpense}</h4>
@@ -21,28 +22,30 @@
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div class="form-actions">
-                <div class="input-group transparent">
-                    <span class="input-group-addon ">
-                        <i class="fa fa-euro"></i>
-                    </span>
-                    <input type="text" class="form-control" value="${regularExpense.getValue()}" placeholder="<g:message code="com.billmate.regularExpense.value" default="Value" />">
-                </div>
-            </div>
-            <div class="white text-right">
-                <div class="p-t-45 p-b-10">
-                    <div class="btn-group">
-                        <button class="btn btn-small btn-info btn-demo-space"><g:message code="com.billmate.expense.create" default="Add expense" /></button>
-                        <button class="btn btn-small btn-info dropdown-toggle btn-demo-space" data-toggle="dropdown"> <span class="caret"></span></button>
-                        <ul class="dropdown-menu">
-                            <li><a href="#"><g:message code="com.billmate.regularExpense.advanced_options" default="Advanced options" /></a></li>
-                            <li class="divider"></li>
-                            <li><a href="#"><g:message code="com.billmate.regularExpense.cancel" default="Cancel expense" /></a></li>
-                            <li><a href="#"><g:message code="com.billmate.regularExpense.settings" default="Settings" /></a></li>
-                        </ul>
+              <g:form url="[action: 'saveExpense', controller: 'regularExpense', id: regularExpense.getId()]" class="upcoming-expense-form">
+                <div class="form-actions">
+                    <div class="input-group transparent">
+                        <span class="input-group-addon ">
+                            <i class="fa fa-euro"></i>
+                        </span>
+                        <input class="form-control" type="number" step="any" name="value" value="${regularExpense.getValue()}" placeholder="<g:message code="com.billmate.regularExpense.value" default="Value" />">
                     </div>
                 </div>
-            </div>
+                <div class="white text-right">
+                    <div class="p-t-45 p-b-10">
+                        <div class="btn-group">
+                            <button class="btn btn-small btn-info btn-demo-space"><g:message code="com.billmate.expense.create" default="Add expense" /></button>
+                            <button class="btn btn-small btn-info dropdown-toggle btn-demo-space" data-toggle="dropdown"> <span class="caret"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><g:message code="com.billmate.regularExpense.advanced_options" default="Advanced options" /></a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><g:message code="com.billmate.regularExpense.cancel" default="Cancel expense" /></a></li>
+                                <li><a href="#"><g:message code="com.billmate.regularExpense.settings" default="Settings" /></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+              </g:form>
         </div>
     </div>
 </div>

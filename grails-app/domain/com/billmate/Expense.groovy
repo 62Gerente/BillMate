@@ -1,6 +1,7 @@
 package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
+import org.springframework.validation.ObjectError
 
 class Expense {
     static belongsTo = [Circle, RegisteredUser, ExpenseType]
@@ -45,8 +46,37 @@ class Expense {
         receptionDate nullable: true
     }
 
+    public Expense(Map map, RegularExpense rExpense, RegisteredUser rUser) {
+        map.each { k,v -> setProperty(k,v) }
+        if(!regularExpense) regularExpense = rExpense
+        if(!responsible) responsible = rUser
+        if(!expenseType) expenseType = rExpense.getExpenseType()
+        if(!circle) circle = rExpense.getCircle()
+        if(!title) title = rExpense.getTitle()
+        if(!description) description = rExpense.getDescription()
+        if(!value) value = rExpense.getValue()
+        if(!beginDate) beginDate = rExpense.getBeginDate()
+        if(!endDate) endDate = rExpense.getEndDate()
+        if(!paymentDeadline) paymentDeadline = rExpense.getPaymentDeadline()
+        if(!paymentDeadline) paymentDeadline = rExpense.getReceptionDeadline()
+    }
+
     public String toString(){
         title
+    }
+
+    public boolean saveAndPostponeRegularExpense(){
+        withTransaction { status ->
+            try {
+                regularExpense.postpone()
+                regularExpense.save(flush: true, failOnError: true)
+                save(flush: true, failOnError: true)
+                return true
+            }catch(Exception ignored){
+                status.setRollbackOnly()
+                return false
+            }
+        }
     }
 
     public boolean isResolved(){

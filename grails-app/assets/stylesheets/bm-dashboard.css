@@ -376,7 +376,7 @@
     }
 }
 
-button[type="submit"]{
+button.logout-header[type="submit"]{
     border: none;
     padding: 0;
     background: none;
@@ -386,7 +386,7 @@ button[type="submit"]{
     font-weight: normal;
 }
 
-button[type="submit"]:hover {
+button.logout-header[type="submit"]:hover {
     outline: none;
 }
 
@@ -494,4 +494,28 @@ button[type="submit"]:hover {
 
 .upcoming-regular-expense .transparent .input-group-addon {
     padding: 8px 0px 10px 14px;
+}
+
+.input-group.transparent.success-control .input-group-addon{
+    border: none;
+}
+
+.input-group.transparent.success-control input{
+    border: none;
+}
+
+.input-group.transparent.error-control .input-group-addon{
+    border: none;
+}
+
+.input-group.transparent.error-control input{
+    border: none;
+}
+
+.input-group.transparent.error-control{
+    border: 1px solid #f35958;
+}
+
+.input-group.transparent.success-control{
+    border: 1px solid #0aa699;
 }
