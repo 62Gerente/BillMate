@@ -124,6 +124,7 @@ class BootStrap {
             internet.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
             internet.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
         }
+
     }
 
     def destroy = {

@@ -3,7 +3,7 @@ package com.billmate
 import grails.converters.JSON
 
 class RegularExpenseController extends RestrictedController{
-    static allowedMethods = [saveExpense: "POST"]
+    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"]]
 
     def beforeInterceptor = [action: this.&checkSession]
 
@@ -24,7 +24,7 @@ class RegularExpenseController extends RestrictedController{
             if(expense.getErrors().getErrorCount()){
                 responseData.message = message(error: expense.getErrors().getAllErrors().first())
             }else{
-                responseData.message = "Oops! Something went wrong."
+                responseData.message = message(code: "com.billmate.generic.error.message")
             }
 
         }
@@ -33,6 +33,25 @@ class RegularExpenseController extends RestrictedController{
     }
 
     def postpone(Long id) {
-        
+        def regularExpense = RegularExpense.get(id)
+
+        def responseData = [
+                'error'  : false,
+                'message': message(code: "com.billmate.regularExpense.cancel.success")
+        ]
+
+        regularExpense.postpone()
+
+        if (!regularExpense.save()) {
+            responseData.error = true;
+            if(regularExpense.getErrors().getErrorCount()){
+                responseData.message = message(error: regularExpense.getErrors().getAllErrors().first())
+            }else{
+                responseData.message = message(code: "com.billmate.generic.error.message")
+            }
+
+        }
+
+        render responseData as JSON
     }
 }

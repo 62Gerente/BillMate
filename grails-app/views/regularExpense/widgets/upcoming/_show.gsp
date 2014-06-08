@@ -34,12 +34,16 @@
                 <div class="white text-right">
                     <div class="p-t-45 p-b-10">
                         <div class="btn-group">
-                            <button class="btn btn-small btn-info btn-demo-space"><g:message code="com.billmate.expense.create" default="Add expense" /></button>
-                            <button class="btn btn-small btn-info dropdown-toggle btn-demo-space" data-toggle="dropdown"> <span class="caret"></span></button>
+                            <button type="submit" class="btn btn-small btn-info btn-demo-space"><g:message code="com.billmate.expense.create" default="Add expense" /></button>
+                            <button type="button" class="btn btn-small btn-info dropdown-toggle btn-demo-space" data-toggle="dropdown"> <span class="caret"></span></button>
                             <ul class="dropdown-menu">
                                 <li><a href="#"><g:message code="com.billmate.regularExpense.advanced_options" default="Advanced options" /></a></li>
                                 <li class="divider"></li>
-                                <li><a href="#"><g:message code="com.billmate.regularExpense.cancel" default="Cancel expense" /></a></li>
+                                <li>
+                                    <g:link url="[action: 'postpone', controller: 'regularExpense', id: regularExpense.getId()]" class="postpone-upcoming-expense">
+                                        <g:message code="com.billmate.regularExpense.cancel" default="Cancel expense" />
+                                    </g:link>
+                                </li>
                                 <li><a href="#"><g:message code="com.billmate.regularExpense.settings" default="Settings" /></a></li>
                             </ul>
                         </div>

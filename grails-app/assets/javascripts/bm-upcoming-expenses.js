@@ -7,6 +7,7 @@ $(document).ready(function() {
         rules: {
             value: {
                 required: true,
+                blank: false,
                 number: true
             }
         },
