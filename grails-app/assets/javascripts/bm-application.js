@@ -3,6 +3,7 @@
 //= require ../plugins/boostrapv3/js/bootstrap.min.js
 //= require ../plugins/jquery-unveil/jquery.unveil.min.js
 //= require ../plugins/breakpoints.js
+//= require ../plugins/blockUI/jquery.blockUI.js
 
 //= require core.js
 //= require demo.js

@@ -1,5 +1,7 @@
 package com.billmate
 
+import groovy.time.TimeCategory
+
 class RegularExpense {
     static belongsTo = [DirectDebit, Circle, RegisteredUser, ExpenseType]
     static hasMany = [customDebts: CustomDebt, actions: Action, assignedUsers: User, expenses: Expense]
@@ -15,6 +17,8 @@ class RegularExpense {
 
     Date beginDate
     Date endDate
+    Date paymentDeadline
+    Date receptionDeadline
 
     Date receptionBeginDate = new Date()
     Date receptionEndDate
@@ -39,6 +43,8 @@ class RegularExpense {
 
         beginDate nullable: true
         endDate nullable: true
+        paymentDeadline nullable: true
+        receptionDeadline nullable: true
 
         receptionBeginDate nullable: false
         receptionEndDate nullable: true
@@ -58,5 +64,11 @@ class RegularExpense {
 
     public boolean inReceptionTime(){
         isActive && receptionBeginDate < new Date()
+    }
+
+    public postpone() {
+        use(TimeCategory) {
+            receptionBeginDate = receptionBeginDate + intervalDays.days + intervalMonths.months + intervalYears.years
+        }
     }
 }

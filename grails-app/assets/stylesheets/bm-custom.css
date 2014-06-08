@@ -23,6 +23,10 @@ a {
     color: #004264;
 }
 
+.alert-dismissable .close {
+    right: -5px;
+}
+
 .uppercase{
     text-transform: uppercase;
 }
