@@ -65,4 +65,9 @@ class SystemNotification{
             }
         }
     }
+
+    public boolean markReadNotification(){
+        setIsRead(true);
+        secureSave();
+    }
 }

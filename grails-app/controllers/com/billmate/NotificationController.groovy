@@ -2,43 +2,32 @@ package com.billmate
 
 import grails.converters.JSON
 
-class NotificationController {
+class NotificationController extends RestrictedController {
+
+    def beforeInterceptor = [action: this.&checkSession]
 
     def index() {}
 
     def read(Long id){
+        boolean success = false
         SystemNotification notification = SystemNotification.findById(id)
-        if(notification) {
-            notification.setIsRead(true)
-            notification.secureSave()
-        }
+        success = notification?.markReadNotification()
 
-        def response = ['notification': notification?.getIsRead()]
+        def response = [
+                'error'  : !success,
+                'message': message(code: "com.billmate.notification.error_mark_as_read")
+        ]
         render response as JSON
     }
 
     def readAll(){
-        List<SystemNotification> notification = SystemNotification.findAll()
-        SystemNotification.withTransaction { status ->
-            try{
-                notification.each {it.setIsRead(true);it.secureSave();};
-            }catch(Exception e){
-                status.setRollbackOnly();
-                notification = null;
-            }
-        }
-        def response = ['notification':  !notification.isEmpty()]
-        render response as JSON
-    }
-
-    def getAllNotifications(int numberActualNotifications){
-        int numberNotifications = SystemNotification.countByIsRead(false)
-        List<Notification> notificationList = null
-        if(numberActualNotifications != numberNotifications){
-            notificationList = SystemNotification.findAllByIsRead(false)
-        }
-
-        def response = ['notification': notificationList]
+        boolean success = false
+        RegisteredUser registeredUser = RegisteredUser.findById(authenticatedUser().getId())
+        success = registeredUser?.markAllReadNotification()
+        def response = [
+                'error'  : !success,
+                'message': message(code: "com.billmate.notification.error_mark_all_as_read")
+        ]
         render response as JSON
     }
 }

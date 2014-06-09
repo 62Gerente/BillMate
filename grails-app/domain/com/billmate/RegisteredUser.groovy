@@ -160,4 +160,18 @@ class RegisteredUser {
     public boolean existsExpenses(){
         (getNumberOfUnreadNotifications() > 0)
     }
+
+    public boolean markAllReadNotification(){
+        boolean finalResult = true
+        Set<SystemNotification> notification = getSystemNotifications().findAll({!it.getIsRead()})
+        SystemNotification.withTransaction { status ->
+            try{
+                notification.each {it.setIsRead(true);it.secureSave();};
+            }catch(Exception e){
+                status.setRollbackOnly();
+                finalResult = false
+            }
+        }
+        return finalResult
+    }
 }
