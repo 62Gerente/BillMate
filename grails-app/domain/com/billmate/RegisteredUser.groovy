@@ -153,25 +153,20 @@ class RegisteredUser {
         count? count : 0
     }
 
-    public boolean moreThanOneExpense(long user_id){
-        (unresolvedResponsibleExpensesBy(user_id).size() > 1)
-    }
+    public boolean markNotificationsAsRead(){
+        Set<SystemNotification> notification = systemNotifications.findAll{!it.getIsRead()}
 
-    public boolean existsExpenses(){
-        (getNumberOfUnreadNotifications() > 0)
-    }
-
-    public boolean markAllReadNotification(){
-        boolean finalResult = true
-        Set<SystemNotification> notification = getSystemNotifications().findAll({!it.getIsRead()})
         SystemNotification.withTransaction { status ->
             try{
-                notification.each {it.setIsRead(true);it.secureSave();};
+                notification.each {
+                    it.setIsRead(true)
+                    it.secureSave()
+                }
             }catch(Exception e){
                 status.setRollbackOnly();
-                finalResult = false
+                return false
             }
         }
-        return finalResult
+        return true
     }
 }

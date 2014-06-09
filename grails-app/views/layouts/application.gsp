@@ -14,7 +14,7 @@
 </head>
 <body>
     <g:render template="/shared/header" model="[user: user]"/>
-    <g:render template="/notification/index" model="[notifications: user.getSystemNotifications()]"/>
+    <g:render template="/systemNotification/index" model="[registeredUser: user, notifications: user.getSystemNotifications()]"/>
 
     <div class="page-container row-fluid">
       <g:render template="/shared/sidebar" model="[user: user]"/>

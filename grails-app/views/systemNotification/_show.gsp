@@ -1,5 +1,5 @@
 <div>
-    <g:link controller="notification" action="read" id="${notification.getId()}"></g:link>
+    <g:link controller="systemNotification" action="markAsRead" id="${notification.getId()}"></g:link>
     <div class="side-widget-content" id="friends-list">
         <div class="user-details-wrapper">
             <div class="user-profile">

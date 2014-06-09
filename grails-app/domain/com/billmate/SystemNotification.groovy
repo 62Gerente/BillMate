@@ -66,8 +66,8 @@ class SystemNotification{
         }
     }
 
-    public boolean markReadNotification(){
-        setIsRead(true);
+    public boolean markAsRead(){
+        isRead = true;
         secureSave();
     }
 }

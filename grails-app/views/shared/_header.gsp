@@ -75,7 +75,7 @@
                     <li class="quicklinks">
                         <a id="chat-menu-toggle" href="#sidr" class="chat-menu-toggle">
                             <div class="iconset top-chat-dark ">
-                                <g:if test="${user.existsExpenses()}">
+                                <g:if test="${user.getNumberOfUnreadNotifications()}">
                                     <span class="badge badge-important animated bounceIn chat-message-count" id="chat-message-count">${user.getNumberOfUnreadNotifications()}</span>
                                 </g:if>
                             </div>

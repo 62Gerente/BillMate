@@ -2,9 +2,11 @@ $(document).ready(function(){
     $(".error-notification").hide();
 
     $(".side-widget-content").not(':has(.status-icon.green)').click(function(){
-        if($(this).find(".status-icon.red").length == 0) return;
+        if(!$(this).find(".status-icon.red").length) return;
         var $notification = $(this).find(".status-icon");
         var link = $(this).siblings("a").attr('href');
+        var alert =  $(".error-notification");
+        alert.hide()
         $.ajax({
             type: "PUT",
             url: link,
@@ -28,11 +30,13 @@ $(document).ready(function(){
                     }
                 }
                 else{
-                    $(".error-notification").empty().text(response.message)
+                    alert.get(0).lastChild.nodeValue = response.message;
+                    alert.show();
                 }
             },
             error: function () {
-                $(".error-notification").show();
+                alert.get(0).lastChild.nodeValue = "Oops! Something went wrong.";
+                alert.show();
             },
             dataType: 'json'
         });
@@ -40,6 +44,7 @@ $(document).ready(function(){
 
     $(".mark-read-notification").click(function(){
         var link = $(this).parent("i").siblings("a").attr('href');
+        var alert =  $(".error-notification");
         $.ajax({
             type: "PUT",
             url: link,
@@ -57,11 +62,13 @@ $(document).ready(function(){
                     $(".chat-message-count").remove();
                 }
                 else{
-                    $(".error-notification").empty().text(response.message)
+                    alert.get(0).lastChild.nodeValue = response.message;
+                    alert.show();
                 }
             },
             error: function () {
-                $(".error-notification").show();
+                alert.get(0).lastChild.nodeValue = "Oops! Something went wrong.";
+                alert.show();
             }
         });
     });

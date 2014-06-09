@@ -101,7 +101,7 @@ class BootStrap {
         }
 
         if(ActionType.count() == 0){
-            def actionType = new ActionType(type: 'com.billmate.notification.add_user_house')
+            def actionType = new ActionType(type: 'com.billmate.action.add_user_house')
             actionType.save()
         }
 
