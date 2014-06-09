@@ -152,4 +152,12 @@ class RegisteredUser {
         int count = systemNotifications.count{ !it.getIsRead() }
         count? count : 0
     }
+
+    public boolean moreThanOneExpense(long user_id){
+        (unresolvedResponsibleExpensesBy(user_id).size() > 1)
+    }
+
+    public boolean existsExpenses(){
+        (getNumberOfUnreadNotifications() > 0)
+    }
 }

@@ -19,5 +19,5 @@
             </div>
         </div>
     </div>
-    <g:render template="/expense/table/userDashboard" model="[user: user, unresolvedExpenses: user.unresolvedExpensesWhoResponsibleIs(registeredUser.getId())]"/>
+    <g:render template="/expense/table/userDashboard" model="[user: user, unresolvedExpenses: user.unresolvedExpensesWhoResponsibleIs(registeredUser.getId()), moreThanOneExpense: registeredUser.moreThanOneExpense(user.getId())]"/>
 </div>

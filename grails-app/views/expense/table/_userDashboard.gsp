@@ -15,7 +15,7 @@
         <g:else>
             <g:render template="/expense/table/userDashboard/index" model="[user: user, unresolvedExpenses: unresolvedExpenses]"/>
         </g:else>
-        <g:if test="${unresolvedExpenses.size() > 1}">
+        <g:if test="${moreThanOneExpense}">
             <tr>
                 <td class="text-right text-grey" colspan="4">
                     <div class="inline b-t b-grey p-t-5">
