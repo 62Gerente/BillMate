@@ -1,7 +1,7 @@
 <div class="p-l-20 p-r-20 p-t-5 p-b-5 b-b b-grey expenses-widget-more-details">
     <div class="user-info-wrapper home-margin-list">
         <img class="profile-wrapper user-profile-pic-2x white-border home-img-list" src="${user.getPhotoOrDefault()}"/>
-        <div class="col-md-8 user-info user-info-photo user-info-name-price no-padding">
+        <div class="col-md-7 user-info user-info-photo user-info-name-price no-padding">
             <div class="username inline p-t-15 widget-payments-name-user">${user.getName()}
                 <i class="fa fa-angle-down widget-dashboard-arrow-down"></i>
             </div>
@@ -13,9 +13,15 @@
                 </h6>
             </span>
         </div>
-        <div class="div-btn-widget-payments pull-right">
-            <div class="col-md-4 pull-right no-padding home-button-divida-primary-confirm" id="home-button-divida-primary-confirm">
-                <button type="button" class="inline btn btn-primary btn-small btn-cons pull-right"><g:message code="com.billmate.payment.confirm" default="Confirm payment" /></button>
+        <div class="div-btn-widget-payments col-md-3 pull-right" style="margin-right: 3px;">
+            <div class="pull-right no-padding home-button-divida-primary-confirm">
+                <div class="btn-group pull-right" style="display: inline">
+                    <button class="btn btn-small btn-primary"><g:message code="com.billmate.payment.confirm" default="Confirm" /></button>
+                    <button type="button" class="btn btn-small btn-primary dropdown-toggle" data-toggle="dropdown"> <span class="caret"></span></button>
+                    <ul class="dropdown-menu">
+                        <li><a href="#"><g:message code="com.billmate.payment.cancel" default="Cancel" /></a></li>
+                    </ul>
+                </div>
             </div>
         </div>
     </div>
