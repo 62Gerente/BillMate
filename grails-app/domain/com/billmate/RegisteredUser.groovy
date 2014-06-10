@@ -148,6 +148,16 @@ class RegisteredUser {
         unconfirmedPayments
     }
 
+    public Set<User> whoHaveUnconfirmedPayments(){
+        Set<User> users = new HashSet<>()
+        unconfirmedPaymentsOnResponsibleExpenses().each { users.add(it.getUser()) }
+        users
+    }
+
+    public Set<Payment> unconfirmedPaymentsOnResponsibleExpensesOf(Long user_id){
+        unconfirmedPaymentsOnResponsibleExpenses().findAll{ it.getUserId() == user_id }
+    }
+
     public Integer getNumberOfUnreadNotifications(){
         int count = systemNotifications.count{ !it.getIsRead() }
         count? count : 0

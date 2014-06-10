@@ -190,11 +190,6 @@
     margin-right: -45px;
 }
 
-.footer-widget .btn{
-    background-color: rgba(10, 166, 153, 0.7);
-    color: #000;
-}
-
 .page-sidebar.mini,
 .page-sidebar.mini .slimScrollDiv ul#home-sidebar-menu{
     top: 0;
@@ -251,13 +246,6 @@
 #table-home-box-fixed{
     table-layout: fixed;
     width: 100%;
-}
-
-.footer-widget .btn,
-.row.tiles-container .btn,
-.home-margin-list .btn{
-    background-color: rgba(10, 166, 153, 0.7);
-    color: #fff;
 }
 
 .row-fluid .checkbox label::after{

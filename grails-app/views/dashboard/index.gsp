@@ -5,7 +5,7 @@
 </head>
 <body>
     <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
-        <g:render template="/payment/widgets/confirm" model="[unconfirmedPayments: dashboard.unconfirmedPayments()]" />
+        <g:render template="/payment/widgets/confirm" model="[registeredUser: dashboard.getRegisteredUser(), whoHaveUnconfirmedPayments: dashboard.whoHaveUnconfirmedPayments()]" />
         <g:render template="/expense/widgets/whoIOwe" model="[user: dashboard.getUser(), totalDebt: dashboard.totalDebt(), whoIOwe: dashboard.whoIOwe()]"/>
         <g:render template="/expense/widgets/whoOweMe" model="[registeredUser: dashboard.getRegisteredUser(), totalAsset: dashboard.totalAsset(), whoOweMe: dashboard.whoOweMe()]"/>
     </div>

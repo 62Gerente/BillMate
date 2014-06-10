@@ -25,8 +25,8 @@ class RegisteredUserDashboard {
         registeredUser.whoOweMe()
     }
 
-    public Set<Payment> unconfirmedPayments(){
-        registeredUser.unconfirmedPaymentsOnResponsibleExpenses()
+    public Set<User> whoHaveUnconfirmedPayments(){
+        registeredUser.whoHaveUnconfirmedPayments()
     }
 
     public Set<RegularExpense> regularExpensesInReceptionTime(){
