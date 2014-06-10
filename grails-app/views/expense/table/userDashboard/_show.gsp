@@ -3,7 +3,7 @@
     <td class="unseen">${expense.getCircle()}</td>
     <td class="unseen">
         <g:if test="${expense.getPaymentDeadline()}">
-            ${expense.getPaymentDeadline()}
+            <g:formatDate date="${expense.getPaymentDeadline()}" type="datetime" style="SMALL"/>
         </g:if>
         <g:else>
             <g:message code="com.billmate.expense.date.notDefined" default="Not defined" />

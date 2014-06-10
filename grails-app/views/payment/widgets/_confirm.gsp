@@ -8,18 +8,32 @@
                     </h4>
                     <div class="pull-right" id="home-button-primary-confirm">
                         <h4>
-                            <button type="button" class="inline btn btn-info btn-small">
-                                <g:message code="com.billmate.payment.confirmAll" default="Confirm All" />
-                            </button>
+                            <div class="btn-group" style="display: inline">
+                                <button class="btn btn-small btn-info"><g:message code="com.billmate.payment.confirmAll" default="Confirm all" /></button>
+                                <button type="button" class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown"> <span class="caret"></span></button>
+                                <ul class="dropdown-menu m-t-30">
+                                    <li><a href="#"><g:message code="com.billmate.payment.confirmSelected" default="Confirm selected" /></a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#"><g:message code="com.billmate.payment.cancelSelected" default="Cancel selected" /></a></li>
+                                    <li><a href="#"><g:message code="com.billmate.payment.cancelAll" default="Cancel all" /></a></li>
+                                </ul>
+                            </div>
                         </h4>
                     </div>
                 </div>
                 <g:render template="/payment/widgets/confirm/index" model="[registeredUser: registeredUser, whoHaveUnconfirmedPayments: whoHaveUnconfirmedPayments]"/>
-                <div class="p-l-20 p-r-20">
-                    <div id="home-button-divida-secondary-confirm" class="m-b-10">
-                        <button type="button" class="btn btn-default btn-small" style="width: 100%">
-                            <g:message code="com.billmate.payment.confirmSelected" default="Confirm" />
-                        </button>
+                <div class="m-b-10 home-button-divida-secondary-confirm">
+                    <div class="btn-group text-center m-t-15" style="width: 100%">
+                        <div>
+                            <button class="btn btn-small btn-info" style="width: 85%"><g:message code="com.billmate.payment.confirmAll" default="Confirm all" /></button>
+                            <button type="button" class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown"> <span class="caret no-margin"></span></button>
+                            <ul class="dropdown-menu">
+                                <li><a href="#"><g:message code="com.billmate.payment.confirmSelected" default="Confirm selected" /></a></li>
+                                <li class="divider"></li>
+                                <li><a href="#"><g:message code="com.billmate.payment.cancelSelected" default="Cancel selected" /></a></li>
+                                <li><a href="#"><g:message code="com.billmate.payment.cancelAll" default="Cancel all" /></a></li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
