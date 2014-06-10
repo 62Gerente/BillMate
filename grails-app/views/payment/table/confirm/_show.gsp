@@ -13,8 +13,8 @@
     <td>
         <div class="row-fluid home-check-confirm">
             <div class="checkbox check-success">
-                <input type="checkbox" id="id1" class="todo-list">
-                <label class="pull-right" for="id1" style="margin-right: 20px" checked></label>
+                <input type="checkbox" id="payment${payment.getId()}" name="payment[]" value="${payment.getId()}" class="todo-list" checked>
+                <label class="pull-right" for="payment${payment.getId()}" style="margin-right: 20px"></label>
             </div>
         </div>
     </td>

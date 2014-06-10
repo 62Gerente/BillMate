@@ -191,4 +191,22 @@ class RegisteredUser {
     public Set<Expense> monthResponsibleExpensesOfExpenseType(Date date, ExpenseType expenseType){
         monthResponsibleExpenses(date).findAll{ it.getExpenseType().getId() == expenseType.getId() }
     }
+
+    public boolean confirmPayments(List<Long> paymentIds){
+        Set<Payment> payments = unconfirmedPaymentsOnResponsibleExpenses().findAll{ paymentIds.contains(it.getId()) }
+
+        Payment.withTransaction { status ->
+            try {
+                payments.each {
+                    it.setIsValidated(true)
+                    it.setValidationDate(new Date())
+                    it.save()
+                }
+            } catch (Exception e) {
+                status.setRollbackOnly();
+                return false
+            }
+        }
+        return true
+    }
 }
