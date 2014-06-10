@@ -6,5 +6,7 @@
 //= require ../../../plugins/modernizr.custom.js
 //= require ../../../plugins/waypoints.min.js
 
+//= require ../../bm-ajax-subscription.js
+
 
 
