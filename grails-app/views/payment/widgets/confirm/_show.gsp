@@ -1,21 +1,23 @@
-<tr>
-    <td class="home-img-list-confs">
-        <div class="friend-profile-pic">
-            <div class="user-profile-pic-normal">
-                <img width="35" height="35" src="${payment.getUser().getPhotoOrDefault()}" alt="">
+<div class="p-l-20 p-r-20 p-t-5 p-b-5 b-b b-grey expenses-widget-more-details">
+    <div class="user-info-wrapper home-margin-list">
+        <img class="profile-wrapper user-profile-pic-2x white-border home-img-list" src="${user.getPhotoOrDefault()}"/>
+        <div class="col-md-8 user-info user-info-photo user-info-name-price no-padding">
+            <div class="username inline p-t-15 widget-payments-name-user">${user.getName()}
+                <i class="fa fa-angle-down widget-dashboard-arrow-down"></i>
             </div>
         </div>
-    </td>
-    <td class="unseen">${payment.getUser()}</td>
-    <td class="unseen">${payment.getExpense().getCircle()}</td>
-    <td><i style="width: 15px" class="${payment.getExpense().getExpenseType().getCssClass()}"></i> ${payment.getExpense()}</td>
-    <td class="text-right"><g:formatNumber number="${payment.getValue()}" type="currency" currencyCode="EUR" /></td>
-    <td id="home-check-list">
-        <div class="row-fluid home-check-confirm">
-            <div class="checkbox check-success">
-                <input type="checkbox" id="id1" class="todo-list">
-                <label class="pull-right" for="id1" style="margin-right: 25px"></label>
+        <div class="col-md-2 pull-right no-padding m-t-10 price-widget-dashboard widget-payments-price m-t-13">
+            <span class="label label-default label-grey-background">
+                <h6 class="bold inline p-t-2">
+                    <g:formatNumber number="${registeredUser.unconfirmedPaymentsOnResponsibleExpensesOf(user.getId()).sum{ it.getValue() }}" type="currency" currencyCode="EUR" />
+                </h6>
+            </span>
+        </div>
+        <div class="div-btn-widget-payments pull-right">
+            <div class="col-md-4 pull-right no-padding home-button-divida-primary-confirm" id="home-button-divida-primary-confirm">
+                <button type="button" class="inline btn btn-primary btn-small btn-cons pull-right"><g:message code="com.billmate.payment.confirm" default="Confirm payment" /></button>
             </div>
         </div>
-    </td>
-</tr>
+    </div>
+    <g:render template="/payment/table/confirm" model="[user: user, unconfirmedPayments: registeredUser.unconfirmedPaymentsOnResponsibleExpensesOf(user.getId())]"/>
+</div>

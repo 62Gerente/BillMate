@@ -15,7 +15,7 @@
         </div>
         <div class="div-btn-widget-payments pull-right">
             <div class="col-md-4 pull-right no-padding home-button-divida-primary-confirm" id="home-button-divida-primary-confirm">
-                <button type="button" class="inline btn btn-default btn-small btn-cons pull-right"><g:message code="com.billmate.payment.new" default="Pay it now" /></button>
+                <button type="button" class="inline btn btn-primary btn-small btn-cons pull-right"><g:message code="com.billmate.payment.new" default="Pay it now" /></button>
             </div>
         </div>
     </div>
