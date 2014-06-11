@@ -30,10 +30,10 @@
     <div class="m-b-10 home-button-divida-secondary-confirm">
         <div class="btn-group text-center" style="display: inline;width: 100%;">
             <div>
-                <button class="btn btn-small btn-primary" style="width: 85%"><g:message code="com.billmate.payment.confirm" default="Confirm" /></button>
+                <button type="submit" class="btn btn-small btn-primary" style="width: 85%"><g:message code="com.billmate.payment.confirm" default="Confirm" /></button>
                 <button type="button" class="btn btn-small btn-primary dropdown-toggle" data-toggle="dropdown"> <span class="caret no-margin"></span></button>
                 <ul class="dropdown-menu">
-                    <li><a href="#"><g:message code="com.billmate.payment.cancel" default="Cancel" /></a></li>
+                    <li><a class="submit-cancel-payments-form" href="${createLink(controller: 'payment', action: 'cancel')}"><g:message code="com.billmate.payment.cancel" default="Cancel" /></a></li>
                 </ul>
             </div>
         </div>

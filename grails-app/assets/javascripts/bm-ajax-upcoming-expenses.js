@@ -42,7 +42,7 @@ $(".upcoming-expense-form :submit").on('click', function (event) {
 
     if(form.valid()){
         var submit = form.find("button[type=submit]");
-        var alert = $(".upcoming-regular-expense-alert");
+        var alert = $(".col4-alert");
         submit.prop("disabled", true);
         $.ajax({
             url: form.attr('action'),
@@ -78,7 +78,7 @@ $(".postpone-upcoming-expense").on('click', function (event) {
     event.preventDefault();
     var link = $(this);
 
-    var alert = $(".upcoming-regular-expense-alert");
+    var alert = $(".col4-alert");
     link.prop("disabled", true);
     $.ajax({
         url: link.attr('href'),

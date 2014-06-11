@@ -20,7 +20,7 @@
                         <button type="submit" class="btn btn-small btn-primary"><g:message code="com.billmate.payment.confirm" default="Confirm" /></button>
                         <button type="button" class="btn btn-small btn-primary dropdown-toggle" data-toggle="dropdown"> <span class="caret"></span></button>
                         <ul class="dropdown-menu">
-                            <li><a href="${createLink(controller: 'payment', action: 'cancel')}"><g:message code="com.billmate.payment.cancel" default="Cancel" /></a></li>
+                            <li><a class="submit-cancel-payments-form" href="${createLink(controller: 'payment', action: 'cancel')}"><g:message code="com.billmate.payment.cancel" default="Cancel" /></a></li>
                         </ul>
                     </div>
                 </div>
