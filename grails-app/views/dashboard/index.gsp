@@ -5,11 +5,13 @@
 </head>
 <body>
     <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
+        <g:render template="/shared/alert" model="[cssClass: 'col8-alert', display: 'none']"/>
         <g:render template="/payment/widgets/confirm" model="[registeredUser: dashboard.getRegisteredUser(), whoHaveUnconfirmedPayments: dashboard.whoHaveUnconfirmedPayments()]" />
         <g:render template="/expense/widgets/whoIOwe" model="[user: dashboard.getUser(), totalDebt: dashboard.totalDebt(), whoIOwe: dashboard.whoIOwe()]"/>
         <g:render template="/expense/widgets/whoOweMe" model="[registeredUser: dashboard.getRegisteredUser(), totalAsset: dashboard.totalAsset(), whoOweMe: dashboard.whoOweMe()]"/>
     </div>
     <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
+        <g:render template="/shared/alert" model="[cssClass: 'col4-alert', display: 'none']"/>
         <g:render template="/regularExpense/widgets/upcoming" model="[regularExpenses: dashboard.regularExpensesInReceptionTime()]"/>
         <g:render template="/expense/charts/monthlySpending" model="[user: dashboard.getUser(), expenseTypes: dashboard.expenseTypesWithMoreSpendingInLastMonths()]"/>
     </div>

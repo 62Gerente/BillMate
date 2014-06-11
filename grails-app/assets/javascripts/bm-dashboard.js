@@ -3,3 +3,4 @@
 //= require bm-widget-dashboard.js
 //= require bm-widgets.js
 //= require bm-ajax-upcoming-expenses.js
+//= require bm-ajax-confirm-payments.js

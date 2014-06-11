@@ -9,13 +9,13 @@
                     <div class="pull-right" id="home-button-primary-confirm">
                         <h4>
                             <div class="btn-group" style="display: inline">
-                                <button class="btn btn-small btn-info"><g:message code="com.billmate.payment.confirmAll" default="Confirm all" /></button>
+                                <a href="${createLink(controller: 'payment', action: 'confirm')}" class="btn btn-small btn-info submit-confirm-all-payments"><g:message code="com.billmate.payment.confirmAll" default="Confirm all" /></a>
                                 <button type="button" class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown"> <span class="caret"></span></button>
                                 <ul class="dropdown-menu m-t-30">
-                                    <li><a href="#"><g:message code="com.billmate.payment.confirmSelected" default="Confirm selected" /></a></li>
+                                    <li><a class="submit-confirm-selected-payments" href="${createLink(controller: 'payment', action: 'confirm')}"><g:message code="com.billmate.payment.confirmSelected" default="Confirm selected" /></a></li>
                                     <li class="divider"></li>
-                                    <li><a href="#"><g:message code="com.billmate.payment.cancelSelected" default="Cancel selected" /></a></li>
-                                    <li><a href="#"><g:message code="com.billmate.payment.cancelAll" default="Cancel all" /></a></li>
+                                    <li><a class="submit-cancel-selected-payments" href="${createLink(controller: 'payment', action: 'cancel')}"><g:message code="com.billmate.payment.cancelSelected" default="Cancel selected" /></a></li>
+                                    <li><a class="submit-cancel-all-payments" href="${createLink(controller: 'payment', action: 'cancel')}"><g:message code="com.billmate.payment.cancelAll" default="Cancel all" /></a></li>
                                 </ul>
                             </div>
                         </h4>

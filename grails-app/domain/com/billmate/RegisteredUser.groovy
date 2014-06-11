@@ -192,13 +192,31 @@ class RegisteredUser {
         monthResponsibleExpenses(date).findAll{ it.getExpenseType().getId() == expenseType.getId() }
     }
 
-    public boolean confirmPayments(List<Long> paymentIds){
-        Set<Payment> payments = unconfirmedPaymentsOnResponsibleExpenses().findAll{ paymentIds.contains(it.getId()) }
+    public boolean confirmPayments(List<String> paymentIds){
+        Set<Payment> payments = unconfirmedPaymentsOnResponsibleExpenses().findAll{ paymentIds.contains(it.getId().toString()) }
 
         Payment.withTransaction { status ->
             try {
                 payments.each {
                     it.setIsValidated(true)
+                    it.setValidationDate(new Date())
+                    it.save()
+                }
+            } catch (Exception e) {
+                status.setRollbackOnly();
+                return false
+            }
+        }
+        return true
+    }
+
+    public boolean cancelPayments(List<String> paymentIds){
+        Set<Payment> payments = unconfirmedPaymentsOnResponsibleExpenses().findAll{ paymentIds.contains(it.getId().toString()) }
+
+        Payment.withTransaction { status ->
+            try {
+                payments.each {
+                    it.setIsValidated(false)
                     it.setValidationDate(new Date())
                     it.save()
                 }
