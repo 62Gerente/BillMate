@@ -1,4 +1,4 @@
-<tr>
+<tr class="single-payment">
     <td><i style="width: 15px" class="${payment.expense.getExpenseType().getCssClass()}"></i> ${payment.expense}</td>
     <td class="unseen">${payment.expense.getCircle()}</td>
     <td class="unseen">
