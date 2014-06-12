@@ -6,7 +6,7 @@
             <th class="text-left unseen text-primary uppercase"><g:message code="com.billmate.circle" default="Circle" /></th>
             <th class="text-left unseen text-primary uppercase"><g:message code="com.billmate.payment.date" default="Payment date" /></th>
             <th class="text-right text-primary uppercase"><g:message code="com.billmate.expense.value" default="Value" /></th>
-            <th class="text-right text-primary uppercase"><g:message code="com.billmate.payment.paid" default="Paid" /></th>
+            <th class="text-right text-primary uppercase"></th>
         </tr>
         </thead>
         <tbody>
