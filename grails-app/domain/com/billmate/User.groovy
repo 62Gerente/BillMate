@@ -122,4 +122,18 @@ class User {
         }
         regularExpensesInReceptionTime
     }
+
+    public List<Action> latestEvents(){
+        Set<Action> latestEvents = new HashSet<>();
+
+        circles.each{ latestEvents.addAll( it.getActions() ) }
+        expenses.each{ latestEvents.addAll( it.getActions() ) }
+        regularExpenses.each{ latestEvents.addAll( it.getActions() ) }
+
+        if(registeredUser){
+            latestEvents.addAll( registeredUser.latestResponsibleEvents() )
+        }
+
+        latestEvents.sort{ it.getActionDate() }
+    }
 }

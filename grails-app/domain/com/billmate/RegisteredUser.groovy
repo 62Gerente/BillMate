@@ -181,4 +181,13 @@ class RegisteredUser {
     public Set<Expense> monthResponsibleExpensesOfExpenseType(Date date, ExpenseType expenseType){
         monthResponsibleExpenses(date).findAll{ it.getExpenseType().getId() == expenseType.getId() }
     }
+
+    public List<Action> latestResponsibleEvents(){
+        Set<Action> latestEvents = new HashSet<>();
+
+        responsibleExpenses.each{ latestEvents.addAll( it.getActions() ) }
+        responsibleRegularExpenses.each{ latestEvents.addAll( it.getActions() ) }
+
+        latestEvents.toList()
+    }
 }

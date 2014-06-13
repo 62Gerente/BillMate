@@ -36,4 +36,8 @@ class RegisteredUserDashboard {
     public List<ExpenseType> expenseTypesWithMoreSpendingInLastMonths(){
         getUser().expenseTypesWithMoreSpendingInLastMonths(4,5)
     }
+
+    public List<Action> latestEvents(){
+        getUser().latestEvents().take(5)
+    }
 }

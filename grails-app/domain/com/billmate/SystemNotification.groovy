@@ -53,6 +53,18 @@ class SystemNotification{
         action.getCircle()
     }
 
+    public RegularExpense getRegularExpense(){
+        action.getRegularExpense()
+    }
+
+    public Expense getExpense(){
+        action.getExpense()
+    }
+
+    public Expense getPayment(){
+        action.getPayment()
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {
