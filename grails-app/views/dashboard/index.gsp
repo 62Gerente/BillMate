@@ -13,6 +13,7 @@
     <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
         <g:render template="/shared/alert" model="[cssClass: 'col4-alert', display: 'none']"/>
         <g:render template="/regularExpense/widgets/upcoming" model="[regularExpenses: dashboard.regularExpensesInReceptionTime()]"/>
+        <g:render template="/action/widgets/latest" model="[latestEvents: dashboard.latestEvents()]"/>
         <g:render template="/expense/charts/monthlySpending" model="[user: dashboard.getUser(), expenseTypes: dashboard.expenseTypesWithMoreSpendingInLastMonths()]"/>
     </div>
 <asset:javascript src="bm-dashboard.js"/>

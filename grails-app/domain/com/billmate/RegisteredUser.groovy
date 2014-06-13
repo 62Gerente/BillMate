@@ -227,4 +227,13 @@ class RegisteredUser {
         }
         return true
     }
+
+    public List<Action> latestResponsibleEvents(){
+        Set<Action> latestEvents = new HashSet<>()
+
+        responsibleExpenses.each{ latestEvents.addAll( it.getActions() ) }
+        responsibleRegularExpenses.each{ latestEvents.addAll( it.getActions() ) }
+
+        latestEvents.toList()
+    }
 }

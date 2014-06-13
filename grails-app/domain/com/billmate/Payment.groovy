@@ -1,6 +1,7 @@
 package com.billmate
 
 class Payment {
+    static hasMany = [actions: Action]
     static belongsTo = [Expense, User]
 
     Expense expense
