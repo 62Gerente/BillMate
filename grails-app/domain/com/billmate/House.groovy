@@ -53,4 +53,41 @@ class House{
             }
         }
     }
+
+    public boolean createHouse(String expenseType, String friendsHouse){
+        String[] expenseSet = expenseType.split(",")
+        String[] friendsSet = friendsHouse.split(",")
+        for (String expense : expenseSet){
+            ExpenseType expenseTypeAux = (expense.isLong())? ExpenseType.findById(Long.parseLong(expense)):null
+            if(expenseTypeAux){
+                expenseTypeAux.addToCircles(getCircle())
+                expenseTypeAux.save()
+            }
+            else{
+                CustomExpenseType customExpenseType = new CustomExpenseType(name: expense, cssClass: 'fa fa-tag')
+                customExpenseType.addToCircles(getCircle())
+                customExpenseType.secureSave()
+            }
+        }
+        for(String friend : friendsSet){
+            RegisteredUser registeredUser = (friend.isLong())? RegisteredUser.findById(Long.parseLong(friend)):null
+            if(registeredUser){
+                registeredUser.addToCircles(getCircle())
+                registeredUser.secureSave()
+            }
+            else{
+                ReferredUser referredUser = ReferredUser.findByEmail(friend)
+                if(referredUser){
+                    referredUser.addToCircles(getCircle())
+                    referredUser.secureSave()
+                }
+                else{
+                    referredUser = new ReferredUser(name: 'ND', email: friend)
+                    referredUser.addToCircles(getCircle())
+                    referredUser.secureSave()
+                }
+            }
+        }
+        return true
+    }
 }
