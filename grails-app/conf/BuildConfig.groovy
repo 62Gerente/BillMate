@@ -83,5 +83,6 @@ grails.project.dependency.resolution = {
         compile ":file-uploader:1.2.1"
         compile ':locale-configuration:1.0'
         compile ":shiro:1.2.1"
+        compile ":pretty-time:2.1.3.Final-1.0.1"
     }
 }
