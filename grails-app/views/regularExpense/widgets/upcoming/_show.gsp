@@ -2,8 +2,8 @@
 
     <div class="grid simple no-border upcoming-regular-expense">
         <div class="grid-title no-border descriptive clickable">
-            <h4 class="semi-bold"><i class="${regularExpense.getExpenseType().getCssClass()} p-r-5"></i>${regularExpense}</h4>
-            <p>
+            <h4 class="semi-bold no-margin"><i class="${regularExpense.getExpenseType().getCssClass()} p-r-5"></i>${regularExpense}</h4>
+            <p class="">
                 <span class="muted"><g:message code="com.billmate.regularExpense.already_received" default="Have you already received the {0} bill?" args="${[regularExpense]}" /></span>
             </p>
             <div class="actions upcoming-regular-expense-expand"> <a class="view" href="javascript:;"><i class="fa fa-angle-down"></i></a>
