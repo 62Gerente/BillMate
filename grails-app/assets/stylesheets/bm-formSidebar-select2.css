@@ -1,0 +1,13 @@
+.select2-highlighted .select2-result-label{
+    color: #ffffff !important;
+}
+
+.select2-container .select2-choices .select2-search-choice a::before,
+.select2-container .select2-choices .select2-search-choice {
+    background-color: #428bca !important;
+    color: #ffffff;
+}
+
+.select2-search-choice i{
+    font-size: 12px;
+}

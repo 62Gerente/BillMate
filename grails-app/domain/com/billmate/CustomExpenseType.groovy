@@ -43,6 +43,10 @@ class CustomExpenseType{
         expenseType.setCssClass("fa fa-tag")
     }
 
+    public void addToCircles(Circle circle){
+        expenseType.addToCircles(circle)
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {

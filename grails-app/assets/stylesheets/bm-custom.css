@@ -40,3 +40,9 @@ a {
 .mark-read-notification:hover{
     color: #fff !important;
 }
+
+.btn-create-circle-sidebar{
+    background: none;
+    border: 0;
+    margin-top: -5px;
+}

@@ -17,22 +17,22 @@ var Switch2 = require('ios7-switch')
         e.preventDefault();
         mySwitch2.toggle();
       }, false);
-	  
+
 $(document).ready(function(){
 	  //Dropdown menu - select2 plug-in
 	  $("#source").select2();
-	  
+
 	  //Multiselect - Select2 plug-in
 	  $("#multi").val(["Jim","Lucy"]).select2();
-	  
+
 	  //Date Pickers
 	  $('.input-append.date').datepicker({
 				autoclose: true,
 				todayHighlight: true
 	   });
-	 
+
 	 $('#dp5').datepicker();
-	 
+
 	 $('#sandbox-advance').datepicker({
 			format: "dd/mm/yyyy",
 			startView: 1,
@@ -40,7 +40,7 @@ $(document).ready(function(){
 			autoclose: true,
 			todayHighlight: true
     });
-	
+
 	//Time pickers
 	$('.timepicker-default').timepicker();
     $('.timepicker-24').timepicker({
@@ -50,7 +50,7 @@ $(document).ready(function(){
      });
 	//Color pickers
 	$('.my-colorpicker-control').colorpicker()
-	
+
 	//Input mask - Input helper
 	$(function($){
 	   $("#date").mask("99/99/9999");
@@ -58,20 +58,20 @@ $(document).ready(function(){
 	   $("#tin").mask("99-9999999");
 	   $("#ssn").mask("999-99-9999");
 	});
-	
+
 	//Autonumeric plug-in - automatic addition of dollar signs,etc controlled by tag attributes
 	$('.auto').autoNumeric('init');
-	
+
 	//HTML5 editor
 	$('#text-editor').wysihtml5();
-	
+
 	//Drag n Drop up-loader
 	$("div#myId").dropzone({ url: "/file/post" });
-	
+
 	//Single instance of tag inputs  -  can be initiated with simply using data-role="tagsinput" attribute in any input field
 	$('#source-tags').tagsinput({
 		typeahead: {
 			source: ['Amsterdam', 'Washington', 'Sydney', 'Beijing', 'Cairo']
-		}	
+		}
 	});
 });

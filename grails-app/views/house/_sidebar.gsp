@@ -1,8 +1,9 @@
 <div class="side-bar-widgets">
     <p class="menu-title"><g:message code="com.billmate.sidebar.house" default="House"/>
         <span class="pull-right">
-            <a href="#" class="create-folder"> <i class="fa fa-plus"></i>
-            </a>
+            <button class="btn-create-circle-sidebar" data-toggle="modal" data-target="#houseCreateModal">
+                    <i class="fa fa-plus"></i>
+            </button>
         </span>
     </p>
     <g:if test="${houses.isEmpty()}">
