@@ -22,7 +22,7 @@ class SessionController extends BaseController {
                 session.user = registeredUser
                 flash.message = "com.billmate.session.save.success"
                 flash.m_default = "Signed in successfully."
-                return redirect(controller: 'dashboard', action: 'index')
+                return redirect(controller: 'dashboard', action: 'user')
             }
         }
 

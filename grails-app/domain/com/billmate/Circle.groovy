@@ -46,4 +46,8 @@ class Circle {
             return  house.getCssClass()
         }
     }
+
+    public Set<RegularExpense> regularExpensesInReceptionTime(){
+        regularExpenses.findAll{ it.inReceptionTime() }
+    }
 }
