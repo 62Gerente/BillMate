@@ -146,19 +146,19 @@ class BootStrap {
         }
 
         if(Action.count() == 0){
-            def addUserCircle = new Action(actionType: ActionType.findWhere(type: 'add_user_circle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), user: User.findWhere(email: 'pmcleite@gmail.com'), circle: House.first().getCircle())
+            def addUserCircle = new Action(actionType: ActionType.findWhere(type: 'add_user_circle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), user: User.findWhere(email: 'andreccdr@gmail.com'), circle: House.first().getCircle())
             addUserCircle.save()
 
-            def addExpenseCircle = new Action(actionType: ActionType.findWhere(type: 'add_expense_circle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), user: User.findWhere(email: 'pmcleite@gmail.com'), circle: House.first().getCircle())
+            def addExpenseCircle = new Action(actionType: ActionType.findWhere(type: 'add_expense_circle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')), circle: House.first().getCircle(), expense: Expense.findWhere(title: 'Maid'))
             addExpenseCircle.save()
 
-            def addRegularExpenseCircle = new Action(actionType: ActionType.findWhere(type: 'add_regular_expense_circle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), user: User.findWhere(email: 'pmcleite@gmail.com'), circle: House.first().getCircle())
+            def addRegularExpenseCircle = new Action(actionType: ActionType.findWhere(type: 'add_regular_expense_circle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), circle: House.first().getCircle(), regularExpense: RegularExpense.findWhere(title: 'Electricity'))
             addRegularExpenseCircle.save()
 
-            def addPaymentExpense = new Action(actionType: ActionType.findWhere(type: 'add_payment_expense'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), user: User.findWhere(email: 'pmcleite@gmail.com'), circle: House.first().getCircle())
+            def addPaymentExpense = new Action(actionType: ActionType.findWhere(type: 'add_payment_expense'), actor: RegisteredUser.findWhere(user: User.findWhere(email: '28.ricardobranco@gmail.com')), payment: Payment.first(), circle: House.first().getCircle(), expense: Expense.findWhere(title: 'Maid'))
             addPaymentExpense.save()
 
-            def addCircle = new Action(actionType: ActionType.findWhere(type: 'add_circle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), user: User.findWhere(email: 'pmcleite@gmail.com'), circle: House.first().getCircle())
+            def addCircle = new Action(actionType: ActionType.findWhere(type: 'add_circle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), circle: Collective.first().getCircle())
             addCircle.save()
         }
 
