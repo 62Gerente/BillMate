@@ -12,10 +12,11 @@
                 <div class="user-more">
                     <g:message code="com.billmate.action.${notification.getActionType().getType()}.long" args="${[
                             notification.getActor(),
-                            notification.getCircle(),
                             notification.getUser(),
+                            notification.getCircle(),
                             notification.getExpense(),
-                            notification.getRegularExpense()
+                            notification.getRegularExpense(),
+                            notification.getPayment()
                     ]}"/>
                 </div>
             </div>

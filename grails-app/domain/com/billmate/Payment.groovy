@@ -1,5 +1,9 @@
 package com.billmate
 
+import org.springframework.format.number.CurrencyFormatter
+
+import java.text.NumberFormat
+
 class Payment {
     static hasMany = [actions: Action]
     static belongsTo = [Expense, User]
@@ -22,5 +26,11 @@ class Payment {
         validationDate nullable: true
         isValidated defaultValue: false, nullable: true
         createdAt nullable: false
+    }
+
+    public String toString(){
+        NumberFormat formater = NumberFormat.currencyInstance
+        formater.setCurrency(Currency.getInstance("EUR"))
+        formater.format(value)
     }
 }
