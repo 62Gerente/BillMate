@@ -14,6 +14,6 @@
                     action.getPayment()
             ]}"/>
         </div>
-        <div class="date"><g:formatDate date="${action.getActionDate()}" type="datetime" style="SMALL"/></div>
+        <div class="date"><prettytime:display date="${action.getActionDate()}" /></div>
     </div>
 </div>
