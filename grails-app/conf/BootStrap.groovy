@@ -1,5 +1,6 @@
 import com.billmate.Action
 import com.billmate.ActionType
+import com.billmate.CircleType
 import com.billmate.Collective
 import com.billmate.CustomExpenseType
 import com.billmate.DefaultExpenseType
@@ -73,6 +74,19 @@ class BootStrap {
         if(Expense.count == 0){
             def friday_dinner = new Expense(title: 'Friday Dinner', value: 25.25, expenseType: ExpenseType.findWhere(name: 'Meal'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
             friday_dinner.save()
+
+        if(CircleType.count() == 0){
+            def circleType = new CircleType(name: 'house')
+            circleType.save()
+            def defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Shopping'))
+            defaultExpenseType.addToCircleTypes(circleType).secureSave()
+            defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Meal'))
+            defaultExpenseType.addToCircleTypes(circleType).secureSave()
+        }
+
+        if(OccasionalExpense.count == 0){
+            def friday_dinner = new OccasionalExpense(title: 'Friday Dinner', value: 25.25, expenseType: ExpenseType.findWhere(name: 'Meal'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
+            friday_dinner.secureSave()
 
             friday_dinner.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
             friday_dinner.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))

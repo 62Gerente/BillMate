@@ -93,6 +93,11 @@ class RegisteredUser {
         }
     }
 
+    public String getPathToDefaultPhoto(){
+        def linkGenerator = this.domainClass.grailsApplication.mainContext.grailsLinkGenerator
+        return linkGenerator.resource(dir: 'images',file: 'default-user.png', absolute: true)
+    }
+
     public Set<Circle> getCircles(Map map){
         Set<Circle> result = user.getCircles()
 
@@ -227,5 +232,21 @@ class RegisteredUser {
         responsibleRegularExpenses.each{ latestEvents.addAll( it.getActions() ) }
 
         latestEvents.toList()
+    }
+    
+    public RegisteredUser[] getFriendsOfAllCircles(Long id_user){
+        Set<User> list = new HashSet<User>()
+        Set<RegisteredUser> listRegisteredUsers = new HashSet<RegisteredUser>()
+        list.addAll(getHouses().last().getUsers())
+        for(User user : list){
+            RegisteredUser registeredUser = RegisteredUser.findByUser(user);
+            if(registeredUser && registeredUser.getId() != id_user) listRegisteredUsers.add(registeredUser);
+        }
+        return listRegisteredUsers.toArray()
+    }
+
+    public Set<DefaultExpenseType> getExpensesByHouse(){
+        CircleType circleType = new CircleType()
+        circleType.getExpensesByHouse()
     }
 }

@@ -1,13 +1,21 @@
 package com.billmate
 
 class CircleType {
-    static hasMany = [expenseTypes: ExpenseType]
+    static hasMany = [expenseTypes: ExpenseType, defaultExpenseType: DefaultExpenseType]
 
-    Integer identifier
     String name
 
     static constraints = {
-        identifier nullable: false
         name nullable: false
+    }
+
+    public Set<DefaultExpenseType> getExpensesByHouse(String type){
+        getExpensesByCircle('house')
+    }
+
+    public Set<DefaultExpenseType> getExpensesByCircle(String type){
+        Set<DefaultExpenseType> defaultExpenseTypeList = new HashSet<DefaultExpenseType>()
+        CircleType.findAllByName(type).each { defaultExpenseTypeList.addAll(it.getDefaultExpenseType()) }
+        return defaultExpenseTypeList
     }
 }

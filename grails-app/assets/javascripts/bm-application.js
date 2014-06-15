@@ -13,6 +13,7 @@
 //= require ../plugins/jquery-slider/jquery.sidr.min.js
 //= require ../plugins/jquery-slimscroll/jquery.slimscroll.min.js
 //= require ../plugins/jquery-validation/js/jquery.validate.min.js
+//= require ../plugins/blockUI/jquery.blockUI.js
 
 //= require bm-ajax-notifications.js
 //= require form_elements.js
