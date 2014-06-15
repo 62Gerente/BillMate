@@ -1,3 +1,4 @@
+import com.billmate.CircleType
 import com.billmate.Collective
 import com.billmate.CustomExpenseType
 import com.billmate.DefaultExpenseType
@@ -54,6 +55,16 @@ class BootStrap {
 
             def fieldRentalType = new CustomExpenseType(name: 'Field Rental')
             fieldRentalType.secureSave()
+        }
+
+        if(CircleType.count() == 0){
+            //def circleType = new CircleType(identifier: 'house', name: 'Shopping')
+            //def defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Shopping'))
+            //circleType.save()
+
+            //circleType = new CircleType(identifier: 'house', name: 'Meal')
+            //defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Meal'))
+            //circleType.save()
         }
 
         if(OccasionalExpense.count == 0){
