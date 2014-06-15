@@ -22,4 +22,10 @@ class RegisteredUserController extends RestrictedController {
 
         render response as JSON
     }
+
+    def edit(Long id) {
+        def registeredUser = RegisteredUser.findById(id)
+
+        return [user: authenticatedUser(), registeredUser: registeredUser]
+    }
 }

@@ -1,0 +1,20 @@
+.user-profile-pic{
+    margin-top: 0px
+}
+
+.user-description-box{
+    background-color: #fff;
+    padding: 10px 20px;
+}
+
+.text-dark-grey{
+    color: #505458 !important;
+}
+
+.user-description-box p{
+    margin-bottom: 5px;
+}
+
+.profile-circle-name{
+    vertical-align: super;
+}
