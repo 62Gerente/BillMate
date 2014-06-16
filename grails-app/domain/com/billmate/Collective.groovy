@@ -57,4 +57,8 @@ class Collective {
     public String getCssClass(){
         "fa fa-circle-o"
     }
+
+    public String getCssColor(){
+        "blue"
+    }
 }

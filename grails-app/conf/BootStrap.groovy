@@ -24,7 +24,7 @@ class BootStrap {
         }
 
         if(House.count() == 0){
-            def house = new House(name: 'BillMate House')
+            def house = new House(name: 'BillMate House', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, incidunt, provident, aut, numquam aspernatur ullam inventore perferendis amet quia animi dignissimos laborum nostrum voluptatibus natus deleniti voluptas veritatis perspiciatis quas?')
             house.secureSave()
 
             User.findWhere(email: 'bill@mate.com').addToCircles(house.circle)

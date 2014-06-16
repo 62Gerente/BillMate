@@ -50,4 +50,12 @@ class Circle {
     public Set<RegularExpense> regularExpensesInReceptionTime(){
         regularExpenses.findAll{ it.inReceptionTime() }
     }
+
+    public String getCssColor(){
+        if(collective){
+            return collective.getCssColor()
+        }else if(house){
+            return  house.getCssColor()
+        }
+    }
 }

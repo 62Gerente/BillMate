@@ -3,24 +3,24 @@
         <div class="row">
             <div class="col-md-3 col-sm-3">
                 <div class="user-profile-pic">
-                    <img width="69" height="69" data-src-retina="assets/img/profiles/avatar2x.jpg" data-src="assets/img/profiles/avatar.jpg" src="assets/img/profiles/avatar2x.jpg" alt="">
+                    <img width="69" height="69" src="${user.getPhotoOrDefault()}" alt="">
                 </div>
                 <div class="user-mini-description">
-                    <h3 class="text-success semi-bold">
-                        2,548 €
-                    </h3>
-                    <h5>Dívidas</h5>
                     <h3 class="text-danger semi-bold">
-                        4,57 €
+                        <g:formatNumber number="${user.getUser().totalDebt()}" type="currency" currencyCode="EUR" />
                     </h3>
-                    <h5>Ativos</h5>
+                    <h5><g:message code="com.billmate.expense.debts" default="Debts" /></h5>
+                    <h3 class="text-success semi-bold">
+                        <g:formatNumber number="${user.totalAsset()}" type="currency" currencyCode="EUR" />
+                    </h3>
+                    <h5><g:message code="com.billmate.expense.assets" default="Assets" /></h5>
                 </div>
             </div>
             <div class="col-md-8 user-description-box col-sm-8">
-                <h3 class="semi-bold no-margin">John Smith</h3>
+                <h3 class="semi-bold no-margin">${user.getName()}</h3>
                 <br>
-                <p><i class="fa fa-envelope"></i>andreccdr@gmail.com</p>
-                <p><i class="fa fa-phone"></i>919200815</p>
+                <p><i class="fa fa-envelope"></i>${user.getEmail()}</p>
+                <p><i class="fa fa-phone"></i><g:if test="${user.getPhoneNumber()}">${user.getPhoneNumber()}</g:if><g:else><small>Click to define your phone number</small></g:else></p>
                 <p><i class="fa fa-key"></i><small>Click to change password</small></p>
             </div>
         </div>

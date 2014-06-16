@@ -57,4 +57,8 @@ class House{
     public String getCssClass(){
         "fa fa-home"
     }
+
+    public String getCssColor(){
+        "green"
+    }
 }
