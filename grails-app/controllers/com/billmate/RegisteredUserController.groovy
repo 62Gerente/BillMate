@@ -26,6 +26,6 @@ class RegisteredUserController extends RestrictedController {
     def edit(Long id) {
         def registeredUser = RegisteredUser.findById(id)
 
-        return [user: authenticatedUser(), registeredUser: registeredUser]
+        return [user: authenticatedUser(), circles: authenticatedUser().getCircles()]
     }
 }

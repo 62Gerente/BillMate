@@ -104,7 +104,7 @@ class RegisteredUser {
     public Set<Circle> getCircles(Map map){
         Set<Circle> result = user.getCircles()
 
-        if(map.containsKey('type')){
+        if(map && map.containsKey('type')){
             result = result.findAll{ it.isType(map.get('type')) }
         }
 

@@ -46,4 +46,12 @@ class Circle {
             return  house.getCssClass()
         }
     }
+
+    public String getCssColor(){
+        if(collective){
+            return collective.getCssColor()
+        }else if(house){
+            return  house.getCssColor()
+        }
+    }
 }
