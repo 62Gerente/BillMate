@@ -15,8 +15,8 @@ class User {
         referredUser nullable: true
         registeredUser nullable: true
 
-        name nullable: false
-        email email: true, unique: true, nullable: false
+        name nullable: false, blank: false
+        email email: true, unique: true, nullable: false, blank: false
         createdAt nullable: false
     }
 

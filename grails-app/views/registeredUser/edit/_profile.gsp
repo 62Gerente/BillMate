@@ -17,11 +17,27 @@
                 </div>
             </div>
             <div class="col-md-8 user-description-box col-sm-8">
-                <h3 class="semi-bold no-margin">${user.getName()}</h3>
+                <h3 class="semi-bold no-margin">
+                    <a href="#" id="edit_name" data-emptytext="Click to define your name" data-name="name" data-type="text" data-pk="${user.getUser().getId()}" data-url="${createLink(controller: 'user', action: 'updateProperty', id: user.getUser().getId())}">
+                        ${user.getName()}
+                    </a>
+                </h3>
                 <br>
-                <p><i class="fa fa-envelope"></i>${user.getEmail()}</p>
-                <p><i class="fa fa-phone"></i><g:if test="${user.getPhoneNumber()}">${user.getPhoneNumber()}</g:if><g:else><small>Click to define your phone number</small></g:else></p>
-                <p><i class="fa fa-key"></i><small>Click to change password</small></p>
+                <p>
+                    <i class="fa fa-envelope"></i>
+                    <a href="#" id="edit_email" data-emptytext="Click to define your email" data-name="email" data-type="text" data-pk="${user.getUser().getId()}" data-url="${createLink(controller: 'user', action: 'updateProperty', id: user.getUser().getId())}">
+                        ${user.getEmail()}
+                    </a>
+                </p>
+                <p>
+                    <i class="fa fa-phone"></i>
+                    <a href="#" id="edit_phone_number" data-emptytext="Click to define your phone number" data-name="phoneNumber" data-type="text" data-pk="${user.getId()}" data-url="${createLink(controller: 'registeredUser', action: 'updateProperty', id: user.getId())}">
+                        ${user.getPhoneNumber()}
+                    </a>
+                </p>
+                <p>
+                    <i class="fa fa-key"></i>
+                    <a href="#" id="edit_password" data-emptytext="Click to change your password" data-name="password" data-type="password" data-pk="${user.getId()}" data-url="${createLink(controller: 'registeredUser', action: 'updateProperty', id: user.getId())}"></a>
             </div>
         </div>
     </div>

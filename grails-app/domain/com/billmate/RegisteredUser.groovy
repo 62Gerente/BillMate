@@ -20,7 +20,7 @@ class RegisteredUser {
         photo nullable: true
 
         phoneNumber matches: '\\d{9}', unique: true, nullable: true
-        password password: true, nullable: false
+        password password: true, nullable: false, blank: false, minSize: 5
     }
 
     public RegisteredUser() {
@@ -40,14 +40,6 @@ class RegisteredUser {
     def beforeUpdate() {
         if (isDirty('password')) {
             encodePassword()
-        }
-    }
-
-    def beforeValidate() {
-        user.validate()
-        user.errors.getAllErrors().each {
-            ObjectError objectError = (ObjectError) it
-            this.errors.reject(objectError.getCode(), objectError.toString())
         }
     }
 

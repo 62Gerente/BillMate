@@ -35,7 +35,7 @@ class BootStrap {
         }
 
         if(Collective.count() == 0){
-            def collective = new Collective(name: 'CeSIUM Soccer Games')
+            def collective = new Collective(name: 'CeSIUM Soccer Games', description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, incidunt, provident, aut, numquam aspernatur ullam inventore perferendis amet quia animi dignissimos laborum nostrum voluptatibus natus deleniti voluptas veritatis perspiciatis quas?')
             collective.secureSave()
 
             User.findWhere(email: 'bill@mate.com').addToCircles(collective.circle)
