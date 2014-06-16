@@ -5,6 +5,7 @@
 
     <asset:stylesheet href="bm-profile.css"/>
     <asset:stylesheet href="../plugins/ios-switch/ios7-switch.css"/>
+    <asset:stylesheet href="../plugins/bootstrap-editable/bootstrap-editable.css"/>
 </head>
 
 <body>
@@ -16,6 +17,9 @@
     <div class="col-md-5">
         <g:render template="/registeredUser/edit/notifications" />
     </div>
+
+<asset:javascript src="../plugins/bootstrap-editable/bootstrap-editable.min.js"/>
+<asset:javascript src="bm-profile.js"/>
 </div>
 </body>
 </html>
