@@ -42,6 +42,10 @@ class DefaultExpenseType{
         expenseType.setCssClass(cssClass)
     }
 
+    public String getName(){
+        expenseType.getName()
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {

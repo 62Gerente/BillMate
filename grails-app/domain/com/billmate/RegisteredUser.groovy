@@ -157,4 +157,9 @@ class RegisteredUser {
         }
         return listRegisteredUsers.toArray()
     }
+
+    public Set<DefaultExpenseType> getExpensesByHouse(){
+        CircleType circleType = new CircleType()
+        circleType.getExpensesByHouse()
+    }
 }

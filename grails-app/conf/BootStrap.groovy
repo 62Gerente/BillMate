@@ -58,13 +58,12 @@ class BootStrap {
         }
 
         if(CircleType.count() == 0){
-            //def circleType = new CircleType(identifier: 'house', name: 'Shopping')
-            //def defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Shopping'))
-            //circleType.save()
-
-            //circleType = new CircleType(identifier: 'house', name: 'Meal')
-            //defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Meal'))
-            //circleType.save()
+            def circleType = new CircleType(name: 'house')
+            circleType.save()
+            def defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Shopping'))
+            defaultExpenseType.addToCircleTypes(circleType).secureSave()
+            defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Meal'))
+            defaultExpenseType.addToCircleTypes(circleType).secureSave()
         }
 
         if(OccasionalExpense.count == 0){
