@@ -3,7 +3,19 @@
         <div class="row">
             <div class="col-md-3 col-sm-3">
                 <div class="user-profile-pic">
-                    <img width="69" height="69" src="${user.getPhotoOrDefault()}" alt="">
+                    <a href="#" class="profile-photo-img" id="profile-photo-link" class="profile-photo-link">
+                        <img id="profile-photo-img" class="profile-photo-img" width="69" height="69" src="${user.getPhotoOrDefault()}" alt="">
+                    </a>
+                    <div id="profile-photo-error" class="profile-photo-error text-danger" style="display: none"></div>
+                    <form enctype="multipart/form-data" action="${createLink(controller: "fileUploader", action: "process", id: user.getId())}" id="updatePhotoForm">
+                            <input type="hidden" name="upload" value="avatar">
+                            <input type="hidden" name="errorAction" value="errorUploadPhoto">
+                            <input type="hidden" name="errorController" value="registeredUser">
+                            <input type="hidden" name="successAction" value="successUploadPhoto">
+                            <input type="hidden" name="successController" value="registeredUser">
+                            <input type="file" name="file" id="edit_photo">
+                        </form>
+                    </form>
                 </div>
                 <div class="user-mini-description">
                     <h3 class="text-danger semi-bold">
@@ -35,9 +47,16 @@
                         ${user.getPhoneNumber()}
                     </a>
                 </p>
+                %{--<p>--}%
+                    %{--<i class="fa fa-camera-retro"></i>--}%
+                    %{--<a href="#" id="edit_photo" class="bm-editable">--}%
+                        %{--<small>Click to change your photo</small>--}%
+                    %{--</a>--}%
+                %{--</p>--}%
                 <p>
                     <i class="fa fa-key"></i>
                     <a href="#" id="edit_password" data-emptytext="Click to change your password" data-name="password" data-type="password" data-pk="${user.getId()}" data-url="${createLink(controller: 'registeredUser', action: 'updateProperty', id: user.getId())}"></a>
+                </p>
             </div>
         </div>
     </div>

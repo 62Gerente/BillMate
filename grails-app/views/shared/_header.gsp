@@ -65,7 +65,7 @@
                         </div>
                     </div>
                     <div class="profile-pic">
-                        <img src="${user.getPhotoOrDefault()}" width="35" height="35">
+                        <img class="profile-photo-img" src="${user.getPhotoOrDefault()}" width="35" height="35">
                     </div>
                 </div>
                 <ul class="nav quick-section ">

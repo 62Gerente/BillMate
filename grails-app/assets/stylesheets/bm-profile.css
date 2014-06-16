@@ -35,5 +35,13 @@
 .editable-empty, .editable-empty:hover, .editable-empty:focus {
     font-style: italic;
     font-size: 10px;
-    color: #8b91a0 !important;
+    color: #0d638f !important;
+}
+
+#edit_photo{
+    display: none;
+}
+
+.profile-photo-error{
+    font-size: 12px;
 }
