@@ -1,5 +1,6 @@
 package com.billmate
 
+import com.lucastex.grails.fileuploader.UFile
 import grails.converters.JSON
 
 class RegisteredUserController extends RestrictedController {
@@ -39,6 +40,38 @@ class RegisteredUserController extends RestrictedController {
         def response = [
                 'error'  : false,
                 'message': message(code: "com.billmate.registeredUser.updateProperty.success")
+        ]
+
+        if(!registeredUser.save()) {
+            response.error = true
+            response.message = message(error: registeredUser.getErrors().getAllErrors().first());
+        }
+
+        render response as JSON
+    }
+
+    def errorUploadPhoto() {
+        def registeredUser = RegisteredUser.findById(params.id)
+        def error = flash.message
+
+        def response = [
+                'error'  : true,
+                'message': error
+        ]
+
+        render response as JSON
+    }
+
+    def successUploadPhoto() {
+        def registeredUser = RegisteredUser.findById(params.id)
+        def ufile = UFile.findById(params.ufileId)
+
+        registeredUser.setPhoto(ufile)
+
+        def response = [
+                'error'  : false,
+                'message': message(code: "com.billmate.registeredUser.updatePhoto.success"),
+                'photo_url': createLink(controller: "fileUploader", action: "show", id: ufile.getId())
         ]
 
         if(!registeredUser.save()) {
