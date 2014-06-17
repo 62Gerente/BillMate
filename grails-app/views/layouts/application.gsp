@@ -16,7 +16,7 @@
     <g:render template="/shared/header" model="[user: user]"/>
 
     <div class="page-container row-fluid">
-      <g:render template="/house/modal/index" model="[users: user.getFriendsOfAllCircles(user.getId()), expenseTypes: user.getExpensesByHouse(), path: user.getPathToDefaultPhoto()]"/>
+      <g:render template="/house/modal/index" model="[users: user.getFriendsOfAllCircles(user.getId()), expenseTypes: user.getExpenseTypeByHouse(), path: user.getPathToDefaultPhoto()]"/>
       <g:render template="/shared/sidebar" model="[user: user]"/>
       <div class="page-content">
         <div class="clearfix"></div>

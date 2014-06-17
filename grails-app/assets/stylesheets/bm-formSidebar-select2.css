@@ -11,3 +11,11 @@
 .select2-search-choice i{
     font-size: 12px;
 }
+
+.add-more-friends input.error{
+    border: solid 1px red;
+}
+
+.add-more-friends input.success{
+    border: none;
+}

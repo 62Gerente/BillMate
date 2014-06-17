@@ -147,19 +147,20 @@ class RegisteredUser {
         users
     }
 
-    public RegisteredUser[] getFriendsOfAllCircles(Long id_user){
+    public User[] getFriendsOfAllCircles(Long id_user){
         Set<User> list = new HashSet<User>()
-        Set<RegisteredUser> listRegisteredUsers = new HashSet<RegisteredUser>()
-        list.addAll(getHouses().last().getUsers())
+        Set<User> listUsers = new HashSet<RegisteredUser>()
+        list.addAll(User.findAll())
         for(User user : list){
-            RegisteredUser registeredUser = RegisteredUser.findByUser(user);
-            if(registeredUser && registeredUser.getId() != id_user) listRegisteredUsers.add(registeredUser);
+            Long idd = user.getRegisteredUserId()
+            if(user.getRegisteredUserId() != id_user && user.getReferredUserId() != id_user)
+                listUsers.add(user)
         }
-        return listRegisteredUsers.toArray()
+        return listUsers.toArray()
     }
 
-    public Set<DefaultExpenseType> getExpensesByHouse(){
+    public Set<ExpenseType> getExpenseTypeByHouse(){
         CircleType circleType = new CircleType()
-        circleType.getExpensesByHouse()
+        circleType.getExpenseTypeByHouse()
     }
 }
