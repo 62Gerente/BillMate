@@ -11,8 +11,8 @@
 <body>
 <div class="row">
     <div class="col-md-7">
-        <g:render template="/registeredUser/edit/profile" model="[user: user]"/>
-        <g:render template="/circle/profile" model="[circles: circles]"/>
+        <g:render template="/registeredUser/edit/profile" model="[user: registeredUser]"/>
+        <g:render template="/circle/profile" model="[circles: circles, registeredUser: registeredUser]"/>
     </div>
     <div class="col-md-5">
         <g:render template="/registeredUser/edit/notifications" />

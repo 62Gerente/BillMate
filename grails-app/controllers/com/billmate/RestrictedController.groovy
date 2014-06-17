@@ -14,6 +14,12 @@ abstract class RestrictedController extends BaseController {
         }
     }
 
+    private withoutPermitions(){
+        flash.error = "com.billmate.session.permissions"
+        flash.e_default = "​You don't have permissions to access this page."
+        return redirect(controller: 'session', action: 'create')
+    }
+
     private authenticatedUser(){
         RegisteredUser sessionUser = session.user
         return RegisteredUser.findWhere(id: sessionUser.getId())

@@ -50,7 +50,7 @@
                     <div id="notification-list" style="display:none">
                         <div>
                             <div class="single-notification-messages">
-                                <a href="#"><i class="fa fa-user p-r-15"></i>
+                                <a href="${createLink(controller: "registeredUser", action: "edit", id: user.getId())}"><i class="fa fa-user p-r-15"></i>
                                     <g:message code="com.billmate.user.profile" default="Profile"/>
                                 </a>
                             </div>
