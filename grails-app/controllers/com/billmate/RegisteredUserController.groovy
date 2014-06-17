@@ -27,9 +27,14 @@ class RegisteredUserController extends RestrictedController {
     }
 
     def edit(Long id) {
-        def registeredUser = RegisteredUser.findById(id)
+        if(id != authenticatedUser().getId()) {
+            return withoutPermitions()
+        }
 
-        return [user: authenticatedUser(), circles: authenticatedUser().getCircles()]
+        def registeredUser = RegisteredUser.findById(id)
+        def circles = registeredUser.getCircles()
+
+        return [user: authenticatedUser(), registeredUser: registeredUser, circles: circles]
     }
 
     def updateProperty(Long id) {

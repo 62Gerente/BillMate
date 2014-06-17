@@ -1,4 +1,4 @@
-<div class="tiles white m-b-20 m-t-15 p-b-10">
+<div class="tiles white m-b-20 p-b-10">
     <div class="tiles-body no-padding">
         <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
             <h4 class="text-black bold inline uppercase">

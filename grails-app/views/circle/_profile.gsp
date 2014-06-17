@@ -1,1 +1,1 @@
-<g:render template="/circle/profile/index" model="[circles: circles]"/>
+<g:render template="/circle/profile/index" model="[circles: circles, registeredUser: registeredUser]"/>

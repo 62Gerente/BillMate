@@ -6,7 +6,7 @@
                     <h4 class="text-black bold inline uppercase">
                         <g:message code="com.billmate.payment.widget.confirm.title" default="Payments waiting confirmation" />
                     </h4>
-                    <div class="pull-right" id="home-button-primary-confirm">
+                    <div class="pull-right home-button-primary-confirm">
                         <h4>
                             <div class="btn-group" style="display: inline">
                                 <a href="${createLink(controller: 'payment', action: 'confirm')}" class="btn btn-small btn-info submit-confirm-all-payments"><g:message code="com.billmate.payment.confirmAll" default="Confirm all" /></a>
@@ -25,13 +25,13 @@
                 <div class="m-b-10 home-button-divida-secondary-confirm">
                     <div class="btn-group text-center m-t-15" style="width: 100%">
                         <div>
-                            <button class="btn btn-small btn-info" style="width: 85%"><g:message code="com.billmate.payment.confirmAll" default="Confirm all" /></button>
+                            <a href="${createLink(controller: 'payment', action: 'confirm')}" style="width: 85%" class="btn btn-small btn-info submit-confirm-all-payments"><g:message code="com.billmate.payment.confirmAll" default="Confirm all" /></a>
                             <button type="button" class="btn btn-small btn-info dropdown-toggle" data-toggle="dropdown"> <span class="caret no-margin"></span></button>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><g:message code="com.billmate.payment.confirmSelected" default="Confirm selected" /></a></li>
+                                <li><a class="submit-confirm-selected-payments" href="${createLink(controller: 'payment', action: 'confirm')}"><g:message code="com.billmate.payment.confirmSelected" default="Confirm selected" /></a></li>
                                 <li class="divider"></li>
-                                <li><a href="#"><g:message code="com.billmate.payment.cancelSelected" default="Cancel selected" /></a></li>
-                                <li><a href="#"><g:message code="com.billmate.payment.cancelAll" default="Cancel all" /></a></li>
+                                <li><a class="submit-cancel-selected-payments" href="${createLink(controller: 'payment', action: 'cancel')}"><g:message code="com.billmate.payment.cancelSelected" default="Cancel selected" /></a></li>
+                                <li><a class="submit-cancel-all-payments" href="${createLink(controller: 'payment', action: 'cancel')}"><g:message code="com.billmate.payment.cancelAll" default="Cancel all" /></a></li>
                             </ul>
                         </div>
                     </div>

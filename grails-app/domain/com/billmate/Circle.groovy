@@ -58,4 +58,8 @@ class Circle {
             return  house.getCssColor()
         }
     }
+
+    public Set<User> getUsersWithout(Long userId){
+        users.findAll { it.getId() != userId }
+    }
 }

@@ -2,11 +2,13 @@
     <div class="page-sidebar-wrapper" id="main-menu-wrapper">
         <div class="user-info-wrapper">
             <div class="profile-wrapper">
-                <img class="profile-photo-img" src="${user.getPhotoOrDefault()}">
+                <a href="${createLink(controller: "registeredUser", action: "edit", id: user.getId())}">
+                    <img class="profile-photo-img" src="${user.getPhotoOrDefault()}">
+                </a>
             </div>
             <div class="user-info" style="margin-top: 12px">
                 <div class="greeting"><g:message code="com.billmate.user.welcome" default="Welcome"/></div>
-                <div class="username">${user}</div>
+                <a href="${createLink(controller: "registeredUser", action: "edit", id: user.getId())}"><div class="username">${user}</div></a>
             </div>
         </div>
         <p class="menu-title"></p>

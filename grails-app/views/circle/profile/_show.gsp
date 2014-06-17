@@ -7,7 +7,7 @@
                     ${circle.getName()}
                 </h4>
                 <p>${circle.getDescription()}</p>
-                <g:render template="/user/members" model="[members: circle.getUsers()]"/>
+                <g:render template="/user/members" model="[members: circle.getUsersWithout(registeredUser.getUser().getId())]"/>
             </div>
         </div>
     </div>

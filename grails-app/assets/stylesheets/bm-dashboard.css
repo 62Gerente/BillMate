@@ -36,6 +36,7 @@
 .grid .grid-title .semi-bold{
     width:90%;
     white-space: normal;
+    line-height: 1.5;
 }
 
 .grid .grid-title.descriptive p .muted{
