@@ -9,6 +9,16 @@ $(document).ready(function() {
     $('#edit_email').editable();
     $('#edit_phone_number').editable();
     $('#edit_password').editable();
+
+    $(".profile-edit-btn").live("click", function (e) {
+        var inputTargetID = $(this).data("input");
+        var inputTarget = $("#" + inputTargetID);
+
+        inputTarget.trigger("click");
+
+        $(this).hide();
+        return false;
+    });
 });
 
 $("#profile-photo-link").on('click', function(){
