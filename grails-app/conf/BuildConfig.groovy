@@ -84,6 +84,7 @@ grails.project.dependency.resolution = {
         compile ':locale-configuration:1.0'
         compile ":shiro:1.2.1"
         compile ":pretty-time:2.1.3.Final-1.0.1"
+        compile ":burning-image:0.5.1"
 
         // Email plugin
         compile ":mail:1.0.5"

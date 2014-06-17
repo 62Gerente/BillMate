@@ -2,11 +2,13 @@ package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
 import grails.converters.JSON
+import pl.burningice.plugins.image.BurningImageService
 
 class RegisteredUserController extends RestrictedController {
     static allowedMethods = [markNotificationsAsRead: "PUT", edit: "GET"]
 
     def beforeInterceptor = [action: this.&checkSession]
+    def burningImageService
 
     def markNotificationsAsRead(Long id) {
         def success = RegisteredUser.findById(id).markNotificationsAsRead()
@@ -66,6 +68,7 @@ class RegisteredUserController extends RestrictedController {
         def registeredUser = RegisteredUser.findById(params.id)
         def ufile = UFile.findById(params.ufileId)
 
+        squarePhoto(ufile)
         registeredUser.setPhoto(ufile)
 
         def response = [
@@ -80,5 +83,17 @@ class RegisteredUserController extends RestrictedController {
         }
 
         render response as JSON
+    }
+
+    def squarePhoto(UFile uFile) {
+        def path = uFile.getPath()
+
+        burningImageService.doWith(path, path.substring(0, path.lastIndexOf("/"))).execute{
+            it.scaleAccurate(150, 150)
+        }
+
+        def newFile = new File(path)
+        uFile.setSize(newFile.size())
+        uFile.save()
     }
 }

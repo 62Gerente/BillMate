@@ -15,7 +15,7 @@
                 </div>
                 <br>
                 <div class="row-fluid">
-                    <div class="checkbox check-default">
+                    <div class="checkbox check-primary">
                         <input id="email_add_circle" type="checkbox" value="1">
                         <label for="email_add_circle">Adicionado a um círculo.</label>
                     </div>
@@ -33,37 +33,37 @@
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="checkbox check-info">
+                    <div class="checkbox check-primary">
                         <input id="email_new_payment" type="checkbox" value="1">
                         <label for="email_new_payment">Novo pagamento numa despesa em que és responsável.</label>
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="checkbox check-info">
+                    <div class="checkbox check-primary">
                         <input id="email_upcoming_limit_date" type="checkbox" value="1">
                         <label for="email_upcoming_limit_date">Aproximação de uma data limite de pagamento.</label>
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="checkbox check-warning">
+                    <div class="checkbox check-primary">
                         <input id="email_upcoming_expense" type="checkbox" value="1" checked="checked">
                         <label for="email_upcoming_expense">Aproximação da data de receção de uma despesa agendada.</label>
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="checkbox check-warning">
+                    <div class="checkbox check-primary">
                         <input id="email_week_report" type="checkbox" value="1" checked="checked">
                         <label for="email_week_report">Relatórios de despesas semanais.</label>
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="checkbox check-warning">
+                    <div class="checkbox check-primary">
                         <input id="email_month_report" type="checkbox" value="1" checked="checked">
                         <label for="email_month_report">Relatórios de despesas mensais.</label>
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="checkbox check-warning">
+                    <div class="checkbox check-primary">
                         <input id="email_year_report" type="checkbox" value="1" checked="checked">
                         <label for="email_year_report">Relatórios de despesas anuais.</label>
                     </div>
@@ -84,19 +84,19 @@
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="checkbox check-info">
+                    <div class="checkbox check-primary">
                         <input id="sms_new_payment" type="checkbox" value="1">
                         <label for="sms_new_payment">Novo pagamento numa despesa em que és responsável.</label>
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="checkbox check-info">
+                    <div class="checkbox check-primary">
                         <input id="sms_upcoming_limit_date" type="checkbox" value="1">
                         <label for="sms_upcoming_limit_date">Aproximação de uma data limite de pagamento.</label>
                     </div>
                 </div>
                 <div class="row-fluid">
-                    <div class="checkbox check-warning">
+                    <div class="checkbox check-primary">
                         <input id="sms_upcoming_expense" type="checkbox" value="1" checked="checked">
                         <label for="sms_upcoming_expense">Aproximação da data de receção de uma despesa agendada.</label>
                     </div>
