@@ -14,6 +14,6 @@
                     action.getPayment()
             ]}"/>
         </div>
-        <prettytime:display date="${action.getActionDate()}" />
+        <div class="date"><prettytime:display date="${action.getActionDate()}" /></div>
     </div>
 </div>
