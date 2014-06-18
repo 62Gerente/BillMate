@@ -1,12 +1,11 @@
 package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
-import org.springframework.validation.ObjectError
 
 class Expense {
     static belongsTo = [Circle, RegisteredUser, ExpenseType]
     static hasMany = [payments: Payment,
-                      customDebts: CustomDebt, actions: Action, assignedUsers: User]
+                      debt: Debt, actions: Action, assignedUsers: User]
 
     RegularExpense regularExpense
     RegisteredUser responsible
@@ -59,8 +58,8 @@ class Expense {
         if(!endDate) endDate = rExpense.getEndDate()
         if(!paymentDeadline) paymentDeadline = rExpense.getPaymentDeadline()
         if(!paymentDeadline) paymentDeadline = rExpense.getReceptionDeadline()
-        if(!customDebts || customDebts.isEmpty()){
-            rExpense.getCustomDebts().each { this.addToCustomDebts(it) }
+        if(!debt || debt.isEmpty()){
+            rExpense.getCustomDebts().each { this.addToDebt(it) }
         }
         if(!assignedUsers || assignedUsers.isEmpty()){
             rExpense.getAssignedUsers().each { this.addToAssignedUsers(it) }
@@ -89,14 +88,15 @@ class Expense {
         receptionDate || totalDebt() == 0
     }
 
+    /*Mudar*/
     public Double valueAssignedTo(Long userId){
         Double totalDebt
-        CustomDebt customDebt = customDebts.find{ it.getUserId() == userId && it.getExpenseId() == this.id }
+        Debt debt = debt.find{ it.getUserId() == userId && it.getExpenseId() == this.id }
 
-        if(customDebt){
-            totalDebt = value * customDebt.getPercentageInDecimal()
+        if(debt){
+            totalDebt = value * debt.getPercentageInDecimal()
         }else{
-            totalDebt = value * percentageAssignedToUsersWithoutCustomDebtsInDecimal()
+            totalDebt = value * percentageAssignedToUsersWithoutDebtsInDecimal()
         }
 
         totalDebt
@@ -106,33 +106,35 @@ class Expense {
         value - totalAmountPaid()
     }
 
-    public Double percentageOfCustomDebts(){
-        Double percentage = customDebts.sum{ it.getPercentage() }
+    public Double percentageOfDebts(){
+        Double percentage = debt.sum{ it.getPercentage() }
         percentage ? percentage : 0D
     }
 
     public Double percentageOfEquallyDividedDebts(){
-        100 - percentageOfCustomDebts()
+        100 - percentageOfDebts()
     }
 
-    public Integer numberOfCustomDebts(){
-        customDebts.size()
+    /*Mudar*/
+    public Integer numberOfDebts(){
+        debt.size()
     }
 
     public Integer numberOfAssignedUsers(){
         assignedUsers.size() + 1
     }
 
-    public Integer numberOfAssignedUsersWithoutCustomDebts(){
-        numberOfAssignedUsers() - numberOfCustomDebts()
+    /*Mudar*/
+    public Integer numberOfAssignedUsersWithoutDebts(){
+        numberOfAssignedUsers() - numberOfDebts()
     }
 
-    public Double percentageAssignedToUsersWithoutCustomDebts(){
-        percentageOfEquallyDividedDebts() / numberOfAssignedUsersWithoutCustomDebts()
+    public Double percentageAssignedToUsersWithoutDebts(){
+        percentageOfEquallyDividedDebts() / numberOfAssignedUsersWithoutDebts()
     }
 
-    public Double percentageAssignedToUsersWithoutCustomDebtsInDecimal(){
-        percentageAssignedToUsersWithoutCustomDebts() / 100
+    public Double percentageAssignedToUsersWithoutDebtsInDecimal(){
+        percentageAssignedToUsersWithoutDebts() / 100
     }
 
     public Double totalAmountPaid(){

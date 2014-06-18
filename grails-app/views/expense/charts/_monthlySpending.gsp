@@ -23,11 +23,15 @@
             <g:set var="date1" value="${ use(TimeCategory){new Date()-1.months}}"/>
             <g:set var="date2" value="${ use(TimeCategory){new Date()-2.months}}"/>
             <g:set var="date3" value="${ use(TimeCategory){new Date()-3.months}}"/>
+            <g:set var="date4" value="${ use(TimeCategory){new Date()-4.months}}"/>
+            <g:set var="date5" value="${ use(TimeCategory){new Date()-5.months}}"/>
             var d_${i} = [
                 [${date0.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date0, expenseType)}],
                 [${date1.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date1, expenseType)}],
                 [${date2.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date2, expenseType)}],
-                [${date3.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date3, expenseType)}]
+                [${date3.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date3, expenseType)}],
+                [${date4.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date4, expenseType)}],
+                [${date5.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date5, expenseType)}]
             ];
         </g:each>
 
@@ -52,7 +56,7 @@
 
         $.plot($("#monthlySpending"), data, {
             xaxis: {
-                min: ${use(TimeCategory){(new Date() - 4.months + 2.week).toTimestamp().getTime()}},
+                min: ${use(TimeCategory){(new Date() - 6.months).toTimestamp().getTime()}},
                 max: ${use(TimeCategory){(new Date() + 2.week).toTimestamp().getTime()}},
                 mode: "time",
                 timeformat: "%b",

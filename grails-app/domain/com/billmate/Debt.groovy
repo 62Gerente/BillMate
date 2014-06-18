@@ -1,6 +1,6 @@
 package com.billmate
 
-class CustomDebt {
+class Debt {
     static belongsTo = [Expense, User, RegularExpense]
 
     Expense expense
@@ -8,6 +8,7 @@ class CustomDebt {
     User user
 
     Double percentage
+    double value
     Date createdAt = new Date()
 
     static constraints = {
@@ -16,6 +17,7 @@ class CustomDebt {
         user nullable: false
 
         percentage min: 0D, nullable: false
+        value min: 0D, nullable: false
         createdAt nullable: false
     }
 
