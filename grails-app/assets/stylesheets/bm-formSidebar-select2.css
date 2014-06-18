@@ -19,3 +19,7 @@
 .add-more-friends input.success{
     border: none;
 }
+
+form .select2-container-multi .select2-choices .select2-search-choice{
+    border-radius: 4px;
+}

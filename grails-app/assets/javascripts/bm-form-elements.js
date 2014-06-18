@@ -98,21 +98,21 @@ $(document).ready(function(){
                     $("body").unblock();
                 },
                 success: function (data) {
-                    context.children("div:nth(0)").show();
-                    context.children("div:nth(0)").removeClass();
-                    context.children("div:nth(0)").addClass(data.class);
-                    context.children("div:nth(0)").find("div").text(data.code);
+                    context.children("div").first().show();
+                    context.children("div").first().removeClass();
+                    context.children("div").first().addClass(data.class);
+                    context.children("div").first().find("div").text(data.code);
                     if (data.error === false) {
-                        form.find(".houseName").val("");
-                        form.find(".houseDescription").val("");
+                        form.find(".houseName").empty();
+                        form.find(".houseDescription").empty();
                         form.delay(2000);
                         window.location.reload();
                     }
                 },
                 error: function (data) {
-                    context.children("div:nth(0)").show();
-                    context.children("div:nth(0)").removeClass();
-                    context.children("div:nth(0)").addClass(data.class);
+                    context.children("div").first().show();
+                    context.children("div").first().removeClass();
+                    context.children("div").first().addClass(data.class);
                     context.find("div div").text(data.code);
                 }
             });

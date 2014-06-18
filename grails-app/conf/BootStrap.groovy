@@ -18,7 +18,7 @@ class BootStrap {
             new RegisteredUser(name: 'Pedro Leite', email: 'pmcleite@gmail.com', password: 'pleite').secureSave()
             new RegisteredUser(name: 'Francisco Neves', email: 'fntneves@gmail.com', password: 'fneves').secureSave()
             new RegisteredUser(name: 'Ricardo Branco', email: '28.ricardobranco@gmail.com', password: 'rbranco').secureSave()
-            new ReferredUser(name: 'merda', email: 'puta@vinho.cerveja').secureSave()
+            new ReferredUser(name: 'Sérgio Almeida', email: 'sergio2malmeida@gmail.com').secureSave()
         }
 
         if(House.count() == 0){

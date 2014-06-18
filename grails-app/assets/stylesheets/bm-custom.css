@@ -26,9 +26,3 @@ a {
 .uppercase{
     text-transform: uppercase;
 }
-
-.btn-create-circle-sidebar{
-    background: none;
-    border: 0;
-    margin-top: -5px;
-}
