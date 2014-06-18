@@ -38,25 +38,23 @@
                 <p class="no-margin"><g:message code="com.billmate.house.modal.info" default="Populates the fields with the information of the new house"/></p>
                 <br>
             </div>
-            <g:form class="houseForm" controller="circle" action="createHouse">
+            <g:form class="houseForm" controller="house" action="createHouse">
                 <div class="modal-body">
                     <div class="row form-row">
                         <div class="col-md-12">
-                            <div class="form-group">
-                                <div class="controls">
-                                    <g:textField name="houseName" placeholder="${message(code: 'com.billmate.house.modal.placeholder_name_house')}" class="form-control houseName"/>
-                                </div>
+                            <div class="controls">
+                                <g:textField name="houseName" placeholder="${message(code: 'com.billmate.house.modal.placeholder_name_house')}" class="form-control houseName"/>
                             </div>
                         </div>
                     </div>
                     <div class="row form-row">
                         <div class="col-md-12">
-                            <g:textField name="expenseType" placeholder="${message(code: 'com.billmate.house.modal.placeholder_expense_type')}" class="custom-multiselect-house-debt select2-offscreen expenseType" style="width:100%" tabindex="-1"/>
+                            <g:textField name="expenseType" placeholder="${message(code: 'com.billmate.house.modal.placeholder_expense_type')}" class="custom-multiselect-house-debt select2-offscreen expenseType" style="width:100%"/>
                         </div>
                     </div>
                     <div class="row form-row p-t-10">
                         <div class="col-md-12">
-                            <g:textField name="friendsHome" placeholder="${message(code: 'com.billmate.house.modal.placeholder_house_friends')}" class="custom-multiselect-house-user select2-offscreen friendsHome" style="width:100%" tabindex="-1"/>
+                            <g:textField name="friendsHome" placeholder="${message(code: 'com.billmate.house.modal.placeholder_house_friends')}" class="custom-multiselect-house-user select2-offscreen friendsHome" style="width:100%"/>
                         </div>
                     </div>
                     <div class="row form-row p-t-10">
@@ -69,14 +67,11 @@
                             <a href="#" class="expand-more-add-friends"><span>Adicionar amigos nao registados? Clique aqui</span></a>
                         </div>
                         <div class="add-more-friends" style="display: none">
-                            <div class="col-md-5">
-                                <input type="text" placeholder="Nome" style="width:100%"/>
-                            </div>
-                            <div class="col-md-5" style="padding-left: 0px">
+                            <div class="col-md-10">
                                 <input type="text" placeholder="Email" style="width:100%"/>
                             </div>
                             <div class="col-md-2" style="padding-left: 0px;">
-                                <button type="button" class="btn btn-default addNewReferredUser" style="height:41px;">Adicionar</button>
+                                <button type="button" class="btn btn-default addNewReferredUser" style="height:36px;">Adicionar</button>
                             </div>
                         </div>
                     </div>
@@ -84,6 +79,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal"><g:message code="com.billmate.btn.close" default="Close"/></button>
                     <g:submitButton name="createHouse" value="${message(code: 'com.billmate.house.modal.create')}" class="btn btn-primary"/>
+                    <g:hiddenField name="identifier" value="${user}"/>
                 </div>
             </g:form>
         </div>

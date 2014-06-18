@@ -2,7 +2,7 @@ package com.billmate
 
 import grails.converters.JSON
 
-class CircleController extends RestrictedController  {
+class HouseController extends RestrictedController  {
 
     def beforeInterceptor = [action: this.&checkSession]
 
@@ -10,10 +10,11 @@ class CircleController extends RestrictedController  {
 
     def createHouse(){
         def response
+        Circle circleInstance = new Circle()
         RegisteredUser registeredUser = authenticatedUser()
         House house = new House(name: params.houseName, description: params.houseDescription)
         house.secureSave()
-        Boolean resultOperation = house.createHouse(params.expenseType, params.friendsHome + "," + authenticatedUser().getId())
+        Boolean resultOperation = circleInstance.createCircle(params.expenseType, params.friendsHome + "," + params.identifier, house.getCircle())
 
         response = [
                 'error': false,

@@ -5,6 +5,7 @@ import com.billmate.DefaultExpenseType
 import com.billmate.ExpenseType
 import com.billmate.House
 import com.billmate.OccasionalExpense
+import com.billmate.ReferredUser
 import com.billmate.User
 import com.billmate.RegisteredUser
 
@@ -17,6 +18,7 @@ class BootStrap {
             new RegisteredUser(name: 'Pedro Leite', email: 'pmcleite@gmail.com', password: 'pleite').secureSave()
             new RegisteredUser(name: 'Francisco Neves', email: 'fntneves@gmail.com', password: 'fneves').secureSave()
             new RegisteredUser(name: 'Ricardo Branco', email: '28.ricardobranco@gmail.com', password: 'rbranco').secureSave()
+            new ReferredUser(name: 'merda', email: 'puta@vinho.cerveja').secureSave()
         }
 
         if(House.count() == 0){

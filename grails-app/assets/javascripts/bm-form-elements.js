@@ -5,17 +5,10 @@ $(document).ready(function(){
         var icon;
         if(state && state.faicon) icon = state.faicon;
         else icon = unknownDebt;
-        return "<i class='" + icon + "'></i>&nbsp;" + state.text;
+        return "<i class='" + icon + "'></i>&nbsp;" + $("<div>").html(state.text).text();
     }
 
     function formatImage(state) {
-        var image;
-        if(state && state.faicon) image = state.faicon;
-        else image = unknownUser;
-        return "<div class='inline p-r-5'><img src='" + image + "' style='width:20px; height:17px;'/></div>" + state.text.split('###')[0];
-    }
-
-    function formatImageSelection(state) {
         var image;
         if(state && state.faicon) image = state.faicon;
         else image = unknownUser;
@@ -43,7 +36,7 @@ $(document).ready(function(){
         formatNoMatches: function () {return ""},
         multiple: true,
         formatResult: formatImage,
-        formatSelection: formatImageSelection,
+        formatSelection: formatImage,
         data:dataUser
     });
     $(".custom-multiselect-house-user").select2("val", setsUser);
@@ -139,18 +132,12 @@ $(document).ready(function(){
     });
 
     $(".addNewReferredUser").click(function(){
-        var name = $(this).closest(".add-more-friends").find("div:nth(0) :input").val();
-        var email = $(this).closest(".add-more-friends").find("div:nth(1) :input").val();
-        //$("<li class='select2-search-choice'>    <div><div class='inline p-r-5'><img src='" + unknownUser + "'style='width:20px; height:17px;'></div>" + name + "</div>    <a href='#' onclick='return false;' class='select2-search-choice-close' tabindex='-1'></a></li>").insertAfter($(".addNewReferredUser").closest(".modal-body").children("div:nth(2)").find("li.select2-search-choice").last());
+        var email = $(this).closest(".add-more-friends").find("div:nth(0) :input").val();
+        var name = email.split("@")[0];
         var validEmail = isValidEmailAddress(email);
 
-        if(name == "" || email == "" || !validEmail){
-            if(name == ""){
+        if(email == "" || !validEmail){
                 $(this).parent().siblings("div:nth(0)").children("input").removeClass().addClass("error");
-            }
-            if(email == "" || !validEmail){
-                $(this).parent().siblings("div:nth(1)").children("input").removeClass().addClass("error");
-            }
         }else{
             setsUser = [];
             var list = $(this).closest(".modal-body").children("div:nth(2)").find("li.select2-search-choice div:not('.inline')").map(function() { return $(this).text(); });
@@ -173,12 +160,11 @@ $(document).ready(function(){
                 formatNoMatches: function () {return ""},
                 multiple: true,
                 formatResult: formatImage,
-                formatSelection: formatImageSelection,
+                formatSelection: formatImage,
                 data:dataUser
             });
             $(".custom-multiselect-house-user").select2("val", setsUser);
             $(this).closest(".add-more-friends").find("div:nth(0) :input").val("");
-            $(this).closest(".add-more-friends").find("div:nth(1) :input").val("");
         }
     });
 
@@ -191,7 +177,16 @@ $(document).ready(function(){
     });
 
     function isValidEmailAddress(emailAddress) {
-        var pattern = new RegExp(/^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i);
-        return pattern.test(emailAddress);
+        return validateEmail(emailAddress);
     };
+
+    function validateEmail(email)
+    {
+        var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
+        if (reg.test(email)){
+            return true; }
+        else{
+            return false;
+        }
+    }
 });

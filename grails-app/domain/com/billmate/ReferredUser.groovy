@@ -4,7 +4,7 @@ import org.apache.shiro.crypto.hash.Sha256Hash
 import org.springframework.validation.ObjectError
 
 class ReferredUser  {
-    static belongsTo = User
+    static belongsTo = [User, Circle]
 
     User user
 
