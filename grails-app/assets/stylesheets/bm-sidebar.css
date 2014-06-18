@@ -1,0 +1,23 @@
+.btn-create-circle-sidebar{
+    background: none;
+    border: 0;
+    margin-top: -5px;
+}
+
+.add-more-friends input,
+.houseForm .friendsHome,
+.houseForm .expenseType{
+    width:100%;
+}
+
+.houseForm .add-more-friends{
+    display: none;
+}
+
+.addNewReferredUser{
+    height:36px;
+}
+
+.add-more-friends .divAddNewReferredUser{
+    padding-left: 0;
+}

@@ -85,11 +85,11 @@ class RegisteredUser {
     }
 
     public String getPhotoOrDefault(){
-        def linkGenerator = this.domainClass.grailsApplication.mainContext.grailsLinkGenerator
         if(photo){
-            return linkGenerator.link(controller: "fileUploader", action: "show", id: photo.getId())
+            def linkGenerator = this.domainClass.grailsApplication.mainContext.grailsLinkGenerator
+            return photo.getPath()
         }else{
-            return linkGenerator.resource(dir: 'images',file: 'default-user.png', absolute: true)
+            return getPathToDefaultPhoto()
         }
     }
 
@@ -234,20 +234,13 @@ class RegisteredUser {
         latestEvents.toList()
     }
     
-    public User[] getFriendsOfAllCircles(Long id_user){
+    public User[] getFriendsOfAllCircles(){
         Set<User> list = new HashSet<User>()
-        Set<User> listUsers = new HashSet<RegisteredUser>()
-        list.addAll(User.findAll())
-        for(User user : list){
-            Long idd = user.getRegisteredUserId()
-            if(user.getRegisteredUserId() != id_user && user.getReferredUserId() != id_user)
-                listUsers.add(user)
-        }
-        return listUsers.toArray()
+        User.findAll().each { if (it.getRegisteredUserId() != getId()) list.add(it)}
+        return list.toArray()
     }
 
     public Set<ExpenseType> getExpenseTypeByHouse(){
-        CircleType circleType = new CircleType()
-        circleType.getExpenseTypeByHouse()
+        CircleType.getExpenseTypeByHouse()
     }
 }
