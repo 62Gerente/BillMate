@@ -4,7 +4,7 @@ import groovy.time.TimeCategory
 
 class User {
     static belongsTo = [Circle, Expense, RegularExpense]
-    static hasMany = [circles: Circle, payments: Payment, customizedDebts: CustomDebt, referencedActions: Action, expenses: Expense, regularExpenses: RegularExpense]
+    static hasMany = [circles: Circle, payments: Payment, debts: Debt, referencedActions: Action, expenses: Expense, regularExpenses: RegularExpense]
     static hasOne = [referredUser: ReferredUser, registeredUser: RegisteredUser]
 
     String name

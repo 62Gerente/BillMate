@@ -34,7 +34,15 @@ class RegisteredUserDashboard {
     }
 
     public List<ExpenseType> expenseTypesWithMoreSpendingInLastMonths(){
-        getUser().expenseTypesWithMoreSpendingInLastMonths(4,5)
+        getUser()?.expenseTypesWithMoreSpendingInLastMonths(6,5)
+    }
+
+    public Long getTotalBalanceExpensesWhoIAmNotResponsible(){
+        return registeredUser.getTotalWhoIOwe()
+    }
+
+    public Long getTotalBalance(){
+        return registeredUser.getTotalBalance()
     }
 
     public List<Action> latestEvents(){

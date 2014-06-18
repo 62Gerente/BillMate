@@ -364,6 +364,19 @@
     }
 }
 
+@media (min-width:1200px){
+    .debts-friend-widget-red{
+        margin-left: -10px;
+    }
+}
+
+@media (min-width:992px) and (max-width:1200px){
+    .debts-friend-widget-green,
+    .debts-friend-widget-red{
+        padding-right: 25px;
+    }
+}
+
 button.logout-header[type="submit"]{
     border: none;
     padding: 0;
