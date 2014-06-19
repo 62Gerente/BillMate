@@ -12,7 +12,7 @@ $(document).ready(function(){
         var image;
         if(state && state.faicon) image = state.faicon;
         else image = unknownUser;
-        return "<div class='inline p-r-5'><img src='" + image + "' style='width:20px; height:17px;'/></div>" + state.text.split('###')[0];
+        return "<div class='inline p-r-5'><img src='" + image + "' style='width:17px; height:17px;'/></div>" + state.text.split('###')[0];
     }
 
     $(".custom-multiselect-house-debt").select2({

@@ -111,7 +111,7 @@ class House{
         }
     }
 
-    public boolean addUsersAndExpenseTypesToHouse(Set<String> friendsSet, Set<String> expenseTypesSet){
+    public boolean addUsersAndExpenseTypesToHouseAndSave(Set<String> friendsSet, Set<String> expenseTypesSet){
         boolean result = true
         withTransaction { status ->
             try {

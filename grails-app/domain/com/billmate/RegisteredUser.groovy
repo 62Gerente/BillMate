@@ -93,11 +93,11 @@ class RegisteredUser {
     }
 
     public String getPhotoOrDefault(){
-        def linkGenerator = this.domainClass.grailsApplication.mainContext.grailsLinkGenerator
         if(photo){
+            def linkGenerator = this.domainClass.grailsApplication.mainContext.grailsLinkGenerator
             return photo.getPath()
         }else{
-            return linkGenerator.resource(dir: 'images',file: 'default-user.png', absolute: true)
+            return getPathToDefaultPhoto()
         }
     }
 
