@@ -56,7 +56,7 @@
 
         $.plot($("#monthlySpending"), data, {
             xaxis: {
-                min: ${use(TimeCategory){(new Date() - 6.months).toTimestamp().getTime()}},
+                min: ${use(TimeCategory){(new Date() - 6.months + 2.week).toTimestamp().getTime()}},
                 max: ${use(TimeCategory){(new Date() + 2.week).toTimestamp().getTime()}},
                 mode: "time",
                 timeformat: "%b",
