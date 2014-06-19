@@ -58,10 +58,4 @@ class DefaultExpenseType{
             }
         }
     }
-
-    public DefaultExpenseType[] getListOfDefaultExpenseTypeForCircles(int identifier){
-        Set<CircleType> circleTypes = CircleType.findAllByIdentifier(identifier)
-        Set<DefaultExpenseType> defaultExpenseTypes = DefaultExpenseType.findAllByCircleTypes(circleTypes)
-        return defaultExpenseTypes.toArray()
-    }
 }

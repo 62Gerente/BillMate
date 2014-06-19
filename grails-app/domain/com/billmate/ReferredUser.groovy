@@ -1,10 +1,7 @@
 package com.billmate
 
-import org.apache.shiro.crypto.hash.Sha256Hash
-import org.springframework.validation.ObjectError
-
 class ReferredUser  {
-    static belongsTo = [User, Circle]
+    static belongsTo = User
 
     User user
 
@@ -46,15 +43,13 @@ class ReferredUser  {
         return user.toString();
     }
 
-    public boolean secureSave(){
+    public void secureSave(){
         withTransaction { status ->
             try {
                 user.save(flush: true, failOnError: true)
                 save(flush: true, failOnError: true)
-                return true
             }catch(Exception ignored){
                 status.setRollbackOnly()
-                return false
             }
         }
     }

@@ -8,7 +8,6 @@
     for(var i=0; i< parsedJSONData.length; i++){
         var value = parsedJSONData[i];
         dataDebt[i] = {id: value.id, text: value.name, faicon: value.cssClass};
-        //setsDebt[i] = value.id;
     }
 
     var objJSONData = '${users.encodeAsJSON()}';
@@ -16,7 +15,6 @@
     for(var i=0; i< parsedJSONData.length; i++){
         var value = parsedJSONData[i];
         dataUser[i] = {id: value.id, text: value.name + "###" + value.email, faicon: value.cssClass};
-        //setsUser[i] = value.id;
     }
 
     var unknownUser = '${path}';
@@ -38,7 +36,7 @@
                 <p class="no-margin"><g:message code="com.billmate.house.modal.info" default="Populates the fields with the information of the new house"/></p>
                 <br>
             </div>
-            <g:form class="houseForm" controller="house" action="createHouse">
+            <g:form class="houseForm" controller="house" action="save">
                 <div class="modal-body">
                     <div class="row form-row">
                         <div class="col-md-12">
@@ -67,7 +65,7 @@
                             <a href="#" class="expand-more-add-friends"><span>Adicionar amigos nao registados? Clique aqui</span></a>
                         </div>
                         <div class="add-more-friends" style="display: none">
-                            <div class="col-md-10">
+                            <div class="col-md-10 'value ${hasErrors(bean:user,field:'email','errors')}'">
                                 <input type="text" placeholder="Email" style="width:100%"/>
                             </div>
                             <div class="col-md-2" style="padding-left: 0px;">
@@ -77,7 +75,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal"><g:message code="com.billmate.btn.close" default="Close"/></button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal"><g:message code="com.billmate.btn.cancel" default="Cancel"/></button>
                     <g:submitButton name="createHouse" value="${message(code: 'com.billmate.house.modal.create')}" class="btn btn-primary"/>
                     <g:hiddenField name="identifier" value="${user}"/>
                 </div>

@@ -182,11 +182,6 @@ $(document).ready(function(){
 
     function validateEmail(email)
     {
-        var reg = /^\w+([-+.']\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$/
-        if (reg.test(email)){
-            return true; }
-        else{
-            return false;
-        }
+        return email.match( /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
     }
 });

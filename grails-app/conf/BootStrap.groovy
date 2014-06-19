@@ -63,9 +63,11 @@ class BootStrap {
             def circleType = new CircleType(name: 'house')
             circleType.save()
             def defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Shopping'))
-            defaultExpenseType.addToCircleTypes(circleType).secureSave()
+            circleType.addToExpenseTypes(defaultExpenseType.getExpenseType())
             defaultExpenseType = DefaultExpenseType.findByExpenseType(ExpenseType.findByName('Meal'))
-            defaultExpenseType.addToCircleTypes(circleType).secureSave()
+            circleType.addToExpenseTypes(defaultExpenseType.getExpenseType())
+            def customExpenseType = CustomExpenseType.findByExpenseType(ExpenseType.findByName('Maid'))
+            circleType.addToExpenseTypes(customExpenseType.getExpenseType())
         }
 
         if(OccasionalExpense.count == 0){
