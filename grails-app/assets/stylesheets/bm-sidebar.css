@@ -27,3 +27,11 @@
 .add-more-friends .divAddNewReferredUser{
     padding-left: 0;
 }
+
+ul#home-sidebar-menu .title{
+    font-size: 13px;
+}
+
+ul#home-sidebar-menu li > a{
+    padding: 3.5px 31px 11.5px 31px;
+}

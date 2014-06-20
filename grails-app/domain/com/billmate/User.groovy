@@ -95,7 +95,7 @@ class User {
 
         List<ExpenseType> orderList = expenseTypes.sort { map.get(it).sum{ it.valueAssignedTo(this.id) } }
 
-        orderList[0..(expenses < orderList.size() ? expenses : orderList.size())-1]
+        orderList.take(expenses)
     }
 
     public Set<Expense> monthExpensesOfExpenseType(Date date, ExpenseType expenseType){
