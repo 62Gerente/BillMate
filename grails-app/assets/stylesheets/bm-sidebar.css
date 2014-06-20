@@ -4,20 +4,26 @@
     margin-top: -5px;
 }
 
+.add-more-friends-collective input,
 .add-more-friends input,
 .houseForm .friendsHome,
-.houseForm .expenseType{
+.houseForm .expenseType,
+.collectiveForm .friendsCollective,
+.collectiveForm .expenseType{
     width:100%;
 }
 
-.houseForm .add-more-friends{
+.houseForm .add-more-friends,
+.collectiveForm .add-more-friends-collective{
     display: none;
 }
 
+.addNewReferredUserCollective,
 .addNewReferredUser{
     height:36px;
 }
 
+.add-more-friends-collective .divAddNewReferredUserCollective,
 .add-more-friends .divAddNewReferredUser{
     padding-left: 0;
 }

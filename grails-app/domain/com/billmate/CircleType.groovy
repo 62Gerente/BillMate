@@ -12,4 +12,8 @@ class CircleType {
     public static Set<ExpenseType> getExpenseTypeByHouse(){
         CircleType.findByName('house')?.getExpenseTypes()
     }
+
+    public static Set<ExpenseType> getExpenseTypeByCollective(){
+        CircleType.findByName('collective')?.getExpenseTypes()
+    }
 }
