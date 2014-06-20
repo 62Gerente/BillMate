@@ -61,4 +61,19 @@ class Collective {
     public String getCssColor(){
         "blue"
     }
+
+    public boolean addUsersAndExpenseTypesToCollectiveAndSave(Set<String> friendsSet, Set<String> expenseTypesSet){
+        boolean result = true
+        withTransaction { status ->
+            try {
+                secureSave()
+                circle.addExpensesByIDSOrName(expenseTypesSet)
+                circle.addUsersByIDSOrEmail(friendsSet)
+            }
+            catch(Exception e){
+                result = false
+            }
+        }
+        return result
+    }
 }

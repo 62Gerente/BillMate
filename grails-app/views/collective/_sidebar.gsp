@@ -1,8 +1,9 @@
 <div class="side-bar-widgets">
     <p class="menu-title"><g:message code="com.billmate.sidebar.group" default="Groups"/>
         <span class="pull-right">
-            <a href="#" class="create-folder"> <i class="fa fa-plus"></i>
-            </a>
+            <button class="btn-create-circle-sidebar" data-toggle="modal" data-target="#collectiveCreateModal">
+                <i class="fa fa-plus"></i>
+            </button>
         </span>
     </p>
     <g:if test="${collectives.isEmpty()}">

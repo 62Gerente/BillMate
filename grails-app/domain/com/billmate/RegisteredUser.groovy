@@ -239,10 +239,6 @@ class RegisteredUser {
         return list.toArray()
     }
 
-    public Set<ExpenseType> getExpenseTypeByHouse(){
-        CircleType.getExpenseTypeByHouse()
-    }
-    
     public long getTotalWhoIOwe(){
         long valueWhoHaveToPay = 0, amountAlreadyPaid = 0, totalAmountPaid = 0, totalValueToPay = 0
         Set<Expense> expenseSet = user.getExpenses()
@@ -280,5 +276,13 @@ class RegisteredUser {
 
     public long getTotalBalance(){
         getTotalWhoOweMe() - getTotalWhoIOwe();
+    }
+
+    public static Set<ExpenseType> getExpenseTypeByHouse(){
+        CircleType.getExpenseTypeByHouse()
+    }
+
+    public static Set<ExpenseType> getExpenseTypeByCollective(){
+        CircleType.getExpenseTypeByCollective()
     }
 }
