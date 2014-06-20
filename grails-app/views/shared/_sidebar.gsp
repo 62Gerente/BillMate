@@ -21,10 +21,10 @@
                     <span class="selected"></span>
                 </a>
             </li>
-            <li class="">
-                <a href="#"> <i class="fa fa-file-text"></i>
+            <li>
+                <a href="#"> <i class="fa fa-money"></i>
                     <span class="title">
-                        <g:message code="com.billmate.sidebar.report" default="Reports"/>
+                        <g:message code="com.billmate.sidebar.expenses" default="Expenses"/>
                     </span>
                 </a>
             </li>
@@ -32,6 +32,20 @@
                 <a href="#"> <i class="fa fa-clock-o"></i>
                     <span class="title">
                         <g:message code="com.billmate.sidebar.history" default="History"/>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-bar-chart-o"></i>
+                    <span class="title">
+                        <g:message code="com.billmate.sidebar.stats" default="Statistics"/>
+                    </span>
+                </a>
+            </li>
+            <li>
+                <a href="#"> <i class="fa fa-file-text-o"></i>
+                    <span class="title">
+                        <g:message code="com.billmate.sidebar.report" default="Reports"/>
                     </span>
                 </a>
             </li>
