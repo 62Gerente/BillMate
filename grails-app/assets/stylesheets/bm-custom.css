@@ -40,3 +40,7 @@ a {
 .mark-read-notification:hover{
     color: #fff !important;
 }
+
+.center-block{
+    display: table;
+}
