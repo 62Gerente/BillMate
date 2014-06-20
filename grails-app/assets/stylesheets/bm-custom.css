@@ -19,6 +19,7 @@ a {
     padding: 15px 19px 15px 15px;
     border-radius: 0px;
 }
+
 .alert a {
     color: #004264;
 }
@@ -45,4 +46,8 @@ a {
     background: none;
     border: 0;
     margin-top: -5px;
+}
+
+.center-block{
+    display: table;
 }
