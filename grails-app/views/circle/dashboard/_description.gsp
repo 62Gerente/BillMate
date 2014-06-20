@@ -1,4 +1,4 @@
-<div class=" tiles white col-md-12 p-t-30 p-b-30 p-r-40 p-l-40 m-b-20">
+<div class="tiles white col-md-12 p-t-30 p-b-30 p-r-40 p-l-40 m-b-20">
     <div class="tiles white">
         <div class="row">
             <div class="text-center">
@@ -41,3 +41,4 @@
         </div>
     </div>
 </div>
+<div class="clearfix"></div>

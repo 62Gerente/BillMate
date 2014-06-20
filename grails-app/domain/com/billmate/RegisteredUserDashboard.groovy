@@ -46,6 +46,6 @@ class RegisteredUserDashboard {
     }
 
     public List<Action> latestEvents(){
-        getUser().latestEvents().take(5)
+        getUser().latestEvents().take(6)
     }
 }

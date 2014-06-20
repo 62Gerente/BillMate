@@ -9,10 +9,10 @@
         <g:render template="/payment/widgets/confirm" model="[registeredUser: dashboard.getRegisteredUser(), whoHaveUnconfirmedPayments: dashboard.whoHaveUnconfirmedPayments()]" />
         <g:render template="/expense/widgets/whoIOwe" model="[user: dashboard.getUser(), totalDebt: dashboard.totalDebt(), whoIOwe: dashboard.whoIOwe()]"/>
         <g:render template="/expense/widgets/whoOweMe" model="[registeredUser: dashboard.getRegisteredUser(), totalAsset: dashboard.totalAsset(), whoOweMe: dashboard.whoOweMe()]"/>
-        <g:render template="/expense/charts/monthlySpending" model="[user: dashboard.getUser(), expenseTypes: dashboard.expenseTypesWithMoreSpendingInLastMonths()]"/>
+        <g:render template="/expense/charts/monthlySpending" model="[entity: dashboard.getUser(), expenseTypes: dashboard.expenseTypesWithMoreSpendingInLastMonths()]"/>
     </div>
     <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
-        <div class="row">
+        <div class="row m-b-20">
             <g:render template="/expense/widgets/balance/index" model="[balance: dashboard.getTotalBalance()]"/>
             <g:render template="/expense/widgets/debt/index" model="[balance: dashboard.getTotalBalanceExpensesWhoIAmNotResponsible()]"/>
         </div>
