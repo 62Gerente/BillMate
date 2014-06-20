@@ -86,7 +86,7 @@ class RegisteredUser {
     public String getPhotoOrDefault(){
         if(photo){
             def linkGenerator = this.domainClass.grailsApplication.mainContext.grailsLinkGenerator
-            return photo.getPath()
+            return linkGenerator.link(controller: "fileUploader", action: "show", id: photo.getId())
         }else{
             return getPathToDefaultPhoto()
         }
