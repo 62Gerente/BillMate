@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title><g:message code="com.billmate.user_dashboard.page.title" default="BillMate - User Dashboard" /></title>
+    <title><g:message code="com.billmate.userDashboard.page.title" default="BillMate - User Dashboard" /></title>
 </head>
 <body>
     <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">

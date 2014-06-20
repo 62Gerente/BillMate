@@ -29,6 +29,13 @@
                 </a>
             </li>
             <li>
+                <a href="#"> <i class="fa fa-calendar"></i>
+                    <span class="title">
+                        <g:message code="com.billmate.sidebar.calendar" default="Calendar"/>
+                    </span>
+                </a>
+            </li>
+            <li>
                 <a href="#"> <i class="fa fa-clock-o"></i>
                     <span class="title">
                         <g:message code="com.billmate.sidebar.history" default="History"/>
