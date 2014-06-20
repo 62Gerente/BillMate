@@ -126,6 +126,7 @@ class User {
     public List<Action> latestEvents(){
         Set<Action> latestEvents = new HashSet<>();
 
+        latestEvents.addAll( referencedActions )
         circles.each{ latestEvents.addAll( it.getActions() ) }
         expenses.each{ latestEvents.addAll( it.getActions() ) }
         regularExpenses.each{ latestEvents.addAll( it.getActions() ) }

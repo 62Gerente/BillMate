@@ -17,4 +17,12 @@ class CircleDashboard {
     public Set<RegularExpense> regularExpensesInReceptionTime(){
         circle.regularExpensesInReceptionTime()
     }
+
+    public List<Action> latestEvents(){
+        circle.latestEvents().take(6)
+    }
+
+    public List<ExpenseType> expenseTypesWithMoreSpendingInLastMonths(){
+        circle.expenseTypesWithMoreSpendingInLastMonths(6,5)
+    }
 }

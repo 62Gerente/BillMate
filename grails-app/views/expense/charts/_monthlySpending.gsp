@@ -26,12 +26,12 @@
             <g:set var="date4" value="${ use(TimeCategory){new Date()-4.months}}"/>
             <g:set var="date5" value="${ use(TimeCategory){new Date()-5.months}}"/>
             var d_${i} = [
-                [${date0.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date0, expenseType)}],
-                [${date1.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date1, expenseType)}],
-                [${date2.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date2, expenseType)}],
-                [${date3.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date3, expenseType)}],
-                [${date4.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date4, expenseType)}],
-                [${date5.toTimestamp().getTime()}, ${user.monthlySpendingOfExpenseType(date5, expenseType)}]
+                [${date0.toTimestamp().getTime()}, ${entity.monthlySpendingOfExpenseType(date0, expenseType)}],
+                [${date1.toTimestamp().getTime()}, ${entity.monthlySpendingOfExpenseType(date1, expenseType)}],
+                [${date2.toTimestamp().getTime()}, ${entity.monthlySpendingOfExpenseType(date2, expenseType)}],
+                [${date3.toTimestamp().getTime()}, ${entity.monthlySpendingOfExpenseType(date3, expenseType)}],
+                [${date4.toTimestamp().getTime()}, ${entity.monthlySpendingOfExpenseType(date4, expenseType)}],
+                [${date5.toTimestamp().getTime()}, ${entity.monthlySpendingOfExpenseType(date5, expenseType)}]
             ];
         </g:each>
 
