@@ -96,6 +96,7 @@ class Collective {
                 eSave.printStackTrace()
                 status.setRollbackOnly()
                 result = false
+                status.setRollbackOnly()
             }
         }
         return result

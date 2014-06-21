@@ -155,4 +155,18 @@ class RegisteredUserController extends RestrictedController {
 
         return [breadcrumb: breadcrumb, user: registeredUser, history: userHistory]
     }
+
+    def circles(Long id){
+        Set<Object> circles = new HashSet<>()
+        String params = params.q
+        Set<Circle> circleSet = RegisteredUser.findById(id).getCircles()
+
+        circleSet.each { if(it.getName().toUpperCase().contains(params.toUpperCase())){
+            circles.add([id: it.getId(), icon: it.getCssClass(), name: it.getName()])
+        }}
+
+        def response = [ 'data': circles ]
+
+        render response as JSON
+    }
 }

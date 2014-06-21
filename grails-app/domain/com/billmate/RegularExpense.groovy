@@ -71,4 +71,12 @@ class RegularExpense {
             receptionBeginDate = receptionBeginDate + intervalDays.days + intervalMonths.months + intervalYears.years
         }
     }
+
+    def toJSON(){
+        return [name: getTitle(), description: getDescription(), id : getExpenseType().getId(), expenseTypeName: getExpenseType().getName(),
+         expenseTypeCssClass: getExpenseType().getCssClass(), value: getValue(), paymentDeadline: BMDate.convertDateFormat(getPaymentDeadline()),
+         receptionDeadline: BMDate.convertDateFormat(getReceptionDeadline()), receptionBeginDate: BMDate.convertDateFormat(getReceptionBeginDate()),
+         receptionEndDate: BMDate.convertDateFormat(getReceptionEndDate()), paymentBeginDate: BMDate.convertDateFormat(getPaymentBeginDate()),
+         paymentEndDate: BMDate.convertDateFormat(getPaymentEndDate())]
+    }
 }

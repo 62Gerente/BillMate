@@ -334,14 +334,18 @@ class RegisteredUser {
     }
 
     public static Set<ExpenseType> getExpenseTypeByHouse() {
-        CircleType.getExpenseTypeByHouse()
+        CircleType.getHouseExpenseTypes()
     }
 
     public static Set<ExpenseType> getExpenseTypeByCollective() {
-        CircleType.getExpenseTypeByCollective()
+        CircleType.getCollectiveExpenseTypes()
     }
 
     public List<Action> latestEvents() {
         user.latestEvents();
+    }
+
+    public Set<Circle> getCircles(){
+        return user.getCircles()
     }
 }

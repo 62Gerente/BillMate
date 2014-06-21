@@ -35,3 +35,93 @@ ul#home-sidebar-menu .title{
 ul#home-sidebar-menu li > a{
     padding: 3.5px 31px 11.5px 31px;
 }
+
+.select2-container-error{
+    border: 1px solid #f35958;
+}
+
+.name-inside-photo-modal-debt{
+    position: relative;
+    width: 76px;
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    padding: 2px 7px 0 7px;
+    font-size: 12px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    bottom: 27px;
+    margin-left: 2px;
+}
+
+.thumbnails.image_picker_selector .thumbnail img{
+    border-radius: 102px;
+}
+
+.thumbnails.image_picker_selector .thumbnail{
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    padding: 0px;
+    border-width: 0px;
+}
+
+ul.thumbnails.image_picker_selector > li{
+    margin-right: 12px;
+    width: 95px;
+}
+
+ul.thumbnails.image_picker_selector > li h6{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+ul.thumbnails.image_picker_selector li .thumbnail{
+    border-radius: 150px;
+    overflow: hidden;
+    width: 80px;
+    height: 80px;
+}
+
+ul.thumbnails.image_picker_selector li .thumbnail .name-inside-photo-modal-debt{
+    opacity: 0;
+}
+
+ul.thumbnails.image_picker_selector li .thumbnail.selected .name-inside-photo-modal-debt{
+    opacity: 1;
+}
+
+ul.thumbnails.image_picker_selector li .thumbnail.selected{
+    background: none;
+}
+
+.thumbnail span.tick-green{
+    opacity: 0;
+    -webkit-transition: opacity 450ms;
+    transition: opacity 450ms;
+}
+
+.thumbnail.selected span.tick-green{
+    width: 32px;
+    height: 25px;
+    z-index: 20000;
+    position: absolute;
+    top: 0;
+    margin-left: 55px;
+    opacity: 1;
+}
+
+.thumbnail.selected span.tick-green i {
+    box-shadow: 0 0 0 5px #e5e9ec, 0 0 0 1px #e5e9ec inset;
+    border-radius: 120px;
+    font-size: 14px;
+    color: green;
+    padding: 0;
+}
+
+ul.thumbnails li{
+    position: relative;
+}

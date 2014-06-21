@@ -55,7 +55,7 @@ class Circle {
         if(collective){
             return collective.getCssClass()
         }else if(house){
-            return  house.getCssClass()
+            return house.getCssClass()
         }
     }
 
@@ -90,6 +90,7 @@ class Circle {
                 expenseType = customExpenseType.getExpenseType()
             }
             if(expenseType) addToExpenseTypes(expenseType)
+            expenseType.addToCircles(this)
         }
     }
 

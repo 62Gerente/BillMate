@@ -479,7 +479,7 @@ button.logout-header[type="submit"]:hover {
     background-color: #1f3853;
     border: 1px solid #1f3853;
     color: #ffffff;
-    display: table-cell;;
+    display: table-cell;
 }
 
 .input-focus {
@@ -516,4 +516,8 @@ button.logout-header[type="submit"]:hover {
 
 .dataTables_paginate li.next{
     margin-left: 5px;
+}
+
+.upcoming-regular-expense p.small{
+    width: 100% !important;
 }

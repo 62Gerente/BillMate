@@ -73,6 +73,33 @@ class Expense {
         title
     }
 
+    public boolean saveAndPostponeRegularExpense(){
+        List<String> listUsers = new LinkedList<>()
+        List<Double> listValues = new LinkedList<>()
+        int position = 0
+        Set<User> detailedListOfUsers = regularExpense.getAssignedUsers()
+        int numberOfUsers = detailedListOfUsers.size()
+        detailedListOfUsers.each { listUsers.add(it.getId().toString()); listValues.add((getValue()/numberOfUsers)) }
+        withTransaction { status ->
+            try {
+                regularExpense.postpone()
+                regularExpense.save(flush: true, failOnError: true)
+                Expense expense = save(flush: true, failOnError: true)
+
+                for(String str : listUsers){
+                    User user = User.findById(Long.parseLong(str))
+                    Debt debt = new Debt(value: listValues[position], percentage: 20, user: user, expense: expense).save()
+                    position++;
+                }
+
+                return true
+            }catch(Exception ignored){
+                status.setRollbackOnly()
+                return false
+            }
+        }
+    }
+
     public void persist() throws Exception{
         regularExpense.postpone()
         regularExpense.save(flush: true, failOnError: true)
@@ -199,5 +226,31 @@ class Expense {
 
     public boolean haveValidatedPaymentsWithoutResponsible(){
         validatedPaymentsWithoutResponsible().size()
+    }
+
+    public boolean create(List<String> idsUsers, List<Double> value){
+        boolean result = false;
+        int position = 0
+        withTransaction {status ->
+            try{
+                Expense expense = save();
+                if(regularExpense){
+                    regularExpense.postpone()
+                    regularExpense.save(flush: true, failOnError: true)
+                }
+                for(String str : idsUsers){
+                    User user = User.findById(Long.parseLong(str))
+                    new Debt(value: Double.parseDouble(value[position]), user: user, expense: expense).save()
+                    this.addToAssignedUsers(user)
+                    position++;
+                }
+                result = true;
+            }
+            catch(Exception e){
+                result = false
+                status.setRollbackOnly()
+            }
+        }
+        return result;
     }
 }

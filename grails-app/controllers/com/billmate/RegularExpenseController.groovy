@@ -3,7 +3,7 @@ package com.billmate
 import grails.converters.JSON
 
 class RegularExpenseController extends RestrictedController{
-    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"]]
+    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"], show: "POST"]
 
     def beforeInterceptor = [action: this.&checkSession]
 
@@ -14,7 +14,7 @@ class RegularExpenseController extends RestrictedController{
 
         def responseData = [
                 'error'  : false,
-                'message': message(code: "com.billmate.expense.success")
+                'message': message(code: "com.billmate.regularExpense.save.insuccess")
         ]
 
         Expense expense = new Expense(regularExpense, authenticatedUser(), value: value)
@@ -26,9 +26,7 @@ class RegularExpenseController extends RestrictedController{
             }else{
                 responseData.message = message(code: "com.billmate.generic.error.message")
             }
-
         }
-
         render responseData as JSON
     }
 
@@ -50,6 +48,23 @@ class RegularExpenseController extends RestrictedController{
                 responseData.message = message(code: "com.billmate.generic.error.message")
             }
 
+        }
+
+        render responseData as JSON
+    }
+
+    def show(Long id){
+        def responseData = [
+                'error'  : true,
+                'message': message(code: "com.billmate.regularExpense.cancel.success")
+        ]
+
+        RegularExpense regularExpense = RegularExpense.findById(id)
+
+        if(regularExpense){
+            responseData.data = regularExpense.toJSON()
+            responseData.error = false
+            responseData.message = message(code: "com.billmate.regularExpense.cancel.success")
         }
 
         render responseData as JSON

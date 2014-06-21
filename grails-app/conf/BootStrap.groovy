@@ -85,8 +85,6 @@ class BootStrap {
             User.findWhere(email: 'bill@mate.com').addToCircles(house.circle)
             User.findWhere(email: 'andreccdr@gmail.com').addToCircles(house.circle)
             User.findWhere(email: 'pmcleite@gmail.com').addToCircles(house.circle)
-            User.findWhere(email: 'fntneves@gmail.com').addToCircles(house.circle)
-            User.findWhere(email: '28.ricardobranco@gmail.com').addToCircles(house.circle)
         }
 
         if(Collective.count() == 0){
@@ -224,19 +222,19 @@ class BootStrap {
         }
 
         if(RegularExpense.count() == 0 ){
-            def electricity = new RegularExpense(title: 'Electricity', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Electricity'), receptionBeginDate: new Date())
+            def electricity = new RegularExpense(title: 'Electricity', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Electricity'), receptionBeginDate: new Date(), value: 20, description: 'Descrição da despesa')
             electricity.save()
 
             electricity.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
             electricity.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
 
-            def water = new RegularExpense(title: 'Water', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Water'), receptionBeginDate: new Date())
+            def water = new RegularExpense(title: 'Water', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Water'), receptionBeginDate: new Date(), value:30)
             water.save()
 
             water.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
             water.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
 
-            def internet = new RegularExpense(title: 'Internet', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Internet'), receptionBeginDate: new Date())
+            def internet = new RegularExpense(title: 'Internet', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Internet'), receptionBeginDate: new Date(), value:40)
             internet.save()
 
             internet.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
