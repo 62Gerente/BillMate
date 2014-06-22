@@ -25,4 +25,8 @@ class CircleDashboard {
     public List<ExpenseType> expenseTypesWithMoreSpendingInLastMonths(){
         circle.expenseTypesWithMoreSpendingInLastMonths(6,5)
     }
+    
+    public Set<Expense> unresolvedExpenses(){
+        circle.unresolvedExpenses()
+    }
 }

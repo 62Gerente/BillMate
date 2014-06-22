@@ -10,10 +10,10 @@
         </thead>
         <tbody>
         <g:if test="${unresolvedExpenses.isEmpty()}">
-            <g:render template="/expense/table/userDashboard/empty"/>
+            <g:render template="/expense/table/whoOwe/empty"/>
         </g:if>
         <g:else>
-            <g:render template="/expense/table/userDashboard/index" model="[user: user, unresolvedExpenses: unresolvedExpenses]"/>
+            <g:render template="/expense/table/whoOwe/index" model="[user: user, unresolvedExpenses: unresolvedExpenses]"/>
         </g:else>
         <g:if test="${unresolvedExpenses.size()>1}">
             <tr>

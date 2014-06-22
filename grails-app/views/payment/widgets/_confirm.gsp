@@ -1,5 +1,5 @@
 <g:if test="${!whoHaveUnconfirmedPayments.isEmpty()}">
-    <div class="row tiles-container tiles white hidden-xlg m-b-20 confirm-payments-widget">
+    <div class="row tiles-container tiles white hidden-xlg m-b-20 confirm-payments-widget unselectable">
         <div class="row tiles-container tiles white hidden-xlg">
             <div class="col-md-12 b-grey b-r no-padding widget-table-adjust-right-margin">
                 <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
