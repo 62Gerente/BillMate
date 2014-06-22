@@ -6,6 +6,8 @@
 //= require ../plugins/blockUI/jquery.blockUI.js
 //= require ../plugins/bootstrap-select2/select2.min.js
 //= require ../plugins/bootstrap-tag/bootstrap-tagsinput.min.js
+//= require ../plugins/bootstrap-datepicker/js/bootstrap-datepicker.js
+
 //= require core.js
 
 //= require ../plugins/pace/pace.min.js
@@ -21,4 +23,4 @@
 
 //= require ../plugins/image-picker-master/image-picker/image-picker.js
 //= require ../plugins/image-picker-master/image-picker/image-picker.min.js
-//= require bm-image-picker.js
+//= require bm-form-elements-expense.js

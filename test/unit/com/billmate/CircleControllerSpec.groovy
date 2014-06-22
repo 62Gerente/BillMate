@@ -6,8 +6,8 @@ import spock.lang.Specification
 /**
  * See the API for {@link grails.test.mixin.web.ControllerUnitTestMixin} for usage instructions
  */
-@TestFor(ExpenseTypeController)
-class ExpenseTypeControllerSpec extends Specification {
+@TestFor(CircleController)
+class CircleControllerSpec extends Specification {
 
     def setup() {
     }
