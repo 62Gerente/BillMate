@@ -1,6 +1,6 @@
 .circle-utilities{
     list-style: none;
-    padding-left: 0px
+    padding-left: 0px;
 }
 
 .circle-utilities > li{
@@ -26,4 +26,27 @@
 
 .circle-utilities a{
     color: #8b91a0;
+}
+
+.icon-active-expense{
+  padding-top: 6px;
+}
+
+.profile-pic-xs{
+  border-radius: 4px;
+  height: 15px;
+  overflow: hidden;
+  width: 15px;
+  display: inline-block;
+  margin-bottom: -3px;
+}
+
+.profile-pic-xs img{
+  vertical-align: top;
+}
+
+.td-settings{
+  width: 10px; 
+  padding-left: 0 !important; 
+  padding-right: 0 !important;
 }

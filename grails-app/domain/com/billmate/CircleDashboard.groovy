@@ -17,4 +17,8 @@ class CircleDashboard {
     public Set<RegularExpense> regularExpensesInReceptionTime(){
         circle.regularExpensesInReceptionTime()
     }
+
+    public Set<Expense> unresolvedExpenses(){
+        circle.unresolvedExpenses()
+    }
 }

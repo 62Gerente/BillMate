@@ -35,6 +35,16 @@ class Circle {
         this.expenses.findAll{ !it.isResolved() }
     }
 
+    public Double totalValueOfUnresolvedExpenses(){
+        Double total = unresolvedExpenses().sum{ it.getValue() }
+        total ? total : 0D
+    }
+
+    public Double totalDebtOfUnresolvedExpenses(){
+        Double total = unresolvedExpenses().sum{ it.totalDebt() }
+        total ? total : 0D
+    }
+
     public Set<Expense> resolvedExpenses(){
         this.expenses.findAll{ !it.isResolved() }
     }

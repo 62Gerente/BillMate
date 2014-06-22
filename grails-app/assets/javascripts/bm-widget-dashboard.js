@@ -5,7 +5,7 @@ $(document).ready(function(){
 
     $(".expenses-widget-more-details").click(function(e){
         var target  = $(e.target);
-        if( target.is('a') || target.parent().andSelf().hasClass('btn') || target.parent().andSelf().hasClass('checkbox')) {
+        if( target.is('a') || target.parent().andSelf().is('button') || target.parent().andSelf().hasClass('checkbox') || target.parent().andSelf().is('a')) {
             return true;
         }
 
@@ -15,6 +15,6 @@ $(document).ready(function(){
         $homeMarginList.children(".price-widget-dashboard").toggle();
         $homeMarginList.children(".div-btn-widget-payments").toggle().toggleClass('inline');
 
-        $homeMarginList.find("i").toggleClass("fa-angle-down").toggleClass("fa-angle-up");
+        $homeMarginList.find("i.fa-angle-down, i.fa-angle-up").toggleClass("fa-angle-down").toggleClass("fa-angle-up");
     });
 });
