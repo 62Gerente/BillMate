@@ -325,7 +325,7 @@
     width: 100%;
 }
 
-@media (max-width: 1180px){
+/*@media (max-width: 1180px){
     .row.tiles-container.tiles .user-info-wrapper .user-info.user-info-photo{
         width: 50%;
     }
@@ -347,7 +347,7 @@
     .row.tiles-container.tiles .user-info-wrapper .user-info.user-info-photo{
         width: 55%;
     }
-}
+}*/
 
 @media (max-width: 520px){
     .home-button-divida-primary-confirm{
