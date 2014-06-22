@@ -59,3 +59,13 @@ a {
     -o-user-select       : none;
     user-select          : none;
 }
+
+.dropdown-left.dropdown-menu:after {
+    left: auto;
+    right: 13px;
+}
+
+.dropdown-left.dropdown-menu {
+    left: auto;
+    right: 0;
+}

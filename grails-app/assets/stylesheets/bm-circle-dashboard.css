@@ -29,11 +29,12 @@
 }
 
 .icon-active-expense{
-  padding-top: 6px;
+  font-size: 20px;
+  line-height: 38px;
 }
 
 .profile-pic-xs{
-  border-radius: 4px;
+  border-radius: 10px;
   height: 15px;
   overflow: hidden;
   width: 15px;
@@ -46,7 +47,21 @@
 }
 
 .td-settings{
-  width: 10px; 
+  width: 10px !important; 
   padding-left: 0 !important; 
   padding-right: 0 !important;
+}
+
+.row.tiles-container.tiles .table.table-home-box tbody tr td.td-settings,
+.row.tiles-container.tiles .table.table-home-box tbody tr td.td-settings {
+  padding: 2px 0px !important;
+  padding-right: 15px !important;
+}
+
+.user-info-wrapper.home-margin-list .pull-right.show-expense {
+  margin-right: -12px;
+}
+
+.dropdown-toggle{
+  cursor: pointer;
 }

@@ -5,7 +5,7 @@
                 <h4 class="text-black bold inline uppercase">
                     <g:message code="com.billmate.expense.widget.unresolved.title" default="Unresolved expenses" />
                 </h4>
-                <div class="pull-right">
+                <div class="pull-right home-button-primary-confirm">
                     <span class="label label-important">
                         <h5 class="text-white inline p-t-2">
                             <g:formatNumber number="${circle.totalDebtOfUnresolvedExpenses()}" type="currency" currencyCode="EUR" />
@@ -21,7 +21,7 @@
                 <g:render template="/expense/widgets/unresolved/empty"/>
             </g:if>
             <g:else>
-                <g:render template="/expense/widgets/unresolved/index" model="[circle: circle, expenses: expenses]"/>
+                <g:render template="/expense/widgets/unresolved/index" model="[registeredUser: registeredUser, expenses: expenses]"/>
             </g:else>
         </div>
     </div>

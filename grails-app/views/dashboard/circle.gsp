@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
-    <g:render template="/expense/widgets/unresolved" model="[circle: dashboard.getCircle(), expenses: dashboard.getUnresolvedExpenses()]"/>
+    <g:render template="/expense/widgets/unresolved" model="[registeredUser: user, circle: dashboard.getCircle(), expenses: dashboard.unresolvedExpenses()]"/>
     <g:render template="/expense/charts/monthlySpending" model="[entity: dashboard.getCircle(), expenseTypes: dashboard.expenseTypesWithMoreSpendingInLastMonths()]"/>
 </div>
 <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">

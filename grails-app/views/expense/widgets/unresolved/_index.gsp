@@ -1,3 +1,3 @@
-<g:each var="user" in="${['André', 'António']}">
-    <g:render template="/expense/widgets/active/show" model="[user: user]"/>
+<g:each var="expense" in="${expenses}">
+    <g:render template="/expense/widgets/unresolved/show" model="[registeredUser: registeredUser, expense: expense]"/>
 </g:each>

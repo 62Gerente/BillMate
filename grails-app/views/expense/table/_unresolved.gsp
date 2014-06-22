@@ -11,25 +11,29 @@
         </thead>
         <tbody>
         <g:if test="${users.isEmpty()}">
-            <g:render template="/expense/table/active/empty"/>
+            <g:render template="/expense/table/unresolved/empty"/>
         </g:if>
         <g:else>
-            <g:render template="/expense/table/active/index" model="[]"/>
+            <g:render template="/expense/table/unresolved/index" model="[registeredUser: registeredUser, expense: expense, users: users]"/>
         </g:else>
         <g:if test="${users.size()>1}">
             <tr>
-                <td class="text-right text-grey" colspan="4">
+                <td></td>
+                <td class="unseen"></td>
+                <td class="unseen"></td>
+                <td class="text-right text-grey">
                     <div class="inline b-t b-grey p-t-5">
-                        <g:formatNumber number="${15.27}" type="currency" currencyCode="EUR" />
+                        <g:formatNumber number="${expense.totalDebt()}" type="currency" currencyCode="EUR" />
                     </div>
                 </td>
+                <td></td>
             </tr>
         </g:if>
         </tbody>
     </table>
     <div class="m-b-10 home-button-divida-secondary-confirm">
-        <button type="button" class="btn btn-default btn-small width-btn-payment">
-            <g:message code="com.billmate.payment.new" default="Pay it now" />
+        <button type="button" class="btn btn-white btn-small width-btn-payment">
+            <g:message code="com.billmate.expense.show" default="Show expense" />
         </button>
     </div>
 </div>
