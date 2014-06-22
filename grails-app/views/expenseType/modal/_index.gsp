@@ -18,6 +18,7 @@
                 <div class="row form-row m-b-10">
                     <div class="col-md-12">
                         <input type="hidden" class="custom-multiselect-expense-circle" placeholder="Círculo" style="width:100%" class="select2-offscreen"/>
+                        <input type="hidden" value="${user}"/>
                     </div>
                 </div>
                 <div class="row form-row m-b-10">

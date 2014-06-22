@@ -6,7 +6,7 @@ $(document).ready(function(){
         var $notification = $(this).find(".status-icon");
         var link = $(this).siblings("a").attr('href');
         var alert =  $(".error-notification");
-        alert.hide()
+        alert.hide();
         $.ajax({
             type: "PUT",
             url: link,

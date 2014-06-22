@@ -1,3 +1,7 @@
+var totalValue = 120;
+var numberOfElements = 6;
+var parcialValue = totalValue / numberOfElements;
+
 $(document).ready(function() {
 
     function displayDatePicker() {
@@ -59,7 +63,8 @@ $(document).ready(function() {
             dataType: 'json',
             data: function(term, page) {
                 return {
-                    q: term
+                    q: term,
+                    id: $(this).siblings("input").val()
                 };
             },
             results: function(data, page) {
@@ -70,7 +75,27 @@ $(document).ready(function() {
         }
     });
 
-    $(".select-list-users").imagepicker({show_label: true});
+    function synchronizeAfterUpdateUsers(){
+        $("select").data('picker').sync_picker_with_select();
+    }
+
+
+
+        /*$.ajax({
+        type: 'POST',
+        url: "/BillMate//getCirclesIfContainsStringPassedByURL",
+        dataType: 'json',
+        global: false,
+        async:false,
+        success: function(data) {
+            return data;
+        }
+    }).responseText;*/
+
+    $(".select-list-users").imagepicker({
+        show_label: true,
+        selected: synchronizeAfterUpdateUsers
+    });
     $(".select-list-users").data('picker');
 
 });

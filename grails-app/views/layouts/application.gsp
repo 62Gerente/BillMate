@@ -19,7 +19,7 @@
     <div class="page-container row-fluid">
       <g:render template="/house/modal/index" model="[users: user.getFriendsOfAllCircles(), expenseTypes: user.getExpenseTypeByHouse(), path: user.getPathToDefaultPhoto(), user: user.getUser().getId()]"/>
       <g:render template="/collective/modal/index" model="[users: user.getFriendsOfAllCircles(), expenseTypes: user.getExpenseTypeByCollective(), path: user.getPathToDefaultPhoto(), user: user.getUser().getId()]"/>
-        <g:render template="/expenseType/modal/index"/>
+        <g:render template="/expenseType/modal/index" model="[user: user.getId()]"/>
       <g:render template="/shared/sidebar" model="[user: user]"/>
       <div class="page-content">
         <div class="clearfix"></div>
