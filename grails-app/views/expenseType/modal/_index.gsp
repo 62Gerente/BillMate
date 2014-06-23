@@ -30,7 +30,7 @@
                                 <span class="input-group-addon">
                                     <i class="fa fa-euro"></i>
                                 </span>
-                                <input class="form-control" type="number" step="any" name="value" value="" placeholder="Valor">
+                                <input class="form-control value-debt" type="number" step="any" name="value" value="" placeholder="Valor">
                             </div>
                         </div>
                 </div>
@@ -69,13 +69,18 @@
                         </select>
                     </div>
                 </div>
-
-                <div class="row form-row m-t-10">
+                <div class="row form-row">
                     <div class="col-md-12">
                         <g:textArea name="houseDescription" rows="5" placeholder="Descrição da despesa" class="form-control houseDescription"/>
                     </div>
                 </div>
-
+                <div class="row form-row">
+                    <div class="pull-right">
+                        <div class="col-md-12">
+                            Opções Avançadas
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div class="modal-footer">

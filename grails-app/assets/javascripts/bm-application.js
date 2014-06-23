@@ -22,5 +22,4 @@
 //= require bm-form-elements-collective.js
 
 //= require ../plugins/image-picker-master/image-picker/image-picker.js
-//= require ../plugins/image-picker-master/image-picker/image-picker.min.js
 //= require bm-form-elements-expense.js

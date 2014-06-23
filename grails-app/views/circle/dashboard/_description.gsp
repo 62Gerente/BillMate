@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="center-block">
-                <g:render template="/user/members" model="[members: circle.getUsersWithout(registeredUser.getUser().getId())]"/>
+                <g:render template="/user/members" model="[members: circle.getUsers()]"/>
             </div>
         </div>
         <div class="row p-t-10">
