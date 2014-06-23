@@ -112,6 +112,6 @@ class Circle {
 
         List<ExpenseType> orderList = expenseTypes.sort { map.get(it).sum{ it.valueAssignedTo(this.id) } }
 
-        orderList[0..(expenses < orderList.size() ? expenses : orderList.size())-1]
+        orderList.take(expenses)
     }
 }
