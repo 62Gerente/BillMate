@@ -9,8 +9,8 @@
     <meta content="" name="description" />
 
     <asset:stylesheet href="bm-application.css"/>
-    <g:layoutHead/>
     <asset:javascript src="bm-application.js"/>
+    <g:layoutHead/>
 </head>
 <body>
     <g:render template="/shared/header" model="[user: user]"/>

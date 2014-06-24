@@ -6,8 +6,6 @@ class CollectiveController extends RestrictedController {
 
     def beforeInterceptor = [action: this.&checkSession]
 
-    def index() {}
-
     def save(){
         boolean result
         String friendsList = ((params.friendsCollective != "")? params.friendsCollective + "," : "") + params.identifier

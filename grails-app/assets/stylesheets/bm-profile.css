@@ -76,16 +76,6 @@
     margin-right: 0px;
 }
 
-.large-user-profile-pic{
-    border-radius: 240px;
-    display: block;
-    height: 120px;
-    overflow: hidden;
-    width: 120px;
-    border: 5px solid #F1F1F1;
-    background-color: #e5e9ec;
-}
-
 .profile-debts-resume h3{
     margin: 0px
 }

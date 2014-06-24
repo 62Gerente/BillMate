@@ -170,4 +170,14 @@ class Expense {
     public Set<Payment> unconfirmedPayments(){
         payments.findAll{ !it.getValidationDate() && !it.getIsValidated() }
     }
+
+    public Set<User> assignedUsersAndResponsible(){
+        Set<User> users = getAssignedUsers()
+        users.add(responsible.getUser())
+        users
+    }
+
+    public List<Action> latestEvents(){
+        actions.sort{ it.getActionDate() }
+    }
 }

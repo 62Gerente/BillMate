@@ -2,7 +2,7 @@
     <div class="tiles white">
         <div class="row">
             <div class="col-md-3">
-                <div class="">
+                <div>
                     <div class="large-user-profile-pic center-block">
                         <a href="#" class="profile-photo-img" id="profile-photo-link" class="profile-photo-link">
                             <img id="profile-photo-img" class="profile-photo-img" width="120" height="120" src="${user.getPhotoOrDefault()}" alt="">
@@ -14,7 +14,6 @@
                                 <input type="hidden" name="successAction" value="successUploadPhoto">
                                 <input type="hidden" name="successController" value="registeredUser">
                                 <input type="file" name="file" id="edit_photo">
-                            </form>
                         </form>
                     </div>
                     <div id="profile-photo-error" class="profile-photo-error text-danger p-r-5 p-t-5" style="display: none"></div>

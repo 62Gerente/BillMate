@@ -69,3 +69,29 @@ a {
     left: auto;
     right: 0;
 }
+
+.large-user-profile-pic{
+    border-radius: 240px;
+    display: block;
+    height: 120px;
+    overflow: hidden;
+    width: 120px;
+    border: 5px solid #F1F1F1;
+    background-color: #e5e9ec;
+}
+
+.medium-user-profile-pic{
+    border-radius: 25px;
+    display: block;
+    height: 80px;
+    overflow: hidden;
+    width: 80px;
+    border: 5px solid #F1F1F1;
+    background-color: #e5e9ec;
+}
+
+.btn-danger-hover:hover{
+    color: #ffffff;
+    background-color: #f35958;
+    border: 1px solid rgba(0,0,0,0);
+}
