@@ -92,6 +92,9 @@
         </g:elseif>
     </div>
     <div class="row p-t-5">
+        <button class="btn btn-block btn-primary" type="button">
+            <g:message code="com.billmate.payment.new" default="Delete expense" />
+        </button>
         <button class="btn btn-block btn-white btn-danger-hover" type="button">
             <g:message code="com.billmate.expense.delete" default="Delete expense" />
         </button>

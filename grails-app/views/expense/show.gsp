@@ -6,6 +6,10 @@
 <body>
     <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
         <g:render template="/expense/widgets/paymentHistory" model="[registeredUser: user, expense: expense, users: expense.getAssignedUsers()]"/>
+        <div class="row">
+            <g:render template="/expense/show/invoice" model="[expense: expense]"/>
+            <g:render template="/expense/show/receipt" model="[expense: expense]"/>
+        </div>
     </div>
     <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
         <g:render template="/expense/show/description" model="[registeredUser: user, expense: expense]"/>

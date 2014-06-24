@@ -9,14 +9,24 @@
         <div class="col-md-2 pull-right no-padding m-t-10 widget-payments-price m-t-13">
             <span class="label label-default label-grey-background">
                 <h6 class="inline p-t-2">
-                    <g:formatNumber number="${expense.debtOf(user.getId())}" type="currency" currencyCode="EUR" />
+                    <g:if test="${expense.isResolvedBy(user.getId())}">
+                        <span class="text-success">
+                            <g:formatNumber number="${expense.amountPaidBy(user.getId())}" type="currency" currencyCode="EUR" />
+                        </span>
+                    </g:if>
+                    <g:else>
+                        <span class="text-danger">
+                            <g:formatNumber number="${expense.amountPaidBy(user.getId())}" type="currency" currencyCode="EUR" />
+                        </span>
+                    </g:else>
                     /
                     <span class="bold">
-                        <g:formatNumber number="${expense.getValue()}" type="currency" currencyCode="EUR" />
+                        <g:formatNumber number="${expense.valueAssignedTo(user.getId())}" type="currency" currencyCode="EUR" />
                     </span>
                 </h6>
             </span>
         </div>
     </div>
-    <g:render template="/payment/table/history" model="[user: user, expense: expense, payments: expense.getPayments()]"/>
+    <g:render template="/payment/table/history" model="[user: user, expense: expense, payments: expense.getPaymentsOf(user.getId())]"/>
 </div>
+

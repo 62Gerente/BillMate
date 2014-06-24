@@ -180,4 +180,8 @@ class Expense {
     public List<Action> latestEvents(){
         actions.sort{ it.getActionDate() }
     }
+
+    public Set<Payment> getPaymentsOf(Long userId){
+        payments.findAll{ it.getUserId() == userId }
+    }
 }
