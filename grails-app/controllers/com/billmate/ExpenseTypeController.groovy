@@ -13,7 +13,6 @@ class ExpenseTypeController extends RestrictedController  {
         Set<ExpenseType> expenseTypes = new HashSet<ExpenseType>()
         ExpenseType.findAll().each { if(it.getName().toUpperCase().contains(params.toUpperCase())) expenseTypes.add(it) }
 
-
         def response = [
                 'error': false,
                 'data': expenseTypes,

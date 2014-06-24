@@ -33,8 +33,6 @@ class BootStrap {
             User.findWhere(email: 'bill@mate.com').addToCircles(house.circle)
             User.findWhere(email: 'andreccdr@gmail.com').addToCircles(house.circle)
             User.findWhere(email: 'pmcleite@gmail.com').addToCircles(house.circle)
-            User.findWhere(email: 'fntneves@gmail.com').addToCircles(house.circle)
-            User.findWhere(email: '28.ricardobranco@gmail.com').addToCircles(house.circle)
         }
 
         if(Collective.count() == 0){

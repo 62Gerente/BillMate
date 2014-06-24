@@ -6,6 +6,9 @@ var listSelectables = [];
 var id_circle = 13;
 var id_user = 3;
 var unknownUser = "/BillMate/assets/default-user.png";
+var hasCircles = false;
+var hasExpenseTypes = false;
+var hasUsers = false;
 
 $(document).ready(function() {
 
@@ -35,7 +38,14 @@ $(document).ready(function() {
         return "<i class='" + state.cssClass + "'></i>&nbsp;" + $("<div>").html(state.name).text();
     }
 
-    function formatCircles(state) {
+    function formatResultCircles(state) {
+        return "<i class='" + state.description + "'></i>&nbsp;" + $("<div>").html(state.name).text();
+    }
+
+    function formatSelectionCircles(state) {
+        id_circle = state.id;
+        listElements = [];
+        fillList();
         return "<i class='" + state.description + "'></i>&nbsp;" + $("<div>").html(state.name).text();
     }
 
@@ -52,6 +62,7 @@ $(document).ready(function() {
                 };
             },
             results: function(data, page) {
+                hasExpenseTypes = true;
                 return {
                     results: data.data
                 };
@@ -61,18 +72,19 @@ $(document).ready(function() {
 
     $(".custom-multiselect-expense-circle").select2({
         minimumInputLength: 1,
-        formatResult: formatCircles,
-        formatSelection: formatCircles,
+        formatResult: formatResultCircles,
+        formatSelection: formatSelectionCircles,
         ajax: {
             url: "/BillMate/circle/getCirclesIfContainsStringPassedByURL",
             dataType: 'json',
             data: function(term, page) {
                 return {
                     q: term,
-                    id: $(this).siblings("input").val()
+                    id: $(this).parents(".simple-options-form-debt").children("input").val()
                 };
             },
             results: function(data, page) {
+                hasCircles = true;
                 return {
                     results: data.data
                 };
@@ -80,10 +92,10 @@ $(document).ready(function() {
         }
     });
 
+
     function calculateValues(){
         numberOfElements = 0;
-        listElements.forEach(function(entry){ if(entry.selectable == true)
-            numberOfElements++; });
+        listElements.forEach(function(entry){ if(entry.selectable == true) numberOfElements++; });
         totalValue = $(".input-group.transparent").find("input").val();
         listElements.forEach(function(entry){
             entry.value = 0;
@@ -144,7 +156,7 @@ $(document).ready(function() {
     }
 
     function fillList(){
-        var url = "/BillMate/circle/getFriendsOfaCircleExceptId?id_circle=13&id_user=3";
+        var url = "/BillMate/circle/getFriendsOfaCircleExceptId?id_circle=" + id_circle +"&id_user=" + id_user;
         $.get(url, function (data) {
             listFriendsOfCircleAjaxRequestInList(data);
         } );
@@ -172,12 +184,33 @@ $(document).ready(function() {
         propagateChanges();
     });
 
-    /*$("li .thumbnail").click(function(){
-        var element = $(this).find("li");
-        if(element.length){
-            alert(element.index())
+    $(".btn-options-form-debt").click(function(){
+        $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-debt").slideToggle();
+        $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-debt").slideToggle();
+    });
 
-        $(this).hide();
-    });}*/
 
+
+
+    $(".btn-submit-new-debt").click(function(){
+        var parent = $(this).closest(".modal-content").find(".simple-options-form-debt");
+        if(parent.find("div.row:nth(0) input").val() == ""){ doAlertInput(parent.find("div.row:nth(0)"),parent.find("div.row:nth(0) input"),"error-control"); }
+        if(!hasCircles){ doAlertSelect(parent.find("div.row:nth(1) .select2-container"),"select2-container-error",".custom-multiselect-expense-circle"); }
+        if(!hasExpenseTypes){ doAlertSelect(parent.find("div.row:nth(2) .select2-container"),"select2-container-error",".custom-multiselect-expense-debt"); }
+        if(parent.find("div.row:nth(2) input").val() == "") { doAlertInput(parent.find("div.row:nth(2) .input-group"),parent.find("div.row:nth(2) .input-group input"),"error-control"); }
+    });
+
+    function doAlertInput(selector, selectorEvent, classe){
+        selector.addClass(classe);
+        selectorEvent.change(function(){
+            selector.removeClass(classe);
+        });
+    }
+
+    function doAlertSelect(selector, classe, selectorStart){
+        selector.addClass(classe);
+        $(selectorStart).on("select2-selecting",function(){
+            selector.removeClass(classe);
+        });
+    }
 });

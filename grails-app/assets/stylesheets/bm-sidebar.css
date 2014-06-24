@@ -35,3 +35,6 @@ ul#home-sidebar-menu .title{
 ul#home-sidebar-menu li > a{
     padding: 3.5px 31px 11.5px 31px;
 }
+
+.select2-container-error{
+    border: 1px solid #f35958;
