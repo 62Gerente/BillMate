@@ -1,5 +1,9 @@
 <div class="modal fade" id="expenseCreateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
+        <div class="" style="display: none">
+            <button class="close"></button>
+            <div><g:message code=""/></div>
+        </div>
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -31,7 +35,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-euro"></i>
                                     </span>
-                                    <input class="form-control value-debt" type="number" step="any" name="value" value="" placeholder="Valor">
+                                    <input class="form-control value-debt" type="number" step="any" name="value" value="" placeholder="Valor"/>
                                 </div>
                             </div>
                     </div>
