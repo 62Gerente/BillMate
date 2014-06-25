@@ -7,8 +7,8 @@
     <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
         <g:render template="/expense/widgets/paymentHistory" model="[registeredUser: user, expense: expense, users: expense.getAssignedUsers()]"/>
         <div class="row">
-            <g:render template="/expense/show/invoice" model="[expense: expense]"/>
-            <g:render template="/expense/show/receipt" model="[expense: expense]"/>
+            <g:render template="/expense/show/invoice" model="[registeredUser: user, expense: expense]"/>
+            <g:render template="/expense/show/receipt" model="[registeredUser: user, expense: expense]"/>
         </div>
     </div>
     <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
@@ -16,5 +16,6 @@
         <g:render template="/action/widgets/latest" model="[latestEvents: expense.latestEvents()]"/>
     </div>
 <asset:javascript src="bm-dashboard.js"/>
+<asset:javascript src="bm-ajax-invoice.js"/>
 </body>
 </html>

@@ -124,12 +124,12 @@ fileuploader {
     avatar {
         maxSize = 1024 * 1024 * 3
         allowedExtensions = ["jpg","jpeg","gif","png"]
-        path = "/tmp/avatar/"
+        path = "/tmp/avatars/"
     }
-    docs {
-        maxSize = 1000 * 1024 * 4
+    document {
+        maxSize = 1000 * 1024 * 5
         allowedExtensions = ["doc", "docx", "pdf", "rtf"]
-        path = "/tmp/docs/"
+        path = "/tmp/documents/"
     }
 }
 

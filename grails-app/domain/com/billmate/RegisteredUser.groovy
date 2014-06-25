@@ -2,8 +2,6 @@ package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
 import org.apache.shiro.crypto.hash.Sha256Hash
-import org.springframework.validation.ObjectError
-import org.codehaus.groovy.grails.web.mapping.LinkGenerator
 
 class RegisteredUser {
     static belongsTo = User

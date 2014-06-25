@@ -2,7 +2,6 @@ package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
 import grails.converters.JSON
-import pl.burningice.plugins.image.BurningImageService
 
 class RegisteredUserController extends RestrictedController {
     static allowedMethods = [markNotificationsAsRead: "PUT", edit: "GET"]
