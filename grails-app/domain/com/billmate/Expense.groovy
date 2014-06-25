@@ -88,7 +88,6 @@ class Expense {
         receptionDate || totalDebt() == 0
     }
 
-    /*Mudar*/
     public Double valueAssignedTo(Long userId){
         Double totalDebt
         Debt debt = debt.find{ it.getUserId() == userId && it.getExpenseId() == this.id }
@@ -115,7 +114,6 @@ class Expense {
         100 - percentageOfDebts()
     }
 
-    /*Mudar*/
     public Integer numberOfDebts(){
         debt.size()
     }
@@ -124,7 +122,6 @@ class Expense {
         assignedUsers.size() + 1
     }
 
-    /*Mudar*/
     public Integer numberOfAssignedUsersWithoutDebts(){
         numberOfAssignedUsers() - numberOfDebts()
     }
@@ -169,5 +166,27 @@ class Expense {
 
     public Set<Payment> unconfirmedPayments(){
         payments.findAll{ !it.getValidationDate() && !it.getIsValidated() }
+    }
+
+    public boolean create(List<String> idsUsers, List<Double> value){
+        boolean result = false;
+        int position = 0
+        withTransaction {status ->
+            try{
+                save();
+                for(String str : idsUsers){
+                    User user = User.findById(Long.parseLong(str))
+                    Debt debt = new Debt(value: value[position], percentage: 20, user: user, expense: this).save()
+                    this.addToAssignedUsers(user)
+                    position++;
+                }
+            }
+            catch(Exception e){
+                result = false
+                status.setRollbackOnly()
+            }
+            result = true;
+        }
+        return result;
     }
 }

@@ -72,6 +72,7 @@ class House{
             }
             catch(Exception e){
                 result = false
+                status.setRollbackOnly()
             }
         }
         return result

@@ -229,13 +229,21 @@ $(document).ready(function() {
         if(!hasExpenseTypes){ hasErrors = true; doAlertSelect(parent.find("div.row:nth(2) .select2-container"),"select2-container-error",".custom-multiselect-expense-debt"); }
         if(value == "") { hasErrors = true; doAlertInput(parent.find("div.row:nth(2) .input-group"),parent.find("div.row:nth(2) .input-group input"),"error-control"); }
 
-        var formData = {name: name, idCircle: id_circle, idExpenseType: idExpenseType, value: value, description: description, idUser: id_user};
+        var listIDsUsers = [];
+        var listValuesUsers = [];
+        listElements.forEach(function(entry){
+            listIDsUsers.push(entry.id);
+            listValuesUsers.push(entry.value);
+        });
+
+        var formData = {name: name, idCircle: id_circle, idExpenseType: idExpenseType, value: value, description: description, idUser: id_user, listOfFriends: listIDsUsers, listValuesUsers: listValuesUsers};
 
         if(!hasErrors){
             $.ajax({
-                type: "POST",
                 url: "/BillMate/expense/create",
                 data: formData,
+                type: "POST",
+                dataType: 'json',
                 success: function (data) {
                     status.show();
                     status.removeClass();

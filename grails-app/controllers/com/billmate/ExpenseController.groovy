@@ -7,19 +7,20 @@ class ExpenseController extends RestrictedController {
     def beforeInterceptor = [action: this.&checkSession]
 
     def create(){
-        Expense result
-        String name = params.name;
-        Long idCircle = Long.parseLong(params.idCircle);
-        Long idExpenseType = Long.parseLong(params.idExpenseType);
-        Double value = Double.parseDouble(params.value);
-        String description = params.description;
-        Long idUser = Long.parseLong(params.idUser);
+        String name = params.name
+        Long idCircle = Long.parseLong(params.idCircle)
+        Long idExpenseType = Long.parseLong(params.idExpenseType)
+        Double value = Double.parseDouble(params.value)
+        String description = params.description
+        Long idUser = Long.parseLong(params.idUser)
+        List<String> listOfFriends = params.getList("listOfFriends[]")
+        List<String> listValuesUsers = params.getList("listValuesUsers[]")
 
         Circle circle = Circle.findById(idCircle)
         ExpenseType expenseType = ExpenseType.findById(idExpenseType)
         User user = User.findById(idUser)
         Expense expense = new Expense(title: name, description: description, value: value, circle: circle, expenseType: expenseType, responsible: user.getRegisteredUser())
-        result = expense.save()
+        Boolean result = expense.create(listOfFriends, listValuesUsers)
 
         def response = [
                 'error': false,

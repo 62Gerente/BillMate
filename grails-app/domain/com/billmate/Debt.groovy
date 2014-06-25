@@ -16,7 +16,7 @@ class Debt {
         regularExpense nullable: true
         user nullable: false
 
-        percentage min: 0D, nullable: false
+        percentage min: 0D, nullable: true
         value min: 0D, nullable: false
         createdAt nullable: false
     }
