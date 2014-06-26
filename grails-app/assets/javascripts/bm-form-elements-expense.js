@@ -1,18 +1,14 @@
-var totalValue = 0;
-var numberOfElements = 0;
-var parcialValue = [];
-var listElements = [];
-var listSelectables = [];
-var id_circle = 13;
-var id_user = 3;
-var idExpenseType = 0;
-var unknownUser = "/BillMate/assets/default-user.png";
-var hasCircles = false;
-var hasExpenseTypes = false;
-var hasUsers = false;
-
 $(document).ready(function() {
 
+    var listElements = [];
+    var id_circle = 0;
+    var id_registered_user = 0;
+    var id_user = 0;
+    var idExpenseType = 0;
+    var hasCircles = false;
+    var hasExpenseTypes = false;
+
+    //Show DatePicker
     function displayDatePicker() {
         $('.clockTimePaymentExpense').datepicker({
             format: "dd/mm/yyyy",
@@ -35,6 +31,7 @@ $(document).ready(function() {
         });
 
 
+    //Next 3 functions format display results
     function formatExpenseTypes(state) {
         idExpenseType = state.id;
         return "<i class='" + state.cssClass + "'></i>&nbsp;" + $("<div>").html(state.name).text();
@@ -47,15 +44,16 @@ $(document).ready(function() {
 
     function formatSelectionCircles(state) {
         id_circle = state.id;
-        listElements = [];
         fillList();
         return "<i class='" + state.icon + "'></i>&nbsp;" + $("<div>").html(state.name).text();
     }
 
+    //Enable select2 plugin to expenses debts
     $(".custom-multiselect-expense-debt").select2({
         minimumInputLength: 1,
         formatResult: formatExpenseTypes,
         formatSelection: formatExpenseTypes,
+        enable: false,
         ajax: {
             url: "/BillMate/expenseType/getExpensesIfContainsStringPassedByURL",
             dataType: 'json',
@@ -72,7 +70,9 @@ $(document).ready(function() {
             }
         }
     });
+    $(".custom-multiselect-expense-debt").select2("enable",false);
 
+    //Enable select2 plugin to expenses circles
     $(".custom-multiselect-expense-circle").select2({
         minimumInputLength: 1,
         formatResult: formatResultCircles,
@@ -83,11 +83,12 @@ $(document).ready(function() {
             data: function(term, page) {
                 return {
                     q: term,
-                    id: $(this).parents(".simple-options-form-debt").children("input").val()
+                    id: $(this).parents(".simple-options-form-debt").children("input:nth(0)").val()
                 };
             },
             results: function(data, page) {
                 hasCircles = true;
+                $(".custom-multiselect-expense-debt").select2("enable",true);
                 return {
                     results: data.data
                 };
@@ -95,64 +96,42 @@ $(document).ready(function() {
         }
     });
 
+    //Call images plugin
+    $(".select-list-users").imagepicker({
+        initialized: fillList
+    });
 
-    function calculateValues(){
-        numberOfElements = 0;
-        listElements.forEach(function(entry){ if(entry.selectable == true) numberOfElements++; });
-        totalValue = $(".input-group.transparent").find("input").val();
-        listElements.forEach(function(entry){
-            entry.value = 0;
-            if(entry.selectable == true)
-                entry.value = totalValue / numberOfElements;
-        });
+    //Fill list of Users
+    function fillList(){
+        if(id_user == 0) id_user = $(".simple-options-form-debt").children("input:nth(1)").val();
+        if(id_circle != 0){
+            var url = "/BillMate/circle/getFriendsOfaCircleExceptId?id_circle=" + id_circle +"&id_user=" + id_registered_user;
+            $.get(url, function (data) {
+                listFriendsOfCircleAjaxRequestInList(data);
+            } );
+            $(".select-list-users").data('picker');
+        }
     }
 
-    function addNewElementstoSelect(){
-        var position = 0;
-        $(".select-list-users").empty();
-        listElements.forEach(function(entry){
-            $(".select-list-users").append("<option data-img-src='" + entry.photo + "' value='" + entry.id + "'>" + entry.value.toFixed(2) +" €</option>")
-        });
+    //When input value debt, we need calculate new values and update in html, calling propagateChanges() and updateValues()
+    $(".input-group.transparent .value-debt").keyup(function(){
+        propagateChanges();
+    });
+
+    function propagateChanges(){
+        calculateValues();
+        updateValues();
     }
 
-    function enableSelectables(){
+    function updateValues(){
         var position = 0;
         listElements.forEach(function(entry){
-            if(entry.selectable == true)
-                $(".thumbnails.image_picker_selector").find("li:nth(" + position + ") .thumbnail").trigger("click");
+            $(".thumbnails.image_picker_selector").find("li:nth(" + position + ") .thumbnail .name-inside-photo-modal-debt").text(entry.value.toFixed(2) + " €");
             position++;
         });
     }
 
-    function startImagePicker(){
-        $("select").imagepicker({
-            show_label: true,
-            clicked: enableClickOnImagePicker
-        });
-        addValuesToPhotos();
-    }
-
-    function addValuesToPhotos(){
-        var position = 0;
-        listElements.forEach(function(entry){
-            $(".thumbnails.image_picker_selector li:nth(" + position + ") .thumbnail").append("<div class='name-inside-photo-modal-debt'>" + entry.value.toFixed(2) + " €</div><span class='tick-green'><i class='fa fa-circle fa-2x text-info'></i></span>");
-            position++;
-        });
-    }
-
-    function updateNamesInBoxes(){
-        var position = 0;
-        listElements.forEach(function(entry){
-            var element = $(".thumbnails.image_picker_selector li:nth(" + position + ") .thumbnail");
-            element.find("p").replaceWith(function(){
-                return $("<h6/>", {html: entry.name});
-            });
-            element.find("h6").addClass("text-center semi-bold");
-            element.find("h6").detach().appendTo(element.parent());
-            position++;
-        });
-    }
-
+    //Put images selected on start, and propagate changes
     function enableClickOnImagePicker(){
         $(".thumbnails.image_picker_selector").find("li").click(function(){
             var index = $(this).index();
@@ -167,6 +146,13 @@ $(document).ready(function() {
         });
     }
 
+    //Simply save actual data array and start process to listUsers
+    function listFriendsOfCircleAjaxRequestInList(data){
+        listElements = data.data;
+        startProcedure()
+    }
+
+    //Core procedure to display list images
     function startProcedure(){
         calculateValues();
         addNewElementstoSelect();
@@ -175,46 +161,71 @@ $(document).ready(function() {
         updateNamesInBoxes();
     }
 
-    function listFriendsOfCircleAjaxRequestInList(data){
-        if(listElements.length == 0)
-            listElements = data.data;
-        startProcedure()
+    //Calculate actual values
+    function calculateValues(){
+        var totalValue = 0;
+        var numberOfElements = 0;
+        listElements.forEach(function(entry){ if(entry.selectable == true) numberOfElements++; });
+        totalValue = $(".input-group.transparent").find("input").val();
+        listElements.forEach(function(entry){
+            entry.value = 0;
+            if(entry.selectable == true)
+                entry.value = totalValue / numberOfElements;
+        });
     }
 
-    function fillList(){
-        var url = "/BillMate/circle/getFriendsOfaCircleExceptId?id_circle=" + id_circle +"&id_user=" + id_user;
-        $.get(url, function (data) {
-            listFriendsOfCircleAjaxRequestInList(data);
-        } );
-        $(".select-list-users").data('picker');
+    //We need append new users according selected circles
+    function addNewElementstoSelect(){
+        var position = 0;
+        $(".select-list-users").empty();
+        listElements.forEach(function(entry){
+            $(".select-list-users").append("<option data-img-src='" + entry.photo + "' value='" + entry.id + "'>" + entry.value.toFixed(2) +" €</option>")
+        });
     }
 
-    $(".select-list-users").imagepicker({
-        initialized: fillList
-    });
+    //Tell to plugin show labels and associate function enableClickOnImagePicker() when clicked
+    function startImagePicker(){
+        $("select").imagepicker({
+            show_label: true,
+            clicked: enableClickOnImagePicker
+        });
+        addValuesToPhotos();
+    }
 
-    function updateValues(){
+    //Show values to each user
+    function addValuesToPhotos(){
         var position = 0;
         listElements.forEach(function(entry){
-            $(".thumbnails.image_picker_selector").find("li:nth(" + position + ") .thumbnail .name-inside-photo-modal-debt").text(entry.value.toFixed(2) + " €");
+            $(".thumbnails.image_picker_selector li:nth(" + position + ") .thumbnail").append("<div class='name-inside-photo-modal-debt'>" + entry.value.toFixed(2) + " €</div><span class='tick-green'><i class='fa fa-circle fa-2x text-info'></i></span>");
             position++;
         });
     }
 
-    function propagateChanges(){
-        calculateValues();
-        updateValues();
+    //Trigger click to display users selected
+    function enableSelectables(){
+        var position = 0;
+        listElements.forEach(function(entry){
+            if(entry.selectable == true)
+                $(".thumbnails.image_picker_selector").find("li:nth(" + position + ") .thumbnail").trigger("click");
+            position++;
+        });
     }
 
-    $(".input-group.transparent .value-debt").keyup(function(){
-        propagateChanges();
-    });
+    //Plugin add paragraph, but whe need replace p by h6
+    function updateNamesInBoxes(){
+        var position = 0;
+        listElements.forEach(function(entry){
+            var element = $(".thumbnails.image_picker_selector li:nth(" + position + ") .thumbnail");
+            element.find("p").replaceWith(function(){
+                return $("<h6/>", {html: entry.name});
+            });
+            element.find("h6").addClass("text-center semi-bold");
+            element.find("h6").detach().appendTo(element.parent());
+            position++;
+        });
+    }
 
-    $(".btn-options-form-debt").click(function(){
-        $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-debt").slideToggle();
-        $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-debt").slideToggle();
-    });
-
+    // When submit form
     $(".btn-submit-new-debt").click(function(){
         var hasErrors = false;
         var status = $(this).closest(".modal-dialog").find("div:nth(0)");
@@ -229,6 +240,14 @@ $(document).ready(function() {
         if(!hasExpenseTypes){ hasErrors = true; doAlertSelect(parent.find("div.row:nth(2) .select2-container"),"select2-container-error",".custom-multiselect-expense-debt"); }
         if(value == "") { hasErrors = true; doAlertInput(parent.find("div.row:nth(2) .input-group"),parent.find("div.row:nth(2) .input-group input"),"error-control"); }
 
+        var dates = $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-debt");
+        var paymentDeadline = dates.find("input:nth(0)").val();
+        var receptionDeadline = dates.find("input:nth(1)").val();
+        var beginDate = dates.find("input:nth(2)").val();
+        var endDate = dates.find("input:nth(3)").val();
+        var paymentDate = dates.find("input:nth(4)").val();
+        var receptionDate = dates.find("input:nth(5)").val();
+
         var listIDsUsers = [];
         var listValuesUsers = [];
         listElements.forEach(function(entry){
@@ -236,7 +255,10 @@ $(document).ready(function() {
             listValuesUsers.push(entry.value);
         });
 
-        var formData = {name: name, idCircle: id_circle, idExpenseType: idExpenseType, value: value, description: description, idUser: id_user, listOfFriends: listIDsUsers, listValuesUsers: listValuesUsers};
+        var formData = {name: name, idCircle: id_circle, idExpenseType: idExpenseType, value: value, description: description,
+                        idUser: id_user, listOfFriends: listIDsUsers, listValuesUsers: listValuesUsers, paymentDeadline: paymentDeadline,
+                        receptionDeadline: receptionDeadline, beginDate: beginDate, endDate: endDate, paymentDate: paymentDate,
+                        receptionDate: receptionDate, numberSelected: getNumberOfSelected()};
 
         if(!hasErrors){
             $.ajax({
@@ -264,21 +286,34 @@ $(document).ready(function() {
         }
     });
 
-    function doAlertInput(selector, selectorEvent, classe){
-        selector.addClass(classe);
+    //Display alerts on input text
+    function doAlertInput(selector, selectorEvent, errorClass){
+        selector.addClass(errorClass);
         selectorEvent.change(function(){
-            selector.removeClass(classe);
+            selector.removeClass(errorClass);
         });
     }
 
-    function doAlertSelect(selector, classe, selectorStart){
-        selector.addClass(classe);
+    //Display alerts on select options
+    function doAlertSelect(selector, errorClass, selectorStart){
+        selector.addClass(errorClass);
         $(selectorStart).on("select2-selecting",function(){
-            selector.removeClass(classe);
+            selector.removeClass(errorClass);
         });
     }
 
-    $("ul.thumbnails.image_picker_selector li .thumbnail").click(function(){
-
+    // Show/hide advanced options
+    $(".btn-options-form-debt").click(function(){
+        $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-debt").slideToggle();
+        $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-debt").slideToggle();
     });
+
+    function getNumberOfSelected(){
+        var numberSelected = 0;
+        listElements.forEach(function(entry){
+            if(entry.selectable == true)
+                numberSelected++;
+        });
+        return numberSelected;
+    }
 });

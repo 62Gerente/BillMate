@@ -173,10 +173,10 @@ class Expense {
         int position = 0
         withTransaction {status ->
             try{
-                save();
+                Expense expense = save();
                 for(String str : idsUsers){
                     User user = User.findById(Long.parseLong(str))
-                    Debt debt = new Debt(value: value[position], percentage: 20, user: user, expense: this).save()
+                    Debt debt = new Debt(value: value[position], percentage: 20, user: user, expense: expense).save()
                     this.addToAssignedUsers(user)
                     position++;
                 }
