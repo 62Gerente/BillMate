@@ -30,24 +30,12 @@ class ExpenseController extends RestrictedController {
             Circle circle = Circle.findById(idCircle)
             ExpenseType expenseType = ExpenseType.findById(idExpenseType)
             User user = User.findById(idUser)
-            String strPaymentDeadline = params.paymentDeadline
-            String strReceptionDeadline = params.receptionDeadline
-            String strBeginDate = params.beginDate
-            String strEndDate = params.endDate
-            String strPaymentDate = params.paymentDate
-            String strReceptionDate = params.receptionDate
-            Date paymentDeadline, receptionDeadline, beginDate, endDate, paymentDate, receptionDate
-
-            if (!strPaymentDeadline.equals("")) paymentDeadline = Date.parse("dd/MM/yyyy", strPaymentDeadline)
-            if (!strReceptionDeadline.equals("")) receptionDeadline = Date.parse("dd/MM/yyyy", strReceptionDeadline)
-            if (!strBeginDate.equals("")) beginDate = Date.parse("dd/MM/yyyy", strBeginDate) else beginDate = new Date()
-            if (!strEndDate.equals("")) endDate = Date.parse("dd/MM/yyyy", strEndDate)
-            if (!strPaymentDate.equals("")) paymentDate = Date.parse("dd/MM/yyyy", strPaymentDate)
-            if (!strReceptionDate.equals("")) receptionDate = Date.parse("dd/MM/yyyy", strReceptionDate)
 
             Expense expense = new Expense(title: name, description: description, value: value, circle: circle, expenseType: expenseType,
-                    responsible: user.getRegisteredUser(), paymentDeadline: paymentDeadline, receptionDeadline: receptionDeadline,
-                    beginDate: beginDate, endDate: endDate, paymentDate: paymentDate, receptionDate: receptionDate)
+                    responsible: user.getRegisteredUser(), paymentDeadline: convertStringsToDate(params.paymentDeadline, false),
+                    receptionDeadline: convertStringsToDate(params.receptionDeadline,false), beginDate: convertStringsToDate(params.beginDate,true),
+                    endDate: convertStringsToDate(params.endDate,false), paymentDate: convertStringsToDate(params.paymentDate,false),
+                    receptionDate: convertStringsToDate(params.receptionDate,false))
 
             if (!expense.create(listOfFriends, listValuesUsers)) {
                 handleErrorMessages(response,"com.billmate.expense.modal.createdUnsuccessfully")
@@ -55,12 +43,15 @@ class ExpenseController extends RestrictedController {
                 response.data = expense;
             }
         }
+
         render response as JSON
     }
 
     def convertStringsToDate(String dateString, boolean generateDateIfNotExists){
         Date date
         if (!dateString.equals("")) date = Date.parse("dd/MM/yyyy", dateString)
+        if(generateDateIfNotExists) date = new Date()
+        return date
     }
 
     def handleErrorMessages(def response, String message){
