@@ -5,6 +5,7 @@
 </head>
 <body>
     <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
+        <g:render template="/shared/alert" model="[cssClass: 'col8-alert', display: 'none']"/>
         <g:render template="/expense/widgets/paymentHistory" model="[registeredUser: user, expense: expense, users: expense.getAssignedUsers()]"/>
         <div class="row">
             <g:render template="/expense/show/invoice" model="[registeredUser: user, expense: expense]"/>

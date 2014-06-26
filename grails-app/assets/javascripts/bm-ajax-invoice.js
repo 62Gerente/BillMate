@@ -1,16 +1,16 @@
-$("#upload-invoice").on('click', function(){
+$(".upload-invoice, .upload-invoice-icon").on('click', function(){
     $("#upload-invoice-input").trigger('click');
 });
 
-$("#upload-invoice-input").on('change', function(){
-    var error = $("#upload-invoice-error");
-    var iframe = $("#invoice-iframe");
-    var upload = $("#upload-invoice");
-    var container = $("#invoice-container");
+$("#upload-invoice-input, .upload-invoice-icon").on('change', function(){
+    var alert = $(".col8-alert");
+    var iframe = $(".invoice-iframe");
+    var upload = $(".upload-invoice");
+    var uploadIcon = $(".upload-invoice-icon");
+    var container = $(".invoice-container");
     var form = $("#upload-invoice-form");
     var formData = new FormData($('#upload-invoice-form')[0]);
-
-    error.hide();
+    var download = $(".download-invoice");
 
     $.ajax({
         url: form.attr('action'),
@@ -22,38 +22,46 @@ $("#upload-invoice-input").on('change', function(){
         dataType: 'json',
         beforeSend: function(){
             upload.prop("disabled", true);
+            uploadIcon.prop("disabled", true);
         },
         success: function (data) {
-            if (data.error === true)
-                error.text(data.message).show();
-            else {
+            if (data.error === true) {
+                alert.removeClass("alert-success").addClass("alert-danger");
+                alert.get(0).lastChild.nodeValue = data.message;
+                alert.stop().fadeIn().delay(5000).fadeOut();
+            } else {
                 iframe.attr("src", data.invoice_url);
+                download.attr("href", data.invoice_url).show();
                 upload.hide();
+                uploadIcon.show();
                 container.show();
             }
         },
         error: function () {
-           error.text("Oops! Something went wrong.").show();
+           alert.removeClass("alert-success").addClass("alert-danger");
+           alert.get(0).lastChild.nodeValue = "Oops! Something went wrong.";
+           alert.stop().fadeIn().delay(5000).fadeOut();
         },
         complete: function(){
             upload.prop("disabled", false);
+            uploadIcon.prop("disabled", false);
         }
     });
 });
 
-$("#upload-receipt").on('click', function(){
+$(".upload-receipt, .upload-receipt-icon").on('click', function(){
     $("#upload-receipt-input").trigger('click');
 });
 
-$("#upload-receipt-input").on('change', function(){
-    var error = $("#upload-receipt-error");
-    var iframe = $("#receipt-iframe");
-    var upload = $("#upload-receipt");
-    var container = $("#receipt-container");
+$("#upload-receipt-input, .upload-receipt-icon").on('change', function(){
+    var alert = $(".col8-alert");
+    var iframe = $(".receipt-iframe");
+    var upload = $(".upload-receipt");
+    var uploadIcon = $(".upload-receipt-icon");
+    var container = $(".receipt-container");
     var form = $("#upload-receipt-form");
     var formData = new FormData($('#upload-receipt-form')[0]);
-
-    error.hide();
+    var download = $(".download-receipt");
 
     $.ajax({
         url: form.attr('action'),
@@ -65,21 +73,29 @@ $("#upload-receipt-input").on('change', function(){
         dataType: 'json',
         beforeSend: function(){
             upload.prop("disabled", true);
+            uploadIcon.prop("disabled", true);
         },
         success: function (data) {
-            if (data.error === true)
-                error.text(data.message).show();
-            else {
-                iframe.attr("src", data.invoice_url);
+            if (data.error === true) {
+                alert.removeClass("alert-success").addClass("alert-danger");
+                alert.get(0).lastChild.nodeValue = data.message;
+                alert.stop().fadeIn().delay(5000).fadeOut();
+            } else {
+                iframe.attr("src", data.receipt_url);
+                download.attr("href", data.receipt_url).show();
                 upload.hide();
+                uploadIcon.show();
                 container.show();
             }
         },
         error: function () {
-            error.text("Oops! Something went wrong.").show();
+            alert.removeClass("alert-success").addClass("alert-danger");
+            alert.get(0).lastChild.nodeValue = "Oops! Something went wrong.";
+            alert.stop().fadeIn().delay(5000).fadeOut();
         },
         complete: function(){
             upload.prop("disabled", false);
+            uploadIcon.prop("disabled", false);
         }
     });
 });

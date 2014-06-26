@@ -116,3 +116,15 @@ a {
 .upload-box{
     height: 330px;
 }
+
+.hover-icon-blg:hover{
+    color: #000;
+    background-color: #F1F1F1;
+    border-radius: 5px;
+}
+
+.utility-icon{
+    text-align: center;
+    width: 25px;
+    padding: 5px;
+}
