@@ -30,12 +30,18 @@ class ExpenseController extends RestrictedController {
             Circle circle = Circle.findById(idCircle)
             ExpenseType expenseType = ExpenseType.findById(idExpenseType)
             User user = User.findById(idUser)
+            String regularExpenseID = params.regularExpenseID
+            RegularExpense regularExpense
+
+            if(regularExpenseID && regularExpenseID.isLong()){
+                regularExpense = RegularExpense.findById(Long.parseLong(regularExpenseID))
+            }
 
             Expense expense = new Expense(title: name, description: description, value: value, circle: circle, expenseType: expenseType,
                     responsible: user.getRegisteredUser(), paymentDeadline: convertStringsToDate(params.paymentDeadline, false),
                     receptionDeadline: convertStringsToDate(params.receptionDeadline,false), beginDate: convertStringsToDate(params.beginDate,true),
                     endDate: convertStringsToDate(params.endDate,false), paymentDate: convertStringsToDate(params.paymentDate,false),
-                    receptionDate: convertStringsToDate(params.receptionDate,false))
+                    receptionDate: convertStringsToDate(params.receptionDate,false), regularExpense: regularExpense)
 
             if (!expense.create(listOfFriends, listValuesUsers)) {
                 response = [
@@ -49,7 +55,7 @@ class ExpenseController extends RestrictedController {
                         'error': false,
                         'data': expense,
                         'code': message(code: "com.billmate.expense.modal.createdSuccessfully"),
-                        'class': "alert alert-error form-modal-house-error"
+                        'class': "alert alert-success form-modal-house-error"
                 ]
             }
         }

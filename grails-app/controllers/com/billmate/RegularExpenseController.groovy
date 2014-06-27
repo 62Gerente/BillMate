@@ -67,7 +67,7 @@ class RegularExpenseController extends RestrictedController{
 
         if(regularExpense){
             responseData.data = [name: regularExpense.getTitle(), description: regularExpense.getDescription(),
-                                 id: regularExpense.getExpenseType().getId(), expenseTypeName: regularExpense.getExpenseType().getName(),
+                                 id : regularExpense.getExpenseType().getId(), expenseTypeName: regularExpense.getExpenseType().getName(),
                                  expenseTypeCssClass: regularExpense.getExpenseType().getCssClass(), value: regularExpense.getValue(),
                                  paymentDeadline: convertDateFormat(regularExpense.getPaymentDeadline()), receptionDeadline: convertDateFormat(regularExpense.getReceptionDeadline()),
                                  receptionBeginDate: convertDateFormat(regularExpense.getReceptionBeginDate()), receptionEndDate: convertDateFormat(regularExpense.getReceptionEndDate()),
@@ -80,6 +80,6 @@ class RegularExpenseController extends RestrictedController{
     }
 
     def convertDateFormat(Date date){
-        def dateString = date?.format("dd/MM/yyyy")
+        return date?.format("dd/MM/yyyy")
     }
 }

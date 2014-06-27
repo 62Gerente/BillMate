@@ -4,8 +4,7 @@ $(document).ready(function() {
     var idCircleRegularExpense = 0;
     var idUserRegularExpense = 0;
     var idExpenseTypeExpense = 0;
-    var hasCirclesExpense = false;
-    var hasExpenseTypesExpense = false;
+    var idRegularExpense = 0;
 
     //Next 3 functions format display results
     function formatExpenseTypes(state) {
@@ -167,7 +166,7 @@ $(document).ready(function() {
         if(name == ""){ hasErrors = true; doAlertInput(parent.find("div.row:nth(0)"),parent.find("div.row:nth(0) input"),"error-control"); }
         if(value == "") { hasErrors = true; doAlertInput(parent.find("div.row:nth(2) .input-group"),parent.find("div.row:nth(2) .input-group input"),"error-control"); }
 
-        var dates = $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-debt");
+        var dates = $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-regularExpense");
         var paymentDeadline = dates.find("input:nth(0)").val();
         var receptionDeadline = dates.find("input:nth(1)").val();
         var beginDate = dates.find("input:nth(2)").val();
@@ -182,10 +181,10 @@ $(document).ready(function() {
             listValuesUsers.push(entry.value);
         });
 
-        var formData = {name: name, idCircle: idCircleRegularExpense, idExpenseTypeExpense: idExpenseTypeExpense, value: value, description: description,
+        var formData = {name: name, idCircle: idCircleRegularExpense, idExpenseType: idExpenseTypeExpense, value: value, description: description,
             idUser: idUserRegularExpense, listOfFriends: listIDsUsers, listValuesUsers: listValuesUsers, paymentDeadline: paymentDeadline,
             receptionDeadline: receptionDeadline, beginDate: beginDate, endDate: endDate, paymentDate: paymentDate,
-            receptionDate: receptionDate, numberSelected: getNumberOfSelected()};
+            receptionDate: receptionDate, numberSelected: getNumberOfSelected(), regularExpenseID: idRegularExpense};
 
         if(!hasErrors){
             $.ajax({
@@ -230,9 +229,9 @@ $(document).ready(function() {
     }
 
     // Show/hide advanced options
-    $(".btn-options-form-debt").click(function(){
+    $(".btn-options-form-regularExpense").click(function(){
         $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-regularExpense").slideToggle();
-        $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-debt").slideToggle();
+        $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-regularExpense").slideToggle();
     });
 
     function getNumberOfSelected(){
@@ -244,26 +243,25 @@ $(document).ready(function() {
         return numberSelected;
     }
 
-
     //REGULAR EXPENSE
 
-    function handleRegularExpenseType(dataDebtRegularExpense){
+    function handleRegularExpenseType(dataDebtRegularExpense, dataDebtList){
         var context = $(".modal#regularExpenseCreateModal .modal-body .advanced-options-form-regularExpense");
-        var dataRegularExpense = dataDebtRegularExpense;
+
         $(".custom-multiselect-regularExpense-debt").select2({
             formatResult: formatExpenseTypes,
             formatSelection: formatExpenseTypes,
             data: dataDebtRegularExpense
         });
-        $(".custom-multiselect-regularExpense-debt").select2("val",dataDebtRegularExpense.id);
+        $(".custom-multiselect-regularExpense-debt").select2("val", dataDebtRegularExpense[0].id);
         $(".custom-multiselect-regularExpense-debt").select2("enable", false);
 
-        if(dataRegularExpense.paymentDeadline) context.find(".row:nth(0) div:nth(0) .clockTimePaymentExpense").val(dataRegularExpense.paymentDeadline);
-        if(dataRegularExpense.receptionDeadline) context.find(".row:nth(0) div:nth(1) .clockTimePaymentExpense").val(dataRegularExpense.receptionDeadline);
-        if(dataRegularExpense.receptionBeginDate) context.find(".row:nth(1) div:nth(0) .clockTimePaymentExpense").val(dataRegularExpense.receptionBeginDate);
-        if(dataRegularExpense.receptionEndDate) context.find(".row:nth(1) div:nth(1) .clockTimePaymentExpense").val(dataRegularExpense.receptionEndDate);
-        if(dataRegularExpense.paymentBeginDate) context.find(".row:nth(2) div:nth(0) .clockTimePaymentExpense").val(dataRegularExpense.paymentBeginDate);
-        if(dataRegularExpense.paymentEndDate) context.find(".row:nth(2) div:nth(1) .clockTimePaymentExpense").val(dataRegularExpense.paymentEndDate);
+        if(dataDebtList.paymentDeadline) context.find(".row:nth(0) div:nth(0) .clockTimePaymentExpense").val(dataDebtList.paymentDeadline);
+        if(dataDebtList.receptionDeadline) context.find(".row:nth(0) div:nth(1) .clockTimePaymentExpense").val(dataDebtList.receptionDeadline);
+        if(dataDebtList.receptionBeginDate) context.find(".row:nth(1) div:nth(0) .clockTimePaymentExpense").val(dataDebtList.receptionBeginDate);
+        if(dataDebtList.receptionEndDate) context.find(".row:nth(1) div:nth(1) .clockTimePaymentExpense").val(dataDebtList.receptionEndDate);
+        if(dataDebtList.paymentBeginDate) context.find(".row:nth(2) div:nth(0) .clockTimePaymentExpense").val(dataDebtList.paymentBeginDate);
+        if(dataDebtList.paymentEndDate) context.find(".row:nth(2) div:nth(1) .clockTimePaymentExpense").val(dataDebtList.paymentEndDate);
     }
 
     function handleCircle(dataCircleRegularExpense){
@@ -279,11 +277,12 @@ $(document).ready(function() {
     $(".regular-expense-advanced-options").click(function(){
         var urlExpense = $(this).parents("form.upcoming-expense-form").children("input:nth(0)").val();
         var urlCircle = $(this).parents("form.upcoming-expense-form").children("input:nth(1)").val();
+        idRegularExpense = $(this).parents("form.upcoming-expense-form").children("input:nth(2)").val();
         var context = $(".modal#regularExpenseCreateModal").find(".modal-body");
         $.get(urlExpense, function (data) {
             context.find(".row:nth(0) input:nth(1)").val(data.data.name);
             context.find(".row:nth(3) textarea").val(data.data.description);
-            handleRegularExpenseType(data.data);
+            handleRegularExpenseType([{id:data.data.id, expenseTypeCssClass: data.data.expenseTypeCssClass, expenseTypeName: data.data.expenseTypeName}], data.data);
         });
         $.get(urlCircle, function (data) {
             handleCircle([{id: data.data.circleID, icon: data.data.circleIcon, name: data.data.circleName}]);
@@ -297,8 +296,8 @@ $(document).ready(function() {
 
     // Show/hide advanced options
     $(".btn-options-form-regularExpense").click(function(){
-        $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-regularExpense").slideToggle();
-        $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-regularExpense").slideToggle();
+        $(this).ancestor(".modal-footer").siblings(".modal-body").find(".simple-options-form-regularExpense").slideToggle();
+        $(this).ancestor(".modal-footer").siblings(".modal-body").find(".advanced-options-form-regularExpense").slideToggle();
     });
 
     function getNumberOfSelected(){

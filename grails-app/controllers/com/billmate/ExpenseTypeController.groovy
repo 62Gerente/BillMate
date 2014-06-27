@@ -9,9 +9,12 @@ class ExpenseTypeController extends RestrictedController  {
     def index() {}
 
     def Set<ExpenseType> getExpensesIfContainsStringPassedByURL(){
+        Long id = Long.parseLong(params.idCircle)
         String params = params.q
         Set<ExpenseType> expenseTypes = new HashSet<ExpenseType>()
-        ExpenseType.findAll().each { if(it.getName().toUpperCase().contains(params.toUpperCase())) expenseTypes.add(it) }
+        Circle circle = Circle.findById(id)
+        Set<ExpenseType> expenseTypes1 = Circle.findById(id).getExpenseTypes()
+        Circle.findById(id).getExpenseTypes().each { if(it.getName().toUpperCase().contains(params.toUpperCase())) expenseTypes.add(it) }
 
         def response = [
                 'error': false,

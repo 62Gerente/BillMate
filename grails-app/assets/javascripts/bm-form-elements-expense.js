@@ -58,7 +58,8 @@ $(document).ready(function() {
             dataType: 'json',
             data: function(term, page) {
                 return {
-                    q: term
+                    q: term,
+                    idCircle: id_circle
                 };
             },
             results: function(data, page) {
