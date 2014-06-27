@@ -23,6 +23,8 @@
                 <div class="clearfix"></div>
             </div>
               <g:form url="[action: 'saveExpense', controller: 'regularExpense', id: regularExpense.getId()]" class="upcoming-expense-form">
+                <input type="hidden" value="<g:createLink controller = "regularExpense" action="getNameAndDescriptionAndExpenseType" params="[id:regularExpense.getId()]"/>" />
+                <input type="hidden" value="<g:createLink controller = "circle" action="getIDAndNameCircle" params="[id:regularExpense.getCircle().getId()]"/>" />
                 <div class="form-actions">
                     <div class="input-group transparent">
                         <span class="input-group-addon ">
@@ -37,7 +39,7 @@
                             <button class="btn btn-small btn-info btn-demo-space"><g:message code="com.billmate.expense.create" default="Add expense" /></button>
                             <button type="button" class="btn btn-small btn-info dropdown-toggle btn-demo-space" data-toggle="dropdown"> <span class="caret"></span></button>
                             <ul class="dropdown-menu">
-                                <li><a href="#"><g:message code="com.billmate.regularExpense.advancedOptions" default="Advanced options" /></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#regularExpenseCreateModal" class="regular-expense-advanced-options"><g:message code="com.billmate.regularExpense.advancedOptions" default="Advanced options" /></a></li>
                                 <li class="divider"></li>
                                 <li>
                                     <g:link url="[action: 'postpone', controller: 'regularExpense', id: regularExpense.getId()]" class="postpone-upcoming-expense">

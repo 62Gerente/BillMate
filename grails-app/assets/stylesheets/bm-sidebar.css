@@ -56,11 +56,11 @@ ul#home-sidebar-menu li > a{
     margin-left: 2px;
 }
 
-.photos-options-form-debt .thumbnails.image_picker_selector .thumbnail img{
+.thumbnails.image_picker_selector .thumbnail img{
     border-radius: 102px;
 }
 
-.photos-options-form-debt .thumbnails.image_picker_selector .thumbnail{
+.thumbnails.image_picker_selector .thumbnail{
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
@@ -89,6 +89,10 @@ ul.thumbnails.image_picker_selector li .thumbnail .name-inside-photo-modal-debt{
 
 ul.thumbnails.image_picker_selector li .thumbnail.selected .name-inside-photo-modal-debt{
     opacity: 1;
+}
+
+ul.thumbnails.image_picker_selector li .thumbnail.selected{
+    background: none;
 }
 
 .thumbnail span.tick-green{

@@ -33,7 +33,7 @@ class CircleController extends RestrictedController  {
         render response as JSON
     }
 
-    def getFriendsOfaCircleExceptId(){
+    def getFriendsOfaCircle(){
         Set<Object> circleFriends = new HashSet<>()
         Circle.findById(Long.parseLong(params.id_circle)).getUsers().each {
             circleFriends.add([id: it.getId(), photo: it.getPhotoOrDefault(), name: it.getName(), value: 0, selectable: true, absolute: false, percentage: false])
@@ -53,4 +53,49 @@ class CircleController extends RestrictedController  {
         render response as JSON
     }
 
+    def getIDAndNameCircle(){
+        Long id = Long.parseLong(params.id)
+        Circle circle = Circle.findById(id)
+
+        def response = [
+                'error'  : false,
+                'data'   : [circleID: circle.getId(), circleIcon: circle.getCssClass(), circleName: circle.getName()],
+                'message': message(code: "com.billmate.registeredUser.updatePhoto.success")
+        ]
+
+        if(!circle) {
+            response.error = true
+            response.message = message(code: "com.billmate.registeredUser.updatePhoto.success")
+        }
+
+        render response as JSON
+    }
+
+    def getUsersByCircle(){
+        Set<User> users = Circle.findById(Long.parseLong(params.id)).getUsers()
+        Set<LinkedHashMap> hashMapSet = new HashSet<LinkedHashMap>()
+        users.each { def obj = new LinkedHashMap()
+            obj.id = it.getId()
+            obj.name = it.getName()
+            obj.photo = it.getPhotoOrDefault()
+            hashMapSet.add(obj)}
+
+        def response = [
+                'error': false,
+                'data': hashMapSet,
+                'code': message(code: "com.billmate.expense.modal.createdSuccessfully"),
+                'class': "alert alert-success form-modal-house-success"
+        ]
+
+        if (!users) {
+            response = [
+                    'error': true,
+                    'data': null,
+                    'code': message(code: "com.billmate.expense.modal.createdUnsuccessfully"),
+                    'class': "alert alert-error form-modal-house-error"
+            ]
+        }
+
+        render response as JSON
+    }
 }

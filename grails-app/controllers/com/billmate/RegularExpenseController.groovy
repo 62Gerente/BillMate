@@ -54,4 +54,32 @@ class RegularExpenseController extends RestrictedController{
 
         render responseData as JSON
     }
+
+    def getNameAndDescriptionAndExpenseType(){
+        def responseData = [
+                'error'  : true,
+                'data'   : null,
+                'message': message(code: "com.billmate.regularExpense.cancel.success")
+        ]
+
+        Long id = Long.parseLong(params.id)
+        RegularExpense regularExpense = RegularExpense.findById(id)
+
+        if(regularExpense){
+            responseData.data = [name: regularExpense.getTitle(), description: regularExpense.getDescription(),
+                                 id: regularExpense.getExpenseType().getId(), expenseTypeName: regularExpense.getExpenseType().getName(),
+                                 expenseTypeCssClass: regularExpense.getExpenseType().getCssClass(), value: regularExpense.getValue(),
+                                 paymentDeadline: convertDateFormat(regularExpense.getPaymentDeadline()), receptionDeadline: convertDateFormat(regularExpense.getReceptionDeadline()),
+                                 receptionBeginDate: convertDateFormat(regularExpense.getReceptionBeginDate()), receptionEndDate: convertDateFormat(regularExpense.getReceptionEndDate()),
+                                 paymentBeginDate: convertDateFormat(regularExpense.getPaymentBeginDate()), paymentEndDate: convertDateFormat(regularExpense.getPaymentEndDate())]
+            responseData.error = false
+            responseData.message = message(code: "com.billmate.regularExpense.cancel.success")
+        }
+
+        render responseData as JSON
+    }
+
+    def convertDateFormat(Date date){
+        def dateString = date?.format("dd/MM/yyyy")
+    }
 }

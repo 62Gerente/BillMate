@@ -8,15 +8,15 @@ class ExpenseController extends RestrictedController {
 
     def create(){
 
-        def response = [
-                'error': false,
-                'data': null,
-                'code': message(code: "com.billmate.expense.modal.createdSuccessfully"),
-                'class': "alert alert-success form-modal-house-success"
-        ]
+        def response
 
         if(Integer.parseInt(params.numberSelected) == 0){
-            handleErrorMessages(response,"com.billmate.expense.modal.error.withoutUsersSelecteds")
+            response = [
+                    'error': true,
+                    'data': null,
+                    'code': message(code: "com.billmate.expense.modal.error.withoutUsersSelecteds"),
+                    'class': "alert alert-error form-modal-house-error"
+            ]
         }
         else {
             String name = params.name
@@ -38,9 +38,19 @@ class ExpenseController extends RestrictedController {
                     receptionDate: convertStringsToDate(params.receptionDate,false))
 
             if (!expense.create(listOfFriends, listValuesUsers)) {
-                handleErrorMessages(response,"com.billmate.expense.modal.createdUnsuccessfully")
+                response = [
+                        'error': true,
+                        'data': null,
+                        'code': message(code: "com.billmate.expense.modal.createdUnsuccessfully"),
+                        'class': "alert alert-error form-modal-house-error"
+                ]
             }else{
-                response.data = expense;
+                response = [
+                        'error': false,
+                        'data': expense,
+                        'code': message(code: "com.billmate.expense.modal.createdSuccessfully"),
+                        'class': "alert alert-error form-modal-house-error"
+                ]
             }
         }
 
@@ -55,9 +65,12 @@ class ExpenseController extends RestrictedController {
     }
 
     def handleErrorMessages(def response, String message){
-        response.error = true
-        response.code = message(code: message)
-        response.class = "alert alert-error form-modal-house-error"
+        response = [
+                'error': true,
+                'data': null,
+                'code': message(code: message),
+                'class': "alert alert-error form-modal-house-error"
+        ]
         return response
     }
 }

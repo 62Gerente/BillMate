@@ -23,3 +23,4 @@
 
 //= require ../plugins/image-picker-master/image-picker/image-picker.js
 //= require bm-form-elements-expense.js
+//= require bm-form-elements-regularExpense.js

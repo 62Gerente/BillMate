@@ -519,3 +519,7 @@ button.logout-header[type="submit"]:hover {
 .input-group.transparent.success-control{
     border: 1px solid #0aa699;
 }
+
+.upcoming-regular-expense p.small{
+    width: 100% !important;
+}

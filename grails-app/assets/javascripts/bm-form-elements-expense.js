@@ -2,7 +2,6 @@ $(document).ready(function() {
 
     var listElements = [];
     var id_circle = 0;
-    var id_registered_user = 0;
     var id_user = 0;
     var idExpenseType = 0;
     var hasCircles = false;
@@ -38,7 +37,7 @@ $(document).ready(function() {
     }
 
     function formatResultCircles(state) {
-        idExpenseType = state.id;
+        id_circle = state.id;
         return "<i class='" + state.icon + "'></i>&nbsp;" + $("<div>").html(state.name).text();
     }
 
@@ -105,7 +104,7 @@ $(document).ready(function() {
     function fillList(){
         if(id_user == 0) id_user = $(".simple-options-form-debt").children("input:nth(1)").val();
         if(id_circle != 0){
-            var url = "/BillMate/circle/getFriendsOfaCircleExceptId?id_circle=" + id_circle +"&id_user=" + id_registered_user;
+            var url = "/BillMate/circle/getFriendsOfaCircle?id_circle=" + id_circle;
             $.get(url, function (data) {
                 listFriendsOfCircleAjaxRequestInList(data);
             } );
@@ -114,7 +113,7 @@ $(document).ready(function() {
     }
 
     //When input value debt, we need calculate new values and update in html, calling propagateChanges() and updateValues()
-    $(".input-group.transparent .value-debt").keyup(function(){
+    $(".input-group.transparent #valueExpense").keyup(function(){
         propagateChanges();
     });
 
@@ -126,18 +125,18 @@ $(document).ready(function() {
     function updateValues(){
         var position = 0;
         listElements.forEach(function(entry){
-            $(".thumbnails.image_picker_selector").find("li:nth(" + position + ") .thumbnail .name-inside-photo-modal-debt").text(entry.value.toFixed(2) + " €");
+            $(".photos-options-form-debt .thumbnails.image_picker_selector").find("li:nth(" + position + ") .thumbnail .name-inside-photo-modal-debt").text(entry.value.toFixed(2) + " €");
             position++;
         });
     }
 
     //Put images selected on start, and propagate changes
     function enableClickOnImagePicker(){
-        $(".thumbnails.image_picker_selector").find("li").click(function(){
+        $(".photos-options-form-debt .thumbnails.image_picker_selector").find("li").click(function(){
             var index = $(this).index();
-            var click = $(".thumbnails.image_picker_selector").find("li:nth(" + index + ") .thumbnail");
+            var click = $(".photos-options-form-debt .thumbnails.image_picker_selector").find("li:nth(" + index + ") .thumbnail");
 
-            if(click.hasClass("selected")){
+            if(click.first().hasClass("selected")){
                 listElements[index].selectable = true;
             }else{
                 listElements[index].selectable = false;
@@ -166,7 +165,7 @@ $(document).ready(function() {
         var totalValue = 0;
         var numberOfElements = 0;
         listElements.forEach(function(entry){ if(entry.selectable == true) numberOfElements++; });
-        totalValue = $(".input-group.transparent").find("input").val();
+        totalValue = $(".input-group.transparent").find("input#valueExpense").val();
         listElements.forEach(function(entry){
             entry.value = 0;
             if(entry.selectable == true)
@@ -177,15 +176,16 @@ $(document).ready(function() {
     //We need append new users according selected circles
     function addNewElementstoSelect(){
         var position = 0;
+        $(".select-list-users ul").empty();
         $(".select-list-users").empty();
         listElements.forEach(function(entry){
-            $(".select-list-users").append("<option data-img-src='" + entry.photo + "' value='" + entry.id + "'>" + entry.value.toFixed(2) +" €</option>")
+            $(".photos-options-form-debt .select-list-users").append("<option data-img-src='" + entry.photo + "' value='" + entry.id + "'>" + entry.value.toFixed(2) +" €</option>")
         });
     }
 
     //Tell to plugin show labels and associate function enableClickOnImagePicker() when clicked
     function startImagePicker(){
-        $("select").imagepicker({
+        $(".select-list-users").imagepicker({
             show_label: true,
             clicked: enableClickOnImagePicker
         });
@@ -196,7 +196,7 @@ $(document).ready(function() {
     function addValuesToPhotos(){
         var position = 0;
         listElements.forEach(function(entry){
-            $(".thumbnails.image_picker_selector li:nth(" + position + ") .thumbnail").append("<div class='name-inside-photo-modal-debt'>" + entry.value.toFixed(2) + " €</div><span class='tick-green'><i class='fa fa-circle fa-2x text-info'></i></span>");
+            $(".photos-options-form-debt .thumbnails.image_picker_selector li:nth(" + position + ") .thumbnail").append("<div class='name-inside-photo-modal-debt'>" + entry.value.toFixed(2) + " €</div><span class='tick-green'><i class='fa fa-circle fa-2x text-info'></i></span>");
             position++;
         });
     }
@@ -206,7 +206,7 @@ $(document).ready(function() {
         var position = 0;
         listElements.forEach(function(entry){
             if(entry.selectable == true)
-                $(".thumbnails.image_picker_selector").find("li:nth(" + position + ") .thumbnail").trigger("click");
+                $(".photos-options-form-debt .thumbnails.image_picker_selector").find("li:nth(" + position + ") .thumbnail").trigger("click");
             position++;
         });
     }
@@ -215,7 +215,7 @@ $(document).ready(function() {
     function updateNamesInBoxes(){
         var position = 0;
         listElements.forEach(function(entry){
-            var element = $(".thumbnails.image_picker_selector li:nth(" + position + ") .thumbnail");
+            var element = $(".photos-options-form-debt .thumbnails.image_picker_selector li:nth(" + position + ") .thumbnail");
             element.find("p").replaceWith(function(){
                 return $("<h6/>", {html: entry.name});
             });
