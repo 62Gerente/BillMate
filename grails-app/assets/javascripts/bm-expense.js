@@ -15,3 +15,17 @@ $(document).ready(function() {
     $('#edit_payment_date').editable();
     $('#edit_reception_date').editable();
 });
+
+$('#deleteExpense').confirmModal({
+    confirmTitle     : 'Please confirm',
+    confirmMessage   : 'Are you sure you want to delete this expense?',
+    confirmOk        : 'Delete',
+    confirmCancel    : 'Cancel',
+    confirmDirection : 'rtl',
+    confirmStyle     : 'danger',
+    confirmCallback  : deleteExpense
+});
+
+function deleteExpense(){
+    $('#deleteExpense').submit()
+}

@@ -160,12 +160,28 @@
         </g:elseif>
     </div>
     <div class="row p-t-5">
-        <button class="btn btn-block btn-primary" type="button">
-            <g:message code="com.billmate.payment.new" default="New payment" />
-        </button>
-        <button class="btn btn-block btn-white btn-danger-hover" type="button">
-            <g:message code="com.billmate.expense.delete" default="Delete expense" />
-        </button>
+        <g:if test="${!expense.isAssignedTo(registeredUser.getUser().getId()) && !expense.isResolvedBy(registeredUser.getUser().getId())}">
+            <button class="btn btn-block btn-primary" type="button">
+                <g:message code="com.billmate.payment.new" default="New payment" />
+            </button>
+        </g:if>
+        <g:else>
+            <button class="btn btn-block btn-primary" type="button" disabled>
+                <g:message code="com.billmate.payment.new" default="New payment" />
+            </button>
+        </g:else>
+        <g:if test="${false && expense.haveAcceptedPayments()}">
+            <button class="btn btn-block btn-white btn-danger-hover" type="button" disabled>
+                <g:message code="com.billmate.expense.delete" default="Delete expense" />
+            </button>
+        </g:if>
+        <g:else>
+            <g:form data-confirm-cancel="${message(code: 'com.billmate.btn.cancel', default: 'Cancel')}" data-confirm-ok="${message(code: 'com.billmate.btn.delete', default: 'Delete')}" data-confirm-title="${message(code: 'com.billmate.pleaseConfirm', default: 'Please confirm')}" data-confirm-message="${message(code: 'com.billmate.expense.areYouSure', default: 'Are you sure you want to delete this expense ?')}" id="deleteExpense" class="p-t-5" url="[action:'delete',controller:'expense',id:expense.getId()]" method="DELETE">
+                <button type="submit" class="btn btn-block btn-white btn-danger-hover">
+                    <g:message code="com.billmate.expense.delete" default="Delete expense" />
+                </button>
+            </g:form>
+        </g:else>
     </div>
 </div>
 <div class="clearfix"></div>
