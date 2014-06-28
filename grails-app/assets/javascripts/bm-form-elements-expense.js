@@ -163,14 +163,22 @@ $(document).ready(function() {
 
     //Calculate actual values
     function calculateValues(){
+        var position = 1;
+        var parcialValue = 0;
         var totalValue = 0;
         var numberOfElements = 0;
         listElements.forEach(function(entry){ if(entry.selectable == true) numberOfElements++; });
         totalValue = $(".input-group.transparent").find("input#valueExpense").val();
         listElements.forEach(function(entry){
             entry.value = 0;
-            if(entry.selectable == true)
-                entry.value = totalValue / numberOfElements;
+            if(entry.selectable == true){
+                parcialValue = totalValue / numberOfElements;
+                if(position == numberOfElements)
+                    entry.value = totalValue - (parcialValue * (numberOfElements-1));
+                else
+                    entry.value = parcialValue;
+            }
+            position++;
         });
     }
 

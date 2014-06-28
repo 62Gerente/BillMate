@@ -13,8 +13,8 @@
     </div>
     <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
         <div class="row m-b-20">
-            <g:render template="/expenseType/widgets/balance/index" model="[balance: dashboard.getTotalBalance()]"/>
-            <g:render template="/expenseType/widgets/debt/index" model="[balance: dashboard.getTotalBalanceExpensesWhoIAmNotResponsible()]"/>
+            <g:render template="/expense/widgets/balance/index" model="[balance: dashboard.getTotalBalance()]"/>
+            <g:render template="/expense/widgets/debt/index" model="[balance: dashboard.getTotalBalanceExpensesWhoIAmNotResponsible()]"/>
         </div>
         <g:render template="/shared/alert" model="[cssClass: 'col4-alert', display: 'none']"/>
         <g:render template="/regularExpense/widgets/upcoming" model="[regularExpenses: dashboard.regularExpensesInReceptionTime()]"/>

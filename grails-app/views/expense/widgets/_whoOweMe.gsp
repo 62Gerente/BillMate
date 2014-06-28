@@ -14,10 +14,10 @@
                 </div>
             </div>
             <g:if test="${whoOweMe.isEmpty()}">
-                <g:render template="/expenseType/widgets/whoOweMe/empty"/>
+                <g:render template="/expense/widgets/whoOweMe/empty"/>
             </g:if>
             <g:else>
-                <g:render template="/expenseType/widgets/whoOweMe/index" model="[registeredUser: registeredUser, whoOweMe: whoOweMe]"/>
+                <g:render template="/expense/widgets/whoOweMe/index" model="[registeredUser: registeredUser, whoOweMe: whoOweMe]"/>
             </g:else>
         </div>
     </div>
