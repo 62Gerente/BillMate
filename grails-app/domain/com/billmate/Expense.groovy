@@ -1,6 +1,7 @@
 package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
+import com.sun.org.apache.xpath.internal.operations.Bool
 
 class Expense {
     static belongsTo = [Circle, RegisteredUser, ExpenseType]
@@ -24,6 +25,7 @@ class Expense {
     Date createdAt = new Date()
     Date paymentDate
     Date receptionDate
+    Boolean isDeleted = false
 
     static constraints = {
         regularExpense nullable: true
@@ -43,6 +45,7 @@ class Expense {
         createdAt nullable: false
         paymentDate nullable: true
         receptionDate nullable: true
+        isDeleted nullable: false
     }
 
     public Expense(Map map, RegularExpense rExpense, RegisteredUser rUser) {
@@ -183,5 +186,9 @@ class Expense {
 
     public Set<Payment> getPaymentsOf(Long userId){
         payments.findAll{ it.getUserId() == userId }
+    }
+
+    public boolean haveAcceptedPayments(){
+        payments.findAll{ it.getIsValidated() }.size()
     }
 }
