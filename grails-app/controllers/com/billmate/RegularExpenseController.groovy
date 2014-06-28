@@ -3,7 +3,7 @@ package com.billmate
 import grails.converters.JSON
 
 class RegularExpenseController extends RestrictedController{
-    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"]]
+    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"], getNameAndDescriptionAndExpenseType: "POST"]
 
     def beforeInterceptor = [action: this.&checkSession]
 
@@ -26,9 +26,7 @@ class RegularExpenseController extends RestrictedController{
             }else{
                 responseData.message = message(code: "com.billmate.generic.error.message")
             }
-
         }
-
         render responseData as JSON
     }
 

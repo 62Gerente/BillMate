@@ -128,7 +128,7 @@ class BootStrap {
         }
 
         if(RegularExpense.count() == 0 ){
-            def electricity = new RegularExpense(title: 'Electricity', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Electricity'), receptionBeginDate: new Date(), value: 20)
+            def electricity = new RegularExpense(title: 'Electricity', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Electricity'), receptionBeginDate: new Date(), value: 20, description: 'Descrição da despesa')
             electricity.save()
 
             electricity.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))

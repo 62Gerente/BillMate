@@ -32,8 +32,8 @@ $(document).ready(function() {
     function fillListExpense(){
         if(idUserRegularExpense == 0) idUserRegularExpense = $(".simple-options-form-regularExpense").children("input:nth(1)").val();
         if(idCircleRegularExpense != 0){
-            var url = "/BillMate/circle/getFriendsOfaCircle?id_circle=" + idCircleRegularExpense;
-            $.get(url, function (data) {
+            var url = $("#users-link-expense").val();
+            $.post(url, {id_circle: idCircleRegularExpense}, function (data) {
                 listFriendsOfCircleAjaxRequestInListExpense(data);
             } );
             $(".select-list-users-expense").data('picker');
@@ -188,10 +188,13 @@ $(document).ready(function() {
 
         if(!hasErrors){
             $.ajax({
-                url: "/BillMate/expense/create",
+                url: $("#submit-link-expense").val(),
                 data: formData,
                 type: "POST",
                 dataType: 'json',
+                beforeSend: function(){
+                    $("body").block({ message: null });
+                },
                 success: function (data) {
                     status.show();
                     status.removeClass();
@@ -207,6 +210,9 @@ $(document).ready(function() {
                     status.removeClass();
                     status.addClass("alert alert-error form-modal-house-error");
                     status.find("div").text("Oops! Something went wrong.");
+                },
+                complete: function(){
+                    $("body").unblock();
                 }
             });
         }
@@ -243,8 +249,6 @@ $(document).ready(function() {
         return numberSelected;
     }
 
-    //REGULAR EXPENSE
-
     function handleRegularExpenseType(dataDebtRegularExpense, dataDebtList){
         var context = $(".modal#regularExpenseCreateModal .modal-body .advanced-options-form-regularExpense");
 
@@ -279,12 +283,12 @@ $(document).ready(function() {
         var urlCircle = $(this).parents("form.upcoming-expense-form").children("input:nth(1)").val();
         idRegularExpense = $(this).parents("form.upcoming-expense-form").children("input:nth(2)").val();
         var context = $(".modal#regularExpenseCreateModal").find(".modal-body");
-        $.get(urlExpense, function (data) {
+        $.post(urlExpense, function (data) {
             context.find(".row:nth(0) input:nth(1)").val(data.data.name);
             context.find(".row:nth(3) textarea").val(data.data.description);
             handleRegularExpenseType([{id:data.data.id, expenseTypeCssClass: data.data.expenseTypeCssClass, expenseTypeName: data.data.expenseTypeName}], data.data);
         });
-        $.get(urlCircle, function (data) {
+        $.post(urlCircle, function (data) {
             handleCircle([{id: data.data.circleID, icon: data.data.circleIcon, name: data.data.circleName}]);
         });
         var price = $(this).parents("form.upcoming-expense-form").find(".form-actions input").val();

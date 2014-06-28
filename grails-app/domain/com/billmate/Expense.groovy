@@ -71,11 +71,24 @@ class Expense {
     }
 
     public boolean saveAndPostponeRegularExpense(){
+        List<String> listUsers = new LinkedList<>()
+        List<Double> listValues = new LinkedList<>()
+        int position = 0
+        Set<User> detailedListOfUsers = regularExpense.getAssignedUsers()
+        int numberOfUsers = detailedListOfUsers.size()
+        detailedListOfUsers.each { listUsers.add(it.getId().toString()); listValues.add((getValue()/numberOfUsers)) }
         withTransaction { status ->
             try {
                 regularExpense.postpone()
                 regularExpense.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
+                Expense expense = save(flush: true, failOnError: true)
+
+                for(String str : listUsers){
+                    User user = User.findById(Long.parseLong(str))
+                    Debt debt = new Debt(value: listValues[position], percentage: 20, user: user, expense: expense).save()
+                    position++;
+                }
+
                 return true
             }catch(Exception ignored){
                 status.setRollbackOnly()
@@ -174,6 +187,10 @@ class Expense {
         withTransaction {status ->
             try{
                 Expense expense = save();
+                if(regularExpense){
+                    regularExpense.postpone()
+                    regularExpense.save(flush: true, failOnError: true)
+                }
                 for(String str : idsUsers){
                     User user = User.findById(Long.parseLong(str))
                     Debt debt = new Debt(value: value[position], percentage: 20, user: user, expense: expense).save()

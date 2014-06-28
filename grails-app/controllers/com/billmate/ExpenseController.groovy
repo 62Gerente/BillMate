@@ -4,6 +4,8 @@ import grails.converters.JSON
 
 class ExpenseController extends RestrictedController {
 
+    static allowedMethods = [create: "POST"]
+
     def beforeInterceptor = [action: this.&checkSession]
 
     def create(){
@@ -42,7 +44,6 @@ class ExpenseController extends RestrictedController {
                     receptionDeadline: convertStringsToDate(params.receptionDeadline,false), beginDate: convertStringsToDate(params.beginDate,true),
                     endDate: convertStringsToDate(params.endDate,false), paymentDate: convertStringsToDate(params.paymentDate,false),
                     receptionDate: convertStringsToDate(params.receptionDate,false), regularExpense: regularExpense)
-
             if (!expense.create(listOfFriends, listValuesUsers)) {
                 response = [
                         'error': true,
@@ -64,19 +65,9 @@ class ExpenseController extends RestrictedController {
     }
 
     def convertStringsToDate(String dateString, boolean generateDateIfNotExists){
-        Date date
+        Date date = null
         if (!dateString.equals("")) date = Date.parse("dd/MM/yyyy", dateString)
         if(generateDateIfNotExists) date = new Date()
         return date
-    }
-
-    def handleErrorMessages(def response, String message){
-        response = [
-                'error': true,
-                'data': null,
-                'code': message(code: message),
-                'class': "alert alert-error form-modal-house-error"
-        ]
-        return response
     }
 }

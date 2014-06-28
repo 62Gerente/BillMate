@@ -84,6 +84,7 @@ class Circle {
                 expenseType = customExpenseType.getExpenseType()
             }
             if(expenseType) addToExpenseTypes(expenseType)
+            expenseType.addToCircles(this)
         }
     }
 

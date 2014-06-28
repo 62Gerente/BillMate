@@ -68,12 +68,15 @@ ul#home-sidebar-menu li > a{
     border-width: 0px;
 }
 
-ul.thumbnails.image_picker_selector > li:first-child{
-    margin-left: 0px;
+ul.thumbnails.image_picker_selector > li{
+    margin-right: 12px;
+    width: 95px;
 }
 
-ul.thumbnails.image_picker_selector > li{
-    margin-left: 12px;
+ul.thumbnails.image_picker_selector > li h6{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 
 ul.thumbnails.image_picker_selector li .thumbnail{
@@ -117,4 +120,8 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected{
     font-size: 14px;
     color: green;
     padding: 0;
+}
+
+ul.thumbnails li{
+    position: relative;
 }

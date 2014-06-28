@@ -54,7 +54,7 @@ $(document).ready(function() {
         formatSelection: formatExpenseTypes,
         enable: false,
         ajax: {
-            url: "/BillMate/expenseType/getExpensesIfContainsStringPassedByURL",
+            url: $("#expense-type-link-expense").val(),
             dataType: 'json',
             data: function(term, page) {
                 return {
@@ -78,7 +78,7 @@ $(document).ready(function() {
         formatResult: formatResultCircles,
         formatSelection: formatSelectionCircles,
         ajax: {
-            url: "/BillMate/circle/getCirclesIfContainsStringPassedByURL",
+            url: $("#circle-link-expense").val(),
             dataType: 'json',
             data: function(term, page) {
                 return {
@@ -105,7 +105,7 @@ $(document).ready(function() {
     function fillList(){
         if(id_user == 0) id_user = $(".simple-options-form-debt").children("input:nth(1)").val();
         if(id_circle != 0){
-            var url = "/BillMate/circle/getFriendsOfaCircle?id_circle=" + id_circle;
+            var url = $("#users-link-expense").val() + "?id_circle=" + id_circle;
             $.get(url, function (data) {
                 listFriendsOfCircleAjaxRequestInList(data);
             } );
@@ -251,10 +251,7 @@ $(document).ready(function() {
 
         var listIDsUsers = [];
         var listValuesUsers = [];
-        listElements.forEach(function(entry){
-            listIDsUsers.push(entry.id);
-            listValuesUsers.push(entry.value);
-        });
+        listElements.forEach(function(entry){ listIDsUsers.push(entry.id); listValuesUsers.push(entry.value); });
 
         var formData = {name: name, idCircle: id_circle, idExpenseType: idExpenseType, value: value, description: description,
                         idUser: id_user, listOfFriends: listIDsUsers, listValuesUsers: listValuesUsers, paymentDeadline: paymentDeadline,
@@ -263,10 +260,13 @@ $(document).ready(function() {
 
         if(!hasErrors){
             $.ajax({
-                url: "/BillMate/expense/create",
+                url: $("#submit-link-expense").val(),
                 data: formData,
                 type: "POST",
                 dataType: 'json',
+                beforeSend: function(){
+                    $("body").block({ message: null });
+                },
                 success: function (data) {
                     status.show();
                     status.removeClass();
@@ -282,6 +282,9 @@ $(document).ready(function() {
                     status.removeClass();
                     status.addClass("alert alert-error form-modal-house-error");
                     status.find("div").text("Oops! Something went wrong.");
+                },
+                complete: function(){
+                    $("body").unblock();
                 }
             });
         }
@@ -305,8 +308,9 @@ $(document).ready(function() {
 
     // Show/hide advanced options
     $(".btn-options-form-debt").click(function(){
-        $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-debt").slideToggle();
-        $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-debt").slideToggle();
+        var context = $(this).parents(".modal-footer").siblings(".modal-body");
+        context.find(".simple-options-form-debt").slideToggle();
+        context.find(".advanced-options-form-debt").slideToggle();
     });
 
     function getNumberOfSelected(){
