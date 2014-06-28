@@ -33,7 +33,7 @@ class Expense {
         circle nullable: false
         expenseType nullable: false
 
-        title nullable: false
+        title nullable: false, blank: false
         description maxSize: 2000, nullable: true
         value min: 0D, nullable: false
         beginDate nullable: false

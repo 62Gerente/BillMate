@@ -128,3 +128,65 @@ a {
     width: 25px;
     padding: 5px;
 }
+
+.input-full-width{
+    width: 100% !important;
+}
+
+.editable-click, a.editable-click, a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none !important;
+    color: #505458;
+}
+
+.edit-property:hover{
+    background-color: #F1F1F1;
+    border-radius: 5px;
+}
+
+.edit-property-sm{
+    padding: 4px 5px;
+}
+
+.label-property-sm{
+    padding: 4px 5px;
+}
+
+.edit-property-lg{
+    padding: 4px 10px;
+    margin-left: -10px;
+}
+
+.editable-ta-fullwidth .editable-pre-wrapped {
+    white-space: normal;
+}
+
+.editable-ta-fullwidth .editable-container.editable-inline,
+.editable-ta-fullwidth .form-group,
+.editable-ta-fullwidth .editable-input,
+.editable-ta-fullwidth textarea.input-large{
+    width: 100%;
+}
+
+.btn-sm{
+    padding: 6px 10px 3px 10px;
+    font-size: 11.9px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.editable-empty, .editable-empty:hover, .editable-empty:focus {
+    font-style: italic;
+    font-size: 11px;
+    color: #9E9E9E !important;
+}
+
+.display-block{
+    display: block;
+}
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+    font-size: 12px;
+    font-weight: 400;
+}

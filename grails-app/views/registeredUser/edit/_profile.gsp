@@ -21,26 +21,26 @@
             </div>
             <div class="col-md-6 p-l-20">
                 <h3 class="semi-bold no-margin">
-                    <a href="#" class="edit-property edit-property-lg" id="edit_name" data-emptytext="Click to define your name" data-name="name" data-type="text" data-pk="${user.getUser().getId()}" data-url="${createLink(controller: 'user', action: 'updateProperty', id: user.getUser().getId())}">
+                    <a href="#" class="edit-property edit-property-lg" id="edit_name" data-emptytext="<g:message code="com.billmate.user.name.xeditable.clickToDefine" default="Click to define your name" />" data-name="name" data-type="text" data-pk="${user.getUser().getId()}" data-url="${createLink(controller: 'user', action: 'updateProperty', id: user.getUser().getId())}">
                         ${user.getName()}
                     </a>
                 </h3>
                 <br>
                 <p>
                     <i class="fa fa-envelope"></i>
-                    <a href="#" class="edit-property edit-property-sm" id="edit_email" data-emptytext="Click to define your email" data-name="email" data-type="text" data-pk="${user.getUser().getId()}" data-url="${createLink(controller: 'user', action: 'updateProperty', id: user.getUser().getId())}">
+                    <a href="#" class="edit-property edit-property-sm" id="edit_email" data-emptytext="<g:message code="com.billmate.user.email.xeditable.clickToDefine" default="Click to define your email" />" data-name="email" data-type="text" data-pk="${user.getUser().getId()}" data-url="${createLink(controller: 'user', action: 'updateProperty', id: user.getUser().getId())}">
                         ${user.getEmail()}
                     </a>
                 </p>
                 <p>
                     <i class="fa fa-phone"></i>
-                    <a href="#" class="edit-property edit-property-sm" id="edit_phone_number" data-emptytext="Click to define your phone number" data-name="phoneNumber" data-type="text" data-pk="${user.getId()}" data-url="${createLink(controller: 'registeredUser', action: 'updateProperty', id: user.getId())}">
+                    <a href="#" class="edit-property edit-property-sm" id="edit_phone_number" data-emptytext="<g:message code="com.billmate.registeredUser.phoneNumber.xeditable.clickToDefine" default="Click to define your phone number" />" data-name="phoneNumber" data-type="text" data-pk="${user.getId()}" data-url="${createLink(controller: 'registeredUser', action: 'updateProperty', id: user.getId())}">
                         ${user.getPhoneNumber()}
                     </a>
                 </p>
                 <p>
                     <i class="fa fa-key"></i>
-                    <a href="#" class="edit-property edit-property-sm" id="edit_password" data-emptytext="Click to change your password" data-name="password" data-type="password" data-pk="${user.getId()}" data-url="${createLink(controller: 'registeredUser', action: 'updateProperty', id: user.getId())}"></a>
+                    <a href="#" class="edit-property edit-property-sm" id="edit_password" data-emptytext="<g:message code="com.billmate.registeredUser.password.xeditable.clickToDefine" default="Click to change your password" />" data-name="password" data-type="password" data-pk="${user.getId()}" data-url="${createLink(controller: 'registeredUser', action: 'updateProperty', id: user.getId())}"></a>
                 </p>
             </div>
             <div class="col-md-3">
