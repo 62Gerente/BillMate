@@ -43,14 +43,21 @@ class ReferredUser  {
         return user.toString();
     }
 
-    public void secureSave(){
+    public void persist() throws Exception{
+        user.save(flush: true, failOnError: true)
+        save(flush: true, failOnError: true)
+    }
+
+    public boolean secureSave(){
+        boolean result = true
         withTransaction { status ->
             try {
-                user.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
+                persist()
             }catch(Exception ignored){
                 status.setRollbackOnly()
+                result = false
             }
         }
+        return result
     }
 }

@@ -41,13 +41,17 @@ class Collective {
         return circle.toString();
     }
 
+    public void persist() throws Exception{
+        circle.save(flush: true, failOnError: true)
+        save(flush: true, failOnError: true)
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {
-                circle.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
+                persist()
                 return true
-            }catch(Exception ignored){
+            }catch(Exception eSave){
                 status.setRollbackOnly()
                 return false
             }
@@ -66,11 +70,30 @@ class Collective {
         boolean result = true
         withTransaction { status ->
             try {
-                secureSave()
+                persist()
                 circle.addExpensesByIDSOrName(expenseTypesSet)
                 circle.addUsersByIDSOrEmail(friendsSet)
             }
-            catch(Exception e){
+            catch(Exception eSave){
+                status.setRollbackOnly()
+                result = false
+            }
+        }
+        return result
+    }
+
+    public boolean addUsersAndExpenseTypesToCollectiveAndSaveWithAction(Set<String> friendsSet, Set<String> expenseTypesSet, Action action, RegisteredUser sessionUser){
+        boolean result = true
+        withTransaction { status ->
+            try {
+                persist()
+                action.save()
+                circle.addExpensesByIDSOrName(expenseTypesSet)
+                circle.addUsersByIDSOrEmail(friendsSet, sessionUser)
+            }
+            catch(Exception eSave){
+                eSave.printStackTrace()
+                status.setRollbackOnly()
                 result = false
             }
         }

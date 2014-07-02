@@ -36,7 +36,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"> <i class="fa fa-clock-o"></i>
+                <a href="${createLink(controller: "registeredUser", action: "history", id: user.getId())}"> <i class="fa fa-clock-o"></i>
                     <span class="title">
                         <g:message code="com.billmate.sidebar.history" default="History"/>
                     </span>

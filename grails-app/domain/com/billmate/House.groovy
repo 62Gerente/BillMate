@@ -41,13 +41,30 @@ class House{
         return circle.toString();
     }
 
+    public void persist() throws Exception{
+        circle.save(flush: true, failOnError: true)
+        save(flush: true, failOnError: true)
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {
-                circle.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
+                persist()
                 return true
-            }catch(Exception ignored){
+            }catch(Exception eSave){
+                status.setRollbackOnly()
+                return false
+            }
+        }
+    }
+
+    public boolean secureSaveWithAction(Action action){
+        withTransaction { status ->
+            try {
+                persist()
+                action.save()
+                return true
+            }catch(Exception eSave){
                 status.setRollbackOnly()
                 return false
             }
@@ -66,11 +83,27 @@ class House{
         boolean result = true
         withTransaction { status ->
             try {
-                secureSave()
+                persist()
                 circle.addExpensesByIDSOrName(expenseTypesSet)
                 circle.addUsersByIDSOrEmail(friendsSet)
             }
-            catch(Exception e){
+            catch(Exception eSave){
+                result = false
+            }
+        }
+        return result
+    }
+
+    public boolean addUsersAndExpenseTypesToHouseAndSaveWithAction(Set<String> friendsSet, Set<String> expenseTypesSet, Action action){
+        boolean result = true
+        withTransaction { status ->
+            try {
+                persist()
+                circle.addExpensesByIDSOrName(expenseTypesSet)
+                circle.addUsersByIDSOrEmail(friendsSet)
+                action.save()
+            }
+            catch(Exception eSave){
                 result = false
             }
         }

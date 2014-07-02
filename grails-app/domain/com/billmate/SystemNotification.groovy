@@ -65,13 +65,17 @@ class SystemNotification{
         action.getPayment()
     }
 
+    public void persist() throws Exception{
+        notification.save(flush: true, failOnError: true)
+        save(flush: true, failOnError: true)
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {
-                notification.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
+                persist()
                 return true
-            }catch(Exception ignored){
+            }catch(Exception eSave){
                 status.setRollbackOnly()
                 return false
             }

@@ -17,7 +17,8 @@ class RegisterController extends BaseController {
             !checkPasswordConfirmation() || !checkEmailUniqueness()) { return }
 
         def registeredUser = new RegisteredUser(name: params['name'], email: params['email'], password: params['password'])
-        if(registeredUser.secureSave()){
+        def signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: registeredUser)
+        if(registeredUser.secureSaveWithAction(signUpAction)){
             session.user = registeredUser
             flash.message = "com.billmate.register.save.success"
             flash.m_default = "You have been successfully registered and logged in."

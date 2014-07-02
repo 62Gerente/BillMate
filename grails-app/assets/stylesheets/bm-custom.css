@@ -69,3 +69,10 @@ a {
     left: auto;
     right: 0;
 }
+
+.navbar-inner .header-seperation .logo{
+    display: block;
+    width: auto;
+    height: 32px !important;
+    margin: 13px auto 0 auto !important;
+}

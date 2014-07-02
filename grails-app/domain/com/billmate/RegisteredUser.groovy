@@ -22,6 +22,10 @@ class RegisteredUser {
         password password: true, nullable: false, blank: false, minSize: 5
     }
 
+    static mapping = {
+        realizedActions sort: "actionDate", order: "desc"
+    }
+
     public RegisteredUser() {
         super()
         user = new User()
@@ -70,13 +74,30 @@ class RegisteredUser {
         return user.toString();
     }
 
+    public void persist() throws Exception{
+        user.save(flush: true, failOnError: true)
+        save(flush: true, failOnError: true)
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {
-                user.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
+                persist()
                 return true
-            }catch(Exception ignored){
+            }catch(Exception eSave){
+                status.setRollbackOnly()
+                return false
+            }
+        }
+    }
+
+    public boolean secureSaveWithAction(Action action){
+        withTransaction { status ->
+            try {
+                persist()
+                action.save()
+                return true
+            }catch(Exception eSave){
                 status.setRollbackOnly()
                 return false
             }
@@ -166,7 +187,7 @@ class RegisteredUser {
             try {
                 notification.each {
                     it.setIsRead(true)
-                    it.secureSave()
+                    it.persist()
                 }
             } catch (Exception e) {
                 status.setRollbackOnly();
@@ -232,7 +253,7 @@ class RegisteredUser {
 
         latestEvents.toList()
     }
-    
+
     public User[] getFriendsOfAllCircles(){
         Set<User> list = new HashSet<User>()
         User.findAll().each { if (it.getRegisteredUserId() != getId()) list.add(it)}
@@ -284,5 +305,9 @@ class RegisteredUser {
 
     public static Set<ExpenseType> getExpenseTypeByCollective(){
         CircleType.getExpenseTypeByCollective()
+    }
+
+    public List<Action> latestEvents(){
+        user.latestEvents();
     }
 }

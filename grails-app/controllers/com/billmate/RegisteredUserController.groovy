@@ -101,4 +101,14 @@ class RegisteredUserController extends RestrictedController {
         uFile.setSize(newFile.size())
         uFile.save()
     }
+
+    def history(Long id) {
+        if(id != authenticatedUser().getId()) {
+            return withoutPermitions()
+        }
+
+        def registeredUser = RegisteredUser.findById(id)
+
+        return [user: authenticatedUser(), registeredUser: registeredUser, actions: registeredUser.getRealizedActions()]
+    }
 }

@@ -257,12 +257,6 @@
 
 }
 
-@media (max-width:900px) {
-    .navbar-inner .header-seperation .logo {
-        margin-left: -15px;
-    }
-}
-
 @media (min-width:992px) and (max-width: 1300px) {
     #home-conf-button{
         width: 150px;
