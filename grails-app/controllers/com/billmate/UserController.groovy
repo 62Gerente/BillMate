@@ -3,7 +3,7 @@ package com.billmate
 import grails.converters.JSON
 
 class UserController extends RestrictedController {
-    static allowedMethods = [updateField: "POST"]
+    static allowedMethods = [updateField: "POST", history: "GET"]
 
     def beforeInterceptor = [action: this.&checkSession]
 

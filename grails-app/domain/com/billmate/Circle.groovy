@@ -75,12 +75,18 @@ class Circle {
         users.findAll { it.getId() != userId }
     }
 
+    public Set<RegisteredUser> getRegisteredUsersWithout(Long userId){
+        Set<RegisteredUser> registeredUsers = new HashSet<>()
+        getUsersWithout(userId).each{ if(it.getRegisteredUser()) registeredUsers.add(it.getRegisteredUser()) }
+        registeredUsers
+    }
+
     public void addExpensesByIDSOrName(Set<String> expenseSet){
         for (String expense : expenseSet) {
             ExpenseType expenseType = (expense.isLong()) ? ExpenseType.findById(Long.parseLong(expense)) : null
             if (!expense.equals("") && !expenseType) {
                 CustomExpenseType customExpenseType = new CustomExpenseType(name: expense)
-                customExpenseType.secureSave()
+                customExpenseType.persist()
                 expenseType = customExpenseType.getExpenseType()
             }
             if(expenseType) addToExpenseTypes(expenseType)
@@ -102,7 +108,7 @@ class Circle {
         (referredUser)? referredUser.getUser():null
     }
 
-    public void addNonRegisteredUsersByEmailAndName(String name, String email){
+    public User addNonRegisteredUsersByEmailAndName(String name, String email){
         try{
             User user = null
             if(!email.equals("")) user = addRegisteredUserToHouseByEmail(email)
@@ -110,26 +116,41 @@ class Circle {
             if(!user && !email.equals("")) user = addReferredUserToHouseByEmail(email)
             if(!user){
                 ReferredUser referredUser = new ReferredUser(name: name, email: email)
-                referredUser.secureSave()
+                referredUser.persist()
                 user = referredUser.getUser()
             }
             addToUsers(user)
+            return user
         }catch(Exception e){
         }
     }
 
-    public void addUsersByIDSOrEmail(Set<String> friendsSet){
+    public void addUsersByIDSOrEmail(Set<String> friendsSet, RegisteredUser sessionUser){
+        def actions = new ArrayList<Action>()
         for (String friend : friendsSet) {
-            RegisteredUser registeredUser = (friend.isLong()) ? RegisteredUser.findByUser(User.findById(Long.parseLong(friend))) : RegisteredUser.findByEmail(friend)
+            def registeredUser = (friend.isLong()) ? RegisteredUser.findByUser(User.findById(Long.parseLong(friend))) : RegisteredUser.findByEmail(friend)
+            def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addUserCircle.toString()), actor: sessionUser, circle: this)
             if (registeredUser) {
                 addToUsers(registeredUser.getUser())
+                action.setUser(registeredUser.getUser())
             } else {
                 String[] newReferredUser = friend.split("###")
                 String email = (newReferredUser.length>1)? newReferredUser[1]:""
-                if(newReferredUser[0] && !newReferredUser[0].equals(""))
-                    addNonRegisteredUsersByEmailAndName(newReferredUser[0],email)
+                if(newReferredUser[0] && !newReferredUser[0].equals("")){
+                    User user = addNonRegisteredUsersByEmailAndName(newReferredUser[0],email)
+                    action.setUser(user)
+                }
+            }
+            if(action.getUserId().equals(sessionUser.getUserId()) == false) {
+                action.save()
+                actions.add(action)
             }
         }
+
+        // Notify Users on Circle
+        for(RegisteredUser registeredUserToNotify : getRegisteredUsersWithout(sessionUser.getUser().getId()))
+            for(Action actionToNotify : actions)
+                new SystemNotification(action: actionToNotify, registeredUser: registeredUserToNotify).persist()
     }
 
     public List<Action> latestEvents(){
@@ -139,7 +160,7 @@ class Circle {
         expenses.each{ latestEvents.addAll( it.getActions() ) }
         regularExpenses.each{ latestEvents.addAll( it.getActions() ) }
 
-        latestEvents.sort{ it.getActionDate() }
+        latestEvents.toList()
     }
 
     public Double monthlySpendingOfExpenseType(Date date, ExpenseType expenseType) {
@@ -180,5 +201,11 @@ class Circle {
         List<ExpenseType> orderList = expenseTypes.sort { map.get(it).sum{ it.amountAssignedTo(this.id) } }
 
         orderList.take(expenses)
+    }
+
+    public List<String> getUsersPhotos(){
+        List<String> userPhotos = new ArrayList<>()
+        users.each { userPhotos.add(it.getPhotoOrDefault()) }
+        userPhotos
     }
 }

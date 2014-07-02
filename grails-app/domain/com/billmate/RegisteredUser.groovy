@@ -20,6 +20,11 @@ class RegisteredUser {
         password password: true, nullable: false, blank: false, minSize: 5
     }
 
+    static mapping = {
+        realizedActions sort: "actionDate", order: "desc"
+        systemNotifications sort: "action", order: "desc"
+    }
+
     public RegisteredUser() {
         super()
         user = new User()
@@ -68,13 +73,32 @@ class RegisteredUser {
         return user.toString();
     }
 
+    public void persist() throws Exception{
+        user.save(flush: true, failOnError: true)
+        save(flush: true, failOnError: true)
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {
-                user.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
+                persist()
                 return true
-            }catch(Exception ignored){
+            }catch(Exception eSave){
+                eSave.printStackTrace()
+                status.setRollbackOnly()
+                return false
+            }
+        }
+    }
+
+    public boolean secureSave(Action action){
+        withTransaction { status ->
+            try {
+                persist()
+                action.save()
+                return true
+            }catch(Exception eSave){
+                eSave.printStackTrace()
                 status.setRollbackOnly()
                 return false
             }
@@ -166,7 +190,7 @@ class RegisteredUser {
             try {
                 notification.each {
                     it.setIsRead(true)
-                    it.secureSave()
+                    it.persist()
                 }
             } catch (Exception e) {
                 status.setRollbackOnly();
@@ -232,11 +256,61 @@ class RegisteredUser {
 
         latestEvents.toList()
     }
-    
+
     public User[] getFriendsOfAllCircles(){
         Set<User> list = new HashSet<User>()
         User.findAll().each { if (it.getRegisteredUserId() != getId()) list.add(it)}
         return list.toArray()
     }
 
+    public long getTotalWhoIOwe(){
+        long valueWhoHaveToPay = 0, amountAlreadyPaid = 0, totalAmountPaid = 0, totalValueToPay = 0
+        Set<Expense> expenseSet = user.getExpenses()
+        Set<Payment> paymentSet
+        Debt debt
+        for(Expense expense in expenseSet){
+            if(expense.getResponsible().getId() != getId()){
+                debt = Debt.findByExpenseAndUser(expense,this.getUser())
+                paymentSet = Payment.findAllByExpenseAndUser(expense,user)
+                valueWhoHaveToPay = (debt)? debt.getValue() : 0
+                for (Payment paymentAux : paymentSet){
+                    amountAlreadyPaid += paymentAux.getValue()
+                }
+                totalValueToPay += valueWhoHaveToPay
+                totalAmountPaid += valueWhoHaveToPay - amountAlreadyPaid
+            }
+        }
+        totalValueToPay - totalAmountPaid
+    }
+
+    public long getTotalWhoOweMe(){
+        long valueAlreadyReceivedByEachExpense = 0
+        long totalAmountRemaining = 0
+        Set<Expense> expenseSet = this.getResponsibleExpenses()
+        Set<Payment> paymentSet
+        for(Expense expense in expenseSet){
+            paymentSet = Payment.findAllByExpenseAndUser(expense, this.getUser())
+            for(Payment payment : paymentSet){
+                valueAlreadyReceivedByEachExpense += payment.value
+            }
+            totalAmountRemaining += expense.getValue() - valueAlreadyReceivedByEachExpense
+        }
+        totalAmountRemaining
+    }
+
+    public long getTotalBalance(){
+        getTotalWhoOweMe() - getTotalWhoIOwe();
+    }
+
+    public static Set<ExpenseType> getExpenseTypeByHouse(){
+        CircleType.getExpenseTypeByHouse()
+    }
+
+    public static Set<ExpenseType> getExpenseTypeByCollective(){
+        CircleType.getExpenseTypeByCollective()
+    }
+
+    public List<Action> latestEvents(){
+        user.latestEvents();
+    }
 }

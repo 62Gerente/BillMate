@@ -46,13 +46,17 @@ class DefaultExpenseType{
         expenseType.getName()
     }
 
+    public void persist() throws Exception{
+        expenseType.save(flush: true, failOnError: true)
+        save(flush: true, failOnError: true)
+    }
+
     public boolean secureSave(){
         withTransaction { status ->
             try {
-                expenseType.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
+                persist()
                 return true
-            }catch(Exception ignored){
+            }catch(Exception eSave){
                 status.setRollbackOnly()
                 return false
             }

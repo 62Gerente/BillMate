@@ -12,8 +12,9 @@ class HouseController extends RestrictedController  {
         Set<String> expenseSet = params.expenseType.split(",")
         Set<String> friendsSet = friendsList.split(",")
 
-        House house = new House(name: params.houseName, description: params.houseDescription)
-        result = house.addUsersAndExpenseTypesToHouseAndSave(friendsSet,expenseSet)
+        def house = new House(name: params.houseName, description: params.houseDescription)
+        def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addHouse.toString()), actor: session.user, circle: house.getCircle())
+        result = house.addUsersAndExpenseTypes(friendsSet, expenseSet, action, session.user)
 
         def response = [
                 'error': false,

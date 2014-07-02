@@ -135,6 +135,6 @@ class User {
             latestEvents.addAll( registeredUser.latestResponsibleEvents() )
         }
 
-        latestEvents.sort{ it.getActionDate() }
+        latestEvents.toList()
     }
 }
