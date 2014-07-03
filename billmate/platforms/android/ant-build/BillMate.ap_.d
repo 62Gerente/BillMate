@@ -37,6 +37,7 @@
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/index.html \
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/index_sample.html \
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/js \
+/Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/registo.html \
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/assets/fonts \
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/assets/images \
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/assets/javascripts \
