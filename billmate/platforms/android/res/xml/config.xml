@@ -6,6 +6,7 @@
         <param name="android-package" value="org.apache.cordova.App" />
     </feature>
     <name>BillMate</name>
+    <preference name="SplashScreen" value="screen" />
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
     </description>
@@ -14,4 +15,5 @@
     </author>
     <content src="index.html" />
     <access origin="*" />
+    <icon src="www/img/logo.png" />
 </widget>

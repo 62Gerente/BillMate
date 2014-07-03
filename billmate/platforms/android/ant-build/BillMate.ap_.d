@@ -475,5 +475,6 @@
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/assets/stylesheets/page/landing/style.css \
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/css/index.css \
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/img/logo.png \
+/Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/img/logo.svg \
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/assets/www/js/index.js \
 /Users/ricardobranco/Documents/git/BillMate/billmate/platforms/android/ant-build/AndroidManifest.xml \
