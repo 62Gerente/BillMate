@@ -1,0 +1,17 @@
+body {
+    font-family: "Open Sans";
+    background-color: #1b1e24;
+    height: 100%;
+}
+
+.login-container {
+    margin-top: 5%;
+}
+
+img.logo {
+    height: 75px;
+}
+
+.forgot-password {
+    margin-top: 0px;
+}

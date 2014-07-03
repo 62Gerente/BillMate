@@ -1,0 +1,95 @@
+.user-profile-pic{
+    margin-top: 0px
+}
+
+.user-description-box{
+    background-color: #fff;
+    padding: 10px 20px;
+}
+
+.text-dark-grey{
+    color: #505458 !important;
+}
+
+.user-description-box p{
+    margin-bottom: 5px;
+}
+
+.profile-circle-name{
+    vertical-align: super;
+}
+
+.btn-sm{
+    padding: 6px 10px 3px 10px;
+    font-size: 11.9px;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+.has-error .help-block, .has-error .control-label, .has-error .radio, .has-error .checkbox, .has-error .radio-inline, .has-error .checkbox-inline {
+    font-size: 12px;
+    font-weight: 400;
+}
+
+.editable-empty, .editable-empty:hover, .editable-empty:focus {
+    font-style: italic;
+    font-size: 11px;
+    color: #9E9E9E !important;
+}
+
+#edit_photo{
+    display: none;
+}
+
+.profile-photo-error{
+    font-size: 12px;
+}
+
+.editable-click, a.editable-click, a.editable-click:hover {
+    text-decoration: none;
+    border-bottom: none !important;
+    color: #505458;
+}
+
+.edit-property:hover{
+    background-color: #F1F1F1;
+    border-radius: 5px;
+}
+
+.edit-property-sm{
+    padding: 4px 5px;
+}
+
+.edit-property-lg{
+    padding: 4px 10px;
+    margin-left: -10px;
+}
+
+.user-description-box p i {
+    width: 20px;
+    font-size: 14px;
+}
+
+.user-description-box{
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+.large-user-profile-pic{
+    border-radius: 240px;
+    display: block;
+    height: 120px;
+    overflow: hidden;
+    width: 120px;
+    border: 5px solid #F1F1F1;
+    background-color: #e5e9ec;
+}
+
+.profile-debts-resume h3{
+    margin: 0px
+}
+
+.profile-debts-resume h5{
+    margin: 12px 0px 0px 0px;
+}
