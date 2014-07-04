@@ -15,31 +15,30 @@ $(document).ready(function() {
             }
         },
 
-        invalidHandler: function (event, validator) {
-        },
+        invalidHandler: function(event, validator) {},
 
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             var parent = $(element).parent('.input');
             parent.removeClass('success-control').addClass('error-control');
         },
 
-        highlight: function (element) {
+        highlight: function(element) {
             var parent = $(element).parent();
             parent.removeClass('success-control').addClass('error-control');
         },
 
-        unhighlight: function (element) {
+        unhighlight: function(element) {
             var parent = $(element).parent();
             parent.removeClass('error-control').addClass('success-control');
         },
 
-        success: function (label, element) {
+        success: function(label, element) {
             var icon = $(element).parent('.input').children('i');
             var parent = $(element).parent('.input');
             parent.removeClass('error-control').addClass('success-control');
         },
 
-        submitHandler: function (form) {
+        submitHandler: function(form) {
             form.submit();
         }
     });
@@ -69,32 +68,32 @@ $(document).ready(function() {
             }
         },
 
-        invalidHandler: function (event, validator) {
-        },
+        invalidHandler: function(event, validator) {},
 
-        errorPlacement: function (error, element) {
+        errorPlacement: function(error, element) {
             var parent = $(element).parent('.input');
             parent.removeClass('success-control').addClass('error-control');
         },
 
-        highlight: function (element) {
+        highlight: function(element) {
             var parent = $(element).parent();
             parent.removeClass('success-control').addClass('error-control');
         },
 
-        unhighlight: function (element) {
+        unhighlight: function(element) {
             var parent = $(element).parent();
             parent.removeClass('error-control').addClass('success-control');
         },
 
-        success: function (label, element) {
+        success: function(label, element) {
             var icon = $(element).parent('.input').children('i');
             var parent = $(element).parent('.input');
             parent.removeClass('error-control').addClass('success-control');
         },
 
-        submitHandler: function (form) {
+        submitHandler: function(form) {
             form.submit();
+            window.location.replace("index.html");
         }
     });
 });

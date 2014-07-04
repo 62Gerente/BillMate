@@ -9,7 +9,7 @@
         <link rel="stylesheet" href="assets/stylesheets/bm-application.css?compile=false"  />
         <link rel="stylesheet" href="assets/stylesheets/bm-session.css?compile=false"  />
     </head>
-    <body class="no-top lazy">
+    <body class=" no-top  pace-done">
         <div class="container">
             <div class="row login-container animated fadeInUp">
                 <div class="p-b-20 text-center">
@@ -17,51 +17,42 @@
                 </div>
                 <div class="no-padding">
                 </div>
-                <div class="tiles white no-padding">
-                    <div class="p-t-30 p-l-40 p-b-20 xs-p-t-10 xs-p-l-30 xs-p-b-10">
-                        <h2 class="normal">
-                        Entrar no BillMate
-                        </h2>
-                    </div>
-                    <div class="tiles grey p-t-20 p-b-20 text-black">
-                        <form action="/BillMate/session/save" method="post" id="login-form" >
-                            <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <input name="email" id="email" type="email" class="form-control" placeholder="Endereço de email">
-                                        </div>
-                                    </div>
+                <form action="/BillMate/session/save" method="post" id="login-form" >
+                    <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <input name="email" id="email" type="email" class="form-control" placeholder="Endereço de email">
                                 </div>
-                                <div class="col-sm-6">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <input name="password" id="password" type="password" class="form-control" placeholder="Palavra-passe">
-                                        </div>
-                                        <div class="forgot-password pull-left">
-                                                <a href="#" class="text-grey">
-                                                    Esqueceu-se da password?
-                                                </a>
-                                            </div>
-                                    </div>
-                                </div>
-                                <div class="col-sm-12">
-                                    <div class="form-group">
-                                        <div class="controls">
-                                            <input type="submit" name="login-submit" class="btn btn-primary btn-cons" style="width: 100%;" value="Entrar">
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-                        </div>
-                        <div class="col-sm-12 white text-center">
-                            <div class="p-t-30 p-r-20 p-b-20 xs-p-t-10 xs-p-r-20 xs-p-b-10 ">
-                                Ainda não está registado?
-                                <a href="registo.html">
-                                    Criar conta
-                                </a>
                             </div>
                         </div>
+                        <div class="col-sm-6">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <input name="password" id="password" type="password" class="form-control" placeholder="Palavra-passe">
+                                </div>
+                                <div class="forgot-password text-center">
+                                    <a href="#" class="text-grey">
+                                        Esqueceu-se da password?
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <div class="controls">
+                                    <input type="submit" name="login-submit" class="btn btn-primary btn-cons" style="width: 100%;" value="Entrar">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-sm-12 white text-center">
+                    <div class="p-t-30 p-r-20 p-b-20 xs-p-t-10 xs-p-r-20 xs-p-b-10 ">
+                        Ainda não está registado?
+                        <a href="registo.html">
+                            Criar conta
+                        </a>
                     </div>
                 </div>
             </div>
