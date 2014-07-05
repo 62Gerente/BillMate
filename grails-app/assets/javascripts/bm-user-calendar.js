@@ -1,19 +1,64 @@
+var actualMonth;
 $(document).ready(function() {
-    $('#calendar').fullCalendar({
-        header: {
-            left: 'prev,next today',
-            center: 'title',
-            right: 'month,agendaWeek,agendaDay'
-        },
-        defaultDate: '2014-07-05',
-        editable: true,
-        events: "/BillMate/user/teste/4"
-    });
-    $('.fc-header').hide();
+
+    var userLang = navigator.language || navigator.userLanguage;
+
+    if(userLang.indexOf("pt") > -1)
+        buildPT();
+    else
+        buildDefault();
+
+    function buildPT(){
+        $('#calendar').fullCalendar({
+            header: {
+                center: 'title'
+            },
+            defaultDate: '2014-07-05',
+            editable: true,
+            events: {
+                url: '/BillMate/user/events/4',
+                type: 'POST',
+                data: {
+                    date: actualMonth
+                }
+            },
+            dateFormat: 'dd/mm/yy',
+            dayNames: ['Domingo','Segunda','Terça','Quarta','Quinta','Sexta','Sábado','Domingo'],
+            dayNamesMin: ['D','S','T','Q','Q','S','S','D'],
+            dayNamesShort: ['Dom','Seg','Ter','Qua','Qui','Sex','Sáb','Dom'],
+            monthNames: ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'],
+            monthNamesShort: ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'],
+            nextText: 'Próximo',
+            prevText: 'Anterior',
+            list: "Agenda",
+            allDayText: "Todo o dia"
+        });
+    }
+
+    function buildDefault(){
+        $('#calendar').fullCalendar({
+            header: {
+                center: 'title'
+            },
+            defaultDate: '2014-07-05',
+            editable: true,
+            events: {
+                url: '/BillMate/user/events/4',
+                type: 'POST',
+                data: {
+                    date: actualMonth
+                }
+            }
+        });
+    }
+
+    $('.fc-header-right').hide();
+    $('.fc-header-left').hide();
 
     $('#change-view-month').click(function () {
         $('#calendar').fullCalendar('changeView', 'month');
         updateCalendar();
+
     });
     $('#change-view-week').click(function () {
         $('#calendar').fullCalendar('changeView', 'agendaWeek');
@@ -33,8 +78,10 @@ $(document).ready(function() {
         updateCalendar();
     });
 
-
     function updateCalendar(){
-        $('#calendar').fullCalendar('refetchEvents');
+        actualMonth = $('#calendar').fullCalendar('getDate').getMonth();
+        $("#calendar").fullCalendar('refetchEvents');
+        $('.fc-header-right').hide();
+        $('.fc-header-left').hide();
     }
 });

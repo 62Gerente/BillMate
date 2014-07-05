@@ -1,6 +1,7 @@
 package com.billmate
 
 import grails.converters.JSON
+import org.joda.time.DateTime
 
 class UserController extends RestrictedController {
     static allowedMethods = [updateField: "POST"]
@@ -34,18 +35,16 @@ class UserController extends RestrictedController {
         return ['user': registeredUser]
     }
 
-    def teste(Long id){
+    def events(Long id, Long date){
         def listEvents = []
-        RegisteredUser registeredUser = RegisteredUser.findById(id)
-        User user = registeredUser?.getUser()
+        User user = RegisteredUser.findById(id)?.getUser()
+        def actualMonth = DateTime.now().getMonthOfYear()
+        date = date? (date+1) : actualMonth
         //Alterar a query toda
-        user?.getExpenses().each { listEvents.add(title: it.getTitle(), start: it.getBeginDate(), end: it.getEndDate())
-            listEvents.add(title: "Limite de pagamento de "+it.getTitle(), start: it.getPaymentDeadline())
-            listEvents.add(title: "Limite de receção de "+it.getTitle(), start: it.getReceptionDeadline())
+        user?.getExpenses().each {
+            if(actualMonth == date)
+                listEvents.add(title: "Despesa "+it.getTitle() + " no círculo " + it.getCircle().getName(), start: it.getBeginDate(), end: it.getEndDate())
         }
-
-        /*listEvents = []
-        listEvents.add(title: 'All Day Event', start: '2014-07-06')*/
 
         render listEvents as JSON
     }

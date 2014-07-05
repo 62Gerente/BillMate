@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
     <head>
+        <asset:stylesheet src="../plugins/fullcalendar/jquery-ui.min.css"/>
         <asset:stylesheet src="../plugins/fullcalendar/fullcalendar.css"/>
         <asset:stylesheet src="../plugins/fullcalendar/fullcalendar.print.css" media='print'/>
     </head>
@@ -23,9 +24,9 @@
 
                                 <div class="pull-right">
                                     <div data-toggle="buttons-radio" class="btn-group">
-                                        <button class="btn btn-primary active" type="button" id="change-view-month">mês</button>
-                                        <button class="btn btn-primary " type="button" id="change-view-week">semana</button>
-                                        <button class="btn btn-primary" type="button" id="change-view-day">dia</button>
+                                        <button class="btn btn-primary active" type="button" id="change-view-month"><g:message code="com.billmate.expense.calendar.month" default="Month" /></button>
+                                        <button class="btn btn-primary " type="button" id="change-view-week"><g:message code="com.billmate.expense.calendar.week" default="Week" /></button>
+                                        <button class="btn btn-primary" type="button" id="change-view-day"><g:message code="com.billmate.expense.calendar.day" default="Day" /></button>
                                     </div>
                                 </div>
 
