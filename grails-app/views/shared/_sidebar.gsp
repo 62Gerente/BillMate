@@ -29,7 +29,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"> <i class="fa fa-calendar"></i>
+                <a href="${createLink(controller: "user", action: "calendarEvents", id: user.getId())}"> <i class="fa fa-calendar"></i>
                     <span class="title">
                         <g:message code="com.billmate.sidebar.calendar" default="Calendar"/>
                     </span>

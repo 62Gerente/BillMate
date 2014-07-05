@@ -15,6 +15,11 @@
 //= require ../plugins/jquery-validation/js/jquery.validate.min.js
 //= require ../plugins/blockUI/jquery.blockUI.js
 
+//= require ../plugins/fullcalendar/fullcalendar.min.js
+//= require ../plugins/fullcalendar/moment.min.js
+//= require bm-user-calendar
+
+
 //= require bm-ajax-notifications.js
 //= require form_elements.js
 //= require bm-links.js
