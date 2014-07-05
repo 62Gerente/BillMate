@@ -6,6 +6,7 @@ else{
     userLang = 'en-US'
 }
 
+/* Set the defaults for DataTables initialisation */
 $.extend( true, $.fn.dataTable.defaults, {
     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'p i>>",
     "sPaginationType": "bootstrap",
