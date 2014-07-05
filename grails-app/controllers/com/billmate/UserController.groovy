@@ -1,6 +1,10 @@
 package com.billmate
 
 import grails.converters.JSON
+import org.joda.time.DateTime
+
+import javax.servlet.http.HttpServletRequest
+import java.text.DecimalFormat
 
 class UserController extends RestrictedController {
     static allowedMethods = [updateField: "POST", history: "GET"]
@@ -23,6 +27,29 @@ class UserController extends RestrictedController {
             response.error = true
             response.message = message(error: user.getErrors().getAllErrors().first());
         }
+
+        render response as JSON
+    }
+
+    def expenses(Long id){
+        return [user: authenticatedUser()]
+    }
+
+    //Alterar Query para ir buscar apenas as que ainda estão por pagar
+    def teste(){
+        def list = []
+        List<Expense> expenseList = new LinkedList<Expense>()
+        User user = User.findById(3);
+        //int pageNumber = Integer.parseInt(request.getParameter("iDisplayStart"))
+        //int numberDisplayed = Integer.parseInt(request.getParameter("iDisplayLength"))
+        Debt.findAllByUser(user).each {
+            Expense expense = it.getExpense()
+            list.add([expense.getTitle(), expense.getResponsible().getName(), expense.getCircle().getName(),
+                      10.1, it.getValue(),/*expense.getPaymentDate()*/ DateTime.now().toString(), /*expense.getInvoice()?.getPath(), expense.getReceipt()?.getPath()*/
+                      "http://www.cse.msu.edu/~chooseun/Test2.pdf","http://www.cse.msu.edu/~chooseun/Test2.pdf"]);
+        }
+
+        def response = ['data': list]
 
         render response as JSON
     }

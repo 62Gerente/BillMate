@@ -1,0 +1,23 @@
+{
+	"sEmptyTable":     "No data available in table",
+    "sLengthMenu":     "_MENU_ ",
+    "sInfo":           "Showing <b>_START_ to _END_</b> of _TOTAL_ entries",
+	"sInfoEmpty":      "Showing 0 to 0 of 0 entries",
+	"sInfoFiltered":   "(filtered from _MAX_ total entries)",
+	"sInfoPostFix":    "",
+	"sInfoThousands":  ",",
+	"sLoadingRecords": "Loading...",
+	"sProcessing":     "Processing...",
+    "sSearch":         "<input type='hidden' id='search-datatable-placeholder' value='Search...'/>",
+	"sZeroRecords":    "No matching records found",
+	"oPaginate": {
+		"sFirst":    "First",
+		"sLast":     "Last",
+		"sNext":     "Next",
+		"sPrevious": "Previous"
+	},
+	"oAria": {
+		"sSortAscending":  ": activate to sort column ascending",
+		"sSortDescending": ": activate to sort column descending"
+	}
+}

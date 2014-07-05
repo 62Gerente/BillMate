@@ -22,7 +22,7 @@
                 </a>
             </li>
             <li>
-                <a href="#"> <i class="fa fa-money"></i>
+                <a href="${createLink(controller: "user", action: "expenses", id: user.getId())}"> <i class="fa fa-money"></i>
                     <span class="title">
                         <g:message code="com.billmate.sidebar.expenses" default="Expenses"/>
                     </span>

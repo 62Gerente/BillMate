@@ -1,4 +1,7 @@
 /* Set the defaults for DataTables initialisation */
+
+var userLang = navigator.language || navigator.userLanguage;
+
 $.extend( true, $.fn.dataTable.defaults, {
 	"sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'p i>>",
 	"sPaginationType": "bootstrap",
@@ -145,23 +148,74 @@ $.extend( $.fn.dataTableExt.oPagination, {
 		}
 	} );
 	
-$(".select2-wrapper").select2({minimumResultsForSearch: -1});	
+$(".select2-wrapper").select2({minimumResultsForSearch: -1});
+
 
 /* Table initialisation */
 $(document).ready(function() {
+    var flag = false;
     var responsiveHelper = undefined;
     var breakpointDefinition = {
         tablet: 1024,
         phone : 480
-    };    
-	var tableElement = $('#example');
+    };
+
+    function propagateRowUpdates(context){
+        var textInfo = context.text();
+        if(context.find("i").length == 0)
+        {
+            if(textInfo == "")
+                context.empty().append("<i class='fa fa-file-pdf-o' style='opacity:0.3;margin-left:20px'></i>");
+            else
+                context.empty().append("<a href='" + textInfo + "' style='text-decoration:none;color:inherit;margin-left:20px'><i class='fa fa-file-pdf-o'></i></a>");
+        }
+    }
+
+    function updateAfterFill(){
+        var invoice = $("#users-debt").find("tr.odd, tr.even");
+        var receipt = $("#users-debt").find("tr.odd, tr.even");
+        var invoiceList = invoice.find("td:nth(6)");
+        var receiptList = invoice.find("td:nth(7)");
+        if(!invoiceList.length) invoiceList = invoice.find("td:nth(3)");
+        if(!receiptList.length) receiptList = invoice.find("td:nth(4)");
+        invoiceList.each(function(index){ propagateRowUpdates($(this)) });
+        receiptList.each(function(index){ propagateRowUpdates($(this)) });
+
+        $("#users-debt_wrapper div.col-md-6").first().addClass("col-xs-6");
+        $("#users-debt_wrapper div.col-md-6").last().addClass("col-xs-6 col-md-6");
+
+        $('#users-debt_wrapper .dataTables_filter input').addClass("input-medium "); // modify table search input
+        $('#users-debt_wrapper .dataTables_length select').addClass("select2-wrapper span12"); // modify table per page dropdown
+
+        $("#search-datatable-placeholder").siblings().attr("placeholder",$("#search-datatable-placeholder").val());
+
+        $(".select2-wrapper").select2({minimumResultsForSearch: -1});
+
+        if(!flag){
+            $("#ToolTables_users-debt_1").click(function(){
+                $("#users-debt").tableExport({type:'csv',escape:'false'});
+            });
+            $("#ToolTables_users-debt_2").click(function(){
+                $("#users-debt").tableExport({type:'excel',escape:'false'});
+            });
+            $("#ToolTables_users-debt_3").click(function(){
+                $("#users-debt").tableExport({type:'pdf',pdfFontSize:'7', escape:'false', pdfLeftMargin:10});
+            });
+            $("#ToolTables_users-debt_4").click(function(){
+                $("#users-debt").tableExport({type:'json',escape:'false'});
+            });
+            flag = true;
+        }
+    }
+
+    var tableElement = $('#users-debt');
 
     tableElement.dataTable( {
-		"sDom": "<'row'<'col-md-6'l T><'col-md-6'f>r>t<'row'<'col-md-12'p i>>",
-			"oTableTools": {
-			"aButtons": [
+        "sDom": "<'row'<'col-md-6'l T><'col-md-6'f>r>t<'row'<'col-md-12'p i>>",
+        "oTableTools": {
+            "aButtons": [
 				{
-					"sExtends":    "collection",
+                    "sExtends":    "collection",
 					"sButtonText": "<i class='fa fa-cloud-download'></i>",
 					"aButtons":    [ "csv", "xls", "pdf", "copy"]
 				}
@@ -169,14 +223,16 @@ $(document).ready(function() {
 		},
 		"sPaginationType": "bootstrap",
 		 "aoColumnDefs": [
-          { 'bSortable': false, 'aTargets': [ 0 ] }
+          { 'bSortable': false, 'aTargets': [ 6,7 ] }
 		],
-		"aaSorting": [[ 1, "asc" ]],
+		"aaSorting": [[ 5, "desc" ]],
 		"oLanguage": {
-			"sLengthMenu": "_MENU_ ",
-			"sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
+            "sUrl": "../../assets/jquery-datatable/i18n/" + userLang + ".json"
 		},
-		 bAutoWidth     : false,
+		 bAutoWidth: false,
+        "bProcessing": true,
+        "sAjaxSource": "/BillMate/user/teste",
+        "sAjaxDataProp": "data",
         fnPreDrawCallback: function () {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper) {
@@ -185,133 +241,11 @@ $(document).ready(function() {
         },
         fnRowCallback  : function (nRow) {
             responsiveHelper.createExpandIcon(nRow);
+            //propagateRowUpdates(nRow)
         },
         fnDrawCallback : function (oSettings) {
             responsiveHelper.respond();
+            updateAfterFill();
         }
 	});
-	
-	$('#example_wrapper .dataTables_filter input').addClass("input-medium "); // modify table search input
-    $('#example_wrapper .dataTables_length select').addClass("select2-wrapper span12"); // modify table per page dropdown
-
-	
-	
-	$('#example input').click( function() {
-        $(this).parent().parent().parent().toggleClass('row_selected');
-    });
-	
-	
-	$('#quick-access .btn-cancel').click( function() {
-		$("#quick-access").css("bottom","-115px");
-    });
-	$('#quick-access .btn-add').click( function() {
-		fnClickAddRow();
-		$("#quick-access").css("bottom","-115px");
-    });
-	
-    /*
-     * Insert a 'details' column to the table
-     */
-    var nCloneTh = document.createElement( 'th' );
-    var nCloneTd = document.createElement( 'td' );
-    nCloneTd.innerHTML = '<i class="fa fa-plus-circle"></i>';
-    nCloneTd.className = "center";
-     
-    $('#example2 thead tr').each( function () {
-        this.insertBefore( nCloneTh, this.childNodes[0] );
-    } );
-     
-    $('#example2 tbody tr').each( function () {
-        this.insertBefore(  nCloneTd.cloneNode( true ), this.childNodes[0] );
-    } );
-     
-    /*
-     * Initialse DataTables, with no sorting on the 'details' column
-     */
-    var oTable = $('#example2').dataTable( {
-	   "sDom": "<'row'<'col-md-6'l><'col-md-6'f>r>t<'row'<'col-md-12'p i>>",
-       "aaSorting": [],
-				"oLanguage": {
-			"sLengthMenu": "_MENU_ ",
-			"sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-		},
-    });
-	 var oTable3 = $('#example3').dataTable( {
-	   "sDom": "<'row'<'col-md-6'l <'toolbar'>><'col-md-6'f>r>t<'row'<'col-md-12'p i>>",
-        			"oTableTools": {
-			"aButtons": [
-				{
-					"sExtends":    "collection",
-					"sButtonText": "<i class='fa fa-cloud-download'></i>",
-					"aButtons":    [ "csv", "xls", "pdf", "copy"]
-				}
-			]
-		},
-        "aoColumnDefs": [
-            { "bSortable": false, "aTargets": [ 0 ] }
-        ],
-        "aaSorting": [[ 3, "desc" ]],
-				"oLanguage": {
-			"sLengthMenu": "_MENU_ ",
-			"sInfo": "Showing <b>_START_ to _END_</b> of _TOTAL_ entries"
-		},
-    });
-	$("div.toolbar").html('<div class="table-tools-actions"><button class="btn btn-primary" style="margin-left:12px" id="test2">Add</button></div>');
-	
-	$('#test2').on( "click",function() {
-		$("#quick-access").css("bottom","0px");
-    });
-	
-	$('#example2_wrapper .dataTables_filter input').addClass("input-medium ");
-    $('#example2_wrapper .dataTables_length select').addClass("select2-wrapper span12"); 
-	
-	$('#example3_wrapper .dataTables_filter input').addClass("input-medium ");
-    $('#example3_wrapper .dataTables_length select').addClass("select2-wrapper span12"); 
-	
-	
-    /* Add event listener for opening and closing details
-     * Note that the indicator for showing which row is open is not controlled by DataTables,
-     * rather it is done here
-     */
-    $('#example2 tbody td i').live('click', function () {
-        var nTr = $(this).parents('tr')[0];
-        if ( oTable.fnIsOpen(nTr) )
-        {
-            /* This row is already open - close it */
-			this.removeClass = "fa fa-plus-circle";
-            this.addClass = "fa fa-minus-circle";     
-            oTable.fnClose( nTr );
-        }
-        else
-        {
-            /* Open this row */
-            this.removeClass = "fa fa-minus-circle";
-            this.addClass = "fa fa-plus-circle";  
-            oTable.fnOpen( nTr, fnFormatDetails(oTable, nTr), 'details' );
-        }
-    });
-	
-		$(".select2-wrapper").select2({minimumResultsForSearch: -1});
-
-	function fnClickAddRow() {
-    $('#example3').dataTable().fnAddData( [
-        $("#val1 option:selected").text(),
-        $("#val2 option:selected").text(),
-        "Windows",
-        "789.","A" ] );     
-	}	
 });
-
-
-/* Formating function for row details */
-function fnFormatDetails ( oTable, nTr )
-{
-    var aData = oTable.fnGetData( nTr );
-    var sOut = '<table cellpadding="5" cellspacing="0" border="0" style="padding-left:50px;" class="inner-table">';
-    sOut += '<tr><td>Rendering engine:</td><td>'+aData[1]+' '+aData[4]+'</td></tr>';
-    sOut += '<tr><td>Link to source:</td><td>Could provide a link here</td></tr>';
-    sOut += '<tr><td>Extra info:</td><td>And any further details here (images etc)</td></tr>';
-    sOut += '</table>';
-     
-    return sOut;
-}
