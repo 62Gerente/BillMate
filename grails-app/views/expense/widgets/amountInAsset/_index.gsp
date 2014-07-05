@@ -2,10 +2,10 @@
     <div class="tiles green added-margin">
         <div class="tiles-body">
             <div class="tiles-title" style="font-size: 11px">
-                <g:message code="com.billmate.expense.widget.balance" default="current balance" />
+                <g:message code="com.billmate.expense.amountInAsset" default="Assets" />
             </div>
             <div class="heading">
-                <g:formatNumber number="${balance}" type="currency" currencyCode="EUR" />
+                <g:formatNumber number="${amountInAsset}" type="currency" currencyCode="EUR" />
             </div>
         </div>
     </div>

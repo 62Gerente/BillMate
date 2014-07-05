@@ -6,9 +6,9 @@ import java.text.NumberFormat
 
 class Payment {
     static hasMany = [actions: Action]
-    static belongsTo = [Expense, User]
+    static belongsTo = [Debt, User]
 
-    Expense expense
+    Debt debt
     User user
 
     Double value
@@ -18,7 +18,7 @@ class Payment {
     Boolean isValidated = false
 
     static constraints = {
-        expense nullable: false
+        debt nullable: false
         user nullable: false
 
         value min: 0D, nullable: false
@@ -32,5 +32,9 @@ class Payment {
         NumberFormat formater = NumberFormat.currencyInstance
         formater.setCurrency(Currency.getInstance("EUR"))
         formater.format(value)
+    }
+
+    public Expense getExpense(){
+        debt.getExpense()
     }
 }

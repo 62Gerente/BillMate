@@ -14,10 +14,10 @@
         </g:else>
     </td>
     <td class="unseen text-right">
-        <g:formatNumber number="${expense.valueAssignedTo(user.getId())}" type="currency" currencyCode="EUR" />
+        <g:formatNumber number="${expense.amountAssignedTo(user.getId())}" type="currency" currencyCode="EUR" />
     </td>
     <td class="text-right">
-        <g:formatNumber number="${expense.debtOf(user.getId())}" type="currency" currencyCode="EUR" />
+        <g:formatNumber number="${expense.amountInDebtOf(user.getId())}" type="currency" currencyCode="EUR" />
     </td>
     <g:if test="${user.getId() == registeredUser.getUserId() || user.getReferredUser()}">
         <td class="text-right td-settings">

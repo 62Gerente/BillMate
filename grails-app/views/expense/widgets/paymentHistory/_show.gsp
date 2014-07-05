@@ -21,12 +21,12 @@
                     </g:else>
                     /
                     <span class="bold">
-                        <g:formatNumber number="${expense.valueAssignedTo(user.getId())}" type="currency" currencyCode="EUR" />
+                        <g:formatNumber number="${expense.amountAssignedTo(user.getId())}" type="currency" currencyCode="EUR" />
                     </span>
                 </h6>
             </span>
         </div>
     </div>
-    <g:render template="/payment/table/history" model="[user: user, expense: expense, payments: expense.getPaymentsOf(user.getId())]"/>
+    <g:render template="/payment/table/history" model="[user: user, expense: expense, payments: expense.paymentsOf(user.getId())]"/>
 </div>
 

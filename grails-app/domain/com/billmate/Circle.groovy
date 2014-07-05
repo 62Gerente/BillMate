@@ -43,7 +43,7 @@ class Circle {
     }
 
     public Double totalDebtOfUnresolvedExpenses(){
-        Double total = unresolvedExpenses().sum{ it.totalDebt() }
+        Double total = unresolvedExpenses().sum{ it.amountInDebt() }
         total ? total : 0D
     }
 
@@ -143,7 +143,7 @@ class Circle {
     }
 
     public Double monthlySpendingOfExpenseType(Date date, ExpenseType expenseType) {
-        Double monthlySpending = monthExpensesOfExpenseType(date, expenseType).sum { it.valueAssignedTo(this.id) }
+        Double monthlySpending = monthExpensesOfExpenseType(date, expenseType).sum { it.amountAssignedTo(this.id) }
         monthlySpending ? monthlySpending : 0
     }
 
@@ -177,7 +177,7 @@ class Circle {
         Map map = lastMonthsExpenses(months).groupBy { expense -> expense.getExpenseType() }
         List<ExpenseType> expenseTypes = new ArrayList<>(map.keySet());
 
-        List<ExpenseType> orderList = expenseTypes.sort { map.get(it).sum{ it.valueAssignedTo(this.id) } }
+        List<ExpenseType> orderList = expenseTypes.sort { map.get(it).sum{ it.amountAssignedTo(this.id) } }
 
         orderList.take(expenses)
     }

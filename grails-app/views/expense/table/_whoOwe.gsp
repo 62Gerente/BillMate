@@ -4,7 +4,7 @@
         <tr>
             <th class="text-left text-primary uppercase"><g:message code="com.billmate.expense" default="Expense" /></th>
             <th class="text-left unseen text-primary uppercase"><g:message code="com.billmate.circle" default="Circle" /></th>
-            <th class="unseen text-primary uppercase"><g:message code="com.billmate.expense.paymentDeadline" default="Payment deadline" /></th>
+            <th class="unseen text-primary uppercase"><g:message code="com.billmate.expense.paymentDeadline.short" default="Payment deadline" /></th>
             <th class="text-right text-primary uppercase"><g:message code="com.billmate.expense.value" default="Value" /></th>
         </tr>
         </thead>
@@ -19,7 +19,7 @@
             <tr>
                 <td class="text-right text-grey" colspan="4">
                     <div class="inline b-t b-grey p-t-5">
-                        <g:formatNumber number="${unresolvedExpenses.sum{ it.debtOf(user.getId()) }}" type="currency" currencyCode="EUR" />
+                        <g:formatNumber number="${unresolvedExpenses.sum{ it.amountInDebtOf(user.getId()) }}" type="currency" currencyCode="EUR" />
                     </div>
                 </td>
             </tr>

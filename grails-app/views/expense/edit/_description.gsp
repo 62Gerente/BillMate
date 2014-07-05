@@ -12,7 +12,9 @@
                     ${expense}
                 </g:else>
             </h3>
-            <h2 class="bold">15,30 €</h2>
+            <h2 class="bold">
+                <g:formatNumber number="${expense.getValue()}" type="currency" currencyCode="EUR" />
+            </h2>
 
             <p class="text-left p-t-10 editable-ta-fullwidth">
                 <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
@@ -160,7 +162,7 @@
         </g:elseif>
     </div>
     <div class="row p-t-5">
-        <g:if test="${!expense.isAssignedTo(registeredUser.getUser().getId()) && !expense.isResolvedBy(registeredUser.getUser().getId())}">
+        <g:if test="${expense.isAssignedTo(registeredUser.getUserId()) && !expense.isResolvedBy(registeredUser.getUserId())}">
             <button class="btn btn-block btn-primary" type="button">
                 <g:message code="com.billmate.payment.new" default="New payment" />
             </button>
@@ -170,7 +172,7 @@
                 <g:message code="com.billmate.payment.new" default="New payment" />
             </button>
         </g:else>
-        <g:if test="${false && expense.haveAcceptedPayments()}">
+        <g:if test="${expense.getResponsibleId() != registeredUser.getId() || expense.haveValidatedPaymentsWithoutResponsible()}">
             <button class="btn btn-block btn-white btn-danger-hover" type="button" disabled>
                 <g:message code="com.billmate.expense.delete" default="Delete expense" />
             </button>

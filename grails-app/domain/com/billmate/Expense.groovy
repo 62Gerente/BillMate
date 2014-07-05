@@ -5,8 +5,7 @@ import com.sun.org.apache.xpath.internal.operations.Bool
 
 class Expense {
     static belongsTo = [Circle, RegisteredUser, ExpenseType]
-    static hasMany = [payments: Payment,
-                      debt: Debt, actions: Action, assignedUsers: User]
+    static hasMany = [debts: Debt, actions: Action, assignedUsers: User]
 
     RegularExpense regularExpense
     RegisteredUser responsible
@@ -61,8 +60,9 @@ class Expense {
         if(!endDate) endDate = rExpense.getEndDate()
         if(!paymentDeadline) paymentDeadline = rExpense.getPaymentDeadline()
         if(!paymentDeadline) paymentDeadline = rExpense.getReceptionDeadline()
-        if(!debt || debt.isEmpty()){
-            rExpense.getCustomDebts().each { this.addToDebt(it) }
+
+        if(!debts || debts.isEmpty()){
+            rExpense.getDebts().each { this.addToDebts(it) }
         }
         if(!assignedUsers || assignedUsers.isEmpty()){
             rExpense.getAssignedUsers().each { this.addToAssignedUsers(it) }
@@ -88,90 +88,54 @@ class Expense {
     }
 
     public boolean isResolved(){
-        receptionDate || totalDebt() == 0
+        receptionDate || amountInDebt() == 0
     }
 
-    /*Mudar*/
-    public Double valueAssignedTo(Long userId){
-        Double totalDebt
-        Debt debt = debt.find{ it.getUserId() == userId && it.getExpenseId() == this.id }
-
-        if(debt){
-            totalDebt = value * debt.getPercentageInDecimal()
-        }else{
-            totalDebt = value * percentageAssignedToUsersWithoutDebtsInDecimal()
-        }
-
-        totalDebt
+    public Double amountAssignedTo(Long userID){
+        Debt debt = debtOf(userID)
+        debt ? debt.getValue() : 0D
     }
 
-    public Double totalDebt(){
-        value - totalAmountPaid()
+    public Double amountInDebt(){
+        value - amountPaid()
     }
 
-    public Double percentageOfDebts(){
-        Double percentage = debt.sum{ it.getPercentage() }
-        percentage ? percentage : 0D
+    public Double amountInDebtOf(Long userID){
+        Debt debt = debtOf(userID)
+        debt ? debt.amountInDebt() : 0D
     }
 
-    public Double percentageOfEquallyDividedDebts(){
-        100 - percentageOfDebts()
-    }
-
-    /*Mudar*/
-    public Integer numberOfDebts(){
-        debt.size()
-    }
-
-    public Integer numberOfAssignedUsers(){
-        assignedUsers.size() + 1
-    }
-
-    /*Mudar*/
-    public Integer numberOfAssignedUsersWithoutDebts(){
-        numberOfAssignedUsers() - numberOfDebts()
-    }
-
-    public Double percentageAssignedToUsersWithoutDebts(){
-        percentageOfEquallyDividedDebts() / numberOfAssignedUsersWithoutDebts()
-    }
-
-    public Double percentageAssignedToUsersWithoutDebtsInDecimal(){
-        percentageAssignedToUsersWithoutDebts() / 100
-    }
-
-    public Double totalAmountPaid(){
-        Double amount = payments.findAll{ it.getIsValidated() || !it.getValidationDate() }.sum{ it.getValue() }
-
-        if(!amount){ amount = 0D }
-
-        amount += valueAssignedTo(responsible.getUserId())
-        amount
-    }
-
-    public Double amountPaidBy(Long userId){
-        Double amount = payments.findAll{ it.getUserId() == userId && (it.getIsValidated() || !it.getValidationDate()) }.sum{ it.getValue() }
+    public Double amountPaid(){
+        Double amount = debts.sum{ it.amountPaid() }
         amount ? amount : 0D
     }
 
-    public Double debtOf(Long userId){
-        valueAssignedTo(userId) - amountPaidBy(userId)
+    public Double amountPaidBy(Long userID){
+        Debt debt = debtOf(userID)
+        debt ? debt.amountPaid() : 0D
     }
 
-    public boolean isAssignedTo(Long userId){
-        assignedUsers.find{ it.getId() == userId }
+    public Debt debtOf(Long userID){
+        debts.find{ it.getUserId() == userID }
     }
 
-    public boolean isResolvedBy(Long userId){
-        !isResolved() && isAssignedTo(userId) && debtOf(userId) == 0
+    public boolean isAssignedTo(Long userID){
+        debtOf(userID)
     }
 
-    public Set<User> assignedUsersWithDebts(){
+    public boolean isResolvedBy(Long userID){
+        Debt debt = debtOf(userID)
+        debt && debt.isResolved()
+    }
+
+    public Set<User> assignedUsersInDebt(){
         assignedUsers.findAll{ !isResolvedBy(it.getId()) }
     }
 
     public Set<Payment> unconfirmedPayments(){
-        payments.findAll{ !it.getValidationDate() && !it.getIsValidated() }
+        Set<Payment> payments = new HashSet<Payment>()
+        debts.each{ payments.addAll(it.unconfirmedPayments()) }
+        payments
     }
 
     public Set<User> assignedUsersAndResponsible(){
@@ -184,11 +148,38 @@ class Expense {
         actions.sort{ it.getActionDate() }
     }
 
-    public Set<Payment> getPaymentsOf(Long userId){
-        payments.findAll{ it.getUserId() == userId }
+    public Set<Payment> validatedPayments(){
+        Set<Payment> payments = new HashSet<Payment>()
+        debts.each{ payments.addAll(it.validatedPayments()) }
+        payments
     }
 
-    public boolean haveAcceptedPayments(){
-        payments.findAll{ it.getIsValidated() }.size()
+    public Set<Debt> debtsWithoutResponsible(){
+        debts.findAll{ it.getUserId() != responsible.getUserId() }
+    }
+
+    public Set<Payment> validatedPaymentsWithoutResponsible(){
+        Set<Payment> payments = new HashSet<Payment>()
+        debtsWithoutResponsible().each{ payments.addAll(it.validatedPayments()) }
+        payments
+    }
+
+    public Set<Payment> payments(){
+        Set<Payment> payments = new HashSet<Payment>()
+        debts.each{ payments.addAll(it.getPayments()) }
+        payments
+    }
+
+    public Set<Payment> paymentsOf(Long userID){
+        Debt debt = debtOf(userID)
+        debt ? debt.getPayments() : new HashSet<Payment>()
+    }
+
+    public boolean haveValidatedPayments(){
+        validatedPayments().size()
+    }
+
+    public boolean haveValidatedPaymentsWithoutResponsible(){
+        validatedPaymentsWithoutResponsible().size()
     }
 }

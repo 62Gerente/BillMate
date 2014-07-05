@@ -23,7 +23,7 @@
                 <td class="unseen"></td>
                 <td class="text-right text-grey">
                     <div class="inline b-t b-grey p-t-5">
-                        <g:formatNumber number="${expense.totalDebt()}" type="currency" currencyCode="EUR" />
+                        <g:formatNumber number="${expense.amountInDebt()}" type="currency" currencyCode="EUR" />
                     </div>
                 </td>
                 <td></td>
