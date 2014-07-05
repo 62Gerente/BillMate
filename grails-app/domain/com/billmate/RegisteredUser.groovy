@@ -119,13 +119,15 @@ class RegisteredUser {
         responsibleExpenses.findAll{ !it.isResolved() }
     }
 
-    public Double totalAsset(){
-        Double total = unresolvedResponsibleExpenses().sum{ it.totalDebt() }
+    // totalAsset
+    public Double amountInAsset(){
+        Double total = unresolvedResponsibleExpenses().sum{ it.amountInDebt() }
         total ? total : 0D
     }
 
-    public Double totalAssetOf(Double user_id){
-        unresolvedResponsibleExpensesBy(user_id).sum{ it.debtOf(user_id) }
+    // totalAssetOf
+    public Double amountInAssetOf(Double userID){
+        unresolvedResponsibleExpensesBy(userID).sum{ it.amountInDebtOf(userID) }
     }
 
     public Set<Expense> unresolvedResponsibleExpensesBy(Long user_id){
@@ -134,7 +136,7 @@ class RegisteredUser {
 
     public Set<User> whoOweMe(){
         Set<User> users = new HashSet<>()
-        unresolvedResponsibleExpenses().each { users.addAll( it.assignedUsersWithDebts() ) }
+        unresolvedResponsibleExpenses().each { users.addAll( it.assignedUsersInDebt() ) }
         users
     }
 
@@ -239,50 +241,4 @@ class RegisteredUser {
         return list.toArray()
     }
 
-    public long getTotalWhoIOwe(){
-        long valueWhoHaveToPay = 0, amountAlreadyPaid = 0, totalAmountPaid = 0, totalValueToPay = 0
-        Set<Expense> expenseSet = user.getExpenses()
-        Set<Payment> paymentSet
-        Debt debt
-        for(Expense expense in expenseSet){
-            if(expense.getResponsible().getId() != getId()){
-                debt = Debt.findByExpenseAndUser(expense,this.getUser())
-                paymentSet = Payment.findAllByExpenseAndUser(expense,user)
-                valueWhoHaveToPay = (debt)? debt.getValue() : 0
-                for (Payment paymentAux : paymentSet){
-                    amountAlreadyPaid += paymentAux.getValue()
-                }
-                totalValueToPay += valueWhoHaveToPay
-                totalAmountPaid += valueWhoHaveToPay - amountAlreadyPaid
-            }
-        }
-        totalValueToPay - totalAmountPaid
-    }
-
-    public long getTotalWhoOweMe(){
-        long valueAlreadyReceivedByEachExpense = 0
-        long totalAmountRemaining = 0
-        Set<Expense> expenseSet = this.getResponsibleExpenses()
-        Set<Payment> paymentSet
-        for(Expense expense in expenseSet){
-            paymentSet = Payment.findAllByExpenseAndUser(expense, this.getUser())
-            for(Payment payment : paymentSet){
-                valueAlreadyReceivedByEachExpense += payment.value
-            }
-            totalAmountRemaining += expense.getValue() - valueAlreadyReceivedByEachExpense
-        }
-        totalAmountRemaining
-    }
-
-    public long getTotalBalance(){
-        getTotalWhoOweMe() - getTotalWhoIOwe();
-    }
-
-    public static Set<ExpenseType> getExpenseTypeByHouse(){
-        CircleType.getExpenseTypeByHouse()
-    }
-
-    public static Set<ExpenseType> getExpenseTypeByCollective(){
-        CircleType.getExpenseTypeByCollective()
-    }
 }

@@ -3,6 +3,7 @@ import com.billmate.ActionType
 import com.billmate.CircleType
 import com.billmate.Collective
 import com.billmate.CustomExpenseType
+import com.billmate.Debt
 import com.billmate.DefaultExpenseType
 import com.billmate.ExpenseType
 import com.billmate.House
@@ -77,32 +78,67 @@ class BootStrap {
             def friday_dinner = new Expense(title: 'Friday Dinner', value: 25.25, expenseType: ExpenseType.findWhere(name: 'Meal'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
             friday_dinner.save()
 
+            def fd_debt = new Debt(user: User.findWhere(email: 'pmcleite@gmail.com'), expense: friday_dinner, value: 5.05, resolvedDate: new Date()).save()
+            new Payment(value: 5.05, debt: fd_debt, user: User.findWhere(email: 'pmcleite@gmail.com'), validationDate: new Date(), isValidated: true).save()
+
             friday_dinner.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
+            new Debt(user: User.findWhere(email: 'andreccdr@gmail.com'), expense: friday_dinner, value: 5.05).save()
+
             friday_dinner.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))
+            new Debt(user: User.findWhere(email: 'fntneves@gmail.com'), expense: friday_dinner, value: 5.05).save()
+
             friday_dinner.addToAssignedUsers(User.findWhere(email: 'bill@mate.com'))
+            new Debt(user: User.findWhere(email: 'bill@mate.com'), expense: friday_dinner, value: 5.05).save()
+
             friday_dinner.addToAssignedUsers(User.findWhere(email: '28.ricardobranco@gmail.com'))
+            new Debt(user: User.findWhere(email: '28.ricardobranco@gmail.com'), expense: friday_dinner, value: 5.05).save()
 
             def shopping = new Expense(title: 'Shopping', value: 31.33, expenseType: ExpenseType.findWhere(name: 'Shopping'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
             shopping.save()
 
+            def s_debt = new Debt(user: User.findWhere(email: 'pmcleite@gmail.com'), expense: shopping, value: 7.84, resolvedDate: new Date()).save()
+            new Payment(value: 7.84, debt: s_debt, user: User.findWhere(email: 'pmcleite@gmail.com'), validationDate: new Date(), isValidated: true).save()
+
             shopping.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
+            new Debt(user: User.findWhere(email: 'andreccdr@gmail.com'), expense: shopping, value: 7.83).save()
+
             shopping.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))
+            new Debt(user: User.findWhere(email: 'fntneves@gmail.com'), expense: shopping, value: 7.83).save()
+
             shopping.addToAssignedUsers(User.findWhere(email: '28.ricardobranco@gmail.com'))
+            new Debt(user: User.findWhere(email: '28.ricardobranco@gmail.com'), expense: shopping, value: 7.83).save()
 
             def maid = new Expense(title: 'Maid', value: 15.00, expenseType: ExpenseType.findWhere(name: 'Maid'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')))
             maid.save()
 
+            def m_debt = new Debt(user: User.findWhere(email: 'andreccdr@gmail.com'), expense: maid, value: 5, resolvedDate: new Date()).save()
+            new Payment(value: 5, debt: m_debt, user: User.findWhere(email: 'andreccdr@gmail.com'), validationDate: new Date(), isValidated: true).save()
+
             maid.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))
+            new Debt(user: User.findWhere(email: 'fntneves@gmail.com'), expense: maid, value: 5).save()
+
             maid.addToAssignedUsers(User.findWhere(email: '28.ricardobranco@gmail.com'))
+            new Debt(user: User.findWhere(email: '28.ricardobranco@gmail.com'), expense: maid, value: 5).save()
 
             def rental = new Expense(title: 'Soccer Field Rental', value: 95.00, expenseType: ExpenseType.findWhere(name: 'Field Rental'), circle: Collective.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: '28.ricardobranco@gmail.com')))
             rental.save()
 
+            def r_debt = new Debt(user: User.findWhere(email: '28.ricardobranco@gmail.com'), expense: rental, value: 19, resolvedDate: new Date()).save()
+            new Payment(value: 19, debt: r_debt, user: User.findWhere(email: '28.ricardobranco@gmail.com'), validationDate: new Date(), isValidated: true).save()
+
             rental.addToAssignedUsers(User.findWhere(email: 'bill@mate.com'))
+            new Debt(user: User.findWhere(email: 'bill@mate.com'), expense: rental, value: 19).save()
+
             rental.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
+            new Debt(user: User.findWhere(email: 'andreccdr@gmail.com'), expense: rental, value: 19).save()
+
             rental.addToAssignedUsers(User.findWhere(email: 'fntneves@gmail.com'))
+            new Debt(user: User.findWhere(email: 'fntneves@gmail.com'), expense: rental, value: 19).save()
+
             rental.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
+            new Debt(user: User.findWhere(email: 'pmcleite@gmail.com'), expense: rental, value: 19).save()
         }
+
 
         if(CircleType.count() == 0){
             def circleType = new CircleType(name: 'house')
@@ -122,7 +158,7 @@ class BootStrap {
             circleType.addToExpenseTypes(customExpenseType.getExpenseType())
         }
 
-        if(Payment.count() == 0){
+        if(Payment.count() == Expense.count()){
             def fnMaidPayment = new Payment(user: User.findWhere(email: 'fntneves@gmail.com'), expense: Expense.findWhere(title: 'Maid'), value: 3.50)
             fnMaidPayment.save()
             def rbMaidPayment = new Payment(user: User.findWhere(email: '28.ricardobranco@gmail.com'), expense: Expense.findWhere(title: 'Maid'), value: 1.00)

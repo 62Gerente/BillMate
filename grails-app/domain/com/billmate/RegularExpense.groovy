@@ -4,7 +4,7 @@ import groovy.time.TimeCategory
 
 class RegularExpense {
     static belongsTo = [DirectDebit, Circle, RegisteredUser, ExpenseType]
-    static hasMany = [customDebts: Debt, actions: Action, assignedUsers: User, expenses: Expense]
+    static hasMany = [debts: Debt, actions: Action, assignedUsers: User, expenses: Expense]
 
     DirectDebit directDebit
     RegisteredUser responsible

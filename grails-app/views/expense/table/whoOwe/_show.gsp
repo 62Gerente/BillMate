@@ -9,5 +9,5 @@
             <g:message code="com.billmate.expense.date.notDefined" default="Not defined" />
         </g:else>
     </td>
-    <td class="text-right"><g:formatNumber number="${expense.debtOf(user.getId())}" type="currency" currencyCode="EUR" /></td>
+    <td class="text-right"><g:formatNumber number="${expense.amountInDebtOf(user.getId())}" type="currency" currencyCode="EUR" /></td>
 </tr>

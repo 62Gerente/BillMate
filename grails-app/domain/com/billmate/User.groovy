@@ -28,8 +28,8 @@ class User {
         name ? name : email
     }
 
-    public Double totalDebt(){
-        Double total = unresolvedExpenses().sum{ it.debtOf(this.id) }
+    public Double amountInDebt(){
+        Double total = unresolvedExpenses().sum{ it.amountInDebtOf(this.id) }
         total ? total : 0D
     }
 
@@ -48,7 +48,7 @@ class User {
     }
 
     public Double totalDebtTo(Long registeredUserId){
-        Double total = unresolvedExpensesWhoResponsibleIs(registeredUserId).sum{ it.debtOf(this.id) }
+        Double total = unresolvedExpensesWhoResponsibleIs(registeredUserId).sum{ it.amountInDebtOf(this.id) }
         total ? total : 0D
     }
 
@@ -73,7 +73,7 @@ class User {
     }
 
     public Double monthlySpending(Date date){
-        Double monthlySpending = monthExpenses(date).sum {it.valueAssignedTo(this.id)}
+        Double monthlySpending = monthExpenses(date).sum {it.amountAssignedTo(this.id)}
         monthlySpending ? monthlySpending : 0
     }
 
@@ -93,7 +93,7 @@ class User {
         Map map = lastMonthsExpenses(months).groupBy { expense -> expense.getExpenseType() }
         List<ExpenseType> expenseTypes = new ArrayList<>(map.keySet());
 
-        List<ExpenseType> orderList = expenseTypes.sort { map.get(it).sum{ it.valueAssignedTo(this.id) } }
+        List<ExpenseType> orderList = expenseTypes.sort { map.get(it).sum{ it.amountAssignedTo(this.id) } }
 
         orderList.take(expenses)
     }
@@ -110,7 +110,7 @@ class User {
     }
 
     public Double monthlySpendingOfExpenseType(Date date, ExpenseType expenseType) {
-        Double monthlySpending = monthExpensesOfExpenseType(date, expenseType).sum { it.valueAssignedTo(this.id) }
+        Double monthlySpending = monthExpensesOfExpenseType(date, expenseType).sum { it.amountAssignedTo(this.id) }
         monthlySpending ? monthlySpending : 0
     }
 

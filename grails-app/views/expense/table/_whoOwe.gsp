@@ -19,7 +19,7 @@
             <tr>
                 <td class="text-right text-grey" colspan="4">
                     <div class="inline b-t b-grey p-t-5">
-                        <g:formatNumber number="${unresolvedExpenses.sum{ it.debtOf(user.getId()) }}" type="currency" currencyCode="EUR" />
+                        <g:formatNumber number="${unresolvedExpenses.sum{ it.amountInDebtOf(user.getId()) }}" type="currency" currencyCode="EUR" />
                     </div>
                 </td>
             </tr>

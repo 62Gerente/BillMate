@@ -9,16 +9,16 @@ class RegisteredUserDashboard {
         registeredUser.getUser()
     }
 
-    public Double totalDebt(){
-        getUser().totalDebt()
+    public Double amountInDebt(){
+        getUser().amountInDebt()
     }
 
     public Set<RegisteredUser> whoIOwe(){
         getUser().whoIOwe()
     }
 
-    public Double totalAsset(){
-        registeredUser.totalAsset()
+    public Double amountInAsset(){
+        registeredUser.amountInAsset()
     }
 
     public Set<User> whoOweMe(){
@@ -35,14 +35,6 @@ class RegisteredUserDashboard {
 
     public List<ExpenseType> expenseTypesWithMoreSpendingInLastMonths(){
         getUser().expenseTypesWithMoreSpendingInLastMonths(6,5)
-    }
-
-    public Long getTotalBalanceExpensesWhoIAmNotResponsible(){
-        return registeredUser.getTotalWhoIOwe()
-    }
-
-    public Long getTotalBalance(){
-        return registeredUser.getTotalBalance()
     }
 
     public List<Action> latestEvents(){

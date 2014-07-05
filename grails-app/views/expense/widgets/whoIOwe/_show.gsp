@@ -9,7 +9,7 @@
         <div class="col-md-2 pull-right no-padding m-t-10 price-widget-dashboard widget-payments-price m-t-13">
             <span class="label label-default label-grey-background">
                 <h6 class="bold inline p-t-2">
-                    <g:formatNumber number="${user.unresolvedExpensesWhoResponsibleIs(registeredUser.getId()).sum{ it.debtOf(user.getId()) }}" type="currency" currencyCode="EUR" />
+                    <g:formatNumber number="${user.unresolvedExpensesWhoResponsibleIs(registeredUser.getId()).sum{ it.amountInDebtOf(user.getId()) }}" type="currency" currencyCode="EUR" />
                 </h6>
             </span>
         </div>

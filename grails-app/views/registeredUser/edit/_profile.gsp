@@ -48,11 +48,11 @@
                 <div class="profile-debts-resume">
                     <h5><g:message code="com.billmate.expense.debts" default="Debts" /></h5>
                     <h3 class="text-danger semi-bold">
-                        <g:formatNumber number="${user.getUser().totalDebt()}" type="currency" currencyCode="EUR" />
+                        <g:formatNumber number="${user.getUser().amountInDebt()}" type="currency" currencyCode="EUR" />
                     </h3>
                     <h5><g:message code="com.billmate.expense.assets" default="Assets" /></h5>
                     <h3 class="text-success semi-bold">
-                        <g:formatNumber number="${user.totalAsset()}" type="currency" currencyCode="EUR" />
+                        <g:formatNumber number="${user.amountInAsset()}" type="currency" currencyCode="EUR" />
                     </h3>
                 </div>
             </div>
