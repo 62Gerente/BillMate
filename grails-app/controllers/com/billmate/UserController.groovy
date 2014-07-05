@@ -2,6 +2,8 @@ package com.billmate
 
 import grails.converters.JSON
 import org.joda.time.DateTime
+import javax.servlet.http.HttpServletRequest
+import java.text.DecimalFormat
 
 class UserController extends RestrictedController {
     static allowedMethods = [updateField: "POST", history: "GET"]
@@ -38,18 +40,25 @@ class UserController extends RestrictedController {
         return [breadcrumb: breadcrumb, user: registeredUser]
     }
 
-    def events(Long id, Long date){
+    def events(Long id, Long date) {
         def listEvents = []
         User user = RegisteredUser.findById(id)?.getUser()
         def actualMonth = DateTime.now().getMonthOfYear()
-        date = date? (date+1) : actualMonth
+        date = date ? (date + 1) : actualMonth
 
         user?.getExpenses().each {
-            if(actualMonth == date)
+            if (actualMonth == date)
                 listEvents.add(title: it.getTitle() + " - " + it.getCircle().getName(), start: it.getBeginDate(), end: it.getEndDate(),
-                                url: createLink(controller: "expense", action: "show", id: it.getId()))
+                        url: createLink(controller: "expense", action: "show", id: it.getId()))
         }
 
         render listEvents as JSON
+    }
+
+    def expenses(){
+        def breadcrumb = [
+                [name: message(code: "com.billmate.sidebar.expenses")]
+        ]
+        return [breadcrumb: breadcrumb, user: authenticatedUser()]
     }
 }

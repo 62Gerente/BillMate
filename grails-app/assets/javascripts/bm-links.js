@@ -1,6 +1,8 @@
 $(document).ready(function(){
     $('a[href="#"]').on('click', function(e) {
+        e.stopPropagation();
         e.preventDefault();
+        return false;
     });
 
     $(".close").on('click', function() {

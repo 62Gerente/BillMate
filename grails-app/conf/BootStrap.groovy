@@ -256,6 +256,18 @@ class BootStrap {
             systemNotification = new SystemNotification(action: Action.first(), registeredUser: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
             systemNotification.secureSave()
         }
+
+        if(Debt.count() == 0){
+            def expense1 = Expense.findByTitle("Friday Dinner")
+            def expense2 = Expense.findByTitle("Shopping")
+            def expense3 = Expense.findByTitle("Maid")
+            def user1 = User.findByEmail("andreccdr@gmail.com")
+            def user2 = User.findByEmail("pmcleite@gmail.com")
+
+            new Debt(expense: expense1, user: user1, percentage: 20, value: 10).save()
+            new Debt(expense: expense2, user: user1, percentage: 20, value: 20).save()
+            new Debt(expense: expense3, user: user1, percentage: 20, value: 30).save()
+        }
     }
 
     def destroy = {
