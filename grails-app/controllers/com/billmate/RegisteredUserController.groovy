@@ -5,7 +5,7 @@ import grails.converters.JSON
 import pl.burningice.plugins.image.BurningImageService
 
 class RegisteredUserController extends RestrictedController {
-    static allowedMethods = [markNotificationsAsRead: "PUT", edit: "GET"]
+    static allowedMethods = [markNotificationsAsRead: "PUT", edit: "GET", circles: "POST"]
 
     def beforeInterceptor = [action: this.&checkSession]
     def burningImageService
@@ -100,5 +100,20 @@ class RegisteredUserController extends RestrictedController {
         def newFile = new File(path)
         uFile.setSize(newFile.size())
         uFile.save()
+    }
+
+    def circles(){
+        Set<Object> circles = new HashSet<>()
+        long id = Long.parseLong(params.id)
+        String params = params.q
+        Set<Circle> circleSet = RegisteredUser.findById(id).getCircles()
+
+        circleSet.each { if(it.getName().toUpperCase().contains(params.toUpperCase())){
+            circles.add([id: it.getId(), icon: it.getCssClass(), name: it.getName()])
+        }}
+
+        def response = [ 'data': circles ]
+
+        render response as JSON
     }
 }

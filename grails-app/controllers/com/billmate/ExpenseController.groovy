@@ -31,7 +31,7 @@ class ExpenseController extends RestrictedController {
 
             Expense expense = setValuesExpenseType(regularExpense)
 
-            if (!expense.create(listOfFriends, listValuesUsers)) {
+            if (!expense.addUsersAndValues(listOfFriends, listValuesUsers)) {
                 response = [
                         'error': true,
                         'data': null,

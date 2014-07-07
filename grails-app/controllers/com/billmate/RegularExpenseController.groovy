@@ -14,7 +14,7 @@ class RegularExpenseController extends RestrictedController{
 
         def responseData = [
                 'error'  : false,
-                'message': message(code: "com.billmate.expense.success")
+                'message': message(code: "com.billmate.regularExpense.save.insuccess")
         ]
 
         Expense expense = new Expense(regularExpense, authenticatedUser(), value: value)

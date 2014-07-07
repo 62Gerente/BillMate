@@ -286,7 +286,7 @@ class RegisteredUser {
         CircleType.getExpenseTypeByCollective()
     }
 
-    public Set<Circle> getAllCircles(){
+    public Set<Circle> getCircles(){
         return user.getCircles()
     }
 }
