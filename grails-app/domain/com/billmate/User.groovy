@@ -43,12 +43,12 @@ class User {
         users
     }
 
-    public Set<Expense> unresolvedExpensesWhoResponsibleIs(Long registeredUserId){
+    public Set<Expense> unresolvedExpensesWhichResponsibleIs(Long registeredUserId){
         unresolvedExpenses().findAll{ it.getResponsibleId() == registeredUserId }
     }
 
     public Double totalDebtTo(Long registeredUserId){
-        Double total = unresolvedExpensesWhoResponsibleIs(registeredUserId).sum{ it.amountInDebtOf(this.id) }
+        Double total = unresolvedExpensesWhichResponsibleIs(registeredUserId).sum{ it.amountInDebtOf(this.id) }
         total ? total : 0D
     }
 
