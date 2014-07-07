@@ -15,6 +15,7 @@
 //= require ../plugins/jquery-slimscroll/jquery.slimscroll.min.js
 //= require ../plugins/jquery-validation/js/jquery.validate.min.js
 //= require ../plugins/blockUI/jquery.blockUI.js
+//= require ../plugins/jquery-inputmask/jquery.inputmask.min.js
 
 //= require bm-ajax-notifications.js
 //= require bm-links.js
@@ -24,3 +25,4 @@
 //= require ../plugins/image-picker-master/image-picker/image-picker.js
 //= require bm-form-elements-expense.js
 //= require bm-form-elements-regularExpense.js
+//= require bm-form-elements-newRegularExpense.js
