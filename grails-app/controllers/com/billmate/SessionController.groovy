@@ -1,5 +1,6 @@
 package com.billmate
 
+import grails.converters.JSON
 import org.apache.shiro.crypto.hash.Sha256Hash
 
 class SessionController extends BaseController {
@@ -29,6 +30,32 @@ class SessionController extends BaseController {
         flash.error = "com.billmate.session.save.failure"
         flash.e_default = "Invalid email or password."
         return redirect(controller: 'session', action: 'create')
+    }
+
+
+    def saveMobile(){
+        if(!checkRequiredParams()){ return }
+
+        def user = User.findWhere(email: params['email'])
+
+        def response = []
+        if (user) {
+            def registeredUser = RegisteredUser.findWhere(user: user)
+
+            if (registeredUser && registeredUser.password == new Sha256Hash(params['password']).toHex()) {
+                session.user = registeredUser
+                response = [
+                        'message' : message("com.billmate.session.save.success"),
+                        'error' : true
+                ]
+            }
+        }else{
+            response = [
+                    'message' : message("com.billmate.session.save.failure"),
+                    'error' : false
+            ]
+        }
+        render response as JSON
     }
 
     def delete = {
