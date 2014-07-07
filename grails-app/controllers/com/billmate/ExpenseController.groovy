@@ -4,58 +4,45 @@ import grails.converters.JSON
 
 class ExpenseController extends RestrictedController {
 
-    static allowedMethods = [create: "POST"]
+    static allowedMethods = [save: "POST"]
 
     def beforeInterceptor = [action: this.&checkSession]
 
-    def create(){
+    def save(){
 
         def response
 
         if(Integer.parseInt(params.numberSelected) == 0){
             response = [
                     'error': true,
-                    'data': null,
-                    'code': message(code: "com.billmate.expense.modal.error.withoutUsersSelecteds"),
+                    'code': message(code: "com.billmate.expense.create.withoutUsersSelecteds"),
                     'class': "alert alert-error form-modal-house-error"
             ]
         }
         else {
-            String name = params.name
-            Long idCircle = Long.parseLong(params.idCircle)
-            Long idExpenseType = Long.parseLong(params.idExpenseType)
-            Double value = Double.parseDouble(params.value)
-            String description = params.description
-            Long idUser = Long.parseLong(params.idUser)
             List<String> listOfFriends = params.getList("listOfFriends[]")
             List<String> listValuesUsers = params.getList("listValuesUsers[]")
-            Circle circle = Circle.findById(idCircle)
-            ExpenseType expenseType = ExpenseType.findById(idExpenseType)
-            User user = User.findById(idUser)
             String regularExpenseID = params.regularExpenseID
-            RegularExpense regularExpense
 
+            RegularExpense regularExpense
             if(regularExpenseID && regularExpenseID.isLong()){
                 regularExpense = RegularExpense.findById(Long.parseLong(regularExpenseID))
             }
 
-            Expense expense = new Expense(title: name, description: description, value: value, circle: circle, expenseType: expenseType,
-                    responsible: user.getRegisteredUser(), paymentDeadline: convertStringsToDate(params.paymentDeadline, false),
-                    receptionDeadline: convertStringsToDate(params.receptionDeadline,false), beginDate: convertStringsToDate(params.beginDate,true),
-                    endDate: convertStringsToDate(params.endDate,false), paymentDate: convertStringsToDate(params.paymentDate,false),
-                    receptionDate: convertStringsToDate(params.receptionDate,false), regularExpense: regularExpense)
+            Expense expense = setValuesExpenseType(regularExpense)
+
             if (!expense.create(listOfFriends, listValuesUsers)) {
                 response = [
                         'error': true,
                         'data': null,
-                        'code': message(code: "com.billmate.expense.modal.createdUnsuccessfully"),
+                        'code': message(code: "com.billmate.expense.save.insuccess"),
                         'class': "alert alert-error form-modal-house-error"
                 ]
             }else{
                 response = [
                         'error': false,
                         'data': expense,
-                        'code': message(code: "com.billmate.expense.modal.createdSuccessfully"),
+                        'code': message(code: "com.billmate.expense.save.success"),
                         'class': "alert alert-success form-modal-house-error"
                 ]
             }
@@ -64,7 +51,26 @@ class ExpenseController extends RestrictedController {
         render response as JSON
     }
 
-    def convertStringsToDate(String dateString, boolean generateDateIfNotExists){
+    private Expense setValuesExpenseType(RegularExpense regularExpense){
+        Expense expense = new Expense()
+
+        expense.setTitle(params.name)
+        expense.setDescription(params.description)
+        expense.setValue(Double.parseDouble(params.value))
+        expense.setCircle(Circle.findById(Long.parseLong(params.idCircle)))
+        expense.setExpenseType(ExpenseType.findById(Long.parseLong(params.idExpenseType)))
+        expense.setResponsible(User.findById(Long.parseLong(params.idUser)).getRegisteredUser())
+        expense.setPaymentDeadline(convertStringsToDate(params.paymentDeadline, false))
+        expense.setReceptionDeadline(convertStringsToDate(params.receptionDeadline,false))
+        expense.setBeginDate(convertStringsToDate(params.beginDate,true))
+        expense.setEndDate(convertStringsToDate(params.endDate,false))
+        expense.setPaymentDate(convertStringsToDate(params.paymentDate,false))
+        expense.setReceptionDate(convertStringsToDate(params.receptionDate,false))
+        expense.setRegularExpense(regularExpense)
+        return expense
+    }
+
+    private static def convertStringsToDate(String dateString, boolean generateDateIfNotExists){
         Date date = null
         if (!dateString.equals("")) date = Date.parse("dd/MM/yyyy", dateString)
         if(generateDateIfNotExists) date = new Date()

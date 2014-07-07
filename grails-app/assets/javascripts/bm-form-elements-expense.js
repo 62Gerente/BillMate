@@ -32,16 +32,19 @@ $(document).ready(function() {
 
     //Next 3 functions format display results
     function formatExpenseTypes(state) {
+        hasExpenseTypes = true;
         idExpenseType = state.id;
         return "<i class='" + state.cssClass + "'></i>&nbsp;" + $("<div>").html(state.name).text();
     }
 
     function formatResultCircles(state) {
+        hasCircles = true;
         id_circle = state.id;
         return "<i class='" + state.icon + "'></i>&nbsp;" + $("<div>").html(state.name).text();
     }
 
     function formatSelectionCircles(state) {
+        hasCircles = true;
         id_circle = state.id;
         fillList();
         return "<i class='" + state.icon + "'></i>&nbsp;" + $("<div>").html(state.name).text();
@@ -54,6 +57,7 @@ $(document).ready(function() {
         formatSelection: formatExpenseTypes,
         enable: false,
         ajax: {
+            type: "POST",
             url: $("#expense-type-link-expense").val(),
             dataType: 'json',
             data: function(term, page) {
@@ -63,7 +67,6 @@ $(document).ready(function() {
                 };
             },
             results: function(data, page) {
-                hasExpenseTypes = true;
                 return {
                     results: data.data
                 };
@@ -78,6 +81,7 @@ $(document).ready(function() {
         formatResult: formatResultCircles,
         formatSelection: formatSelectionCircles,
         ajax: {
+            type: "POST",
             url: $("#circle-link-expense").val(),
             dataType: 'json',
             data: function(term, page) {
@@ -87,7 +91,6 @@ $(document).ready(function() {
                 };
             },
             results: function(data, page) {
-                hasCircles = true;
                 $(".custom-multiselect-expense-debt").select2("enable",true);
                 return {
                     results: data.data
@@ -106,7 +109,7 @@ $(document).ready(function() {
         if(id_user == 0) id_user = $(".simple-options-form-debt").children("input:nth(1)").val();
         if(id_circle != 0){
             var url = $("#users-link-expense").val() + "?id_circle=" + id_circle;
-            $.get(url, function (data) {
+            $.post(url, function (data) {
                 listFriendsOfCircleAjaxRequestInList(data);
             } );
             $(".select-list-users").data('picker');

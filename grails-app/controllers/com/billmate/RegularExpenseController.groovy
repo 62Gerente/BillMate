@@ -3,7 +3,7 @@ package com.billmate
 import grails.converters.JSON
 
 class RegularExpenseController extends RestrictedController{
-    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"], getNameAndDescriptionAndExpenseType: "POST"]
+    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"], show: "POST"]
 
     def beforeInterceptor = [action: this.&checkSession]
 
@@ -53,14 +53,12 @@ class RegularExpenseController extends RestrictedController{
         render responseData as JSON
     }
 
-    def getNameAndDescriptionAndExpenseType(){
+    def show(Long id){
         def responseData = [
                 'error'  : true,
-                'data'   : null,
                 'message': message(code: "com.billmate.regularExpense.cancel.success")
         ]
 
-        Long id = Long.parseLong(params.id)
         RegularExpense regularExpense = RegularExpense.findById(id)
 
         if(regularExpense){
@@ -77,7 +75,7 @@ class RegularExpenseController extends RestrictedController{
         render responseData as JSON
     }
 
-    def convertDateFormat(Date date){
+    private String convertDateFormat(Date date){
         return date?.format("dd/MM/yyyy")
     }
 }

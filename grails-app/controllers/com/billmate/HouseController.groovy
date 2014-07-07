@@ -19,7 +19,7 @@ class HouseController extends RestrictedController  {
 
         def response = [
                 'error': false,
-                'code': message(code: "com.billmate.house.modal.createdSuccessfully"),
+                'code': message(code: "com.billmate.house.save.success"),
                 'class': "alert alert-success form-modal-house-success"
         ]
 

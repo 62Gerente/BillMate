@@ -30,10 +30,10 @@
                     <div class="row form-row m-b-10">
                             <div class="col-md-6">
                                 <input type="hidden" class="custom-multiselect-expense-debt" placeholder="<g:message code="com.billmate.expense.modal.placeholderExpenseType" default="Expense Type"/>" style="width:100%" class="select2-offscreen"/>
-                                <input type="hidden" id="expense-type-link-expense" value="<g:createLink controller="expenseType" action="getExpensesIfContainsStringPassedByURL"/>" />
-                                <input type="hidden" id="circle-link-expense" value="<g:createLink controller="circle" action="getCirclesIfContainsStringPassedByURL"/>" />
-                                <input type="hidden" id="users-link-expense" value="<g:createLink controller="circle" action="getFriendsOfaCircle"/>" />
-                                <input type="hidden" id="submit-link-expense" value="<g:createLink controller="expense" action="create"/>" />
+                                <input type="hidden" id="expense-type-link-expense" value="<g:createLink controller="circle" action="expenseType"/>" />
+                                <input type="hidden" id="circle-link-expense" value="<g:createLink controller="circle" action="circles"/>" />
+                                <input type="hidden" id="users-link-expense" value="<g:createLink controller="circle" action="assignedUsers"/>" />
+                                <input type="hidden" id="submit-link-expense" value="<g:createLink controller="expense" action="save"/>" />
                             </div>
                             <div class="col-md-6">
                                 <div class="input-group transparent">

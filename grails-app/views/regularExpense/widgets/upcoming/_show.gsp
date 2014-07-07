@@ -23,8 +23,8 @@
                 <div class="clearfix"></div>
             </div>
               <g:form url="[action: 'saveExpense', controller: 'regularExpense', id: regularExpense.getId()]" class="upcoming-expense-form">
-                <input type="hidden" value="<g:createLink controller = "regularExpense" action="getNameAndDescriptionAndExpenseType" params="[id:regularExpense.getId()]"/>" />
-                <input type="hidden" value="<g:createLink controller = "circle" action="getIDAndNameCircle" params="[id:regularExpense.getCircle().getId()]"/>" />
+                <input type="hidden" value="<g:createLink controller = "regularExpense" action="show" params="[id:regularExpense.getId()]"/>" />
+                <input type="hidden" value="<g:createLink controller = "circle" action="show" params="[id:regularExpense.getCircle().getId()]"/>" />
                 <input type="hidden" value="${regularExpense.getId()}" />
                 <div class="form-actions">
                     <div class="input-group transparent">

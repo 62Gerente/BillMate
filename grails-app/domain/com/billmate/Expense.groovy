@@ -197,12 +197,12 @@ class Expense {
                     this.addToAssignedUsers(user)
                     position++;
                 }
+                result = true;
             }
             catch(Exception e){
                 result = false
                 status.setRollbackOnly()
             }
-            result = true;
         }
         return result;
     }
