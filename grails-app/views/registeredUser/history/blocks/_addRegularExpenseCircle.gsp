@@ -1,8 +1,5 @@
-<div class="cbp_tmicon primary">
-    <div class="user-profile">
-        <img src="assets/img/profiles/d.jpg" data-src="assets/img/profiles/d.jpg"
-             data-src-retina="assets/img/profiles/d2x.jpg" width="48" height="48" alt="">
-    </div>
+<div class="cbp_tmicon ${action.getActionType().getCssClass()}">
+    <i class="${action.getActionType().getIcon()} fa-1-2x m-t-10"></i>
 </div>
 
 <div class="cbp_tmlabel">

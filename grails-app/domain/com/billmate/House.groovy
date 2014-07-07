@@ -94,16 +94,18 @@ class House{
         return result
     }
 
-    public boolean addUsersAndExpenseTypesToHouseAndSaveWithAction(Set<String> friendsSet, Set<String> expenseTypesSet, Action action){
+    public boolean addUsersAndExpenseTypesToHouseAndSaveWithAction(Set<String> friendsSet, Set<String> expenseTypesSet, Action action, RegisteredUser sessionUser){
         boolean result = true
         withTransaction { status ->
             try {
                 persist()
-                circle.addExpensesByIDSOrName(expenseTypesSet)
-                circle.addUsersByIDSOrEmail(friendsSet)
                 action.save()
+                circle.addExpensesByIDSOrName(expenseTypesSet)
+                circle.addUsersByIDSOrEmail(friendsSet, sessionUser)
             }
             catch(Exception eSave){
+                eSave.printStackTrace()
+                status.setRollbackOnly()
                 result = false
             }
         }

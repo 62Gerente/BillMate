@@ -24,6 +24,7 @@ class RegisteredUser {
 
     static mapping = {
         realizedActions sort: "actionDate", order: "desc"
+        systemNotifications sort: "action", order: "desc"
     }
 
     public RegisteredUser() {
@@ -309,5 +310,33 @@ class RegisteredUser {
 
     public List<Action> latestEvents(){
         user.latestEvents();
+    }
+
+    public List<Action> getRealizedActions(Long page, Long maxResult, Long offset, String order){
+        Action.findAllByActor(this, [max: maxResult, offset: offset, sort: "actionDate", order: order])
+    }
+
+    public List<Action> getRealizedActionsByCircleAndType(Circle circle, ActionType type){
+        Action.findAllByActorAndCircleAndActionType(this, circle, type)
+    }
+
+    public List<Action> getRealizedActionsByCircleAndType(Circle circle, ActionType type, Long page, Long maxResult, Long offset, String order){
+        Action.findAllByActorAndCircleAndActionType(this, circle, type, [max: maxResult, offset: offset, sort: "actionDate", order: order])
+    }
+
+    public List<Action> getRealizedActionsByCircle(Circle circle){
+        Action.findAllByActorAndCircle(this, circle)
+    }
+
+    public List<Action> getRealizedActionsByCircle(Circle circle, Long page, Long maxResult, Long offset, String order){
+        Action.findAllByActorAndCircle(this, circle, [max: maxResult, offset: offset, sort: "actionDate", order: order])
+    }
+
+    public List<Action> getRealizedActionsByType(ActionType type){
+        Action.findAllByActorAndActionType(this, type)
+    }
+
+    public List<Action> getRealizedActionsByType(ActionType type, Long page, Long maxResult, Long offset, String order){
+        Action.findAllByActorAndActionType(this, type, [max: maxResult, offset: offset, sort: "actionDate", order: order])
     }
 }

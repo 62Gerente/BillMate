@@ -75,6 +75,12 @@ class Circle {
         users.findAll { it.getId() != userId }
     }
 
+    public Set<RegisteredUser> getRegisteredUsersWithout(Long userId){
+        Set<RegisteredUser> registeredUsers = new HashSet<>()
+        getUsersWithout(userId).each{ if(it.getRegisteredUser()) registeredUsers.add(it.getRegisteredUser()) }
+        registeredUsers
+    }
+
     public void addExpensesByIDSOrName(Set<String> expenseSet){
         for (String expense : expenseSet) {
             ExpenseType expenseType = (expense.isLong()) ? ExpenseType.findById(Long.parseLong(expense)) : null
@@ -120,6 +126,7 @@ class Circle {
     }
 
     public void addUsersByIDSOrEmail(Set<String> friendsSet, RegisteredUser sessionUser){
+        def actions = new ArrayList<Action>()
         for (String friend : friendsSet) {
             def registeredUser = (friend.isLong()) ? RegisteredUser.findByUser(User.findById(Long.parseLong(friend))) : RegisteredUser.findByEmail(friend)
             def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addUserCircle.toString()), actor: sessionUser, circle: this)
@@ -134,8 +141,16 @@ class Circle {
                     action.setUser(user)
                 }
             }
-            action.save()
+            if(action.getUserId().equals(sessionUser.getUserId()) == false) {
+                action.save()
+                actions.add(action)
+            }
         }
+
+        // Notify Users on Circle
+        for(RegisteredUser registeredUserToNotify : getRegisteredUsersWithout(sessionUser.getUser().getId()))
+            for(Action actionToNotify : actions)
+                new SystemNotification(action: actionToNotify, registeredUser: registeredUserToNotify).persist()
     }
 
     public List<Action> latestEvents(){
@@ -186,5 +201,11 @@ class Circle {
         List<ExpenseType> orderList = expenseTypes.sort { map.get(it).sum{ it.valueAssignedTo(this.id) } }
 
         orderList.take(expenses)
+    }
+
+    public List<String> getUsersPhotos(){
+        List<String> userPhotos = new ArrayList<>()
+        users.each { userPhotos.add(it.getPhotoOrDefault()) }
+        userPhotos
     }
 }

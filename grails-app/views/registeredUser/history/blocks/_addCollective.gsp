@@ -1,5 +1,5 @@
-<div class="cbp_tmicon success">
-    <i class="fa fa-users fa-1-2x m-t-10"></i>
+<div class="cbp_tmicon ${action.getActionType().getCssClass()}">
+    <i class="${action.getActionType().getIcon()} fa-1-2x m-t-10"></i>
 </div>
 
 <div class="cbp_tmlabel">

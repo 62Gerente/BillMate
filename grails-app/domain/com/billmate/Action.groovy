@@ -26,4 +26,41 @@ class Action {
         actionDate nullable: false
     }
 
+    public Map getJsonMap(){
+        // Get all fields of an action, even null
+        def actionType = getActionType().getType().toString()
+        def actionDate = getActionDate()
+        def actionCircle = getCircle()
+        def actionExpense = getExpense()
+        def actionRegularExpense = getRegularExpense()
+        def actionUser = getUser()
+
+        def jsonMap= [
+                type: actionType,
+                date: actionDate.toString(),
+                icon: getActionType().getIcon(),
+                cssClass: getActionType().getCssClass()
+        ]
+
+        if(actionCircle) {
+            jsonMap.circle = actionCircle.getName()
+            jsonMap.circleUsers = actionCircle.getUsersPhotos()
+            jsonMap.circleCssClass = actionCircle.getCssClass()
+        }
+
+        if(actionExpense) {
+            jsonMap.expense = actionExpense.getTitle()
+        }
+
+        if(actionRegularExpense) {
+            jsonMap.regularExpense = actionRegularExpense.getTitle()
+        }
+
+        if(actionUser) {
+            jsonMap.user = actionUser.getName()
+        }
+
+        jsonMap
+    }
+
 }

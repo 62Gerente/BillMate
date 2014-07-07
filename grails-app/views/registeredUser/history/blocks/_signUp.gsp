@@ -1,6 +1,6 @@
-<div class="cbp_tmicon primary">
+<div class="cbp_tmicon ${action.getActionType().getCssClass()}">
     <div class="user-profile">
-        <img src="${assetPath(src: 'logo.svg')}" alt="" onerror="this.src=${assetPath(src: 'logo.png')}" height="35" width="35" class="m-t-5">
+        <img src="${assetPath(src: action.getActionType().getIcon() + ".svg")}" alt="" onerror="this.src=${assetPath(src: action.getActionType().getIcon() + ".png")}" height="35" width="35" class="m-t-5">
     </div>
 </div>
 

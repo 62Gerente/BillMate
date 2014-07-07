@@ -1,0 +1,1 @@
+<prettytime:display date="${time}" />

@@ -75,6 +75,7 @@ class Collective {
                 circle.addUsersByIDSOrEmail(friendsSet)
             }
             catch(Exception eSave){
+                eSave.printStackTrace()
                 status.setRollbackOnly()
                 result = false
             }
