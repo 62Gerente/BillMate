@@ -4,7 +4,6 @@ $(document).ready(function() {
     var idCircleRegularExpense = 0;
     var idUserRegularExpense = 0;
     var idExpenseTypeExpense = 0;
-    var idRegularExpense = 0;
     var hasCircles = false;
     var hasExpenseTypes = false;
 
@@ -236,8 +235,6 @@ $(document).ready(function() {
         var receptionDeadline = dates.find("input:nth(1)").val();
         var beginDate = dates.find("input:nth(2)").val();
         var endDate = dates.find("input:nth(3)").val();
-        var paymentDate = dates.find("input:nth(4)").val();
-        var receptionDate = dates.find("input:nth(5)").val();
         var periodicity = dates.find("input:nth(7)").val();
 
         var listIDsUsers = [];
@@ -249,8 +246,7 @@ $(document).ready(function() {
 
         var formData = {name: name, idCircle: idCircleRegularExpense, idExpenseType: idExpenseTypeExpense, value: value, description: description,
             idUser: idUserRegularExpense, listOfFriends: listIDsUsers, listValuesUsers: listValuesUsers, paymentDeadline: paymentDeadline,
-            receptionDeadline: receptionDeadline, beginDate: beginDate, endDate: endDate, paymentDate: paymentDate,
-            receptionDate: receptionDate, numberSelected: getNumberOfSelected(), regularExpenseID: idRegularExpense, periodicity: periodicity};
+            receptionDeadline: receptionDeadline, beginDate: beginDate, endDate: endDate, numberSelected: getNumberOfSelected(), periodicity: periodicity };
 
         if(!hasErrors){
             $.ajax({

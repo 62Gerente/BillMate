@@ -22,7 +22,7 @@ class RegularExpense {
 
     Date receptionBeginDate = new Date()
     Date receptionEndDate
-    Date paymentBeginDate
+    Date paymentBeginDate = new Date()
     Date paymentEndDate
 
     Integer intervalDays = 0
@@ -69,6 +69,14 @@ class RegularExpense {
     public postpone() {
         use(TimeCategory) {
             receptionBeginDate = receptionBeginDate + intervalDays.days + intervalMonths.months + intervalYears.years
+        }
+    }
+
+    def addFriendsAndValues(List<String> listOfFriends, List<String> listValuesUsers){
+        User user
+        for(String str : listOfFriends){
+            user = User.findById(Long.parseLong(str))
+            this.addToAssignedUsers(user)
         }
     }
 }

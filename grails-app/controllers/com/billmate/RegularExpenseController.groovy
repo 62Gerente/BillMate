@@ -20,26 +20,20 @@ class RegularExpenseController extends RestrictedController{
         else {
             List<String> listOfFriends = params.getList("listOfFriends[]")
             List<String> listValuesUsers = params.getList("listValuesUsers[]")
-            String regularExpenseID = params.regularExpenseID
 
-            RegularExpense regularExpense
-            if(regularExpenseID && regularExpenseID.isLong()){
-                regularExpense = RegularExpense.findById(Long.parseLong(regularExpenseID))
-            }
+            RegularExpense regularExpense = setValuesRegularExpense(params)
+            regularExpense.addFriendsAndValues(listOfFriends, listValuesUsers)
 
-            Expense expense = setValuesRegularExpense(regularExpense)
-
-            if (!expense.create(listOfFriends, listValuesUsers)) {
+            if (!regularExpense.save()) {
                 response = [
                         'error': true,
-                        'data': null,
                         'code': message(code: "com.billmate.expense.save.insuccess"),
                         'class': "alert alert-error form-modal-house-error"
                 ]
             }else{
                 response = [
                         'error': false,
-                        'data': expense,
+                        'data': regularExpense,
                         'code': message(code: "com.billmate.expense.save.success"),
                         'class': "alert alert-success form-modal-house-error"
                 ]
@@ -49,23 +43,33 @@ class RegularExpenseController extends RestrictedController{
         render response as JSON
     }
 
-    private RegularExpense setValuesRegularExpense(RegularExpense regularExpense){
-        Expense expense = new Expense()
+    def static extractInts( String input ) {
+        input.findAll( /\d+/ )*.toInteger()
+    }
 
-        expense.setTitle(params.name)
-        expense.setDescription(params.description)
-        expense.setValue(Double.parseDouble(params.value))
-        expense.setCircle(Circle.findById(Long.parseLong(params.idCircle)))
-        expense.setExpenseType(ExpenseType.findById(Long.parseLong(params.idExpenseType)))
-        expense.setResponsible(User.findById(Long.parseLong(params.idUser)).getRegisteredUser())
-        expense.setPaymentDeadline(BMDate.convertStringsToDate(params.paymentDeadline, false))
-        expense.setReceptionDeadline(BMDate.convertStringsToDate(params.receptionDeadline,false))
-        expense.setBeginDate(BMDate.convertStringsToDate(params.beginDate,true))
-        expense.setEndDate(BMDate.convertStringsToDate(params.endDate,false))
-        expense.setPaymentDate(BMDate.convertStringsToDate(params.paymentDate,false))
-        expense.setReceptionDate(BMDate.convertStringsToDate(params.receptionDate,false))
-        expense.setRegularExpense(regularExpense)
-        return expense
+    private static RegularExpense setValuesRegularExpense(params){
+        RegularExpense regularExpense = new RegularExpense()
+
+        regularExpense.setTitle(params.name)
+        regularExpense.setDescription(params.description)
+        regularExpense.setValue(Double.parseDouble(params.value))
+        regularExpense.setCircle(Circle.findById(Long.parseLong(params.idCircle)))
+        regularExpense.setExpenseType(ExpenseType.findById(Long.parseLong(params.idExpenseType)))
+        regularExpense.setResponsible(User.findById(Long.parseLong(params.idUser)).getRegisteredUser())
+        regularExpense.setPaymentDeadline(BMDate.convertStringsToDate(params.paymentDeadline, false))
+        regularExpense.setReceptionDeadline(BMDate.convertStringsToDate(params.receptionDeadline,false))
+        regularExpense.setBeginDate(BMDate.convertStringsToDate(params.beginDate,true))
+        regularExpense.setEndDate(BMDate.convertStringsToDate(params.endDate,false))
+
+        int year = extractInts(params.periodicity)[2]
+        int month = extractInts(params.periodicity)[1]
+        int day = extractInts(params.periodicity)[0]
+
+        regularExpense.setIntervalYears(year)
+        regularExpense.setIntervalMonths(month)
+        regularExpense.setIntervalDays(day)
+
+        return regularExpense
     }
 
     def saveExpense(Long id) {
@@ -126,17 +130,13 @@ class RegularExpenseController extends RestrictedController{
             responseData.data = [name: regularExpense.getTitle(), description: regularExpense.getDescription(),
                                  id : regularExpense.getExpenseType().getId(), expenseTypeName: regularExpense.getExpenseType().getName(),
                                  expenseTypeCssClass: regularExpense.getExpenseType().getCssClass(), value: regularExpense.getValue(),
-                                 paymentDeadline: convertDateFormat(regularExpense.getPaymentDeadline()), receptionDeadline: convertDateFormat(regularExpense.getReceptionDeadline()),
-                                 receptionBeginDate: convertDateFormat(regularExpense.getReceptionBeginDate()), receptionEndDate: convertDateFormat(regularExpense.getReceptionEndDate()),
-                                 paymentBeginDate: convertDateFormat(regularExpense.getPaymentBeginDate()), paymentEndDate: convertDateFormat(regularExpense.getPaymentEndDate())]
+                                 paymentDeadline: BMDate.convertDateFormat(regularExpense.getPaymentDeadline()), receptionDeadline: BMDate.convertDateFormat(regularExpense.getReceptionDeadline()),
+                                 receptionBeginDate: BMDate.convertDateFormat(regularExpense.getReceptionBeginDate()), receptionEndDate: BMDate.convertDateFormat(regularExpense.getReceptionEndDate()),
+                                 paymentBeginDate: BMDate.convertDateFormat(regularExpense.getPaymentBeginDate()), paymentEndDate: BMDate.convertDateFormat(regularExpense.getPaymentEndDate())]
             responseData.error = false
             responseData.message = message(code: "com.billmate.regularExpense.cancel.success")
         }
 
         render responseData as JSON
-    }
-
-    private String convertDateFormat(Date date){
-        return date?.format("dd/MM/yyyy")
     }
 }
