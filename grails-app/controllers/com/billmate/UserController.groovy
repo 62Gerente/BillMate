@@ -40,13 +40,10 @@ class UserController extends RestrictedController {
         def list = []
         List<Expense> expenseList = new LinkedList<Expense>()
         User user = User.findById(3);
-        //int pageNumber = Integer.parseInt(request.getParameter("iDisplayStart"))
-        //int numberDisplayed = Integer.parseInt(request.getParameter("iDisplayLength"))
         Debt.findAllByUser(user).each {
             Expense expense = it.getExpense()
             list.add([expense.getTitle(), expense.getResponsible().getName(), expense.getCircle().getName(),
-                      10.1, it.getValue(),/*expense.getPaymentDate()*/ DateTime.now().toString(), /*expense.getInvoice()?.getPath(), expense.getReceipt()?.getPath()*/
-                      "http://www.cse.msu.edu/~chooseun/Test2.pdf","http://www.cse.msu.edu/~chooseun/Test2.pdf"]);
+                      10.1, it.getValue(),/*expense.getPaymentDate()*/ DateTime.now().toString(), expense.getInvoice()?.getPath(), expense.getReceipt()?.getPath()]);
         }
 
         def response = ['data': list]

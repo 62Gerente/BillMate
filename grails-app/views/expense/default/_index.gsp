@@ -26,9 +26,9 @@
                         <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.circle" default="CIRCLE" /></th>
                         <th><g:message code="com.billmate.expense.default.payvalue" default="PAID VALUE" /></th>
                         <th><g:message code="com.billmate.expense.default.total" default="TOTAL" /></th>
-                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.paymentdate" default="PAYMENT DATE" /></th>
-                        <th><g:message code="com.billmate.expense.default.invoice" default="INVOICE" /></th>
-                        <th><g:message code="com.billmate.expense.default.receipt" default="RECEIPT" /></th>
+                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.resolved" default="RESOLVED?" /></th>
+                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.invoice" default="INVOICE" /></th>
+                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.receipt" default="RECEIPT" /></th>
                     </tr>
                     </thead>
                 </table>

@@ -34,5 +34,4 @@
 //= require bm-links.js
 //= require bm-form-elements-house.js
 //= require bm-form-elements-collective.js
-
-//= require datatables.js
+//= require bm-datatables-expense.js
