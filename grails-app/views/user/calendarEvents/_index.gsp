@@ -29,10 +29,9 @@
                                         <button class="btn btn-primary" type="button" id="change-view-day"><g:message code="com.billmate.expense.calendar.day" default="Day" /></button>
                                     </div>
                                 </div>
-
+                                <input type="hidden" id="link-user-events" value="<g:createLink controller = "user" action="events" id="${user.getId()}"/>" />
                                 <div class="clearfix"></div>
                             </div>
-
                             <div id='calendar'></div>
                         </div>
                     </div>

@@ -197,3 +197,7 @@ a {
     height: 32px !important;
     margin: 13px auto 0 auto !important;
 }
+
+.chat-window-wrapper{
+    overflow: auto !important;
+}

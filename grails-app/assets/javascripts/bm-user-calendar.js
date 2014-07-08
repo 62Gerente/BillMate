@@ -13,10 +13,9 @@ $(document).ready(function() {
             header: {
                 center: 'title'
             },
-            defaultDate: '2014-07-05',
             editable: true,
             events: {
-                url: '/BillMate/user/events/4',
+                url: $("#link-user-events").val(),
                 type: 'POST',
                 data: {
                     date: actualMonth
@@ -33,6 +32,7 @@ $(document).ready(function() {
             list: "Agenda",
             allDayText: "Todo o dia"
         });
+        $('#calendar').fullCalendar('option', 'height', 600);
     }
 
     function buildDefault(){
@@ -40,16 +40,16 @@ $(document).ready(function() {
             header: {
                 center: 'title'
             },
-            defaultDate: '2014-07-05',
             editable: true,
             events: {
-                url: '/BillMate/user/events/4',
+                url: $("#link-user-events").val(),
                 type: 'POST',
                 data: {
                     date: actualMonth
                 }
             }
         });
+        $('#calendar').fullCalendar('option', 'height', 600);
     }
 
     $('.fc-header-right').hide();
