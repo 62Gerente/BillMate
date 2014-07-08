@@ -86,6 +86,7 @@ class RegisteredUser {
                 persist()
                 return true
             }catch(Exception eSave){
+                eSave.printStackTrace()
                 status.setRollbackOnly()
                 return false
             }
@@ -99,6 +100,7 @@ class RegisteredUser {
                 action.save()
                 return true
             }catch(Exception eSave){
+                eSave.printStackTrace()
                 status.setRollbackOnly()
                 return false
             }

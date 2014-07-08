@@ -108,13 +108,13 @@ class RegisteredUserController extends RestrictedController {
         def size = params.size && ((String) params.size).isInteger() ? Integer.parseInt(params.size) : 0
         def circleID = params.circle && ((String) params.circle).isLong() ? Long.parseLong(params.circle) : 0
         def typeID = params.type && ((String) params.type).isLong() ? Long.parseLong(params.type) : 0
-        def userHistory = new RegisteredUserHistory(registeredUser: registeredUser, format: params.format, size: size, page: page, circleId: circleID, actionTypeId: typeID)
+        def userHistory = new RegisteredUserHistory(registeredUser: registeredUser, format: params.alt, size: size, page: page, circleId: circleID, actionTypeId: typeID)
 
-        def response = [
-                error: false
-        ]
+        if(params.alt){
+            def response = [
+                    error: false
+            ]
 
-        if(params.format){
             response.actions = new ArrayList<Object>()
 
             userHistory.getRealizedActions().each {
@@ -136,6 +136,7 @@ class RegisteredUserController extends RestrictedController {
             }
 
             render response as JSON
+            return
         }
 
         return [user: registeredUser, history: userHistory]

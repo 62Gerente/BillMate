@@ -76,6 +76,7 @@ class SystemNotification{
                 persist()
                 return true
             }catch(Exception eSave){
+                eSave.printStackTrace()
                 status.setRollbackOnly()
                 return false
             }

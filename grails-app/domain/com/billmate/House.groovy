@@ -52,6 +52,7 @@ class House{
                 persist()
                 return true
             }catch(Exception eSave){
+                eSave.printStackTrace()
                 status.setRollbackOnly()
                 return false
             }
@@ -65,6 +66,7 @@ class House{
                 action.save()
                 return true
             }catch(Exception eSave){
+                eSave.printStackTrace()
                 status.setRollbackOnly()
                 return false
             }
@@ -88,6 +90,8 @@ class House{
                 circle.addUsersByIDSOrEmail(friendsSet)
             }
             catch(Exception eSave){
+                eSave.printStackTrace()
+                status.setRollbackOnly()
                 result = false
             }
         }

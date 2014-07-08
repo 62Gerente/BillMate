@@ -7,7 +7,7 @@
 
 <body>
 <form id="history-filter-form" action="${createLink(action: 'history', params: [id: history.getRegisteredUser().getId()])}" method="POST">
-    <input type="hidden" name="format" value="json">
+    <input type="hidden" name="alt" value="json">
     <input type="hidden" name="page" value="1">
     <input type="hidden" name="size" value="20">
     <div class="row">
