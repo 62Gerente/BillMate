@@ -40,7 +40,9 @@
     <div class="row">
         <div class="col-md-12 p-b-30">
             <g:if test="${20 <= history.getRealizedActions().size()}">
-                <button id="history-load-more" type="button" class="btn btn-primary btn-cons center-block m-t-20" style="margin-left: auto; margin-right: auto;">Load More</button>
+                <button id="history-load-more" type="button" class="btn btn-primary btn-cons center-block m-t-20" style="margin-left: auto; margin-right: auto;">
+                    <g:message code="com.billmate.history.search.loadMore" default="Load more"></g:message>...
+                </button>
             </g:if>
         </div>
     </div>
