@@ -16,7 +16,7 @@ class HouseController extends RestrictedController  {
 
         def house = new House(name: params.houseName, description: params.houseDescription)
         def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addHouse.toString()), actor: session.user, circle: house.getCircle())
-        result = house.addUsersAndExpenseTypesToHouseAndSaveWithAction(friendsSet, expenseSet, action, session.user)
+        result = house.addUsersAndExpenseTypes(friendsSet, expenseSet, action, session.user)
 
         def response = [
                 'error': false,

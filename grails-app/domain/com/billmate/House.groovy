@@ -79,7 +79,7 @@ class House{
         "green"
     }
 
-    public boolean addUsersAndExpenseTypesToHouseAndSave(Set<String> friendsSet, Set<String> expenseTypesSet){
+    public boolean addUsersAndExpenseTypes(Set<String> friendsSet, Set<String> expenseTypesSet){
         boolean result = true
         withTransaction { status ->
             try {
@@ -94,7 +94,7 @@ class House{
         return result
     }
 
-    public boolean addUsersAndExpenseTypesToHouseAndSaveWithAction(Set<String> friendsSet, Set<String> expenseTypesSet, Action action, RegisteredUser sessionUser){
+    public boolean addUsersAndExpenseTypes(Set<String> friendsSet, Set<String> expenseTypesSet, Action action, RegisteredUser sessionUser){
         boolean result = true
         withTransaction { status ->
             try {

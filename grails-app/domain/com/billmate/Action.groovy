@@ -26,7 +26,7 @@ class Action {
         actionDate nullable: false
     }
 
-    public Map getJsonMap(){
+    public Map toJSON(){
         // Get all fields of an action, even null
         def actionType = getActionType().getType().toString()
         def actionDate = getActionDate()

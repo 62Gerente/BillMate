@@ -2,9 +2,6 @@ package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
 import grails.converters.JSON
-import grails.web.JSONBuilder
-import groovy.json.*
-import pl.burningice.plugins.image.BurningImageService
 
 class RegisteredUserController extends RestrictedController {
     static allowedMethods = [markNotificationsAsRead: "PUT", edit: "GET", history: "GET"]
@@ -105,98 +102,42 @@ class RegisteredUserController extends RestrictedController {
     }
 
     def history(Long id) {
-        if (id != authenticatedUser().getId()) {
-            return withoutPermitions()
-        }
 
-        Long offsetResultNumber = params.size ? Long.parseLong(params.size) : 20
-        Long offsetResult = Math.min(offsetResultNumber > 0 ? offsetResultNumber : 20, 50)
+        def registeredUser =  RegisteredUser.findById(id)
+        def page = params.page && ((String) params.page).isInteger() ? Integer.parseInt(params.page) : 0
+        def size = params.size && ((String) params.size).isInteger() ? Integer.parseInt(params.size) : 0
+        def circleID = params.circle && ((String) params.circle).isLong() ? Long.parseLong(params.circle) : 0
+        def typeID = params.type && ((String) params.type).isLong() ? Long.parseLong(params.type) : 0
+        def userHistory = new RegisteredUserHistory(registeredUser: registeredUser, format: params.format, size: size, page: page, circleId: circleID, actionTypeId: typeID)
 
-        Long pageNumber = params.page ? Long.parseLong(params.page) : null
-        Long page = pageNumber > 0 ? pageNumber - 1 : 0
+        def response = [
+                error: false
+        ]
 
-        def user = authenticatedUser()
-        def registeredUser = RegisteredUser.findById(id)
+        if(params.format){
+            response.actions = new ArrayList<Object>()
 
-        if (params.alt.equals("json")) {
-            def response = [
-                    'error': false
-            ]
+            userHistory.getRealizedActions().each {
+                def jsonMap = it.toJSON()
+                def textArgs = [it.getActor(), it.getUser(), it.getCircle(), it.getExpense(), it.getRegularExpense(), it.getPayment()]
 
-            def circle = null
-            def type = null
+                jsonMap.date = g.render(template:"/shared/dateFormat", model:[time: it.getActionDate()])
+                jsonMap.text = message(code: 'com.billmate.history.' + jsonMap.type, args: textArgs)
 
-            def circleID = Long.parseLong(params.circle)
-            def typeID = Long.parseLong(params.type)
-
-            try {
-                def actions = null
-
-                if(circleID < 0 && typeID < 0)
-                    actions = registeredUser.getRealizedActions(page, offsetResult, offsetResult * page, "desc")
-                else {
-
-                    if (circleID > 0)
-                        circle = Circle.findById(circleID)
-
-                    if (typeID > 0)
-                        type = ActionType.findById(typeID)
-
-                    if (typeID > 0 && circleID > 0)
-                        actions = registeredUser.getRealizedActionsByCircleAndType(circle, type, page, offsetResult, offsetResult * page, "desc")
-                    else {
-                        if (circleID < 0)
-                            actions = registeredUser.getRealizedActionsByType(type, page, offsetResult, offsetResult * page, "desc")
-
-                        if (typeID < 0)
-                            actions = registeredUser.getRealizedActionsByCircle(circle, page, offsetResult, offsetResult * page, "desc")
-                    }
+                if(it.getActionType().getType().toString().equals(ActionTypeEnum.signUp.toString())){
+                    jsonMap.icon = assetPath([src: "/"]) + jsonMap.icon
                 }
+                response.actions.add(jsonMap)
+            }
 
-                // Check if list is empty and throws Exception
-                if(actions.size() == 0)
-                    throw new Exception("List is empty")
-
-                // Get specified actions
-                response.actions = new ArrayList<Object>()
-
-                actions.each {
-                    def jsonMap = it.getJsonMap()
-                    def textArgs = [it.getActor(), it.getUser(), it.getCircle(), it.getExpense(), it.getRegularExpense(), it.getPayment()]
-
-                    jsonMap.date = g.render(template:"/shared/dateFormat", model:[time: it.getActionDate()])
-                    jsonMap.text = message(code: 'com.billmate.history.' + jsonMap.type, args: textArgs)
-
-                    if(it.getActionType().getType().toString().equals(ActionTypeEnum.signUp.toString())){
-                        jsonMap.icon = assetPath([src: "/"]) + jsonMap.icon
-                    }
-                    response.actions.add(jsonMap)
-                }
-
-            } catch (Exception eActionFilter) {
+            if(response.actions.size() == 0){
                 response.error = true
                 response.message = message(code: 'com.billmate.history.search.empty')
-
-                eActionFilter.printStackTrace()
             }
 
-            switch (params.alt) {
-                default:
-                    render response as JSON
-            }
-            return
+            render response as JSON
         }
 
-        def actions = registeredUser.getRealizedActions(page, offsetResult, offsetResult * page, "desc")
-
-        return [
-                user          : user,
-                registeredUser: registeredUser,
-                actions       : actions,
-                actionsType   : ActionType.getAll(),
-                houses        : registeredUser.getHouses(),
-                collectives   : registeredUser.getCollectives(),
-                display       : actions.size() < offsetResult ? "none" : ""
-        ]
+        return [user: registeredUser, history: userHistory]
     }
 }

@@ -66,7 +66,7 @@ class Collective {
         "blue"
     }
 
-    public boolean addUsersAndExpenseTypesToCollectiveAndSave(Set<String> friendsSet, Set<String> expenseTypesSet){
+    public boolean addUsersAndExpenseTypes(Set<String> friendsSet, Set<String> expenseTypesSet){
         boolean result = true
         withTransaction { status ->
             try {
@@ -83,7 +83,7 @@ class Collective {
         return result
     }
 
-    public boolean addUsersAndExpenseTypesToCollectiveAndSaveWithAction(Set<String> friendsSet, Set<String> expenseTypesSet, Action action, RegisteredUser sessionUser){
+    public boolean addUsersAndExpenseTypes(Set<String> friendsSet, Set<String> expenseTypesSet, Action action, RegisteredUser sessionUser){
         boolean result = true
         withTransaction { status ->
             try {

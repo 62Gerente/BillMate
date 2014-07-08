@@ -1,8 +1,5 @@
 package com.billmate
 
-import grails.converters.JSON
-import org.apache.shiro.crypto.hash.Sha256Hash
-
 class RegisterController extends BaseController {
     static layout = "session"
     static allowedMethods = [create: "GET", save: "POST"]
@@ -18,7 +15,7 @@ class RegisterController extends BaseController {
 
         def registeredUser = new RegisteredUser(name: params['name'], email: params['email'], password: params['password'])
         def signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: registeredUser)
-        if(registeredUser.secureSaveWithAction(signUpAction)){
+        if(registeredUser.secureSave(signUpAction)){
             session.user = registeredUser
             flash.message = "com.billmate.register.save.success"
             flash.m_default = "You have been successfully registered and logged in."

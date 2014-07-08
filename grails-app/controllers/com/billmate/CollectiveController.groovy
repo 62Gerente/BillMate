@@ -16,7 +16,7 @@ class CollectiveController extends RestrictedController {
 
         def collective = new Collective(name: params.collectiveName, description: params.collectiveDescription)
         def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addCollective.toString()), actor: session.user, circle: collective.getCircle())
-        result = collective.addUsersAndExpenseTypesToCollectiveAndSaveWithAction(friendsSet, expenseSet, action, session.user)
+        result = collective.addUsersAndExpenseTypes(friendsSet, expenseSet, action, session.user)
 
         def response = [
                 'error': false,
