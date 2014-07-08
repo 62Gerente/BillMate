@@ -19,12 +19,50 @@ import com.billmate.RegisteredUser
 class BootStrap {
     def init = { servletContext ->
 
+        if(ActionType.count() == 0){
+            def addUserCircle = new ActionType(type: ActionTypeEnum.addUserCircle.toString(), icon: ActionTypeEnum.addUserCircle.getIcon(), cssClass: ActionTypeEnum.addUserCircle.getCssClass())
+            addUserCircle.save()
+
+            def addExpenseCircle = new ActionType(type: ActionTypeEnum.addExpenseCircle.toString(), icon: ActionTypeEnum.addExpenseCircle.getIcon(), cssClass: ActionTypeEnum.addExpenseCircle.getCssClass())
+            addExpenseCircle.save()
+
+            def addRegularExpenseCircle = new ActionType(type: ActionTypeEnum.addRegularExpenseCircle.toString(), icon: ActionTypeEnum.addRegularExpenseCircle.getIcon(), cssClass: ActionTypeEnum.addRegularExpenseCircle.getCssClass())
+            addRegularExpenseCircle.save()
+
+            def addPaymentExpense = new ActionType(type: ActionTypeEnum.addPaymentExpense.toString(), icon: ActionTypeEnum.addPaymentExpense.getIcon(), cssClass: ActionTypeEnum.addPaymentExpense.getCssClass())
+            addPaymentExpense.save()
+
+            def addHouse = new ActionType(type: ActionTypeEnum.addHouse.toString(), icon: ActionTypeEnum.addHouse.getIcon(), cssClass: ActionTypeEnum.addHouse.getCssClass())
+            addHouse.save()
+
+            def signUp = new ActionType(type: ActionTypeEnum.signUp.toString(), icon: ActionTypeEnum.signUp.getIcon(), cssClass: ActionTypeEnum.signUp.getCssClass())
+            signUp.save()
+
+            def addCollective = new ActionType(type: ActionTypeEnum.addCollective.toString(), icon: ActionTypeEnum.addCollective.getIcon(), cssClass: ActionTypeEnum.addCollective.getCssClass())
+            addCollective.save()
+        }
+
         if(User.count() == 0){
-            new RegisteredUser(name: 'Bill Mates', email: 'bill@mate.com', password: 'billmate').secureSave()
-            new RegisteredUser(name: 'André Santos', email: 'andreccdr@gmail.com', password: 'asantos').secureSave()
-            new RegisteredUser(name: 'Pedro Leite', email: 'pmcleite@gmail.com', password: 'pleite').secureSave()
-            new RegisteredUser(name: 'Francisco Neves', email: 'fntneves@gmail.com', password: 'fneves').secureSave()
-            new RegisteredUser(name: 'Ricardo Branco', email: '28.ricardobranco@gmail.com', password: 'rbranco').secureSave()
+            def signUpUser = new RegisteredUser(name: 'Bill Mates', email: 'bill@mate.com', password: 'billmate')
+            def signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: signUpUser)
+            signUpUser.secureSave(signUpAction)
+
+            signUpUser = new RegisteredUser(name: 'André Santos', email: 'andreccdr@gmail.com', password: 'asantos')
+            signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: signUpUser)
+            signUpUser.secureSave(signUpAction)
+
+            signUpUser = new RegisteredUser(name: 'Pedro Leite', email: 'pmcleite@gmail.com', password: 'pleite')
+            signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: signUpUser)
+            signUpUser.secureSave(signUpAction)
+
+            signUpUser = new RegisteredUser(name: 'Francisco Neves', email: 'fntneves@gmail.com', password: 'fneves')
+            signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: signUpUser)
+            signUpUser.secureSave(signUpAction)
+
+            signUpUser = new RegisteredUser(name: 'Ricardo Branco', email: '28.ricardobranco@gmail.com', password: 'rbranco')
+            signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: signUpUser)
+            signUpUser.secureSave(signUpAction)
+
             new ReferredUser(name: 'Sérgio Almeida', email: 'sergio2malmeida@gmail.com').secureSave()
         }
 
@@ -190,24 +228,7 @@ class BootStrap {
             internet.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
         }
 
-        if(ActionType.count() == 0){
-            def addUserCircle = new ActionType(type: ActionTypeEnum.addUserCircle)
-            addUserCircle.save()
-
-            def addExpenseCircle = new ActionType(type: ActionTypeEnum.addExpenseCircle)
-            addExpenseCircle.save()
-
-            def addRegularExpenseCircle = new ActionType(type: ActionTypeEnum.addRegularExpenseCircle)
-            addRegularExpenseCircle.save()
-
-            def addPaymentExpense = new ActionType(type: ActionTypeEnum.addPaymentExpense)
-            addPaymentExpense.save()
-
-            def addCircle = new ActionType(type: ActionTypeEnum.addCircle)
-            addCircle.save()
-        }
-
-        if(Action.count() == 0){
+        if(Action.count() <= RegisteredUser.count()){
             def addUserCircle = new Action(actionType: ActionType.findWhere(type: 'addUserCircle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), user: User.findWhere(email: 'andreccdr@gmail.com'), circle: House.first().getCircle())
             addUserCircle.save()
 

@@ -73,14 +73,32 @@ class Expense {
         title
     }
 
-    public boolean saveAndPostponeRegularExpense(){
+    public void persist() throws Exception{
+        regularExpense.postpone()
+        regularExpense.save(flush: true, failOnError: true)
+        save(flush: true, failOnError: true)
+    }
+
+    public boolean secureSave(){
         withTransaction { status ->
             try {
-                regularExpense.postpone()
-                regularExpense.save(flush: true, failOnError: true)
-                save(flush: true, failOnError: true)
+                persist()
                 return true
-            }catch(Exception ignored){
+            }catch(Exception eSave){
+                eSave.printStackTrace()
+                status.setRollbackOnly()
+                return false
+            }
+        }
+    }
+
+    public boolean secureSave(Action action){
+        withTransaction { status ->
+            try {
+                persist()
+                return true
+            }catch(Exception eSave){
+                eSave.printStackTrace()
                 status.setRollbackOnly()
                 return false
             }

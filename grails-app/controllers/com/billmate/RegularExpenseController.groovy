@@ -19,7 +19,7 @@ class RegularExpenseController extends RestrictedController{
 
         Expense expense = new Expense(regularExpense, authenticatedUser(), value: value)
 
-        if (!expense.saveAndPostponeRegularExpense()) {
+        if (!expense.secureSave()) {
             responseData.error = true;
             if(expense.getErrors().getErrorCount()){
                 responseData.message = message(error: expense.getErrors().getAllErrors().first())

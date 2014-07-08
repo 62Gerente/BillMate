@@ -105,14 +105,14 @@ class RegisteredUserController extends RestrictedController {
 
     def history(Long id) {
 
-        def registeredUser =  RegisteredUser.findById(id)
+        def registeredUser = RegisteredUser.findById(id)
         def page = params.page && ((String) params.page).isInteger() ? Integer.parseInt(params.page) : 0
         def size = params.size && ((String) params.size).isInteger() ? Integer.parseInt(params.size) : 0
         def circleID = params.circle && ((String) params.circle).isLong() ? Long.parseLong(params.circle) : 0
         def typeID = params.type && ((String) params.type).isLong() ? Long.parseLong(params.type) : 0
         def userHistory = new RegisteredUserHistory(registeredUser: registeredUser, format: params.alt, size: size, page: page, circleId: circleID, actionTypeId: typeID)
 
-        if(params.alt){
+        if (params.alt) {
             def response = [
                     error: false
             ]
@@ -123,16 +123,19 @@ class RegisteredUserController extends RestrictedController {
                 def jsonMap = it.toJSON()
                 def textArgs = [it.getActor(), it.getUser(), it.getCircle(), it.getExpense(), it.getRegularExpense(), it.getPayment()]
 
-                jsonMap.date = g.render(template:"/shared/dateFormat", model:[time: it.getActionDate()])
+                jsonMap.date = g.render(template: "/shared/dateFormat", model: [time: it.getActionDate()])
                 jsonMap.text = message(code: 'com.billmate.history.' + jsonMap.type, args: textArgs)
+                if (jsonMap.expenseTitle) {
+                    jsonMap.expenseText = message(code: 'com.billmate.expense.total')
+                }
 
-                if(it.getActionType().getType().toString().equals(ActionTypeEnum.signUp.toString())){
+                if (it.getActionType().getType().toString().equals(ActionTypeEnum.signUp.toString())) {
                     jsonMap.icon = assetPath([src: "/"]) + jsonMap.icon
                 }
                 response.actions.add(jsonMap)
             }
 
-            if(response.actions.size() == 0){
+            if (response.actions.size() == 0) {
                 response.error = true
                 response.message = message(code: 'com.billmate.history.search.empty')
             }

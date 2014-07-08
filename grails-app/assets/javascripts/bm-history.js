@@ -36,6 +36,14 @@ function listAction(list, action){
             break;
         case "addCollective":
             break;
+        case "addPaymentExpense":
+            bottomWrapper = '<span class="muted dark-text">' +
+                                action.expenseTotalText +
+                            ':</span>' +
+                            '<span class="label label-success">€ ' +
+                                action.expenseTotal +
+                            '</span>';
+            break;
         default:
             bottom = "";
 

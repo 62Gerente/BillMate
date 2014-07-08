@@ -49,7 +49,8 @@ class Action {
         }
 
         if(actionExpense) {
-            jsonMap.expense = actionExpense.getTitle()
+            jsonMap.expenseTitle = actionExpense.getTitle()
+            jsonMap.expenseTotal = actionExpense.getValue()
         }
 
         if(actionRegularExpense) {
