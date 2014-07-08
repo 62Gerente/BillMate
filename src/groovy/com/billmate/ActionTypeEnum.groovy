@@ -4,8 +4,8 @@ enum ActionTypeEnum {
     signUp("signUp", "logo", "primary"),
     addExpenseCircle("addExpenseCircle", "fa fa-money", "info"),
     addUserCircle("addUserCircle", "fa fa-user", "primary"),
-    addRegularExpenseCircle("addRegularExpenseCircle", "fa fa-money"),
-    addPaymentExpense("addPaymentExpense", "fa fa-money"),
+    addRegularExpenseCircle("addRegularExpenseCircle", "fa fa-money", "primary"),
+    addPaymentExpense("addPaymentExpense", "fa fa-money", "primary"),
     addHouse("addHouse", "fa fa-home", "success"),
     addCollective("addCollective", "fa fa-circle-o", "success")
 

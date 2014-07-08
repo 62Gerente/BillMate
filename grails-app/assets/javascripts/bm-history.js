@@ -1,24 +1,9 @@
 function listAction(list, action){
     var actionType = '<i class="'+ action.icon +' fa-1-2x m-t-10"></i>';
-    var members = ""
 
-    for(user in action.circleUsers){
-        members += '<li>' +
-            '<div class="profile-pic">' +
-            '<img width="35" height="35" src="'+ action.circleUsers[user] +'" alt="">' +
-            '</div>' +
-            '</li>';
-    }
-    var bottomWrapper = '<ul class="my-friends no-margin">' +
-        members +
-        '</ul>';
+    var bottom = "";
 
-
-    var bottom = '<div class="clearfix"></div>' +
-        '<div class="tiles grey p-t-20 p-b-10 p-l-20">' +
-        bottomWrapper +
-        '<div class="clearfix"></div>' +
-        '</div>';
+    var bottomWrapper = "";
 
     var descriptionTitle = '<div class="muted m-t-15">' +
         '<i class="fa '+ action.circleCssClass +'"></i> '+ action.circle +' - '+ action.date +
@@ -35,18 +20,36 @@ function listAction(list, action){
             bottom = "";
             break;
         case "addCollective":
+            for(user in action.circleUsers){
+                members += '<li>' +
+                    '<div class="profile-pic">' +
+                    '<img width="35" height="35" src="'+ action.circleUsers[user] +'" alt="">' +
+                    '</div>' +
+                    '</li>';
+            }
+            bottomWrapper = '<ul class="my-friends no-margin">' +
+                members +
+                '</ul>';
             break;
         case "addPaymentExpense":
             bottomWrapper = '<span class="muted dark-text">' +
-                                action.expenseTotalText +
-                            ':</span>' +
-                            '<span class="label label-success">€ ' +
-                                action.expenseTotal +
-                            '</span>';
+                                action.expenseText +
+                            ':</span> ' +
+                            '<span class="label label-success">' +
+                                parseFloat(action.expenseTotal).format(2) +
+                            ' €</span>';
             break;
         default:
             bottom = "";
 
+    }
+
+    if(bottomWrapper.length > 0){
+        bottom = '<div class="clearfix"></div>' +
+            '<div class="tiles grey p-t-10 p-b-10 p-l-20 no-margin">' +
+            bottomWrapper +
+            '<div class="clearfix"></div>' +
+            '</div>';
     }
 
     var icon =  '<div class="cbp_tmicon ' + action.cssClass + '">' +

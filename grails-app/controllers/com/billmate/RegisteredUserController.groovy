@@ -126,7 +126,7 @@ class RegisteredUserController extends RestrictedController {
                 jsonMap.date = g.render(template: "/shared/dateFormat", model: [time: it.getActionDate()])
                 jsonMap.text = message(code: 'com.billmate.history.' + jsonMap.type, args: textArgs)
                 if (jsonMap.expenseTitle) {
-                    jsonMap.expenseText = message(code: 'com.billmate.expense.total')
+                    jsonMap.expenseText = message(code: 'com.billmate.expense.action.total')
                 }
 
                 if (it.getActionType().getType().toString().equals(ActionTypeEnum.signUp.toString())) {

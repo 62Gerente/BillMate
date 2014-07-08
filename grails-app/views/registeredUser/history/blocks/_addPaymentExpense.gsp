@@ -15,6 +15,6 @@
     <div class="clearfix"></div>
 
     <div class="tiles grey p-t-10 p-b-10 p-l-20 p-r-20">
-        <span class="muted dark-text"><g:message code="com.billmate.expense.action.total"/>:</span> <span class="label label-success">${action.getPayment()}</span>
+        <span class="muted dark-text"><g:message code="com.billmate.expense.action.total"/>:</span> <span class="label label-success"><g:formatNumber number="${action.getExpense().getValue()}" type="currency" currencyCode="EUR"/></span>
     </div>
 </div>

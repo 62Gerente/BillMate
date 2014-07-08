@@ -188,6 +188,9 @@ class BootStrap {
 
             def rbMaidPayment = new Payment(user: User.findWhere(email: '28.ricardobranco@gmail.com'), debt: rbDebt, value: 1.00)
             rbMaidPayment.save()
+
+            def fnMaidPaymentAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addPaymentExpense.toString()), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), user: User.findWhere(email: 'andreccdr@gmail.com'), expense: maid, circle: House.first().getCircle(), payment: fnMaidPayment)
+            fnMaidPaymentAction.save()
         }
 
         if(CircleType.count() == 0){
