@@ -292,6 +292,10 @@ a.fc-event,
 .fc-event-title {
 	padding: 0 1px;
 	}
+
+.fc-event:hover{
+    color: white;
+}
 	
 .fc .ui-resizable-handle {
 	display: block;

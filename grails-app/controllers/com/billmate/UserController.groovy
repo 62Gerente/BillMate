@@ -40,10 +40,11 @@ class UserController extends RestrictedController {
         User user = RegisteredUser.findById(id)?.getUser()
         def actualMonth = DateTime.now().getMonthOfYear()
         date = date? (date+1) : actualMonth
-        //Alterar a query toda
+
         user?.getExpenses().each {
             if(actualMonth == date)
-                listEvents.add(title: "Despesa "+it.getTitle() + " no círculo " + it.getCircle().getName(), start: it.getBeginDate(), end: it.getEndDate())
+                listEvents.add(title: it.getTitle() + " - " + it.getCircle().getName(), start: it.getBeginDate(), end: it.getEndDate(),
+                                url: createLink(controller: "expense", action: "show", id: it.getId()))
         }
 
         render listEvents as JSON
