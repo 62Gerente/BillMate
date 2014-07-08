@@ -1,8 +1,10 @@
 package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
 import com.sun.org.apache.xpath.internal.operations.Bool
 
+@LogicalDelete
 class Expense {
     static belongsTo = [Circle, RegisteredUser, ExpenseType]
     static hasMany = [debts: Debt, actions: Action, assignedUsers: User]
@@ -141,7 +143,7 @@ class Expense {
     }
 
     public boolean isResolved(){
-        receptionDate
+        receptionDate || amountInDebt() == 0
     }
 
     public Double amountAssignedTo(Long userID){
@@ -257,13 +259,13 @@ class Expense {
                 }
                 if(idsUsers.size() == 1) expense.setReceptionDate(new Date())
                 for(String str : idsUsers){
-                    if( Double.parseDouble(value[position]) > 0 ){
+                    if( value[position] > 0 ){
                         User user = User.findById(Long.parseLong(str))
-                        Debt debt = new Debt(value: Double.parseDouble(value[position]), user: user, expense: expense).save()
+                        Debt debt = new Debt(value: value[position], user: user, expense: expense).save()
                         this.addToAssignedUsers(user)
                         RegisteredUser registeredUser = user.getRegisteredUser()
                         if(registeredUser && registeredUser.getId() == getResponsibleId()) {
-                            new Payment(user: user, debt: debt, value: Double.parseDouble(value[position]), validationDate: new Date(), isValidated: true).save()
+                            new Payment(user: user, debt: debt, value: value[position], validationDate: new Date(), isValidated: true).save()
                             debt.setResolvedDate(new Date())
                         }
                     }
@@ -317,5 +319,15 @@ class Expense {
             setReceptionDate(new Date())
             save()
         }
+    }
+
+    public Set<RegisteredUser> getAssignedRegisteredUsers(){
+        Set<RegisteredUser> registeredUsers = new HashSet<RegisteredUser>();
+        assignedUsers.each{
+            if(it.getRegisteredUser()){
+                registeredUsers.add(it.getRegisteredUser())
+            }
+        }
+        registeredUsers
     }
 }

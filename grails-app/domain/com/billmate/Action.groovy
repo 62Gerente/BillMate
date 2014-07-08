@@ -1,5 +1,8 @@
 package com.billmate
 
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
+
+@LogicalDelete
 class Action {
     static belongsTo = [ActionType, Expense, RegisteredUser, User, Circle, Payment]
     static hasMany = [systemNotifications: SystemNotification]

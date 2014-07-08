@@ -49,14 +49,16 @@ class PaymentController extends RestrictedController {
         Boolean result = true
         Integer position = 0
         List<String> listExpenses = idsExpense.substring(1,idsExpense.length()-1).split(",")
-        List<String> listValues = values.substring(1,values.length()-1).split(",")
+        List<Double> listValues = new LinkedList<>()
+        values.substring(1,values.length()-1).split(",").each {listValues.add(Double.parseDouble(it))}
         try{
             for(String ids : listExpenses){
                 Long id = Long.parseLong(ids)
                 User user = User.findById(idUser)
                 Expense expense = Expense.findById(id)
                 Debt debt = expense.debtOf(user.getId())
-                expense.payAndConfirmExpense(Double.parseDouble(listValues[position]), debt, flag, user)
+                if(listValues[position] < debt.getValue() && (listValues[position] + 0.1) >= debt.getValue()) listValues[position]+=0.1
+                expense.payAndConfirmExpense(listValues[position], debt, flag, user)
                 position++
                 result = true
             }

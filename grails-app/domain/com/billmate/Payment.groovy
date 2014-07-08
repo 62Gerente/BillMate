@@ -1,9 +1,11 @@
 package com.billmate
 
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
 import org.springframework.format.number.CurrencyFormatter
 
 import java.text.NumberFormat
 
+@LogicalDelete
 class Payment {
     static hasMany = [actions: Action]
     static belongsTo = [Debt, User]

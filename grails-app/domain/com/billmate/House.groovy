@@ -1,7 +1,10 @@
 package com.billmate
 
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
+import org.hibernate.annotations.Where
 import org.springframework.validation.ObjectError
 
+@LogicalDelete
 class House{
     static belongsTo = Circle
 
@@ -9,6 +12,10 @@ class House{
 
     static constraints = {
         circle nullable: false
+    }
+
+    static mapping = {
+
     }
 
     public House() {

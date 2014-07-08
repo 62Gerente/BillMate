@@ -1,7 +1,9 @@
 package com.billmate
 
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
 import org.springframework.validation.ObjectError
 
+@LogicalDelete
 class DefaultExpenseType{
     static belongsTo = [CircleType, ExpenseType]
     static hasMany = [circleTypes: CircleType]

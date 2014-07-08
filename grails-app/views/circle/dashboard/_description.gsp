@@ -29,7 +29,7 @@
                 </div></a>
             </li>
             <li>
-                <a href="#"><div>
+                <a href="${createLink([controller: "circle", action: "edit", id: circle.getId()])}"><div>
                     <i class="fa fa-cog"></i> <g:message code="com.billmate.circleDashboard.actions.settings" default="Group settings"/>
                 </div></a>
             </li>

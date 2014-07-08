@@ -1,0 +1,18 @@
+.div-new-expensetype-circle{
+    width: 90%;
+}
+
+.div-new-friend-circle{
+    width: 96%;
+}
+
+.new-expensetype-circle,
+.new-friend-circle{
+    width: 100%;
+}
+
+#circle-edit-datatable tr,
+#expense-type-circles-btnNew{
+    cursor: hand;
+    cursor: pointer;
+}

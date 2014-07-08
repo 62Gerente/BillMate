@@ -202,4 +202,5 @@ class RegisteredUserController extends RestrictedController {
 
         render response as JSON
     }
+
 }

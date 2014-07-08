@@ -32,6 +32,12 @@ class ExpenseController extends RestrictedController {
             }else{
                 value = null
             }
+        }else if(property.equals("responsible")){
+            if(value.isLong()){
+                value = RegisteredUser.findById(Long.parseLong(value))
+            }else{
+                value = null
+            }
         }
 
         expense.setProperty(property, value)
@@ -149,7 +155,12 @@ class ExpenseController extends RestrictedController {
         }
         else {
             List<String> listOfFriends = params.getList("listOfFriends[]")
-            List<String> listValuesUsers = params.getList("listValuesUsers[]")
+            List<Double> listValuesUsers = new LinkedList<>()
+
+            params.getList("listValuesUsers[]").each {
+                listValuesUsers.add(Double.parseDouble(it))
+            }
+
             String regularExpenseID = params.regularExpenseID
 
             RegularExpense regularExpense

@@ -114,4 +114,5 @@
         <g:message code="com.billmate.sidebar.addDebt" default="Confirm Payment"/>
     </button>
     <button type="button" id="btn-advanced-options-regularExpense" class="btn btn-primary btn-cons hidden" data-toggle="modal" data-target="#regularExpenseCreateModal"></button>
+    <button type="button" id="btn-advanced-options-newRegularExpense" class="btn btn-primary btn-cons hidden" data-toggle="modal" data-target="#newRegularExpenseCreateModal"></button>
 </div>

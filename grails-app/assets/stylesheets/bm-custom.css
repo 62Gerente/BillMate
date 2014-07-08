@@ -253,3 +253,8 @@ a {
 #detailedConfirmPayments .grid-body.no-border{
     padding-bottom: 10px;
 }
+
+.expense-icon{
+    width: 15px;
+    font-size: 10px;
+}

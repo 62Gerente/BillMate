@@ -3,7 +3,7 @@
         <div class="text-center">
             <i class="${expense.getExpenseType().getCssClass()} fa-5x"></i>
             <h3>
-                <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
+                <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
                     <a href="#" class="edit-property edit-property-sm" id="edit_title" data-emptytext="<g:message code="com.billmate.expense.title.xeditable.clickToDefine" default="Click to define expense's title" />" data-name="title" data-type="text" data-pk="${expense.getId()}" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
                         ${expense}
                     </a>
@@ -17,7 +17,7 @@
             </h2>
 
             <p class="text-left p-t-10 editable-ta-fullwidth">
-                <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
+                <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
                     <a href="#" class="edit-property edit-property-sm display-block" id="edit_description" data-emptytext="<g:message code="com.billmate.expense.description.xeditable.clickToDefine" default="Click to define expense's description" />" data-showbuttons="bottom" data-name="description" data-type="textarea" data-pk="${expense.getId()}" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
                             ${expense.getDescription()}
                     </a>
@@ -29,6 +29,23 @@
         </div>
     </div>
     <div class="row p-t-10 p-b-10">
+        <div class="col-md-6">
+            <h6 class="semi-bold text-left no-margin label-property-sm">
+                <g:message code="com.billmate.expense.responsible" default="Responsible" />
+            </h6>
+        </div>
+        <div class="col-md-6">
+            <h6 class="no-margin p-t-5 p-b-5">
+                <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
+                    <a href="#" class="edit-property edit-property-sm" id="edit-responsible" data-name="responsible" data-mode="popup" data-type="select" data-pk="${expense.getId()}" data-title="<g:message code="com.billmate.expense.responsible.select" default="Select responsible" />" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
+                        ${expense.getResponsible()}
+                    </a>
+                </g:if>
+                <g:else>
+                    ${expense.getResponsible()}
+                </g:else>
+            </h6>
+        </div>
         <g:if test="${expense.getBeginDate() && expense.getEndDate()}">
             <div class="col-md-6">
                 <h6 class="semi-bold text-left no-margin label-property-sm">
@@ -37,7 +54,7 @@
             </div>
             <div class="col-md-6">
                 <h6 class="no-margin p-t-5 p-b-5">
-                    <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
+                    <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
                         <a href="#" class="edit-property edit-property-sm" id="edit_begin_date" data-mode="popup" data-showbuttons="bottom" data-placement="left" data-emptytext="<g:message code="com.billmate.xeditable.clickToDefine" default="Click to define" />" data-name="beginDate" data-type="combodate" data-template="D MMM YYYY  HH:mm" data-format="DD-MM-YYYY HH:mm" data-viewformat="DD-MM-YYYY HH:mm" data-pk="${expense.getId()}" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
                             <g:formatDate date="${expense.getBeginDate()}" type="datetime" style="SMALL"/>
                         </a>
@@ -54,7 +71,7 @@
             </div>
             <div class="col-md-6">
                 <h6 class="no-margin p-t-5 p-b-5">
-                    <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
+                    <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
                         <a href="#" class="edit-property edit-property-sm" id="edit_end_date" data-mode="popup" data-showbuttons="bottom" data-placement="left" data-emptytext="<g:message code="com.billmate.xeditable.clickToDefine" default="Click to define" />" data-name="endDate" data-type="combodate" data-template="D MMM YYYY  HH:mm" data-format="DD-MM-YYYY HH:mm" data-viewformat="DD-MM-YYYY HH:mm" data-pk="${expense.getId()}" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
                             <g:formatDate date="${expense.getEndDate()}" type="datetime" style="SMALL"/>
                         </a>
@@ -73,7 +90,7 @@
             </div>
             <div class="col-md-6">
                 <h6 class="no-margin p-t-5 p-b-5">
-                    <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
+                    <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
                         <a href="#" class="edit-property edit-property-sm" id="edit_date" data-mode="popup" data-showbuttons="bottom" data-placement="left" data-emptytext="<g:message code="com.billmate.xeditable.clickToDefine" default="Click to define" />" data-name="beginDate" data-type="combodate" data-template="D MMM YYYY  HH:mm" data-format="DD-MM-YYYY HH:mm" data-viewformat="DD-MM-YYYY HH:mm" data-pk="${expense.getId()}" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
                             <g:formatDate date="${expense.getBeginDate()}" type="datetime" style="SMALL"/>
                         </a>
@@ -92,7 +109,7 @@
             </div>
             <div class="col-md-6">
                 <h6 class="no-margin p-t-5 p-b-5">
-                    <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
+                    <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
                         <a href="#" class="edit-property edit-property-sm" id="edit_payment_deadline" data-mode="popup" data-showbuttons="bottom" data-placement="left" data-emptytext="<g:message code="com.billmate.xeditable.clickToDefine" default="Click to define" />" data-name="paymentDeadline" data-type="combodate" data-template="D MMM YYYY  HH:mm" data-format="DD-MM-YYYY HH:mm" data-viewformat="DD-MM-YYYY HH:mm" data-pk="${expense.getId()}" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
                             <g:formatDate date="${expense.getPaymentDeadline()}" type="datetime" style="SMALL"/>
                         </a>
@@ -111,7 +128,7 @@
             </div>
             <div class="col-md-6">
                 <h6 class="no-margin p-t-5 p-b-5">
-                    <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
+                    <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
                         <a href="#" class="edit-property edit-property-sm" id="edit_reception_deadline" data-mode="popup" data-showbuttons="bottom" data-placement="left" data-emptytext="<g:message code="com.billmate.xeditable.clickToDefine" default="Click to define" />" data-name="receptionDeadline" data-type="combodate" data-template="D MMM YYYY  HH:mm" data-format="DD-MM-YYYY HH:mm" data-viewformat="DD-MM-YYYY HH:mm" data-pk="${expense.getId()}" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
                             <g:formatDate date="${expense.getReceptionDeadline()}" type="datetime" style="SMALL"/>
                         </a>
@@ -130,7 +147,7 @@
             </div>
             <div class="col-md-6">
                 <h6 class="no-margin p-t-5 p-b-5">
-                    <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
+                    <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
                         <a href="#" class="edit-property edit-property-sm" id="edit_payment_date" data-mode="popup" data-showbuttons="bottom" data-placement="left" data-emptytext="<g:message code="com.billmate.xeditable.clickToDefine" default="Click to define" />" data-name="paymentDate" data-type="combodate" data-template="D MMM YYYY  HH:mm" data-format="DD-MM-YYYY HH:mm" data-viewformat="DD-MM-YYYY HH:mm" data-pk="${expense.getId()}" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
                             <g:formatDate date="${expense.getPaymentDate()}" type="datetime" style="SMALL"/>
                         </a>
@@ -149,7 +166,7 @@
             </div>
             <div class="col-md-6">
                 <h6 class="no-margin p-t-5 p-b-5">
-                    <g:if test="${expense.getResponsible().getId() == registeredUser.getId()}">
+                    <g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
                         <a href="#" class="edit-property edit-property-sm" id="edit_reception_date" data-mode="popup" data-showbuttons="bottom" data-placement="left" data-emptytext="<g:message code="com.billmate.xeditable.clickToDefine" default="Click to define" />" data-name="receptionDate" data-type="combodate" data-template="D MMM YYYY  HH:mm" data-format="DD-MM-YYYY HH:mm" data-viewformat="DD-MM-YYYY HH:mm" data-pk="${expense.getId()}" data-url="${createLink(controller: 'expense', action: 'updateProperty', id: expense.getId())}">
                             <g:formatDate date="${expense.getReceptionDate()}" type="datetime" style="SMALL"/>
                         </a>
@@ -189,3 +206,18 @@
     </div>
 </div>
 <div class="clearfix"></div>
+
+<g:if test="${expense.getResponsibleId() == registeredUser.getId()}">
+    <script>
+        $(function(){
+            $('#edit-responsible').editable({
+                value: ${expense.getResponsibleId()},
+                source: [
+                    <g:each in="${expense.getAssignedRegisteredUsers()}" var="user">
+                    {value: ${user.getId()}, text: '${user}'},
+                    </g:each>
+                ]
+            });
+        });
+    </script>
+</g:if>

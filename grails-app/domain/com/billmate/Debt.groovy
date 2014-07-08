@@ -1,5 +1,8 @@
 package com.billmate
 
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
+
+@LogicalDelete
 class Debt {
     static belongsTo = [Expense, User, RegularExpense]
     static hasMany = [payments: Payment]

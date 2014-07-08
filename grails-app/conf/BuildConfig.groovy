@@ -87,5 +87,7 @@ grails.project.dependency.resolution = {
 
         // Email plugin
         compile ":mail:1.0.5"
+
+        compile ":logical-delete:0.1"
     }
 }

@@ -1,7 +1,9 @@
 package com.billmate
 
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
 import groovy.time.TimeCategory
 
+@LogicalDelete
 class User {
     static belongsTo = [Circle, Expense, RegularExpense]
     static hasMany = [circles: Circle, payments: Payment, debts: Debt, referencedActions: Action, expenses: Expense, regularExpenses: RegularExpense]
@@ -26,6 +28,12 @@ class User {
 
     public String toString(){
         name ? name : email
+    }
+
+    public String getPhoneNumber(){
+        if(registeredUser){
+            registeredUser.getPhoneNumber()
+        }
     }
 
     public Double amountInDebt(){
@@ -137,5 +145,20 @@ class User {
         }
 
         latestEvents.toList()
+    }
+
+    public boolean hasMovementsInCircle(Long id_circle){
+        boolean result = false
+        Circle.findById(id_circle).getExpenses().each {
+            Debt debt = it.debtOf(getId())
+            if(!result && debt && (debt.amountInDebt() > 0 || !debt.isResolved())) result = true
+        }
+        return result
+    }
+
+    public Set<Circle> getActiveCircles(){
+        Set<Circle> list = new HashSet<>()
+        circles.each { if(!it.isDeleted()) list.add(it) }
+        return list
     }
 }

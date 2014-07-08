@@ -1,7 +1,9 @@
 package com.billmate
 
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
 import groovy.time.TimeCategory
 
+@LogicalDelete
 class RegularExpense {
     static belongsTo = [DirectDebit, Circle, RegisteredUser, ExpenseType]
     static hasMany = [debts: Debt, actions: Action, assignedUsers: User, expenses: Expense]

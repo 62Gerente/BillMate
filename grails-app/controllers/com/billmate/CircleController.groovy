@@ -4,7 +4,7 @@ import grails.converters.JSON
 
 class CircleController extends RestrictedController  {
 
-    static allowedMethods = [circles: "POST", assignedUsers: "POST", show: "POST", history: "GET"]
+    static allowedMethods = [circles: "POST", assignedUsers: "POST", show: "POST", history: "GET", listBy: "POST"]
 
     def beforeInterceptor = [action: this.&checkSession]
 
@@ -116,5 +116,141 @@ class CircleController extends RestrictedController  {
         }
 
         return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle, history: circleHistory]
+    }
+
+    def edit(Long id) {
+        def circle = Circle.findById(id)
+
+        def breadcrumb = [
+                [href: createLink(controller: "dashboard", action: "circle", id: id), name: circle.getName()],
+                [name: message(code: "com.billmate.circle.edit")]
+        ]
+
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle]
+    }
+
+    def updateProperty(Long id) {
+        def circle = Circle.findById(id)
+        def property = params.name
+        def value = params.value
+
+        circle.setProperty(property, value)
+
+        def response = [
+                'error'  : false,
+                'message': message(code: "com.billmate.circle.updateProperty.success")
+        ]
+
+        if(!circle.save()) {
+            response.error = true
+            response.message = message(error: circle.getErrors().getAllErrors().first());
+        }
+
+        render response as JSON
+    }
+
+    def listUsersBy(Long id){
+        Set<User> userSet = Circle.getFriendsOfAllCirclesByTermFormated(params.q.toUpperCase(), id)
+        def response = [ 'data': userSet ]
+        render response as JSON
+    }
+
+    def listExpensetypeBy(Long id){
+        Set<ExpenseType> typeSet = ExpenseType.getFromAllCirclesByTermFormated(params.q.toUpperCase(),id)
+        def response = [ 'data': typeSet ]
+        render response as JSON
+    }
+
+    def adduser(Long id, Long id_circle){
+        User user = User.findById(id)
+        def response = [
+                error: true,
+                message: message(code: "com.billmate.circle.user.add.insuccess")
+        ]
+        if(user){
+            User.findById(id).addToCircles(Circle.findById(id_circle)).save()
+
+            response.error = false
+            response.message = message(code: "com.billmate.circle.user.add.success")
+        }
+
+        render response as JSON
+    }
+
+    def deleteUser(Long id, Long id_circle){
+        User user = User.findById(id)
+        def response = [
+                error: true,
+                message: message(code: "com.billmate.circle.user.delete.insuccess")
+        ]
+        if(user && !user.hasMovementsInCircle(id_circle)){
+            user.removeFromCircles(Circle.findById(id_circle))
+
+            response.error = false
+            response.message = message(code: "com.billmate.circle.user.delete.success")
+        }
+
+        render response as JSON
+    }
+
+    def addExpensetype(Long id, Long id_circle){
+        ExpenseType expenseType = ExpenseType.findById(id)
+        def response = [
+                error: true,
+                message: message(code: "com.billmate.circle.expensetype.add.insuccess")
+        ]
+        if(expenseType){
+            expenseType.addToCircles(Circle.findById(id_circle)).save()
+
+            response.error = false
+            response.message = message(code: "com.billmate.circle.expensetype.add.success")
+        }
+
+        render response as JSON
+    }
+
+    def deleteExpensetype(Long id, Long id_circle){
+        ExpenseType expenseType = ExpenseType.findById(id)
+        Circle circle = Circle.findById(id_circle)
+        def response = [
+                error: true,
+                message: message(code: "com.billmate.circle.expensetype.delete.insuccess")
+        ]
+        if(expenseType){
+            expenseType.removeFromCircles()
+
+            response.error = false
+            response.message = message(code: "com.billmate.circle.expensetype.delete.success")
+        }
+
+        render response as JSON
+    }
+
+    def close(Long id){
+        def response = [
+                error: true,
+                message: message(code: "com.billmate.circle.remove.insuccess")
+        ]
+        if(id){
+            Circle circle = Circle.findById(id)
+            if(circle && circle.delete()){
+                response.error = false
+                response.message = message(code: "com.billmate.circle.remove.success")
+            }
+        }
+
+        render response as JSON
+    }
+
+    def regularexpense(Long id){
+        def list = []
+        Circle circle = Circle.findById(id)
+        RegularExpense.findAllByCircle(circle).each {
+            list.add([it.getTitle(), it.getResponsible().getName(), it.getValue(), BMDate.convertDateFormat(it.getBeginDate()), it.getId(), it.getExpenseType().getCssClass(), it.getResponsible().getPhotoOrDefault()])
+        }
+
+        def response = ['data': list]
+
+        render response as JSON
     }
 }

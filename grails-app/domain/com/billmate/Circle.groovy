@@ -1,7 +1,10 @@
 package com.billmate
 
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
 import groovy.time.TimeCategory
+import org.hibernate.annotations.Where
 
+@LogicalDelete
 class Circle {
     static hasMany = [users: User, expenseTypes: ExpenseType,
                       expenses: Expense, actions: Action, regularExpenses: RegularExpense]
@@ -15,7 +18,7 @@ class Circle {
         collective nullable: true
         house nullable: true
 
-        name nullable: false
+        name nullable: false, blank: false
         description nullable: true
         createdAt nullable: false
     }
@@ -39,6 +42,11 @@ class Circle {
 
     public Double totalValueOfUnresolvedExpenses(){
         Double total = unresolvedExpenses().sum{ it.getValue() }
+        total ? total : 0D
+    }
+
+    public Double totalDebtOfResolvedExpenses(){
+        Double total = resolvedExpenses().sum{ it.amountInDebt() }
         total ? total : 0D
     }
 
@@ -214,5 +222,42 @@ class Circle {
         List<String> userPhotos = new ArrayList<>()
         users.each { userPhotos.add(it.getPhotoOrDefault()) }
         userPhotos
+    }
+
+    public static Set<User> getFriendsOfAllCirclesByTerm(String term) {
+        Set<User> list = new HashSet<User>()
+        User.findAll().each { if(it.getName().toUpperCase().contains(term) || it.getEmail().toUpperCase().contains(term)) list.add(it) }
+        return list
+    }
+
+    public static Set<Object> getFriendsOfAllCirclesByTermFormated(String term, Long id_circle){
+        Boolean result = false
+        Set<Object> list = new HashSet<>()
+        Circle circle = Circle.findById(id_circle)
+        getFriendsOfAllCirclesByTerm(term).each {
+            User user = it
+            result = false
+            circle.getUsers().each { if(!result && it.getId() == user.getId()) result = true }
+            if(!result) {
+                list.add([id  : it.getId(), faicon: it.getPhotoOrDefault(), name: it.getName()])
+            }
+        }
+        return list
+    }
+
+    public boolean hasMovementsInCircle(){
+        boolean result = false
+        getExpenses().each {
+            if(!result){
+                it.getDebts().each {
+                    if(!result && it && it.amountInDebt() > 0 || !it.isResolved()) result = true
+                }
+            }
+        }
+        return result
+    }
+
+    public boolean isDeleted(){
+        deleted
     }
 }

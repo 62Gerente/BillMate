@@ -1,8 +1,10 @@
 package com.billmate
 
 import com.lucastex.grails.fileuploader.UFile
+import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
 import org.apache.shiro.crypto.hash.Sha256Hash
 
+@LogicalDelete
 class RegisteredUser {
     static belongsTo = User
     static hasMany = [responsibleExpenses: Expense, realizedActions: Action, systemNotifications: SystemNotification, responsibleRegularExpenses: RegularExpense]
@@ -120,7 +122,7 @@ class RegisteredUser {
     }
 
     public Set<Circle> getCircles(Map map) {
-        Set<Circle> result = user.getCircles()
+        Set<Circle> result = user.getActiveCircles()
 
         if (map && map.containsKey('type')) {
             result = result.findAll { it.isType(map.get('type')) }
@@ -164,7 +166,6 @@ class RegisteredUser {
 
     public Set<Payment> unconfirmedPaymentsOnResponsibleExpenses() {
         Set<Payment> unconfirmedPayments = new HashSet<>()
-        Set<Expense> expenseSet = unresolvedResponsibleExpenses()
         unresolvedResponsibleExpenses().each { unconfirmedPayments.addAll(it.unconfirmedPayments()) }
         unconfirmedPayments
     }
@@ -273,7 +274,7 @@ class RegisteredUser {
                     debt.setResolvedDate(null)
                     debt.removeFromPayments(it)
                     debt.save()
-                    it.delete()
+                    it.delete(physical: true)
                 }
             } catch (Exception eCancelPayment) {
                 eCancelPayment.printStackTrace()
@@ -351,6 +352,10 @@ class RegisteredUser {
     }
 
     public Set<Circle> getCircles(){
-        return user.getCircles()
+        return user.getActiveCircles()
+    }
+
+    public boolean hasMovementsInCircle(Long id_circle){
+        getUser().hasMovementsInCircle(id_circle)
     }
 }
