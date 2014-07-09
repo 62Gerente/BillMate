@@ -3,6 +3,9 @@ class UrlMappings {
 
 	static mappings = {
 
+        "/api/$namespace/login"(controller: "Session", action: "save")
+        "/api/$namespace/register"(controller: "Register", action: "save")
+
         "/api/$namespace/$controller/$action"{
             constraints {}
         }
