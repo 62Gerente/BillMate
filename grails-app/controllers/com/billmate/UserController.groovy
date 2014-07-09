@@ -35,7 +35,7 @@ class UserController extends RestrictedController {
 
         RegisteredUser registeredUser = RegisteredUser.findById(id)
 
-        return [breadcrumb: breadcrumb, 'user': registeredUser]
+        return [breadcrumb: breadcrumb, user: registeredUser]
     }
 
     def events(Long id, Long date){
