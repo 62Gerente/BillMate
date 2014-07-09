@@ -35,10 +35,9 @@ class UserController extends RestrictedController {
         return [user: authenticatedUser()]
     }
 
-    def list(){
+    def list(Long id){
         def list = []
-        List<Expense> expenseList = new LinkedList<Expense>()
-        User user = User.findById(3);
+        User user = User.findById(RegisteredUser.findById(id).getUserId());
         Debt.findAllByUser(user).each {
             Expense expense = it.getExpense()
             list.add([expense.getTitle(), expense.getResponsible().getName(), expense.getCircle().getName(), expense.amountPaidBy(user.getId()), expense.getValue(),

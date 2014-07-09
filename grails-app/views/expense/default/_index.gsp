@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <title><g:message code="com.billmate.expense.page.title" default="BillMate - Expense"/></title>
     <asset:stylesheet src="../plugins/jquery-datatable/css/jquery.dataTables.css"/>
     <asset:stylesheet src="../plugins/boostrap-checkbox/css/bootstrap-checkbox.css"/>
     <asset:stylesheet src="../plugins/datatables-responsive/css/datatables.responsive.css"/>
@@ -18,6 +19,7 @@
             </div>
 
             <div class="grid-body ">
+                <g:hiddenField name="identifier-user-expense" value="${user.getId()}"/>
                 <table class="table table-hover table-condensed" id="users-debt">
                     <thead>
                     <tr>
@@ -32,6 +34,7 @@
                     </tr>
                     </thead>
                 </table>
+
             </div>
         </div>
     </div>
