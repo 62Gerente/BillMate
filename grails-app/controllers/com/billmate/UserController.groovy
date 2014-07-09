@@ -42,8 +42,11 @@ class UserController extends RestrictedController {
         User user = User.findById(3);
         Debt.findAllByUser(user).each {
             Expense expense = it.getExpense()
-            list.add([expense.getTitle(), expense.getResponsible().getName(), expense.getCircle().getName(),
-                      10.1, it.getValue(),/*expense.getPaymentDate()*/ DateTime.now().toString(), expense.getInvoice()?.getPath(), expense.getReceipt()?.getPath()]);
+            list.add([expense.getTitle(), expense.getResponsible().getName(), expense.getCircle().getName(), expense.amountPaidBy(user.getId()), expense.getValue(),
+                      expense.getInvoice()?.getPath(), expense.getReceipt()?.getPath(), expense.isResolved(), expense.getId(),
+                      expense.getExpenseType().getCssClass(), expense.getResponsible().getPhotoOrDefault(), expense.getCircle().getCssClass(),
+                      expense.debtOf(user.getId()).getValue(), expense.amountPaid()
+                     ]);
         }
 
         def response = ['data': list]

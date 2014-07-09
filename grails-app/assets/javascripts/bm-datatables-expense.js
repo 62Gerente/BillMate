@@ -1,6 +1,12 @@
 /* Set the defaults for DataTables initialisation */
 
 var userLang = navigator.language || navigator.userLanguage;
+if(userLang.indexOf("pt") > -1){
+    userLang = 'pt-PT'
+}
+else{
+    userLang = 'en-US'
+}
 
 $.extend( true, $.fn.dataTable.defaults, {
     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span12'p i>>",
@@ -167,17 +173,17 @@ $(document).ready(function() {
             if(textInfo == "")
                 context.empty().append("<i class='fa fa-file-pdf-o' style='opacity:0.3;margin-left:20px'></i>");
             else
-                context.empty().append("<a href='" + textInfo + "' style='text-decoration:none;color:inherit;margin-left:20px'><i class='fa fa-file-pdf-o'></i></a>");
+                context.empty().append("<a href='" + "#" + "' style='text-decoration:none;color:inherit;margin-left:20px'><i class='fa fa-file-pdf-o'></i></a>");
         }
     }
 
     function updateAfterFill(){
         var invoice = $("#users-debt").find("tr.odd, tr.even");
         var receipt = $("#users-debt").find("tr.odd, tr.even");
-        var invoiceList = invoice.find("td:nth(6)");
-        var receiptList = invoice.find("td:nth(7)");
-        if(!invoiceList.length) invoiceList = invoice.find("td:nth(3)");
-        if(!receiptList.length) receiptList = invoice.find("td:nth(4)");
+        var invoiceList = invoice.find("td:nth(5)");
+        var receiptList = receipt.find("td:nth(6)");
+        //if(!invoiceList.length) invoiceList = invoice.find("td:nth(3)");
+        //if(!receiptList.length) receiptList = invoice.find("td:nth(4)");
         invoiceList.each(function(index){ propagateRowUpdates($(this)) });
         receiptList.each(function(index){ propagateRowUpdates($(this)) });
 
@@ -223,9 +229,56 @@ $(document).ready(function() {
         },
         "sPaginationType": "bootstrap",
         "aoColumnDefs": [
-            { 'bSortable': false, 'aTargets': [ 6,7 ] }
+            { 'aTargets': [ 4 ] },
+            {
+                "mData": null ,
+                "mRender" : function ( data, type, full ) {
+                    var checks = "<i class='fa fa-check text-success m-l-15'></i>";
+                    if(full[7] == false){
+                        checks = "<i class='fa fa-times m-l-15'></i>"
+                    }
+                    return checks
+                },
+                'aTargets': [ 7 ]
+            },
+            {
+                "mData": null ,
+                "mRender" : function ( data, type, full ) {
+                    return "<span class='text-danger'>" + full[3].toFixed(2) + " € </span> / " + full[12].toFixed(2) + " €";
+                },
+                'aTargets': [ 3 ]
+            },
+            {
+                "mData": null ,
+                "mRender" : function ( data, type, full ) {
+                    return "<span class='text-danger'>" + full[13].toFixed(2) + " € </span> / " + full[4].toFixed(2) + " €";
+                },
+                'aTargets': [ 4 ]
+            },
+            {
+                "mData": null ,
+                "mRender" : function ( data, type, full ) {
+                    return "<i class='" + full[9] + " p-r-10'></i>" + full[0]
+                },
+                'aTargets': [ 0 ]
+            },
+            {
+                "mData": null ,
+                "mRender" : function ( data, type, full ) {
+                    return "<span class='p-r-10'><img src='" + full[10] + "'height='15' width='15'/></span>" + full[1]
+                },
+                'aTargets': [ 1 ]
+            },
+            {
+                "mData": null ,
+                "mRender" : function ( data, type, full ) {
+                    return "<i class='" + full[11] + " p-r-10'></i>" + full[2]
+                },
+                'aTargets': [ 2 ]
+            },
+            { 'bSortable': false, 'aTargets': [ 5,6,7 ] }
         ],
-        "aaSorting": [[ 5, "desc" ]],
+        "aaSorting": [[ 0, "asc" ]],
         "oLanguage": {
             "sUrl": "../../assets/jquery-datatable/i18n/" + userLang + ".json"
         },
@@ -234,21 +287,29 @@ $(document).ready(function() {
         "sAjaxSource": "/BillMate/user/teste",
         "sAjaxDataProp": "data",
         fnPreDrawCallback: function () {
-            // Initialize the responsive datatables helper once.
             if (!responsiveHelper) {
                 responsiveHelper = new ResponsiveDatatablesHelper(tableElement, breakpointDefinition);
             }
         },
-        fnRowCallback  : function (nRow) {
+        fnRowCallback  : function( nRow, aData, iDisplayIndex ) {
             responsiveHelper.createExpandIcon(nRow);
-            //propagateRowUpdates(nRow)
+            $(nRow).find("td:nth(5)").click(function(e){
+                e.stopPropagation();
+                if(aData[5] != null)
+                    window.open(aData[5]);
+            });
+            $(nRow).find("td:nth(6)").click(function(e){
+                e.stopPropagation();
+                if(aData[6] != null)
+                    window.open(aData[6],"_blank");
+            });
+            $(nRow).click(function(e){
+                document.location.href = "/BillMate/expense/show/" + aData[8];
+            });
         },
         fnDrawCallback : function (oSettings) {
             responsiveHelper.respond();
             updateAfterFill();
-        },
-        "columnDefs": [
-            {"render": function ( data, type, row ) { return '('+')'; }, "aTargets": [0]}
-        ]
+        }
     });
 });
