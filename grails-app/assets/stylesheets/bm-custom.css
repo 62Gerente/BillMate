@@ -201,3 +201,16 @@ a {
 .chat-window-wrapper{
     overflow: auto !important;
 }
+
+.page-content .breadcrumb{
+    margin-bottom: 20px;
+}
+
+.page-content .breadcrumb li:first-child a{
+    margin-left: 0;
+}
+
+.page-content .breadcrumb li:last-child{
+    font-weight: 600;
+    font-size: 14px;
+}

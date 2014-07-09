@@ -9,16 +9,22 @@ class DashboardController extends RestrictedController {
     def beforeInterceptor = [action: this.&checkSession]
 
     def user() {
+        def breadcrumb = [
+                [name: message(code: "com.billmate.sidebar.dashboard")]
+        ]
         def userDashboard = new RegisteredUserDashboard(registeredUser: authenticatedUser())
 
-        return [user: authenticatedUser(), dashboard: userDashboard]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), dashboard: userDashboard]
     }
 
     def circle(Long id) {
         def circle = Circle.findById(id)
+        def breadcrumb = [
+                [name: circle.getName()]
+        ]
 
         def circleDashboard = new CircleDashboard(registeredUser: authenticatedUser(), circle: circle)
 
-        return [user: authenticatedUser(), dashboard: circleDashboard]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), dashboard: circleDashboard]
     }
 }
