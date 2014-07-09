@@ -32,10 +32,13 @@ class RegisteredUserController extends RestrictedController {
             return withoutPermitions()
         }
 
+        def breadcrumb = [
+                [name: message(code: "com.billmate.user.profile")]
+        ]
         def registeredUser = RegisteredUser.findById(id)
         def circles = registeredUser.getCircles()
 
-        return [user: authenticatedUser(), registeredUser: registeredUser, circles: circles]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), registeredUser: registeredUser, circles: circles]
     }
 
     def updateProperty(Long id) {
@@ -104,7 +107,13 @@ class RegisteredUserController extends RestrictedController {
     }
 
     def history(Long id) {
+        if (id != authenticatedUser().getId()) {
+            return withoutPermitions()
+        }
 
+        def breadcrumb = [
+                [name: message(code: "com.billmate.sidebar.history")]
+        ]
         def registeredUser = RegisteredUser.findById(id)
         def page = params.page && ((String) params.page).isInteger() ? Integer.parseInt(params.page) : 0
         def size = params.size && ((String) params.size).isInteger() ? Integer.parseInt(params.size) : 0
@@ -144,6 +153,6 @@ class RegisteredUserController extends RestrictedController {
             return
         }
 
-        return [user: registeredUser, history: userHistory]
+        return [breadcrumb: breadcrumb, user: registeredUser, history: userHistory]
     }
 }

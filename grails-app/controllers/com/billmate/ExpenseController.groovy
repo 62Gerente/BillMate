@@ -12,8 +12,11 @@ class ExpenseController extends RestrictedController {
 
     def show(Long id) {
         def expense = Expense.findById(id)
+        def breadcrumb = [
+                [name: expense.getTitle()]
+        ]
 
-        return [user: authenticatedUser(), expense: expense]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), expense: expense]
     }
 
     def updateProperty(Long id) {

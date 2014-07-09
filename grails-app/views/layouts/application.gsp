@@ -24,6 +24,7 @@
       <div class="page-content">
         <div class="clearfix"></div>
         <div class="content">
+          <g:render template="/shared/breadcrumb" model="[breadcrumb: breadcrumb]"/>
           <g:layoutBody/>
         </div>
       </div>
