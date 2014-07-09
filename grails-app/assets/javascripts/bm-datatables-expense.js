@@ -1,5 +1,3 @@
-/* Set the defaults for DataTables initialisation */
-
 var userLang = navigator.language || navigator.userLanguage;
 if(userLang.indexOf("pt") > -1){
     userLang = 'pt-PT'
@@ -173,7 +171,7 @@ $(document).ready(function() {
             if(textInfo == "")
                 context.empty().append("<i class='fa fa-file-pdf-o' style='opacity:0.3;margin-left:20px'></i>");
             else
-                context.empty().append("<a href='" + "#" + "' style='text-decoration:none;color:inherit;margin-left:20px'><i class='fa fa-file-pdf-o'></i></a>");
+                context.empty().append("<a href='" + "" + "' style='text-decoration:none;color:inherit;margin-left:20px'><i class='fa fa-file-pdf-o'></i></a>");
         }
     }
 
@@ -182,8 +180,6 @@ $(document).ready(function() {
         var receipt = $("#users-debt").find("tr.odd, tr.even");
         var invoiceList = invoice.find("td:nth(5)");
         var receiptList = receipt.find("td:nth(6)");
-        //if(!invoiceList.length) invoiceList = invoice.find("td:nth(3)");
-        //if(!receiptList.length) receiptList = invoice.find("td:nth(4)");
         invoiceList.each(function(index){ propagateRowUpdates($(this)) });
         receiptList.each(function(index){ propagateRowUpdates($(this)) });
 
@@ -284,7 +280,7 @@ $(document).ready(function() {
         },
         bAutoWidth: false,
         "bProcessing": true,
-        "sAjaxSource": "/BillMate/user/teste",
+        "sAjaxSource": "/BillMate/user/list",
         "sAjaxDataProp": "data",
         fnPreDrawCallback: function () {
             if (!responsiveHelper) {
@@ -296,7 +292,7 @@ $(document).ready(function() {
             $(nRow).find("td:nth(5)").click(function(e){
                 e.stopPropagation();
                 if(aData[5] != null)
-                    window.open(aData[5]);
+                    window.open(aData[5],"_blank");
             });
             $(nRow).find("td:nth(6)").click(function(e){
                 e.stopPropagation();

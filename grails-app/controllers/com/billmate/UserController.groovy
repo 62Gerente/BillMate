@@ -35,8 +35,7 @@ class UserController extends RestrictedController {
         return [user: authenticatedUser()]
     }
 
-    //Alterar Query para ir buscar apenas as que ainda estão por pagar
-    def teste(){
+    def list(){
         def list = []
         List<Expense> expenseList = new LinkedList<Expense>()
         User user = User.findById(3);
