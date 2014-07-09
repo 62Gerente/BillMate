@@ -29,7 +29,6 @@ class UserController extends RestrictedController {
     }
 
     def calendarEvents(Long id){
-
         RegisteredUser registeredUser = RegisteredUser.findById(id)
 
         return ['user': registeredUser]
