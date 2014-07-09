@@ -60,6 +60,7 @@ $(".upcoming-expense-form :submit").on('click', function (event) {
                     form.closest(".upcoming-regular-expense").remove();
                 }
                 alert.get(0).lastChild.nodeValue = data.message;
+                window.location.reload();
             },
             error: function () {
                 alert.removeClass("alert-success").addClass("alert-danger");

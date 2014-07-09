@@ -47,7 +47,7 @@
                                         <g:message code="com.billmate.regularExpense.cancel" default="Cancel expense" />
                                     </g:link>
                                 </li>
-                                <li><a href="#"><g:message code="com.billmate.regularExpense.settings" default="Settings" /></a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#regularExpenseEditModal" class="regular-expense-advanced-options"><g:message code="com.billmate.regularExpense.advancedOptions" default="Advanced options" /></a></li>
                             </ul>
                         </div>
                     </div>

@@ -209,7 +209,7 @@ $(document).ready(function() {
                     status.addClass(data.class);
                     status.find("div").text(data.code);
                     if(!data.error){
-                        status.delay();
+                        status.delay(1500);
                         window.location.reload();
                     }
                 },

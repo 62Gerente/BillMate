@@ -80,8 +80,8 @@ class Expense {
         withTransaction { status ->
             try {
                 regularExpense.postpone()
-                regularExpense.save(flush: true, failOnError: true)
                 Expense expense = save(flush: true, failOnError: true)
+                regularExpense.save(flush: true, failOnError: true)
 
                 for(String str : listUsers){
                     User user = User.findById(Long.parseLong(str))

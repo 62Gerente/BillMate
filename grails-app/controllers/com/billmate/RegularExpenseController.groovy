@@ -22,9 +22,8 @@ class RegularExpenseController extends RestrictedController{
             List<String> listValuesUsers = params.getList("listValuesUsers[]")
 
             RegularExpense regularExpense = setValuesRegularExpense(params)
-            regularExpense.addFriendsAndValues(listOfFriends, listValuesUsers)
 
-            if (!regularExpense.save()) {
+            if (!regularExpense.create(listOfFriends, listValuesUsers)) {
                 response = [
                         'error': true,
                         'code': message(code: "com.billmate.expense.save.insuccess"),
@@ -43,11 +42,11 @@ class RegularExpenseController extends RestrictedController{
         render response as JSON
     }
 
-    def static extractInts( String input ) {
+    def extractInts( String input ) {
         input.findAll( /\d+/ )*.toInteger()
     }
 
-    private static RegularExpense setValuesRegularExpense(params){
+    private RegularExpense setValuesRegularExpense(params){
         RegularExpense regularExpense = new RegularExpense()
 
         regularExpense.setTitle(params.name)

@@ -72,11 +72,26 @@ class RegularExpense {
         }
     }
 
-    def addFriendsAndValues(List<String> listOfFriends, List<String> listValuesUsers){
-        User user
-        for(String str : listOfFriends){
-            user = User.findById(Long.parseLong(str))
-            this.addToAssignedUsers(user)
+    def create(List<String> idsUsers, List<Double> value){
+        boolean result = false;
+        int position = 0
+        withTransaction {status ->
+            try{
+                RegularExpense regularExpense = save(flush: true, failOnError: true)
+                regularExpense.postpone()
+                for(String str : idsUsers){
+                    User user = User.findById(Long.parseLong(str))
+                    Debt debt = new Debt(value: value[position], percentage: 20, user: user, regularExpense: regularExpense).save()
+                    this.addToAssignedUsers(user)
+                    position++
+                }
+                result = true;
+            }
+            catch(Exception e){
+                result = false
+                status.setRollbackOnly()
+            }
         }
+        return result;
     }
 }

@@ -4,10 +4,10 @@ $(".confirm-payments-form :submit").on('click', function (event) {
     var widget = form.closest(".confirm-payments-widget");
     var submit = form.find("button[type=submit]");
     var action = form.attr('action');
-    var alert = $(".col8-alert");
+    var alert = ($(".col8-alert"));
     var trs = form.find('input[value]:checkbox:checked').closest('.single-payment');
     
-    submitAndAlert(trs, form, submit, action, form.serialize(), alert);
+    submitAndAlert(trs, form, submit, action, form.serialize(), alert, true);
 });
 
 $(".submit-cancel-payments-form").on('click', function (event) {
@@ -59,7 +59,7 @@ $(".submit-confirm-selected-payments, .submit-cancel-selected-payments").on('cli
     submitAndAlert(trs, widget, link, url, data, alert);
 });
 
-function submitAndAlert(_remove, _block, _link, _url, _data, _alert, _rmWidget, _rmForms){
+function submitAndAlert(_remove, _block, _link, _url, _data, _alert, _rmWidget, _rmForms, _reload){
     _link.prop("disabled", true);
     $.ajax({
         url: _url,
@@ -80,6 +80,9 @@ function submitAndAlert(_remove, _block, _link, _url, _data, _alert, _rmWidget, 
                 $(".confirm-payments-widget").not(":has('.confirm-payments-form')").remove();
             }
             _alert.get(0).lastChild.nodeValue = data.message;
+            /*if (_reload === true){
+                window.location.reload()
+            }*/
         },
         error: function () {
             _alert.removeClass("alert-success").addClass("alert-danger");

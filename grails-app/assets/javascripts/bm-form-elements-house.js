@@ -105,7 +105,7 @@ $(document).ready(function(){
                     if (data.error === false) {
                         form.find(".houseName").empty();
                         form.find(".houseDescription").empty();
-                        form.delay(2000);
+                        form.delay(1500);
                         window.location.reload();
                     }
                 },
