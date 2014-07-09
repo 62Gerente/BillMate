@@ -32,32 +32,6 @@ class SessionController extends BaseController {
         return redirect(controller: 'session', action: 'create')
     }
 
-
-    def saveMobile(){
-        if(!checkRequiredParams()){ return }
-
-        def user = User.findWhere(email: params['email'])
-
-        def response = []
-        if (user) {
-            def registeredUser = RegisteredUser.findWhere(user: user)
-
-            if (registeredUser && registeredUser.password == new Sha256Hash(params['password']).toHex()) {
-                session.user = registeredUser
-                response = [
-                        'message' : message("com.billmate.session.save.success"),
-                        'error' : true
-                ]
-            }
-        }else{
-            response = [
-                    'message' : message("com.billmate.session.save.failure"),
-                    'error' : false
-            ]
-        }
-        render response as JSON
-    }
-
     def delete = {
         session.user = null
         return redirect(controller: 'session', action: 'create')
