@@ -1,0 +1,37 @@
+.btn-create-circle-sidebar{
+    background: none;
+    border: 0;
+    margin-top: -5px;
+}
+
+.add-more-friends-collective input,
+.add-more-friends input,
+.houseForm .friendsHome,
+.houseForm .expenseType,
+.collectiveForm .friendsCollective,
+.collectiveForm .expenseType{
+    width:100%;
+}
+
+.houseForm .add-more-friends,
+.collectiveForm .add-more-friends-collective{
+    display: none;
+}
+
+.addNewReferredUserCollective,
+.addNewReferredUser{
+    height:36px;
+}
+
+.add-more-friends-collective .divAddNewReferredUserCollective,
+.add-more-friends .divAddNewReferredUser{
+    padding-left: 0;
+}
+
+ul#home-sidebar-menu .title{
+    font-size: 13px;
+}
+
+ul#home-sidebar-menu li > a{
+    padding: 3.5px 31px 11.5px 31px;
+}

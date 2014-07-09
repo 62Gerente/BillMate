@@ -119,3 +119,34 @@ log4j = {
            'org.hibernate',
            'net.sf.ehcache.hibernate'
 }
+
+fileuploader {
+    avatar {
+        maxSize = 1024 * 1024 * 3
+        allowedExtensions = ["jpg","jpeg","gif","png"]
+        path = "/tmp/avatars/"
+    }
+    document {
+        maxSize = 1000 * 1024 * 5
+        allowedExtensions = ["doc", "docx", "pdf", "rtf"]
+        path = "/tmp/documents/"
+    }
+}
+
+grails.plugins.localeConfiguration.supportedLocales = [new Locale("pt","PT")]
+grails.plugins.localeConfiguration.defaultLocale = new Locale("pt","PT")
+
+
+// Email Configuration
+grails {
+    mail {
+        host = "localhost"
+        //port = 465
+        //username = "youracount@gmail.com"
+        //password = "yourpassword"
+        //props = ["mail.smtp.auth":"true",
+        //         "mail.smtp.socketFactory.port":"465",
+        //         "mail.smtp.socketFactory.class":"javax.net.ssl.SSLSocketFactory",
+        //         "mail.smtp.socketFactory.fallback":"false"]
+    }
+}
