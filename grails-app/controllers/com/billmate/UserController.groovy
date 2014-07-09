@@ -28,10 +28,14 @@ class UserController extends RestrictedController {
         render response as JSON
     }
 
-    def calendarEvents(Long id){
+    def calendar(Long id){
+        def breadcrumb = [
+                [name: message(code: "com.billmate.sidebar.calendar")]
+        ]
+
         RegisteredUser registeredUser = RegisteredUser.findById(id)
 
-        return ['user': registeredUser]
+        return [breadcrumb: breadcrumb, 'user': registeredUser]
     }
 
     def events(Long id, Long date){
