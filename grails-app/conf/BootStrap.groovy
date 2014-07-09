@@ -267,18 +267,6 @@ class BootStrap {
             new Debt(expense: expense1, user: user1, percentage: 20, value: 10).save()
             new Debt(expense: expense2, user: user1, percentage: 20, value: 20).save()
             new Debt(expense: expense3, user: user1, percentage: 20, value: 30).save()
-            new Debt(expense: expense1, user: user1, percentage: 20, value: 10).save()
-            new Debt(expense: expense2, user: user1, percentage: 20, value: 20).save()
-            new Debt(expense: expense3, user: user1, percentage: 20, value: 30).save()
-            new Debt(expense: expense1, user: user1, percentage: 20, value: 10).save()
-            new Debt(expense: expense2, user: user1, percentage: 20, value: 20).save()
-            new Debt(expense: expense3, user: user1, percentage: 20, value: 30).save()
-            new Debt(expense: expense1, user: user1, percentage: 20, value: 10).save()
-            new Debt(expense: expense2, user: user1, percentage: 20, value: 20).save()
-            new Debt(expense: expense3, user: user1, percentage: 20, value: 30).save()
-            new Debt(expense: expense1, user: user1, percentage: 20, value: 10).save()
-            new Debt(expense: expense2, user: user1, percentage: 20, value: 20).save()
-            new Debt(expense: expense3, user: user1, percentage: 20, value: 30).save()
         }
     }
 
