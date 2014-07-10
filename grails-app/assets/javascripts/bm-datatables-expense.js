@@ -211,7 +211,6 @@ $(document).ready(function() {
     }
 
     var tableElement = $('#users-debt');
-var idx = "/BillMate/user/list/" + $("#identifier-user-expense").val();
     tableElement.dataTable( {
         "sDom": "<'row'<'col-md-6'l T><'col-md-6'f>r>t<'row'<'col-md-12'p i>>",
         "oTableTools": {
@@ -280,7 +279,7 @@ var idx = "/BillMate/user/list/" + $("#identifier-user-expense").val();
         },
         bAutoWidth: false,
         "bProcessing": true,
-        "sAjaxSource": "/BillMate/user/list/" + $("#identifier-user-expense").val(),
+        "sAjaxSource": "/BillMate/expense/list/" + $("#identifier-user-expense").val(),
         "sAjaxDataProp": "data",
         fnPreDrawCallback: function () {
             if (!responsiveHelper) {

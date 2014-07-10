@@ -14,7 +14,7 @@
         <div class="grid simple ">
             <div class="grid-title">
                 <h4>
-                    <span class="semi-bold"><g:message code="com.billmate.expense.default.title" default="MY EXPENSES" /></span>
+                    <span class="semi-bold"><g:message code="com.billmate.expense.default.title" default="My EXPENSES" /></span>
                 </h4>
             </div>
 
@@ -23,14 +23,14 @@
                 <table class="table table-hover table-condensed" id="users-debt">
                     <thead>
                     <tr>
-                        <th><g:message code="com.billmate.expense.default.name" default="NAME" /></th>
-                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.responsible" default="RESPONSIBLE" /></th>
-                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.circle" default="CIRCLE" /></th>
-                        <th><g:message code="com.billmate.expense.default.payvalue" default="PAID VALUE" /></th>
-                        <th><g:message code="com.billmate.expense.default.total" default="TOTAL" /></th>
-                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.invoice" default="INVOICE" /></th>
-                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.receipt" default="RECEIPT" /></th>
-                        <th><g:message code="com.billmate.expense.default.paid" default="PAID" /></th>
+                        <th><g:message code="com.billmate.expense.default.name" default="Name" /></th>
+                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.responsible" default="Responsible" /></th>
+                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.circle" default="Circle" /></th>
+                        <th><g:message code="com.billmate.expense.default.payvalue" default="Paid value" /></th>
+                        <th><g:message code="com.billmate.expense.default.total" default="Total" /></th>
+                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.invoice" default="Invoice" /></th>
+                        <th data-hide="phone,tablet"><g:message code="com.billmate.expense.default.receipt" default="Receipt" /></th>
+                        <th><g:message code="com.billmate.expense.default.paid" default="Paid" /></th>
                     </tr>
                     </thead>
                 </table>

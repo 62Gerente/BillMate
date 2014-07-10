@@ -114,4 +114,21 @@ class ExpenseController extends RestrictedController {
             return redirect(controller: 'expense', action: 'show', id: expense.getId())
         }
     }
+
+    def list(Long id){
+        def list = []
+        User user = User.findById(RegisteredUser.findById(id).getUserId());
+        Debt.findAllByUser(user).each {
+            Expense expense = it.getExpense()
+            list.add([expense.getTitle(), expense.getResponsible().getName(), expense.getCircle().getName(), expense.amountPaidBy(user.getId()), expense.getValue(),
+                      expense.getInvoice()?.getPath(), expense.getReceipt()?.getPath(), expense.isResolved(), expense.getId(),
+                      expense.getExpenseType().getCssClass(), expense.getResponsible().getPhotoOrDefault(), expense.getCircle().getCssClass(),
+                      expense.debtOf(user.getId()).getValue(), expense.amountPaid()
+            ]);
+        }
+
+        def response = ['data': list]
+
+        render response as JSON
+    }
 }
