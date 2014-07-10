@@ -45,3 +45,4 @@
 //= require bm-form-elements-expense.js
 //= require bm-form-elements-regularExpense.js
 //= require bm-form-elements-newRegularExpense.js
+//= require bm-datatables-circle-expense.js
