@@ -272,7 +272,8 @@ class RegisteredUser {
                         paymentNotification.secureSave()
                     }
                 }
-            } catch (Exception e) {
+            } catch (Exception eCancelPayment) {
+                eConfirmPayment.printStackTrace()
                 status.setRollbackOnly();
                 return false
             }
