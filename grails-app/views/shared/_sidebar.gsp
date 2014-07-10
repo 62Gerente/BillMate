@@ -110,8 +110,7 @@
 <a href="#" class="scrollup"></a>
 <g:render template="/regularExpense/modal/create" model="[registeredUser: user.getId(), user: user.getUserId()]"/>
 <div class="footer-widget">
-    <!--<button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#expenseCreateModal">-->
-    <button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#newRegularExpenseCreateModal">
+    <button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#expenseCreateModal">
         <g:message code="com.billmate.sidebar.addDebt" default="Add Debt"/>
     </button>
 </div>

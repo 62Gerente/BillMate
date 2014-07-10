@@ -15,6 +15,7 @@
             </div>
             <div class="modal-body">
                 <div class="simple-options-form-newRegularExpense">
+                    <input type="hidden" id="mask-periodicity" value="REPETIR \APÓS 9 \ANO, 9 MÊS E 9 DIA"/>
                     <input type="hidden" value="${registeredUser}"/>
                     <input type="hidden" value="${user}"/>
                     <input type="hidden" id="users-link-newRegularExpense" value="<g:createLink controller="circle" action="assignedUsers"/>" />

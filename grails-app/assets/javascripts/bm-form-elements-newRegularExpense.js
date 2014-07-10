@@ -7,7 +7,12 @@ $(document).ready(function() {
     var hasCircles = false;
     var hasExpenseTypes = false;
 
-    $(".periodicity").mask("REPETIR \APÓS 9 \ANO, 9 MÊS E 9 DIA");
+    var userLang = navigator.language || navigator.userLanguage;
+    if(userLang.indexOf("pt") > -1){
+        $(".periodicity").mask("REPETIR \APÓS 9 \ANO, 9 MÊS E 9 DIA");
+    }else{
+        $(".periodicity").mask("REPEAT \AFTER 9 YE\AR, 9 MONTH E 9 D\AY");
+    }
 
     //Next 3 functions format display results
     function formatExpenseTypesNewRegularExpense(state) {
