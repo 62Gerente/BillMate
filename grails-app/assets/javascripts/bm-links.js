@@ -13,4 +13,9 @@ $(document).ready(function(){
         var re = '(\\d)(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\.' : '$') + ')';
         return this.toFixed(Math.max(0, ~~n)).replace(new RegExp(re, 'g'), '$1,');
     };
+
+    $(".upcoming-regular-expense .regular-expense-advanced-options").click(function(){
+        $("#btn-advanced-options-regularExpense").trigger("click");
+    });
+
 });

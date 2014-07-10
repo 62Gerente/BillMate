@@ -112,4 +112,5 @@
     <button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#expenseCreateModal">
         <g:message code="com.billmate.sidebar.addDebt" default="Add Debt"/>
     </button>
+    <button type="button" id="btn-advanced-options-regularExpense" class="btn btn-primary btn-cons hidden" data-toggle="modal" data-target="#regularExpenseCreateModal"></button>
 </div>

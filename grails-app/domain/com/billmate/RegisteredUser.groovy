@@ -341,7 +341,7 @@ class RegisteredUser {
         CircleType.getCollectiveExpenseTypes()
     }
 
-    public List<Action> latestEvents() {
+    public List<Action> latestEvents(){
         user.latestEvents();
     }
 

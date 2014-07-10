@@ -4,9 +4,24 @@ import grails.converters.JSON
 
 class CircleController extends RestrictedController  {
 
-    static allowedMethods = [assignedUsers: "POST", show: "POST"]
+    static allowedMethods = [circles: "POST", assignedUsers: "POST", show: "POST"]
 
     def beforeInterceptor = [action: this.&checkSession]
+
+    def circles(){
+        Set<Object> circles = new HashSet<>()
+        long id = Long.parseLong(params.id)
+        String params = params.q
+        Set<Circle> circleSet = RegisteredUser.findById(id).getCircles()
+
+        circleSet.each { if(it.getName().toUpperCase().contains(params.toUpperCase())){
+            circles.add([id: it.getId(), icon: it.getCssClass(), name: it.getName()])
+        }}
+
+        def response = [ 'data': circles ]
+
+        render response as JSON
+    }
 
     def assignedUsers(){
         Set<Object> circleFriends = new HashSet<>()
@@ -31,7 +46,6 @@ class CircleController extends RestrictedController  {
         String params = params.q
         Set<ExpenseType> expenseTypes = new HashSet<ExpenseType>()
         Circle.findById(idCircle).getExpenseTypes().each { if(it.getName().toUpperCase().contains(params.toUpperCase())) expenseTypes.add(it) }
-
         def response = [ 'data': expenseTypes ]
 
         render response as JSON
