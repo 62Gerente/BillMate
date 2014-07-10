@@ -11,29 +11,41 @@ class CircleHistory {
     Long userId
     Long actionTypeId
 
+    private importantActionsTypes = [
+            ActionTypeEnum.addExpenseCircle,
+            ActionTypeEnum.addRegularExpenseCircle,
+            ActionTypeEnum.addUserCircle,
+            ActionTypeEnum.addPaymentExpense,
+            ActionTypeEnum.removedFromCircle,
+            ActionTypeEnum.addCollective,
+            ActionTypeEnum.addHouse
+    ]
+
+    private importantActions = ActionType.findAllByTypeInList(importantActionsTypes)
+
     public List<ActionType> getActionTypes() {
-        ActionType.findAllByTypeNotEqual(ActionTypeEnum.signUp.toString())
+        ActionType.findAllByTypeInList(importantActionsTypes)
     }
 
     public List<Action> getRealizedActions() {
-        if(this.actions){
+        if (this.actions) {
             this.actions
         } else {
             def resultSize = Math.min(size > 20 ? size : 20, 100)
             def resultOffset = page < 0 ? 0 : (page - 1) * resultSize
             def registeredUser = RegisteredUser.findById(userId)
-            def actionType = ActionType.findById(actionTypeId)
+            def actionType = ActionType.findByTypeInListAndId(importantActionsTypes, actionTypeId)
             def actions
 
             if (registeredUser && actionType) {
                 actions = Action.findAllByCircleAndActorAndActionType(circle, registeredUser, actionType, [max: resultSize, offset: resultOffset, sort: "actionDate", order: "desc"])
             } else {
                 if (registeredUser) {
-                    actions = Action.findAllByCircleAndActor(circle, registeredUser, [max: resultSize, offset: resultOffset, sort: "actionDate", order: "desc"])
+                    actions = Action.findAllByCircleAndActorAndActionTypeInList(circle, registeredUser, importantActions, [max: resultSize, offset: resultOffset, sort: "actionDate", order: "desc"])
                 } else if (actionType) {
                     actions = Action.findAllByCircleAndActionType(circle, actionType, [max: resultSize, offset: resultOffset, sort: "actionDate", order: "desc"])
                 } else {
-                    actions = Action.findAllByCircle(circle, [max: resultSize, offset: resultOffset, sort: "actionDate", order: "desc"])
+                    actions = Action.findAllByCircleAndActionTypeInList(circle, importantActions, [max: resultSize, offset: resultOffset, sort: "actionDate", order: "desc"])
                 }
             }
 
