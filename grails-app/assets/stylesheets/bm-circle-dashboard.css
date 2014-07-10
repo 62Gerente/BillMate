@@ -47,8 +47,8 @@
 }
 
 .td-settings{
-  width: 10px !important; 
-  padding-left: 0 !important; 
+  width: 10px !important;
+  padding-left: 0 !important;
   padding-right: 0 !important;
 }
 
@@ -64,4 +64,18 @@
 
 .dropdown-toggle{
   cursor: pointer;
+}
+
+#ToolTables_circle-datatable_0{
+    height: 35px;
+}
+
+#circle-datatable tbody td .checkbox label::after{
+    left: 3px;
+    top: 1px;
+}
+
+#circle-datatable tbody td:hover{
+    cursor: pointer;
+    cursor: hand;
 }
