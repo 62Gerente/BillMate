@@ -240,14 +240,22 @@ $(document).ready(function() {
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
-                    return "<span class='text-danger'>" + full[3].toFixed(2) + " € </span> / " + full[12].toFixed(2) + " €";
+                    var text = 'text-danger';
+                    if(full[3] == full[12]){
+                        text = 'text-success';
+                    }
+                    return "<span class=" + text + ">" + full[3].toFixed(2) + " € </span> / " + full[12].toFixed(2) + " €";
                 },
                 'aTargets': [ 3 ]
             },
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
-                    return "<span class='text-danger'>" + full[13].toFixed(2) + " € </span> / " + full[4].toFixed(2) + " €";
+                    var text = 'text-danger';
+                    if(full[13] == full[4]){
+                        text = 'text-success';
+                    }
+                    return "<span class=" + text + ">" + full[13].toFixed(2) + " € </span> / " + full[4].toFixed(2) + " €";
                 },
                 'aTargets': [ 4 ]
             },
