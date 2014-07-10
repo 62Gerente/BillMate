@@ -228,25 +228,22 @@ $(document).ready(function() {
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
-                    var checks = "<i class='fa fa-check text-success m-l-15'></i>";
-                    if(full[6] == false){
-                        checks = "<i class='fa fa-times m-l-15'></i>"
+                    var text = 'text-danger';
+                    if(full[2] == full[11]){
+                        text = 'text-success';
                     }
-                    return checks
-                },
-                'aTargets': [ 6 ]
-            },
-            {
-                "mData": null ,
-                "mRender" : function ( data, type, full ) {
-                    return "<span class='text-danger'>" + full[2].toFixed(2) + " € </span> / " + full[11].toFixed(2) + " €";
+                    return "<span class=" + text + ">" + full[2].toFixed(2) + " € </span> / " + full[11].toFixed(2) + " €";
                 },
                 'aTargets': [ 2 ]
             },
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
-                    return "<span class='text-danger'>" + full[12].toFixed(2) + " € </span> / " + full[3].toFixed(2) + " €";
+                    var text = 'text-danger';
+                    if(full[12] == full[3]){
+                        text = 'text-success';
+                    }
+                    return "<span class='" + text + "'>" + full[12].toFixed(2) + " € </span> / " + full[3].toFixed(2) + " €";
                 },
                 'aTargets': [ 3 ]
             },
@@ -264,7 +261,7 @@ $(document).ready(function() {
                 },
                 'aTargets': [ 1 ]
             },
-            { 'bSortable': false, 'aTargets': [ 4,5,6 ] }
+            { 'bSortable': false, 'aTargets': [ 4,5 ] }
         ],
         "aaSorting": [[ 0, "asc" ]],
         "oLanguage": {
