@@ -31,10 +31,9 @@ class ExpenseController extends RestrictedController {
 
             Expense expense = setValuesExpenseType(regularExpense)
 
-            if (!expense.addUsersAndValues(listOfFriends, listValuesUsers)) {
+            if (!expense.create(listOfFriends, listValuesUsers)) {
                 response = [
                         'error': true,
-                        'data': null,
                         'code': message(code: "com.billmate.expense.save.insuccess"),
                         'class': "alert alert-error form-modal-house-error"
                 ]

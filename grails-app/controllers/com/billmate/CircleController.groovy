@@ -27,11 +27,10 @@ class CircleController extends RestrictedController  {
         render response as JSON
     }
 
-    def Set<ExpenseType> expenseType(){
-        Long id = Long.parseLong(params.idCircle)
+    def Set<ExpenseType> expenseTypes(Long idCircle){
         String params = params.q
         Set<ExpenseType> expenseTypes = new HashSet<ExpenseType>()
-        Circle.findById(id).getExpenseTypes().each { if(it.getName().toUpperCase().contains(params.toUpperCase())) expenseTypes.add(it) }
+        Circle.findById(idCircle).getExpenseTypes().each { if(it.getName().toUpperCase().contains(params.toUpperCase())) expenseTypes.add(it) }
 
         def response = [ 'data': expenseTypes ]
 

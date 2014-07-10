@@ -102,9 +102,8 @@ class RegisteredUserController extends RestrictedController {
         uFile.save()
     }
 
-    def circles(){
+    def circles(Long id){
         Set<Object> circles = new HashSet<>()
-        long id = Long.parseLong(params.id)
         String params = params.q
         Set<Circle> circleSet = RegisteredUser.findById(id).getCircles()
 

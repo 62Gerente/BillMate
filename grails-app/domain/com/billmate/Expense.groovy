@@ -181,7 +181,7 @@ class Expense {
         payments.findAll{ !it.getValidationDate() && !it.getIsValidated() }
     }
 
-    public boolean addUsersAndValues(List<String> idsUsers, List<Double> value){
+    public boolean create(List<String> idsUsers, List<Double> value){
         boolean result = false;
         int position = 0
         withTransaction {status ->
