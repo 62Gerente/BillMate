@@ -22,7 +22,7 @@ class RegularExpense {
 
     Date receptionBeginDate = new Date()
     Date receptionEndDate
-    Date paymentBeginDate
+    Date paymentBeginDate = new Date()
     Date paymentEndDate
 
     Integer intervalDays = 0
@@ -48,7 +48,7 @@ class RegularExpense {
 
         receptionBeginDate nullable: false
         receptionEndDate nullable: true
-        paymentBeginDate nullable: true
+        paymentBeginDate nullable: false
         paymentEndDate nullable: true
 
         intervalDays nullable: false, min: 0
@@ -70,5 +70,28 @@ class RegularExpense {
         use(TimeCategory) {
             receptionBeginDate = receptionBeginDate + intervalDays.days + intervalMonths.months + intervalYears.years
         }
+    }
+
+    def create(List<String> idsUsers, List<Double> value){
+        boolean result = false;
+        int position = 0
+        withTransaction {status ->
+            try{
+                RegularExpense regularExpense = save(flush: true, failOnError: true)
+                regularExpense.postpone()
+                for(String str : idsUsers){
+                    User user = User.findById(Long.parseLong(str))
+                    Debt debt = new Debt(value: value[position], percentage: 20, user: user, regularExpense: regularExpense).save()
+                    this.addToAssignedUsers(user)
+                    position++
+                }
+                result = true;
+            }
+            catch(Exception e){
+                result = false
+                status.setRollbackOnly()
+            }
+        }
+        return result;
     }
 }

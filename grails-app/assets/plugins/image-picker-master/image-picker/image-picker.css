@@ -1,0 +1,58 @@
+ul.thumbnails.image_picker_selector {
+    overflow: auto;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+}
+ul.thumbnails.image_picker_selector ul {
+    overflow: auto;
+    list-style-image: none;
+    list-style-position: outside;
+    list-style-type: none;
+}
+ul.thumbnails.image_picker_selector li.group_title {
+    float: none; }
+ul.thumbnails.image_picker_selector li {
+    float: left;
+
+}
+ul.thumbnails.image_picker_selector li .thumbnail {
+    border: 1px solid #dddddd;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    height: 112px;
+}
+ul.thumbnails.image_picker_selector li .thumbnail img {
+    width: 80px;
+    height: 80px;
+    -webkit-user-drag: none;
+    cursor: pointer;
+    cursor: hand;
+}
+
+ul.thumbnails.image_picker_selector li .thumbnail p{
+    font-size: 12px;
+    padding-top: 5px;
+    text-align: center;
+    vertical-align: middle;
+}
+
+ul.thumbnails.image_picker_selector li .thumbnail.selected p{
+    color: #ffffff;
+}
+
+ul.thumbnails.image_picker_selector li .thumbnail.selected {
+    background: #0088cc; }
+.thumbnails.image_picker_selector li .thumbnail{
+    margin-bottom: 0px;
+}
+
+ul.thumbnails.image_picker_selector{
+    padding-left: 0px;
+}
+
+.thumbnails.image_picker_selector > li{
+    padding-right: 3px;
+    padding-left: 0px;
+}

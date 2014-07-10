@@ -302,15 +302,11 @@ class RegisteredUser {
         getTotalWhoOweMe() - getTotalWhoIOwe();
     }
 
-    public static Set<ExpenseType> getExpenseTypeByHouse(){
-        CircleType.getExpenseTypeByHouse()
-    }
-
-    public static Set<ExpenseType> getExpenseTypeByCollective(){
-        CircleType.getExpenseTypeByCollective()
-    }
-
     public List<Action> latestEvents(){
         user.latestEvents();
+    }
+
+    public Set<Circle> getAllCircles(){
+        return user.getCircles()
     }
 }
