@@ -14,7 +14,7 @@
     <div class="row p-t-10">
         <ul class="circle-utilities">
             <li>
-                <a href="#"><div>
+                <a href="${createLink([controller: "Circle", action: "history", id: circle.getId()])}"><div>
                     <i class="fa fa-clock-o"></i> <g:message code="com.billmate.circleDashboard.actions.history" default="Actions history"/>
                 </div></a>
             </li>
