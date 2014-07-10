@@ -81,6 +81,12 @@ class Circle {
         registeredUsers
     }
 
+    public Set<RegisteredUser> getRegisteredUsers(){
+        Set<RegisteredUser> registeredUsers = new HashSet<>()
+        getUsers().each{ if(it.getRegisteredUser()) registeredUsers.add(it.getRegisteredUser()) }
+        registeredUsers
+    }
+
     public void addExpensesByIDSOrName(Set<String> expenseSet){
         for (String expense : expenseSet) {
             ExpenseType expenseType = (expense.isLong()) ? ExpenseType.findById(Long.parseLong(expense)) : null

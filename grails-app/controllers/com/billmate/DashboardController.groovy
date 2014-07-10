@@ -1,7 +1,5 @@
 package com.billmate
 
-import org.h2.engine.Session
-
 class DashboardController extends RestrictedController {
     static layout = "application"
     static allowedMethods = [user: "GET"]
