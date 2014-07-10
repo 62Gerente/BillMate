@@ -186,13 +186,14 @@ class RegisteredUser {
     public boolean markNotificationsAsRead() {
         Set<SystemNotification> notification = systemNotifications.findAll { !it.getIsRead() }
 
-        SystemNotification.withTransaction { status ->
+        withTransaction { status ->
             try {
                 notification.each {
                     it.setIsRead(true)
                     it.persist()
                 }
-            } catch (Exception e) {
+            } catch (Exception eMarkNotificationAsRead) {
+                eMarkNotificationAsRead.printStackTrace()
                 status.setRollbackOnly();
                 return false
             }
@@ -231,18 +232,18 @@ class RegisteredUser {
                     def circle = expense.getCircle()
 
                     // Save action and notification
-                    def paymentAction = new Action(actionType: ActionType.findWhere(type: 'addPaymentExpense'), actor: sessionUser, user: responsible.getUser(), payment: it, circle: circle, expense: expense)
+                    def paymentAction = new Action(actionType: ActionType.findWhere(type: 'addPaymentExpense'), actor: it.getUser().getRegisteredUser(), user: responsible.getUser(), payment: it, circle: circle, expense: expense)
                     paymentAction.save()
 
-                    def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: expense.getResponsible())
+                    //def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: expense.getResponsible())
+                    //paymentNotification.secureSave()
+
+                    def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: it.getUser().getRegisteredUser())
                     paymentNotification.secureSave()
 
                     // Save action and notification
-                    paymentAction = new Action(actionType: ActionType.findWhere(type: 'receivedPaymentExpense'), actor: responsible, user: sessionUser.getUser(), payment: it, circle: circle, expense: expense)
+                    paymentAction = new Action(actionType: ActionType.findWhere(type: 'receivedPaymentExpense'), actor: responsible, user: it.getUser(), payment: it, circle: circle, expense: expense)
                     paymentAction.save()
-
-                    paymentNotification = new SystemNotification(action: paymentAction, registeredUser: sessionUser)
-                    paymentNotification.secureSave()
                 }
             } catch (Exception eConfirmPayment) {
                 eConfirmPayment.printStackTrace()
