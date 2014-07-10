@@ -32,6 +32,7 @@ function listAction(list, action){
                 '</ul>';
             break;
         case "addPaymentExpense":
+        case "receivePaymentExpense":
             bottomWrapper = '<span class="muted dark-text">' +
                                 action.expenseText +
                             ':</span> ' +

@@ -61,7 +61,7 @@ class SystemNotification{
         action.getExpense()
     }
 
-    public Expense getPayment(){
+    public Payment getPayment(){
         action.getPayment()
     }
 
