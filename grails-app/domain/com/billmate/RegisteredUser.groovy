@@ -236,6 +236,13 @@ class RegisteredUser {
 
                     def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: expense.getResponsible())
                     paymentNotification.secureSave()
+
+                    // Save action and notification
+                    paymentAction = new Action(actionType: ActionType.findWhere(type: 'receivedPaymentExpense'), actor: responsible, user: sessionUser.getUser(), payment: it, circle: circle, expense: expense)
+                    paymentAction.save()
+
+                    paymentNotification = new SystemNotification(action: paymentAction, registeredUser: sessionUser)
+                    paymentNotification.secureSave()
                 }
             } catch (Exception eConfirmPayment) {
                 eConfirmPayment.printStackTrace()
@@ -261,19 +268,9 @@ class RegisteredUser {
                     def expense = it.getExpense()
                     def payer = it.getDebt().getUser()
                     def circle = expense.getCircle()
-
-                    // Save action and notification
-                    def paymentAction = new Action(actionType: ActionType.findWhere(type: 'cancelPaymentExpense'), actor: sessionUser, user: payer, payment: it, circle: circle, expense: expense)
-                    paymentAction.save()
-
-                    def registeredPayer = payer.getRegisteredUser()
-                    if (registeredPayer) {
-                        def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: registeredPayer)
-                        paymentNotification.secureSave()
-                    }
                 }
             } catch (Exception eCancelPayment) {
-                eConfirmPayment.printStackTrace()
+                eCancelPayment.printStackTrace()
                 status.setRollbackOnly();
                 return false
             }

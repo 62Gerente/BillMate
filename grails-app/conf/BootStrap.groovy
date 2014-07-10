@@ -40,6 +40,18 @@ class BootStrap {
 
             def addCollective = new ActionType(type: ActionTypeEnum.addCollective.toString(), icon: ActionTypeEnum.addCollective.getIcon(), cssClass: ActionTypeEnum.addCollective.getCssClass())
             addCollective.save()
+
+            def addedToCircle = new ActionType(type: ActionTypeEnum.addedToCircle.toString(), icon: ActionTypeEnum.addedToCircle.getIcon(), cssClass: ActionTypeEnum.addedToCircle.getCssClass())
+            addedToCircle.save()
+
+            def receivedPaymentExpense = new ActionType(type: ActionTypeEnum.receivedPaymentExpense.toString(), icon: ActionTypeEnum.receivedPaymentExpense.getIcon(), cssClass: ActionTypeEnum.receivedPaymentExpense.getCssClass())
+            receivedPaymentExpense.save()
+
+            def removedFromCircle = new ActionType(type: ActionTypeEnum.removedFromCircle.toString(), icon: ActionTypeEnum.removedFromCircle.getIcon(), cssClass: ActionTypeEnum.removedFromCircle.getCssClass())
+            removedFromCircle.save()
+
+            def removeUserCircle = new ActionType(type: ActionTypeEnum.removedUserCircle.toString(), icon: ActionTypeEnum.removedUserCircle.getIcon(), cssClass: ActionTypeEnum.removedUserCircle.getCssClass())
+            removeUserCircle.save()
         }
 
         if(User.count() == 0){

@@ -29,9 +29,9 @@ class Payment {
     }
 
     public String toString(){
-        NumberFormat formater = NumberFormat.currencyInstance
-        formater.setCurrency(Currency.getInstance("EUR"))
-        formater.format(value)
+        NumberFormat formatter = NumberFormat.currencyInstance
+        formatter.setCurrency(Currency.getInstance("EUR"))
+        formatter.format(value)
     }
 
     public Expense getExpense(){
