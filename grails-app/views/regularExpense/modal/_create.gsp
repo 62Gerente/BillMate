@@ -118,7 +118,7 @@
                     <div class="row form-row">
                         <div class="col-md-12">
                             <input type="hidden" value="${user}"/>
-                            <input type="text" class="form-control periodicity" placeholder="Periodicidade ( Exemplo: 1 ano, 1 mês e 1 dia = 1a, 1m, 1d)" value=""/>
+                            <input type="text" class="form-control periodicity" placeholder="<g:message code="com.billmate.regularExpense.modal.periodicity" default="Schedule repetitions"/>" value=""/>
                         </div>
                     </div>
                 </div>

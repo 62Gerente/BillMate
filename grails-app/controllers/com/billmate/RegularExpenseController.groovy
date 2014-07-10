@@ -26,14 +26,14 @@ class RegularExpenseController extends RestrictedController{
             if (!regularExpense.create(listOfFriends, listValuesUsers)) {
                 response = [
                         'error': true,
-                        'code': message(code: "com.billmate.expense.save.insuccess"),
+                        'code': message(code: "com.billmate.regularExpense.modal.createdUnsuccessfully"),
                         'class': "alert alert-error form-modal-house-error"
                 ]
             }else{
                 response = [
                         'error': false,
                         'data': regularExpense,
-                        'code': message(code: "com.billmate.expense.save.success"),
+                        'code': message(code: "com.billmate.regularExpense.modal.createdSuccessfully"),
                         'class': "alert alert-success form-modal-house-error"
                 ]
             }
@@ -78,7 +78,7 @@ class RegularExpenseController extends RestrictedController{
 
         def responseData = [
                 'error'  : false,
-                'message': message(code: "com.billmate.expense.success")
+                'message': message(code: "com.billmate.regularExpense.modal.createdSuccessfully")
         ]
 
         Expense expense = new Expense(regularExpense, authenticatedUser(), value: value)
@@ -88,7 +88,7 @@ class RegularExpenseController extends RestrictedController{
             if(expense.getErrors().getErrorCount()){
                 responseData.message = message(error: expense.getErrors().getAllErrors().first())
             }else{
-                responseData.message = message(code: "com.billmate.generic.error.message")
+                responseData.message = message(code: "com.billmate.regularExpense.modal.createdUnsuccessfully")
             }
         }
         render responseData as JSON

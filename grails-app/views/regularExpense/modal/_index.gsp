@@ -9,8 +9,8 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <br>
                 <i class="fa fa-money fa-7x"></i>
-                <h4 id="myModalLabel" class="semi-bold"><g:message code="com.billmate.regularExpense.modal.create" default="Create new regular expense"/></h4>
-                <p class="no-margin"><g:message code="com.billmate.regularExpense.modal.info" default="Fill in fields with information of new regular expense"/></p>
+                <h4 id="myModalLabel" class="semi-bold"><g:message code="com.billmate.regularExpense.modal.create" default="New Expense"/></h4>
+                <p class="no-margin"><g:message code="com.billmate.regularExpense.modal.info" default="Fill in fields with information of the regular expense"/></p>
                 <br>
             </div>
             <div class="modal-body">
@@ -26,12 +26,12 @@
                     <div class="row form-row m-b-10">
                         <div class="col-md-12">
                             <input type="hidden" value="${user}"/>
-                            <input type="hidden" class="custom-multiselect-regularExpense-circle" placeholder="<g:message code="com.billmate.expense.modal.placeholderCircle" default="Circle"/>" style="width:100%" class="select2-offscreen"/>
+                            <input type="hidden" class="custom-multiselect-regularExpense-circle" placeholder="<g:message code="com.billmate.regularExpense.modal.placeholderCircle" default="Circle"/>" style="width:100%" class="select2-offscreen"/>
                         </div>
                     </div>
                     <div class="row form-row m-b-10">
                         <div class="col-md-6">
-                            <input type="hidden" class="custom-multiselect-regularExpense-debt" placeholder="<g:message code="com.billmate.expense.modal.placeholderExpenseType" default="Expense Type"/>" style="width:100%" class="select2-offscreen"/>
+                            <input type="hidden" class="custom-multiselect-regularExpense-debt" placeholder="<g:message code="com.billmate.regularExpense.modal.placeholderExpenseType" default="Expense Type"/>" style="width:100%" class="select2-offscreen"/>
                         </div>
                         <div class="col-md-6">
                             <div class="input-group transparent">
@@ -44,7 +44,7 @@
                     </div>
                     <div class="row form-row">
                         <div class="col-md-12">
-                            <g:textArea name="houseDescription" rows="5" placeholder="${message(code: 'com.billmate.expense.modal.placeholderDescription')}" class="form-control houseDescription"/>
+                            <g:textArea name="houseDescription" rows="5" placeholder="${message(code: 'com.billmate.regularExpense.modal.placeholderDescription')}" class="form-control houseDescription"/>
                         </div>
                     </div>
                 </div>

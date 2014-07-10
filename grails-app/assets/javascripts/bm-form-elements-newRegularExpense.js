@@ -224,18 +224,21 @@ $(document).ready(function() {
         var name = parent.find("div.row:nth(0) input.form-control").val();
         var value = parent.find("div.row:nth(2) input.value-debt").val();
         var description = parent.find("div.row:nth(3) textarea").val();
+        var dates = $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-newRegularExpense");
+        var periodicity = dates.find("input:nth(7)").val();
+        var selectorPeriodicity = dates.find(" > div").last();
 
         if(name == ""){ hasErrors = true; doAlertInput(parent.find("div.row:nth(0)"),parent.find("div.row:nth(0) input"),"error-control"); }
-        if(!hasCircles){ hasErrors = true; doAlertSelect(parent.find("div.row:nth(1) .select2-container"),"select2-container-error",".custom-multiselect-expense-circle"); }
-        if(!hasExpenseTypes){ hasErrors = true; doAlertSelect(parent.find("div.row:nth(2) .select2-container"),"select2-container-error",".custom-multiselect-expense-debt"); }
+        if(!hasCircles){ hasErrors = true; doAlertSelect(parent.find("div.row:nth(1) .select2-container"),"select2-container-error",".custom-multiselect-newRegularExpense-circle"); }
+        if(!hasExpenseTypes){ hasErrors = true; doAlertSelect(parent.find("div.row:nth(2) .select2-container"),"select2-container-error",".custom-multiselect-newRegularExpense-debt"); }
         if(value == "") { hasErrors = true; doAlertInput(parent.find("div.row:nth(2) .input-group"),parent.find("div.row:nth(2) .input-group input"),"error-control"); }
+        if(periodicity == "") { hasErrors = true; doAlertInput(selectorPeriodicity,selectorPeriodicity.find("input.periodicity"),"error-control"); }
 
-        var dates = $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-newRegularExpense");
         var paymentDeadline = dates.find("input:nth(0)").val();
         var receptionDeadline = dates.find("input:nth(1)").val();
         var beginDate = dates.find("input:nth(2)").val();
         var endDate = dates.find("input:nth(3)").val();
-        var periodicity = dates.find("input:nth(7)").val();
+
 
         var listIDsUsers = [];
         var listValuesUsers = [];
@@ -277,6 +280,14 @@ $(document).ready(function() {
                     $("body").unblock();
                 }
             });
+        }
+        else if(!hasCircles || !hasExpenseTypes){
+            $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-newRegularExpense").slideDown();
+            $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-newRegularExpense").slideUp();
+        }
+        else{
+            $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-newRegularExpense").slideUp();
+            $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-newRegularExpense").slideDown();
         }
     });
 
