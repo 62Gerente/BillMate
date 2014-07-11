@@ -230,7 +230,7 @@ $(document).ready(function() {
         var value = parent.find("div.row:nth(2) input.value-debt").val();
         var description = parent.find("div.row:nth(3) textarea").val();
         var dates = $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-newRegularExpense");
-        var periodicity = dates.find("input:nth(7)").val();
+        var periodicity = parent.find("div.row:nth(4) input.periodicity").val();
         var selectorPeriodicity = dates.find(" > div").last();
 
         if(name == ""){ hasErrors = true; doAlertInput(parent.find("div.row:nth(0)"),parent.find("div.row:nth(0) input"),"error-control"); }
@@ -289,13 +289,9 @@ $(document).ready(function() {
                 }
             });
         }
-        else if(!hasCircles || !hasExpenseTypes){
+        else{
             $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-newRegularExpense").slideDown();
             $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-newRegularExpense").slideUp();
-        }
-        else{
-            $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-newRegularExpense").slideUp();
-            $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-newRegularExpense").slideDown();
         }
     });
 

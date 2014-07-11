@@ -51,8 +51,14 @@
                             <g:textArea name="houseDescription" rows="5" placeholder="${message(code: 'com.billmate.regularExpense.modal.placeholderDescription')}" class="form-control houseDescription"/>
                         </div>
                     </div>
+                    <div class="row form-row m-b-10">
+                        <div class="col-md-12">
+                            <input type="hidden" value="${user}"/>
+                            <input type="text" class="form-control periodicity" placeholder="<g:message code="com.billmate.regularExpense.modal.periodicity" default="Schedule repetitions"/>" value=""/>
+                        </div>
+                    </div>
                 </div>
-                <div class="photos-options-form-newRegularExpense">
+                <div class="photos-options-form-newRegularExpense m-t-10">
                     <div class="row form-row">
                         <div class="col-md-12">
                             <select class="image-picker limit_callback show-html select-list-users-newRegularexpense" multiple="multiple">
@@ -113,12 +119,6 @@
                                     <span class="arrow"></span><i class="fa fa-calendar"></i>
                                 </span>
                             </div>
-                        </div>
-                    </div>
-                    <div class="row form-row">
-                        <div class="col-md-12">
-                            <input type="hidden" value="${user}"/>
-                            <input type="text" class="form-control periodicity" placeholder="<g:message code="com.billmate.regularExpense.modal.periodicity" default="Schedule repetitions"/>" value=""/>
                         </div>
                     </div>
                 </div>

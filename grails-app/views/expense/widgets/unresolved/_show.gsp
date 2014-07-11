@@ -21,7 +21,7 @@
         </div>
         <div class="div-btn-widget-payments pull-right">
             <div class="col-md-4 pull-right no-padding home-button-divida-primary-confirm" id="home-button-divida-primary-confirm">
-                <button type="button" class="inline btn btn-white btn-small btn-cons pull-right show-expense">
+                <button type="button" class="inline btn btn-white btn-small btn-cons pull-right show-expense" data-value="<g:createLink controller='expense' action='show' id='${expense.getId()}'/>">
                     <g:message code="com.billmate.expense.show" default="Show expense" />
                 </button>
             </div>

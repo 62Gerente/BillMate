@@ -165,8 +165,7 @@ class ExpenseController extends RestrictedController {
                     'code': message(code: "com.billmate.expense.save.success"),
                     'class': "alert alert-success form-modal-house-error"
             ]
-
-            if (!expense.create(listOfFriends, listValuesUsers)) {
+            if (!expense.create(listOfFriends, listValuesUsers, session.user.getId())) {
                 response.error = true
                 response.code = message(code: "com.billmate.expense.save.insuccess")
                 response.class = "alert alert-error form-modal-house-error"

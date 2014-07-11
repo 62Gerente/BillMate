@@ -290,7 +290,7 @@ class RegisteredUser {
 
     public User[] getFriendsOfAllCircles() {
         Set<User> list = new HashSet<User>()
-        User.findAll().each { if (it.getRegisteredUserId() != getId()) list.add(it) }
+        User.findAll().each { if (it.getRegisteredUser() && it.getRegisteredUserId() != getId()) list.add(it) }
         return list.toArray()
     }
 
