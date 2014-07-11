@@ -115,6 +115,6 @@ class CircleController extends RestrictedController  {
             return
         }
 
-        return [breadcrumb: breadcrumb, user: session.user, circle: circle, history: circleHistory]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle, history: circleHistory]
     }
 }

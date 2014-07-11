@@ -14,7 +14,7 @@
         <div class="grid simple ">
             <div class="grid-title">
                 <h4>
-                    <span class="semi-bold"><g:message code="com.billmate.expense.default.title" default="My EXPENSES" /></span>
+                    <span class="semi-bold uppercase"><g:message code="com.billmate.expense.default.title" default="My EXPENSES" /></span>
                 </h4>
             </div>
 

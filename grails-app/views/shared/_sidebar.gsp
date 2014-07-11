@@ -14,7 +14,7 @@
         <p class="menu-title"></p>
         <ul id="home-sidebar-menu">
             <li class="start active ">
-                <a href="#"> <i class="fa fa-dashboard"></i>
+                <a href="${createLink(controller: "dashboard", action: "user")}"> <i class="fa fa-dashboard"></i>
                     <span class="title">
                         <g:message code="com.billmate.sidebar.dashboard" default="Dashboard"/>
                     </span>
@@ -109,7 +109,8 @@
 </div>
 <a href="#" class="scrollup"></a>
 <div class="footer-widget">
-    <button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#expenseCreateModal">
+    <!--<button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#expenseCreateModal">-->
+    <button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#newRegularExpenseCreateModal">
         <g:message code="com.billmate.sidebar.addDebt" default="Add Debt"/>
     </button>
     <button type="button" id="btn-advanced-options-regularExpense" class="btn btn-primary btn-cons hidden" data-toggle="modal" data-target="#regularExpenseCreateModal"></button>

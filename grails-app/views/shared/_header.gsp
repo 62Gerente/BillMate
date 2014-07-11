@@ -8,7 +8,7 @@
                     </a>
                 </li>
             </ul>
-            <a href=<g:createLink controller="Dashboard" action="index" />>
+            <a href="${createLink(controller: "dashboard", action: "user")}">
                 <img src="${assetPath(src: 'logo-full.svg')}" class="logo" alt="<g:message code="com.billmate.application.name" default="BillMate"/>" onerror="this.src=${assetPath(src: 'logo-full.png')}">
             </a>
             <ul class="nav pull-right notifcation-center">

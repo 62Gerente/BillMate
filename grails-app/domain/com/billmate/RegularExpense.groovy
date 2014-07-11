@@ -63,12 +63,18 @@ class RegularExpense {
     }
 
     public boolean inReceptionTime(){
-        isActive && receptionBeginDate < new Date()
+        Date date, dateBefore, dateAfter
+        use(TimeCategory) {
+            date = beginDate + intervalDays.days + intervalMonths.months + intervalYears.years
+            dateBefore = new Date()
+            dateAfter = dateBefore + 5.days
+        }
+        isActive && date >= dateBefore && date <= dateAfter
     }
 
     public postpone() {
         use(TimeCategory) {
-            receptionBeginDate = receptionBeginDate + intervalDays.days + intervalMonths.months + intervalYears.years
+            beginDate = beginDate + intervalDays.days + intervalMonths.months + intervalYears.years
         }
     }
 
@@ -79,19 +85,25 @@ class RegularExpense {
          receptionEndDate: BMDate.convertDateFormat(getReceptionEndDate()), paymentBeginDate: BMDate.convertDateFormat(getPaymentBeginDate()),
          paymentEndDate: BMDate.convertDateFormat(getPaymentEndDate())]
     }
-    
+
     def create(List<String> idsUsers, List<Double> value){
         boolean result = false;
         int position = 0
         withTransaction {status ->
             try{
                 RegularExpense regularExpense = save(flush: true, failOnError: true)
-                regularExpense.postpone()
                 for(String str : idsUsers){
-                    User user = User.findById(Long.parseLong(str))
-                    Debt debt = new Debt(value: value[position], percentage: 20, user: user, regularExpense: regularExpense).save()
-                    this.addToAssignedUsers(user)
-                    position++
+                    if( Double.parseDouble(value[position]) > 0 ){
+                        User user = User.findById(Long.parseLong(str))
+                        Debt debt = new Debt(value: value[position], user: user, regularExpense: regularExpense).save()
+                        regularExpense.addToAssignedUsers(user)
+                        RegisteredUser registeredUser = user.getRegisteredUser()
+                        if(registeredUser && registeredUser.getId() == id) {
+                            new Payment(user: user, debt: debt, value: Double.parseDouble(value[position]), validationDate: new Date(), isValidated: true).save()
+                            debt.setResolvedDate(new Date())
+                        }
+                    }
+                    position++;
                 }
                 result = true;
             }
@@ -101,5 +113,35 @@ class RegularExpense {
             }
         }
         return result;
+    }
+
+    Expense fromRegularExpenseToExpense(Expense expense, RegisteredUser registeredUser, Double value){
+        expense.setRegularExpense(this)
+        expense.setResponsible(getResponsible())
+        expense.setExpenseType(getExpenseType())
+        expense.setCircle(getCircle())
+        expense.setTitle(getTitle())
+        expense.setDescription(getDescription())
+        expense.setValue(value)
+        expense.setBeginDate(new Date())
+        expense.setEndDate(getEndDate())
+        expense.setPaymentDeadline(getPaymentDeadline())
+        expense.setReceptionDeadline(getReceptionDeadline())
+        expense.setCreatedAt(new Date())
+        expense.setPaymentDate(getPaymentDeadline())
+        expense.setReceptionDate(getReceptionEndDate())
+        expense.setIsDeleted(false)
+        expense.secureSave()
+        double partialValue = value / getAssignedUsers().size()
+        for (User user : getAssignedUsers()){
+            Debt debt = new Debt(value: partialValue, user: user, expense: expense).save()
+            expense.addToAssignedUsers(user)
+            RegisteredUser regUser = user.getRegisteredUser()
+            if(regUser && regUser.getId() == registeredUser.getId()) {
+                new Payment(user: user, debt: debt, value: partialValue, validationDate: new Date(), isValidated: true).save()
+                debt.setResolvedDate(new Date())
+            }
+        }
+        return expense
     }
 }

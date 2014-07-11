@@ -88,7 +88,7 @@ class Expense {
 
                 for(String str : listUsers){
                     User user = User.findById(Long.parseLong(str))
-                    Debt debt = new Debt(value: listValues[position], percentage: 20, user: user, expense: expense).save()
+                    Debt debt = new Debt(value: listValues[position], user: user, expense: expense).save()
                     position++;
                 }
 
@@ -228,7 +228,7 @@ class Expense {
         validatedPaymentsWithoutResponsible().size()
     }
 
-    public boolean create(List<String> idsUsers, List<Double> value){
+    public boolean create(List<String> idsUsers, List<Double> value, Long id){
         boolean result = false;
         int position = 0
         withTransaction {status ->
@@ -239,9 +239,16 @@ class Expense {
                     regularExpense.save(flush: true, failOnError: true)
                 }
                 for(String str : idsUsers){
-                    User user = User.findById(Long.parseLong(str))
-                    new Debt(value: Double.parseDouble(value[position]), user: user, expense: expense).save()
-                    this.addToAssignedUsers(user)
+                    if( Double.parseDouble(value[position]) > 0 ){
+                        User user = User.findById(Long.parseLong(str))
+                        Debt debt = new Debt(value: Double.parseDouble(value[position]), user: user, expense: expense).save()
+                        this.addToAssignedUsers(user)
+                        RegisteredUser registeredUser = user.getRegisteredUser()
+                        if(registeredUser && registeredUser.getId() == id) {
+                            new Payment(user: user, debt: debt, value: Double.parseDouble(value[position]), validationDate: new Date(), isValidated: true).save()
+                            debt.setResolvedDate(new Date())
+                        }
+                    }
                     position++;
                 }
                 result = true;

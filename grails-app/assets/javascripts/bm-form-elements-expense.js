@@ -30,22 +30,25 @@ $(document).ready(function() {
         });
 
 
-    //Next 3 functions format display results
-    function formatExpenseTypes(state) {
+    //Next 4 functions format display results
+    function formatResultExpenseTypes(state) {
+        return "<i class='" + state.cssClass + "'></i>&nbsp;" + $("<div>").html(state.name).text();
+    }
+
+    function formatSelectionExpenseTypes(state) {
         hasExpenseTypes = true;
         idExpenseType = state.id;
         return "<i class='" + state.cssClass + "'></i>&nbsp;" + $("<div>").html(state.name).text();
     }
 
     function formatResultCircles(state) {
-        hasCircles = true;
-        id_circle = state.id;
         return "<i class='" + state.icon + "'></i>&nbsp;" + $("<div>").html(state.name).text();
     }
 
     function formatSelectionCircles(state) {
         hasCircles = true;
         id_circle = state.id;
+        $(".custom-multiselect-expense-debt").select2("enable",true);
         fillList();
         return "<i class='" + state.icon + "'></i>&nbsp;" + $("<div>").html(state.name).text();
     }
@@ -53,8 +56,8 @@ $(document).ready(function() {
     //Enable select2 plugin to expenses debts
     $(".custom-multiselect-expense-debt").select2({
         minimumInputLength: 1,
-        formatResult: formatExpenseTypes,
-        formatSelection: formatExpenseTypes,
+        formatResult: formatResultExpenseTypes,
+        formatSelection: formatSelectionExpenseTypes,
         enable: false,
         ajax: {
             type: "POST",
@@ -91,7 +94,6 @@ $(document).ready(function() {
                 };
             },
             results: function(data, page) {
-                $(".custom-multiselect-expense-debt").select2("enable",true);
                 return {
                     results: data.data
                 };
@@ -298,6 +300,10 @@ $(document).ready(function() {
                     $("body").unblock();
                 }
             });
+        }
+        else{
+            $(this).parents(".modal-footer").siblings(".modal-body").find(".simple-options-form-debt").slideDown();
+            $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-debt").slideUp();
         }
     });
 

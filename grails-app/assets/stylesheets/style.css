@@ -5148,11 +5148,11 @@ form legend,
   padding: 1px 4px;
 }
 .tiles .heading {
-  font-size: 25px;
+  font-size: 23px;
   display: block;
   font-family: 'Arial';
   font-weight: 600;
-  margin: 4px 0px;
+  margin: 3px -6px;
 }
 .tiles .heading .icon-grid {
   top: 1px;

@@ -32,8 +32,8 @@ $(document).ready(function() {
     function fillListExpense(){
         if(idUserRegularExpense == 0) idUserRegularExpense = $(".simple-options-form-regularExpense").children("input:nth(1)").val();
         if(idCircleRegularExpense != 0){
-            var url = $("#users-link-expense").val();
-            $.post(url, {id_circle: idCircleRegularExpense}, function (data) {
+            var url = $("#users-link-FillRegularExpense").val();
+            $.post(url, {id_regular_expense: idRegularExpense}, function (data) {
                 listFriendsOfCircleAjaxRequestInListExpense(data);
             } );
             $(".select-list-users-expense").data('picker');
@@ -259,6 +259,7 @@ $(document).ready(function() {
 
     function handleRegularExpenseType(dataDebtRegularExpense, dataDebtList){
         var context = $(".modal#regularExpenseCreateModal .modal-body .advanced-options-form-regularExpense");
+
 
         $(".custom-multiselect-regularExpense-debt").select2({
             formatResult: formatExpenseTypes,

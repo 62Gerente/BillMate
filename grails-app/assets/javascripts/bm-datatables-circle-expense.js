@@ -297,4 +297,8 @@ $(document).ready(function() {
             updateAfterFill();
         }
     });
+
+    $("button.show-expense").click(function(){
+        window.location.href=$(this).attr("data-value");
+    });
 });
