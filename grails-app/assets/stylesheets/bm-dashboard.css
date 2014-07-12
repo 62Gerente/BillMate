@@ -521,3 +521,15 @@ button.logout-header[type="submit"]:hover {
 .upcoming-regular-expense p.small{
     width: 100% !important;
 }
+
+.debts-friend-widget-green .heading{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+@media (min-width:992px) and (max-width: 1199px) {
+    .debts-friend-widget-red{
+        margin-top: 10px;
+    }
+}

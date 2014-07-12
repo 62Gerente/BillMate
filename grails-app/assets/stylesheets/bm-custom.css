@@ -198,6 +198,36 @@ a {
     margin: 13px auto 0 auto !important;
 }
 
+.debts-friend-widget-green{
+    max-height: 95px;
+}
+
+@media (max-width: 768px) {
+    .navbar-inner .header-seperation .logo{
+        display: inline;
+    }
+
+    .simple-options-form-regularExpense .input-group.transparent,
+    .simple-options-form-newRegularExpense .input-group.transparent{
+        padding-top: 10px;
+    }
+
+    #createGroup, #createHouse,
+    .modal-footer .pull-left{
+        width: 100%;
+    }
+
+    .modal-footer button,
+    .modal-footer .pull-right{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .modal-footer .btn+.btn{
+        margin-left: 0px;
+    }
+}
+
 .chat-window-wrapper{
     overflow: auto !important;
 }
