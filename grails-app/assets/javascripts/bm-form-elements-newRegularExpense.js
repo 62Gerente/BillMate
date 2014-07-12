@@ -231,13 +231,12 @@ $(document).ready(function() {
         var description = parent.find("div.row:nth(3) textarea").val();
         var dates = $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-newRegularExpense");
         var periodicity = parent.find("div.row:nth(4) input.periodicity").val();
-        var selectorPeriodicity = dates.find(" > div").last();
 
         if(name == ""){ hasErrors = true; doAlertInput(parent.find("div.row:nth(0)"),parent.find("div.row:nth(0) input"),"error-control"); }
         if(!hasCircles){ hasErrors = true; doAlertSelect(parent.find("div.row:nth(1) .select2-container"),"select2-container-error",".custom-multiselect-newRegularExpense-circle"); }
         if(!hasExpenseTypes){ hasErrors = true; doAlertSelect(parent.find("div.row:nth(2) .select2-container"),"select2-container-error",".custom-multiselect-newRegularExpense-debt"); }
         if(value == "") { hasErrors = true; doAlertInput(parent.find("div.row:nth(2) .input-group"),parent.find("div.row:nth(2) .input-group input"),"error-control"); }
-        if(periodicity == "") { hasErrors = true; doAlertInput(selectorPeriodicity,selectorPeriodicity.find("input.periodicity"),"error-control"); }
+        if(periodicity == "") { hasErrors = true; doAlertInput(parent.find("div.row:nth(4)"),parent.find("div.row:nth(4) input.periodicity"),"error-control"); }
 
         var paymentDeadline = dates.find("input:nth(0)").val();
         var receptionDeadline = dates.find("input:nth(1)").val();

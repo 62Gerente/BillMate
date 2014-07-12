@@ -68,7 +68,8 @@ $(".upcoming-expense-form :submit").on('click', function (event) {
             complete: function(){
                 form.closest(".upcoming-regular-expense").unblock();
                 submit.prop("disabled", false);
-                alert.stop().fadeIn().delay(5000).fadeOut();
+                window.location.reload();
+                alert.stop().fadeIn().delay(3000).fadeOut();
             }
         });
     }

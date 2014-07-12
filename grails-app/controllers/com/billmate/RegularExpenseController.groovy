@@ -62,9 +62,9 @@ class RegularExpenseController extends RestrictedController{
         regularExpense.setPaymentEndDate(BMDate.convertStringsToDate(params.paymentEndDate,false))
 
 
-        int year = extractInts(params.periodicity)[2]
+        int year = extractInts(params.periodicity)[0]
         int month = extractInts(params.periodicity)[1]
-        int day = extractInts(params.periodicity)[0]
+        int day = extractInts(params.periodicity)[2]
 
         regularExpense.setIntervalYears(year)
         regularExpense.setIntervalMonths(month)
@@ -75,22 +75,22 @@ class RegularExpenseController extends RestrictedController{
 
     def saveExpense(Long id) {
         def regularExpense = RegularExpense.get(id)
-        Double value
+        Double value = 0
         if(params.value.isNumber()) value = Double.parseDouble(params.value)
 
         def responseData = [
                 'error'  : false,
-                'message': message(code: "com.billmate.regularExpense.save.insuccess")
+                'message': message(code: "com.billmate.regularExpense.modal.createdSuccessfully")
         ]
 
-        Expense expense = new Expense(regularExpense, authenticatedUser(), value: value)
+        Expense expense = new Expense()
 
-        if (!expense.secureSave()) {
+        if (!regularExpense.fromRegularExpenseToExpense(expense, authenticatedUser(), value)) {
             responseData.error = true;
             if(expense.getErrors().getErrorCount()){
-                responseData.message = message(error: expense.getErrors().getAllErrors().first())
+                responseData.message = message(code: "com.billmate.regularExpense.modal.createdUnsuccessfully")
             }else{
-                responseData.message = message(code: "com.billmate.generic.error.message")
+                responseData.message = message(code: "com.billmate.regularExpense.modal.createdUnsuccessfully")
             }
         }
         render responseData as JSON
@@ -134,5 +134,16 @@ class RegularExpenseController extends RestrictedController{
         }
 
         render responseData as JSON
+    }
+
+    def assignedUsers(){
+        Set<Object> circleFriends = new HashSet<>()
+        RegularExpense.findById(Long.parseLong(params.id_regular_expense)).getAssignedUsers().each {
+            circleFriends.add([id: it.getId(), photo: it.getPhotoOrDefault(), name: it.getName(), value: 0, selectable: true, absolute: false, percentage: false])
+        }
+
+        def response = [ 'data': circleFriends ]
+
+        render response as JSON
     }
 }

@@ -17,6 +17,7 @@
                 <div class="simple-options-form-regularExpense">
                     <input type="hidden" value="${registeredUser}"/>
                     <input type="hidden" value="${user}"/>
+                    <input type="hidden" id="users-link-FillRegularExpense" value="<g:createLink controller="regularExpense" action="assignedUsers"/>"/>
                     <div class="row form-row">
                         <div class="col-md-12">
                             <input type="hidden" value="${user}"/>

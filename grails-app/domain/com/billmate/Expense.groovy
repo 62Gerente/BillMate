@@ -88,7 +88,7 @@ class Expense {
 
                 for(String str : listUsers){
                     User user = User.findById(Long.parseLong(str))
-                    Debt debt = new Debt(value: listValues[position], percentage: 20, user: user, expense: expense).save()
+                    Debt debt = new Debt(value: listValues[position], user: user, expense: expense).save()
                     position++;
                 }
 

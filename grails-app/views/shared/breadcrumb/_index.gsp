@@ -1,6 +1,6 @@
 <ul class="breadcrumb">
     <li>
-        <a href="<g:createLink controller="Dashboard" action="index" />">
+        <a href="<g:createLink controller="dashboard" action="user" />">
             <i class="fa fa-home"></i>
         </a>
     </li>
