@@ -244,3 +244,12 @@ a {
     font-weight: 600;
     font-size: 14px;
 }
+
+#users-detailedMakePayments,
+#users-detailedConfirmPayments{
+    width:100% !important;
+}
+
+#detailedConfirmPayments .grid-body.no-border{
+    padding-bottom: 10px;
+}

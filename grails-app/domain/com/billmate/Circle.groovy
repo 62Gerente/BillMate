@@ -34,21 +34,21 @@ class Circle {
     }
 
     public Set<Expense> unresolvedExpenses(){
-        this.expenses.findAll{ !it.isResolved() }
+        this.expenses.findAll{ !it.isResolved() && !it.getIsDeleted() }
     }
 
     public Double totalValueOfUnresolvedExpenses(){
-        Double total = unresolvedExpenses().sum{ it.getValue() }
+        Double total = unresolvedExpenses().sum{ it.getValue() && !it.getIsDeleted() }
         total ? total : 0D
     }
 
     public Double totalDebtOfUnresolvedExpenses(){
-        Double total = unresolvedExpenses().sum{ it.amountInDebt() }
+        Double total = unresolvedExpenses().sum{ it.amountInDebt() && !it.getIsDeleted() }
         total ? total : 0D
     }
 
     public Set<Expense> resolvedExpenses(){
-        this.expenses.findAll{ !it.isResolved() }
+        this.expenses.findAll{ !it.isResolved() && !it.getIsDeleted() }
     }
 
     public String getCssClass(){

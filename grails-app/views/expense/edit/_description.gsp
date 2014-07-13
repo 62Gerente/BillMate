@@ -162,10 +162,12 @@
         </g:elseif>
     </div>
     <div class="row p-t-5">
-        <g:if test="${expense.isAssignedTo(registeredUser.getUserId()) && !expense.isResolvedBy(registeredUser.getUserId())}">
-            <button class="btn btn-block btn-primary" type="button">
-                <g:message code="com.billmate.payment.new" default="New payment" />
-            </button>
+        <g:if test="${expense.isAssignedTo(registeredUser.getUserId()) && !expense.isResolvedBy(registeredUser.getUserId()) && !expense.haveUnvalidatedPayments(registeredUser.getUserId())}">
+            <g:form data-confirm-cancel="${message(code: 'com.billmate.btn.cancel', default: 'Cancel')}" data-confirm-ok="${message(code: 'com.billmate.expense.pay', default: 'Pay')}" data-confirm-title="${message(code: 'com.billmate.expense.info', default: 'Confirm payment')}" data-confirm-message="${message(code: 'com.billmate.expense.areYouSureToPay', args: [expense.amountInDebtOf(registeredUser.getUserId()),expense.getTitle()], default: 'Are you sure you want to pay this expense ?')}" id="payExpense" class="p-t-5 m-b-10" url="[action:'confirmOne',controller:'payment',id:expense.debtOf(registeredUser.getUserId()).getId()]" method="DELETE">
+                <button class="btn btn-block btn-primary" type="button">
+                    <g:message code="com.billmate.payment.new" default="New payment" />
+                </button>
+            </g:form>
         </g:if>
         <g:else>
             <button class="btn btn-block btn-primary" type="button" disabled>

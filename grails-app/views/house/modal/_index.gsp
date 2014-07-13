@@ -52,7 +52,7 @@
                     </div>
                     <div class="row form-row p-t-10">
                         <div class="col-md-12">
-                            <g:textField name="friendsHome" placeholder="${message(code: 'com.billmate.house.modal.placeholderHouseFriends')}" class="custom-multiselect-house-user select2-offscreen friendsHome"/>
+                            <g:textField name="friendsHouse" placeholder="${message(code: 'com.billmate.house.modal.placeholderHouseFriends')}" class="custom-multiselect-house-user select2-offscreen friendsHome"/>
                         </div>
                     </div>
                     <div class="row form-row p-t-10">

@@ -169,4 +169,37 @@ class RegisteredUserController extends RestrictedController {
 
         render response as JSON
     }
+
+    def unresolvedExpensesUser(Long idUser, Long idRegisteredUser){
+        RegisteredUser registeredUser = RegisteredUser.findById(idRegisteredUser)
+        def list = []
+
+        registeredUser.unresolvedResponsibleExpensesBy(idUser).each {
+            Circle circle = it.getCircle()
+            if(it.amountInDebtOf(idUser) != 0)
+                list.add([
+                        it.getTitle(), circle.getName(), it.amountPaidBy(idUser), it.debtOf(idUser).getValue(), it.getExpenseType().getCssClass(), circle.getCssClass(), it.getId()
+                ])
+        }
+
+        def response = [data: list]
+
+        render response as JSON
+    }
+
+    def unresolvedExpensesToMe(Long idUser, Long idRegisteredUser){
+        def list = []
+        User user = User.findById(idUser)
+        user.unresolvedExpensesWhichResponsibleIs(idRegisteredUser).each {
+            Circle circle = it.getCircle()
+            if(it.amountInDebtOf(idUser) != 0)
+                list.add([
+                        it.getTitle(), circle.getName(), it.amountPaidBy(idUser), it.debtOf(idUser).getValue(), it.getExpenseType().getCssClass(), circle.getCssClass(), it.getId()
+                ])
+        }
+
+        def response = [data: list]
+
+        render response as JSON
+    }
 }

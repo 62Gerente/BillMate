@@ -34,21 +34,22 @@ class User {
     }
 
     public Set<Expense> unresolvedExpenses(){
-        expenses.findAll{ !it.isResolvedBy(this.id) }
+        expenses.findAll{ !it.isResolvedBy(this.id) && !it.getIsDeleted() }
     }
 
     public Set<RegisteredUser> whoIOwe(){
         Set<RegisteredUser> users = new HashSet<>()
-        unresolvedExpenses().each { users.add( it.getResponsible() ) }
+        unresolvedExpenses().each { if(it.debtOf(id) && it.debtOf(id).debtWaitingValidationPayment())
+                                        users.add( it.getResponsible() ) }
         users
     }
 
     public Set<Expense> unresolvedExpensesWhichResponsibleIs(Long registeredUserId){
-        unresolvedExpenses().findAll{ it.getResponsibleId() == registeredUserId }
+        unresolvedExpenses().findAll{ it.getResponsibleId() == registeredUserId && !it.getIsDeleted() }
     }
 
     public Double totalDebtTo(Long registeredUserId){
-        Double total = unresolvedExpensesWhichResponsibleIs(registeredUserId).sum{ it.amountInDebtOf(this.id) }
+        Double total = unresolvedExpensesWhichResponsibleIs(registeredUserId).sum{ it.amountInDebtOf(this.id) && !it.getIsDeleted() }
         total ? total : 0D
     }
 
@@ -63,7 +64,7 @@ class User {
 
     public Set<Expense> monthExpenses(Date date){
         Set<Expense> monthExpenses = new HashSet<>()
-        monthExpenses.addAll(expenses.findAll{ it.getBeginDate().getAt(Calendar.MONTH) == date.getAt(Calendar.MONTH) && it.getBeginDate().getAt(Calendar.YEAR) == date.getAt(Calendar.YEAR)  })
+        monthExpenses.addAll(expenses.findAll{ it.getBeginDate().getAt(Calendar.MONTH) == date.getAt(Calendar.MONTH) && it.getBeginDate().getAt(Calendar.YEAR) == date.getAt(Calendar.YEAR) && !it.getIsDeleted()  })
 
         if(registeredUser){
             monthExpenses.addAll(registeredUser.monthResponsibleExpenses(date))
@@ -73,7 +74,7 @@ class User {
     }
 
     public Double monthlySpending(Date date){
-        Double monthlySpending = monthExpenses(date).sum {it.amountAssignedTo(this.id)}
+        Double monthlySpending = monthExpenses(date).sum {it.amountAssignedTo(this.id) && !it.getIsDeleted()}
         monthlySpending ? monthlySpending : 0
     }
 
@@ -100,7 +101,7 @@ class User {
 
     public Set<Expense> monthExpensesOfExpenseType(Date date, ExpenseType expenseType){
         Set<Expense> expenses = new HashSet<>()
-        expenses.addAll(monthExpenses(date).findAll{ it.getExpenseType().getId() == expenseType.getId() })
+        expenses.addAll(monthExpenses(date).findAll{ it.getExpenseType().getId() == expenseType.getId() && !it.getIsDeleted() })
 
         if(registeredUser){
             expenses.addAll(registeredUser.monthResponsibleExpensesOfExpenseType(date, expenseType))

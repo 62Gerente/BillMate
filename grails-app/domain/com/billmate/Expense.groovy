@@ -132,6 +132,14 @@ class Expense {
         }
     }
 
+    public Set<Payment> unvalidatedPayments(Long userID){
+        debtOf(userID)?.getPayments().findAll{ !it.getIsValidated() }
+    }
+
+    public boolean haveUnvalidatedPayments(Long userID){
+        unvalidatedPayments(userID).size()
+    }
+
     public boolean isResolved(){
         receptionDate || amountInDebt() == 0
     }
@@ -173,8 +181,17 @@ class Expense {
         debt && debt.isResolved()
     }
 
+    public boolean waitingPaymentBy(Long userID){
+        Debt debt = debtOf(userID)
+        debt && (!debt.getExpense().isResolved() && !debt.getExpense().getIsDeleted() && debt.amountInDebt() > 0)
+    }
+
     public Set<User> assignedUsersInDebt(){
         assignedUsers.findAll{ !isResolvedBy(it.getId()) }
+    }
+
+    public Set<User> assignedUsersInDebtOrWaitingValidation(){
+        assignedUsers.findAll{ waitingPaymentBy(it.getId()) }
     }
 
     public Set<Payment> unconfirmedPayments(){
@@ -259,5 +276,29 @@ class Expense {
             }
         }
         return result;
+    }
+
+    public boolean delete(){
+        boolean result = true
+        Set<Debt> debtSet = new HashSet<Debt>()
+        withTransaction { status ->
+            try {
+                this.isDeleted = true
+                Expense expense
+                debtSet.addAll(getDebts())
+                debtSet.each {
+                    expense = it.getExpense()
+                    expense.removeFromDebts(it)
+                    expense.removeFromAssignedUsers(it.getUser())
+                    it.delete(flush:true)
+                }
+                save()
+            }catch(Exception eDelete){
+                eDelete.printStackTrace()
+                status.setRollbackOnly()
+                result = false
+            }
+        }
+        return result
     }
 }
