@@ -132,8 +132,16 @@ class Expense {
         }
     }
 
+    public Set<Payment> unvalidatedPayments(Long userID){
+        debtOf(userID)?.getPayments().findAll{ !it.getIsValidated() }
+    }
+
+    public boolean haveUnvalidatedPayments(Long userID){
+        unvalidatedPayments(userID).size()
+    }
+
     public boolean isResolved(){
-        receptionDate || amountInDebt() == 0
+        receptionDate
     }
 
     public Double amountAssignedTo(Long userID){
@@ -152,7 +160,7 @@ class Expense {
 
     public Double amountPaid(){
         Double amount = debts.sum{ it.amountPaid() }
-        amount ? amount : 0D
+        amount? amount : 0D
     }
 
     public Double amountPaidBy(Long userID){
@@ -173,8 +181,17 @@ class Expense {
         debt && debt.isResolved()
     }
 
+    public boolean waitingPaymentBy(Long userID){
+        Debt debt = debtOf(userID)
+        debt && (!debt.getExpense().isResolved() && !debt.getExpense().getIsDeleted() && debt.amountInDebt() > 0)
+    }
+
     public Set<User> assignedUsersInDebt(){
         assignedUsers.findAll{ !isResolvedBy(it.getId()) }
+    }
+
+    public Set<User> assignedUsersInDebtOrWaitingValidation(){
+        assignedUsers.findAll{ waitingPaymentBy(it.getId()) }
     }
 
     public Set<Payment> unconfirmedPayments(){
@@ -217,7 +234,7 @@ class Expense {
 
     public Set<Payment> paymentsOf(Long userID){
         Debt debt = debtOf(userID)
-        debt ? debt.getPayments() : new HashSet<Payment>()
+        debt ? debt.getPayments().findAll { it.getValue() > 0 } : new HashSet<Payment>()
     }
 
     public boolean haveValidatedPayments(){
@@ -238,13 +255,14 @@ class Expense {
                     regularExpense.postpone()
                     regularExpense.save(flush: true, failOnError: true)
                 }
+                if(idsUsers.size() == 1) expense.setReceptionDate(new Date())
                 for(String str : idsUsers){
                     if( Double.parseDouble(value[position]) > 0 ){
                         User user = User.findById(Long.parseLong(str))
                         Debt debt = new Debt(value: Double.parseDouble(value[position]), user: user, expense: expense).save()
                         this.addToAssignedUsers(user)
                         RegisteredUser registeredUser = user.getRegisteredUser()
-                        if(registeredUser && registeredUser.getId() == id) {
+                        if(registeredUser && registeredUser.getId() == getResponsibleId()) {
                             new Payment(user: user, debt: debt, value: Double.parseDouble(value[position]), validationDate: new Date(), isValidated: true).save()
                             debt.setResolvedDate(new Date())
                         }
@@ -259,5 +277,45 @@ class Expense {
             }
         }
         return result;
+    }
+
+    public boolean delete(){
+        boolean result = true
+        Set<Debt> debtSet = new HashSet<Debt>()
+        withTransaction { status ->
+            try {
+                this.isDeleted = true
+                Expense expense
+                debtSet.addAll(getDebts())
+                debtSet.each {
+                    expense = it.getExpense()
+                    expense.removeFromDebts(it)
+                    expense.removeFromAssignedUsers(it.getUser())
+                    it.delete(flush:true)
+                }
+                save()
+            }catch(Exception eDelete){
+                eDelete.printStackTrace()
+                status.setRollbackOnly()
+                result = false
+            }
+        }
+        return result
+    }
+
+    public void payAndConfirmExpense(Double val, Debt debt, boolean flag, User user){
+        if(flag){
+            new Payment(debt: debt, user: user, value: val).save()
+        }else{
+            new Payment(debt: debt, user: user, value: val, validationDate: new Date(), isValidated: true).save()
+            debt.confirm()
+        }
+    }
+
+    public void confirm(Debt debt){
+        if(debt.getExpense().amountInDebt() <= 0){
+            setReceptionDate(new Date())
+            save()
+        }
     }
 }

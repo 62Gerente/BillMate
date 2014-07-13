@@ -1,5 +1,7 @@
 <div class="p-l-20 p-r-20 p-t-5 p-b-5 b-b b-grey expenses-widget-more-details">
     <div class="user-info-wrapper home-margin-list">
+        <input type="hidden" value="${user}"/>
+        <input type="hidden" value="${registeredUser}"/>
         <img class="profile-wrapper user-profile-pic-2x white-border home-img-list" src="${registeredUser.getPhotoOrDefault()}"/>
         <div class="col-md-8 user-info user-info-photo user-info-name-price no-padding">
             <div class="username inline p-t-15 widget-payments-name-user">${registeredUser.getName()}
@@ -14,8 +16,11 @@
             </span>
         </div>
         <div class="div-btn-widget-payments pull-right">
+            <input type="hidden" value="${user.getId()}"/>
+            <input type="hidden" value="${registeredUser.getId()}"/>
+            <input type="hidden" value="<g:createLink controller="registeredUser" action="unresolvedExpensesToMe" />"/>
             <div class="col-md-4 pull-right no-padding home-button-divida-primary-confirm">
-                <button type="button" class="inline btn btn-primary btn-small btn-cons pull-right"><g:message code="com.billmate.payment.new" default="Pay it now" /></button>
+                <button type="button" class="inline btn btn-primary btn-small btn-cons pull-right whoIOwe" data-toggle="modal" data-target="#detailedMakePayments"><g:message code="com.billmate.payment.new" default="Pay it now" /></button>
             </div>
         </div>
     </div>

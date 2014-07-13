@@ -23,6 +23,8 @@
     <g:render template="/expense/modal/index" model="[registeredUser: user.getId(), user: user.getUserId()]"/>
     <g:render template="/regularExpense/modal/index" model="[registeredUser: user.getId(), user: user.getUserId()]"/>
     <g:render template="/regularExpense/modal/create" model="[registeredUser: user.getId(), user: user.getUserId()]"/>
+    <g:render template="/payment/modal/index" model="[registeredUser: user.getId(), user: user.getUserId()]"/>
+    <g:render template="/payment/modal/create" model="[registeredUser: user.getId(), user: user.getUserId()]"/>
     <g:render template="/shared/sidebar" model="[user: user]"/>
     <div class="page-content">
         <div class="clearfix"></div>

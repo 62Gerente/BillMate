@@ -8,7 +8,7 @@ class HouseController extends RestrictedController  {
 
     def save(){
         boolean result
-        String friendsList = ((params.friendsHome != "")? params.friendsHome + "," : "") + params.identifier
+        String friendsList = ((params.friendsHouse != "")? params.friendsHouse + "," : "") + params.identifier
         Set<String> expenseSet = params.expenseType.split(",")
         Set<String> friendsSet = friendsList.split(",")
 

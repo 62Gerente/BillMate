@@ -24,10 +24,18 @@
                             <input type="text" class="form-control" placeholder="<g:message code="com.billmate.expense.modal.placeholderNameExpense" default="Regular expense name"/>" value=""/>
                         </div>
                     </div>
-                    <div class="row form-row m-b-10">
-                        <div class="col-md-12">
+                    <div class="row form-row">
+                        <div class="col-md-6 col-lg-6">
                             <input type="hidden" value="${user}"/>
                             <input type="hidden" class="custom-multiselect-regularExpense-circle" placeholder="<g:message code="com.billmate.expense.modal.placeholderCircle" default="Circle"/>" style="width:100%" class="select2-offscreen"/>
+                        </div>
+                        <div class="col-md-6 col-lg-6">
+                            <div class="input-append success date" style="width: 86%;">
+                                <input type="text" placeholder="<g:message code="com.billmate.expense.modal.beginDate" default="Expense date"/>" class="form-control input-small clockTimePaymentExpense">
+                                <span class="add-on">
+                                    <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                </span>
+                            </div>
                         </div>
                     </div>
                     <div class="row form-row m-b-10">
@@ -88,24 +96,6 @@
                         <div class="col-md-6 col-lg-6">
                             <div class="input-append success date" style="width: 86%;">
                                 <input type="text" placeholder="<g:message code="com.billmate.expense.modal.endDate" default="Final Date of the expense"/>" class="form-control input-small clockTimePaymentExpense">
-                                <span class="add-on">
-                                    <span class="arrow"></span><i class="fa fa-calendar"></i>
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row form-row m-b-10">
-                        <div class="col-md-6 col-lg-6">
-                            <div class="input-append success date" style="width: 86%;">
-                                <input type="text" placeholder="<g:message code="com.billmate.expense.modal.paymentDate" default="Have you paid?"/>" class="form-control input-small clockTimePaymentExpense">
-                                <span class="add-on">
-                                    <span class="arrow"></span><i class="fa fa-calendar"></i>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="col-md-6 col-lg-6">
-                            <div class="input-append success date" style="width: 86%;">
-                                <input type="text" placeholder="<g:message code="com.billmate.expense.modal.receptionDate" default="Already paid you?"/>" class="form-control input-small clockTimePaymentExpense">
                                 <span class="add-on">
                                     <span class="arrow"></span><i class="fa fa-calendar"></i>
                                 </span>

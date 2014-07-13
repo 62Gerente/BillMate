@@ -34,7 +34,7 @@ class Circle {
     }
 
     public Set<Expense> unresolvedExpenses(){
-        this.expenses.findAll{ !it.isResolved() }
+        this.expenses.findAll{ !it.isResolved() && !it.getIsDeleted() }
     }
 
     public Double totalValueOfUnresolvedExpenses(){
@@ -48,7 +48,7 @@ class Circle {
     }
 
     public Set<Expense> resolvedExpenses(){
-        this.expenses.findAll{ !it.isResolved() }
+        this.expenses.findAll{ !it.isResolved() && !it.getIsDeleted() }
     }
 
     public String getCssClass(){

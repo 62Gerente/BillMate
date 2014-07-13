@@ -26,6 +26,20 @@ $('#deleteExpense').confirmModal({
     confirmCallback  : deleteExpense
 });
 
+$('#payExpense').confirmModal({
+    confirmTitle     : 'Please confirm',
+    confirmMessage   : 'Are you sure you want to pay this expense?',
+    confirmOk        : 'Pay',
+    confirmCancel    : 'Cancel',
+    confirmDirection : 'rtl',
+    confirmStyle     : 'primary',
+    confirmCallback  : payExpense
+});
+
 function deleteExpense(){
     $('#deleteExpense').submit()
+}
+
+function payExpense(){
+    $('#payExpense').submit()
 }

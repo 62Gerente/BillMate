@@ -14,8 +14,11 @@
             </span>
         </div>
         <div class="div-btn-widget-payments pull-right">
+            <input type="hidden" value="${user.getId()}"/>
+            <input type="hidden" value="${registeredUser.getId()}"/>
+            <input type="hidden" value="<g:createLink controller="registeredUser" action="unresolvedExpensesUser" />"/>
             <div class="col-md-4 pull-right no-padding home-button-divida-primary-confirm" id="home-button-divida-primary-confirm">
-                <button type="button" class="inline btn btn-primary btn-small btn-cons pull-right"><g:message code="com.billmate.payment.confirm" default="Confirm payment" /></button>
+                <button type="button" class="inline btn btn-primary btn-small btn-cons pull-right whoOweMe" data-toggle="modal" data-target="#detailedConfirmPayments"><g:message code="com.billmate.payment.confirm" default="Confirm payment" /></button>
             </div>
         </div>
     </div>

@@ -103,9 +103,7 @@ class ExpenseController extends RestrictedController {
     def delete(Long id) {
         def expense = Expense.findById(id)
 
-        expense.setIsDeleted(true)
-
-        if(expense.save()){
+        if(expense.delete()){
             flash.message = "com.billmate.expense.delete.success"
             flash.m_default = "Expense deleted with success."
 
@@ -123,11 +121,12 @@ class ExpenseController extends RestrictedController {
         User user = User.findById(RegisteredUser.findById(id).getUserId());
         Debt.findAllByUser(user).each {
             Expense expense = it.getExpense()
-            if(expense) {
+            Debt debt = expense.debtOf(user.getId())
+            if(expense && !expense.getIsDeleted() && debt) {
                 list.add([expense.getTitle(), expense.getResponsible().getName(), expense.getCircle().getName(), expense.amountPaidBy(user.getId()), expense.getValue(),
-                          expense.getInvoice()?.getPath(), expense.getReceipt()?.getPath(), expense.isResolved(), expense.getId(),
+                          expense.getInvoice()?.getId(), expense.getReceipt()?.getId(), expense.isResolved(), expense.getId(),
                           expense.getExpenseType().getCssClass(), expense.getResponsible().getPhotoOrDefault(), expense.getCircle().getCssClass(),
-                          expense.debtOf(user.getId()).getValue(), expense.amountPaid()
+                          debt.getValue(), expense.amountPaid()
                 ]);
             }
         }
@@ -188,8 +187,6 @@ class ExpenseController extends RestrictedController {
         expense.setReceptionDeadline(BMDate.convertStringsToDate(params.receptionDeadline,false))
         expense.setBeginDate(BMDate.convertStringsToDate(params.beginDate,true))
         expense.setEndDate(BMDate.convertStringsToDate(params.endDate,false))
-        expense.setPaymentDate(BMDate.convertStringsToDate(params.paymentDate,false))
-        expense.setReceptionDate(BMDate.convertStringsToDate(params.receptionDate,false))
         expense.setRegularExpense(regularExpense)
         return expense
     }

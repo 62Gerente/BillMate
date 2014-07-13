@@ -7,6 +7,8 @@ $(document).ready(function() {
     var hasCircles = false;
     var hasExpenseTypes = false;
 
+    updateInputsDate();
+
     //Show DatePicker
     function displayDatePicker() {
         $('.clockTimePaymentExpense').datepicker({
@@ -262,6 +264,8 @@ $(document).ready(function() {
         var paymentDate = dates.find("input:nth(4)").val();
         var receptionDate = dates.find("input:nth(5)").val();
 
+        if(beginDate == "") { hasErrors = true; doAlertInput(parent.find("div.row:nth(1) > div:nth(1)"),parent.find("div.row:nth(1) > div:nth(1) input"),"error-control"); }
+
         var listIDsUsers = [];
         var listValuesUsers = [];
         listElements.forEach(function(entry){ listIDsUsers.push(entry.id); listValuesUsers.push(entry.value); });
@@ -337,5 +341,14 @@ $(document).ready(function() {
                 numberSelected++;
         });
         return numberSelected;
+    }
+
+    function updateInputsDate(){
+        $("#expenseCreateModal").find(".simple-options-form-debt .row:nth(1) > div:nth(1) input").change(function(){
+            $("#expenseCreateModal").find(".advanced-options-form-debt .row:nth(1) > div:nth(0) input").val($(this).val());
+        });
+        $("#expenseCreateModal").find(".advanced-options-form-debt .row:nth(1) > div:nth(0) input").change(function(){
+            $("#expenseCreateModal").find(".simple-options-form-debt .row:nth(1) > div:nth(1) input").val($(this).val());
+        });
     }
 });

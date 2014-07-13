@@ -27,6 +27,15 @@ class Debt {
         amount ? amount : 0D
     }
 
+    public Double remainingAmountPaid(){
+        Double amount = unconfirmedPayments().sum{ it.getValue() }
+        amount ? amount : 0D
+    }
+
+    public debtWaitingValidationPayment(){
+        amountInDebt() > 0
+    }
+
     public amountInDebt(){
         value - amountPaid()
     }
@@ -47,4 +56,10 @@ class Debt {
         payments.findAll{ it.getIsValidated() }
     }
 
+    public void confirm() {
+        if (!getResolvedDate() && getValue() <= amountPaid()) {
+            setResolvedDate(new Date())
+            save().getExpense().confirm(this)
+        }
+    }
 }

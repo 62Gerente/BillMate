@@ -21,9 +21,6 @@ class RegularExpense {
     Date receptionDeadline
 
     Date receptionBeginDate = new Date()
-    Date receptionEndDate
-    Date paymentBeginDate = new Date()
-    Date paymentEndDate
 
     Integer intervalDays = 0
     Integer intervalMonths = 1
@@ -47,9 +44,6 @@ class RegularExpense {
         receptionDeadline nullable: true
 
         receptionBeginDate nullable: false
-        receptionEndDate nullable: true
-        paymentBeginDate nullable: false
-        paymentEndDate nullable: true
 
         intervalDays nullable: false, min: 0
         intervalMonths nullable: false, min: 0
@@ -65,7 +59,7 @@ class RegularExpense {
     public boolean inReceptionTime(){
         Date date, dateBefore, dateAfter
         use(TimeCategory) {
-            date = beginDate + intervalDays.days + intervalMonths.months + intervalYears.years
+            date = receptionBeginDate + intervalDays.days + intervalMonths.months + intervalYears.years
             dateBefore = new Date()
             dateAfter = dateBefore + 5.days
         }
@@ -74,19 +68,22 @@ class RegularExpense {
 
     public postpone() {
         use(TimeCategory) {
-            beginDate = beginDate + intervalDays.days + intervalMonths.months + intervalYears.years
+            if(beginDate) beginDate = beginDate + intervalDays.days + intervalMonths.months + intervalYears.years
+            if(endDate) endDate = endDate + intervalDays.days + intervalMonths.months + intervalYears.years
+            if(paymentDeadline) paymentDeadline = paymentDeadline + intervalDays.days + intervalMonths.months + intervalYears.years
+            if(receptionDeadline) receptionDeadline = receptionDeadline + intervalDays.days + intervalMonths.months + intervalYears.years
+            if(receptionBeginDate) receptionBeginDate = receptionBeginDate + intervalDays.days + intervalMonths.months + intervalYears.years
         }
     }
 
-    def toJSON(){
+    public toJSON(){
         return [name: getTitle(), description: getDescription(), id : getExpenseType().getId(), expenseTypeName: getExpenseType().getName(),
          expenseTypeCssClass: getExpenseType().getCssClass(), value: getValue(), paymentDeadline: BMDate.convertDateFormat(getPaymentDeadline()),
          receptionDeadline: BMDate.convertDateFormat(getReceptionDeadline()), receptionBeginDate: BMDate.convertDateFormat(getReceptionBeginDate()),
-         receptionEndDate: BMDate.convertDateFormat(getReceptionEndDate()), paymentBeginDate: BMDate.convertDateFormat(getPaymentBeginDate()),
-         paymentEndDate: BMDate.convertDateFormat(getPaymentEndDate())]
+         beginDate: BMDate.convertDateFormat(getBeginDate()), endDate: BMDate.convertDateFormat(getEndDate())]
     }
 
-    def create(List<String> idsUsers, List<Double> value){
+    public create(List<String> idsUsers, List<Double> value){
         boolean result = false;
         int position = 0
         withTransaction {status ->
@@ -94,14 +91,7 @@ class RegularExpense {
                 RegularExpense regularExpense = save(flush: true, failOnError: true)
                 for(String str : idsUsers){
                     if( Double.parseDouble(value[position]) > 0 ){
-                        User user = User.findById(Long.parseLong(str))
-                        Debt debt = new Debt(value: value[position], user: user, regularExpense: regularExpense).save()
-                        regularExpense.addToAssignedUsers(user)
-                        RegisteredUser registeredUser = user.getRegisteredUser()
-                        if(registeredUser && registeredUser.getId() == id) {
-                            new Payment(user: user, debt: debt, value: Double.parseDouble(value[position]), validationDate: new Date(), isValidated: true).save()
-                            debt.setResolvedDate(new Date())
-                        }
+                        regularExpense.addToAssignedUsers(User.findById(Long.parseLong(str)))
                     }
                     position++;
                 }
@@ -115,7 +105,7 @@ class RegularExpense {
         return result;
     }
 
-    Expense fromRegularExpenseToExpense(Expense expense, RegisteredUser registeredUser, Double value){
+    public Expense fromRegularExpenseToExpense(Expense expense, RegisteredUser registeredUser, Double value){
         expense.setRegularExpense(this)
         expense.setResponsible(getResponsible())
         expense.setExpenseType(getExpenseType())
@@ -129,7 +119,6 @@ class RegularExpense {
         expense.setReceptionDeadline(getReceptionDeadline())
         expense.setCreatedAt(new Date())
         expense.setPaymentDate(getPaymentDeadline())
-        expense.setReceptionDate(getReceptionEndDate())
         expense.setIsDeleted(false)
         expense.secureSave()
         double partialValue = value / getAssignedUsers().size()

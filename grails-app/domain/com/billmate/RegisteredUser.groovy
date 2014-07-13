@@ -138,7 +138,7 @@ class RegisteredUser {
     }
 
     public Set<Expense> unresolvedResponsibleExpenses() {
-        responsibleExpenses.findAll { !it.isResolved() }
+        responsibleExpenses.findAll { !it.isResolved() && !it.getIsDeleted() }
     }
 
     // totalAsset
@@ -148,22 +148,23 @@ class RegisteredUser {
     }
 
     // totalAssetOf
-    public Double amountInAssetOf(Double userID) {
+    public Double amountInAssetOf(Long userID) {
         unresolvedResponsibleExpensesBy(userID).sum { it.amountInDebtOf(userID) }
     }
 
     public Set<Expense> unresolvedResponsibleExpensesBy(Long user_id) {
-        unresolvedResponsibleExpenses().findAll { !it.isResolvedBy(user_id) }
+        unresolvedResponsibleExpenses().findAll { !it.isResolvedBy(user_id) && !it.getIsDeleted() && it.amountInDebtOf(user_id)!=0 }
     }
 
     public Set<User> whoOweMe() {
         Set<User> users = new HashSet<>()
-        unresolvedResponsibleExpenses().each { users.addAll(it.assignedUsersInDebt()) }
+        unresolvedResponsibleExpenses().each { users.addAll(it.assignedUsersInDebtOrWaitingValidation()) }
         users
     }
 
     public Set<Payment> unconfirmedPaymentsOnResponsibleExpenses() {
         Set<Payment> unconfirmedPayments = new HashSet<>()
+        Set<Expense> expenseSet = unresolvedResponsibleExpenses()
         unresolvedResponsibleExpenses().each { unconfirmedPayments.addAll(it.unconfirmedPayments()) }
         unconfirmedPayments
     }
@@ -215,7 +216,7 @@ class RegisteredUser {
         monthResponsibleExpenses(date).findAll { it.getExpenseType().getId() == expenseType.getId() }
     }
 
-    public boolean confirmPayments(List<String> paymentIds, RegisteredUser sessionUser) {
+    public boolean confirmPayments(List<String> paymentIds) {
         Set<Payment> payments = unconfirmedPaymentsOnResponsibleExpenses().findAll {
             paymentIds.contains(it.getId().toString())
         }
@@ -230,6 +231,12 @@ class RegisteredUser {
                     def expense = it.getExpense()
                     def responsible = expense.getResponsible()
                     def circle = expense.getCircle()
+
+                    Debt debt = expense.debtOf(it.getUserId())
+                    if (!debt.getResolvedDate() && debt.getValue() <= debt.amountPaid()) {
+                        debt.setResolvedDate(new Date())
+                        debt.save()
+                    }
 
                     // Save action and notification
                     def paymentAction = new Action(actionType: ActionType.findWhere(type: 'addPaymentExpense'), actor: it.getUser().getRegisteredUser(), user: responsible.getUser(), payment: it, circle: circle, expense: expense)
@@ -262,13 +269,11 @@ class RegisteredUser {
         withTransaction { status ->
             try {
                 payments.each {
-                    it.setIsValidated(false)
-                    it.setValidationDate(new Date())
-                    it.save()
-
-                    def expense = it.getExpense()
-                    def payer = it.getDebt().getUser()
-                    def circle = expense.getCircle()
+                    Debt debt = it.getDebt()
+                    debt.setResolvedDate(null)
+                    debt.removeFromPayments(it)
+                    debt.save()
+                    it.delete()
                 }
             } catch (Exception eCancelPayment) {
                 eCancelPayment.printStackTrace()

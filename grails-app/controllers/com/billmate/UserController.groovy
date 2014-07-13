@@ -47,8 +47,8 @@ class UserController extends RestrictedController {
         date = date ? (date + 1) : actualMonth
 
         user?.getExpenses().each {
-            if (actualMonth == date)
-                listEvents.add(title: it.getTitle() + " - " + it.getCircle().getName(), start: it.getBeginDate(), end: it.getEndDate(),
+            if (actualMonth == date && !it.getIsDeleted())
+                listEvents.add(title: it.getTitle() + " - " + it.getCircle().getName(), start: it.getBeginDate(), end: it.getPaymentDeadline(),
                         url: createLink(controller: "expense", action: "show", id: it.getId()))
         }
 

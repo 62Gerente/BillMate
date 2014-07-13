@@ -242,8 +242,7 @@ $(document).ready(function() {
         var receptionDeadline = dates.find("input:nth(1)").val();
         var beginDate = dates.find("input:nth(2)").val();
         var endDate = dates.find("input:nth(3)").val();
-        var receptionEndDate = dates.find("input:nth(4)").val();
-        var paymentEndDate = dates.find("input:nth(5)").val();
+        var receptionBeginDate = parent.find("div.row:nth(1) input.form-control").val();
 
 
         var listIDsUsers = [];
@@ -256,7 +255,7 @@ $(document).ready(function() {
         var formData = {name: name, idCircle: idCircleRegularExpense, idExpenseType: idExpenseTypeExpense, value: value, description: description,
             idUser: idUserRegularExpense, listOfFriends: listIDsUsers, listValuesUsers: listValuesUsers, paymentDeadline: paymentDeadline,
             receptionDeadline: receptionDeadline, beginDate: beginDate, endDate: endDate, numberSelected: getNumberOfSelected(), periodicity: periodicity,
-            receptionEndDate: receptionEndDate, paymentEndDate: paymentEndDate};
+            receptionBeginDate: receptionBeginDate};
 
         if(!hasErrors){
             $.ajax({

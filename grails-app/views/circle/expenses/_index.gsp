@@ -2,7 +2,7 @@
     <div class="tiles white m-t-15">
         <div class="tiles-body no-padding">
             <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
-                <h4 class="text-black bold inline uppercase"><g:message code="com.billmate.circle.expense.title" default="Monthly expenses" /></h4>
+                <h4 class="text-black bold inline uppercase"><g:message code="com.billmate.circle.expense.table" default="Monthly expenses" /></h4>
             </div>
             <div class="notification-messages no-padding m-t-20">
                 <div class="grid simple">

@@ -109,9 +109,9 @@
 </div>
 <a href="#" class="scrollup"></a>
 <div class="footer-widget">
-    <!--<button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#expenseCreateModal">-->
-    <button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#newRegularExpenseCreateModal">
-        <g:message code="com.billmate.sidebar.addDebt" default="Add Debt"/>
+    <!--<button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#newRegularExpenseCreateModal">-->
+    <button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#expenseCreateModal">
+        <g:message code="com.billmate.sidebar.addDebt" default="Confirm Payment"/>
     </button>
     <button type="button" id="btn-advanced-options-regularExpense" class="btn btn-primary btn-cons hidden" data-toggle="modal" data-target="#regularExpenseCreateModal"></button>
 </div>
