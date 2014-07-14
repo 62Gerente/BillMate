@@ -16,7 +16,6 @@ class RegisterController {
         def registeredUser = new RegisteredUser(name: params['name'], email: params['email'], password: params['password'])
         def response = []
         if(registeredUser.secureSave()){
-            session.user = registeredUser
             def token = UUID.randomUUID().toString()
             AuthenticationToken authenticationToken = new AuthenticationToken(username: registeredUser.email, token: token)
             authenticationToken.secureSave()

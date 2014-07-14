@@ -23,7 +23,6 @@ class SessionController {
             def registeredUser = RegisteredUser.findWhere(user: user)
 
             if (registeredUser && registeredUser.password == new Sha256Hash(params['password']).toHex()) {
-                session.user = registeredUser
                 def token = UUID.randomUUID().toString()
                 AuthenticationToken authenticationToken = new AuthenticationToken(username: user.email, token: token)
                 authenticationToken.secureSave()
