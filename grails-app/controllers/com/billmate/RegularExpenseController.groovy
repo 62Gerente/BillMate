@@ -108,7 +108,7 @@ class RegularExpenseController extends RestrictedController{
                 'message': message(code: "com.billmate.regularExpense.updateProperty.success")
         ]
 
-        if(!regularExpense.save()) {
+        if(!regularExpense.securSsave()) {
             response.error = true
             response.message = message(error: regularExpense.getErrors().getAllErrors().first());
         }
@@ -149,7 +149,7 @@ class RegularExpenseController extends RestrictedController{
 
         regularExpense.postpone()
 
-        if (!regularExpense.save()) {
+        if (!regularExpense.secureSave()) {
             responseData.error = true;
             if(regularExpense.getErrors().getErrorCount()){
                 responseData.message = message(error: regularExpense.getErrors().getAllErrors().first())
