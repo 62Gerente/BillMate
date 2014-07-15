@@ -6,6 +6,7 @@
 
 <body>
 <div class="row-fluid">
+    <g:render template="/shared/active" model="[active: active]"/>
     <div class="span12">
         <div class="grid simple ">
             <div class="grid-title">

@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
+    <g:render template="/shared/active" model="[active: active]"/>
     <title><g:message code="com.billmate.circleDashboard.page.title" default="BillMate - ${0} settings" args="[circle]" /></title>
 
     <asset:stylesheet href="../plugins/bootstrap-editable/bootstrap-editable.css"/>

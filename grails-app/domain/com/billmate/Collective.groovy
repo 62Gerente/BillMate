@@ -15,12 +15,10 @@ class Collective {
     }
 
     public Collective() {
-        super()
         circle = new Circle()
     }
 
     public Collective(Map map) {
-        super(map)
         circle = new Circle(map)
     }
 

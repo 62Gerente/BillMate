@@ -10,6 +10,7 @@
 <body>
 <div class="col-md-12">
     <g:render template="/shared/messages"/>
+    <g:render template="/shared/active" model="[active: active]"/>
 </div>
 <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
     <g:render template="/expense/widgets/unresolved" model="[registeredUser: user, circle: dashboard.getCircle(), expenses: dashboard.unresolvedExpenses()]"/>

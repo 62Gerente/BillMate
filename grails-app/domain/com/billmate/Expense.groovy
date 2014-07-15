@@ -134,6 +134,10 @@ class Expense {
         }
     }
 
+    public List<Action> getActionsWithoutType(ActionType type){
+
+    }
+
     public Set<Payment> unvalidatedPayments(Long userID){
         debtOf(userID)?.getPayments().findAll{ !it.getIsValidated() }
     }
@@ -161,7 +165,7 @@ class Expense {
     }
 
     public Double amountPaid(){
-        Double amount = debts.sum{ it.amountPaid() }
+        Double amount = debts.sum{ it.amountPaidWithoutValidation() }
         amount? amount : 0D
     }
 
@@ -248,6 +252,8 @@ class Expense {
     }
 
     public boolean create(List<String> idsUsers, List<Double> value, Long id){
+        Double acc = 0
+        Integer numberOfUsers = 0
         boolean result = false;
         int position = 0
         withTransaction {status ->
@@ -258,15 +264,29 @@ class Expense {
                     regularExpense.save(flush: true, failOnError: true)
                 }
                 if(idsUsers.size() == 1) expense.setReceptionDate(new Date())
+                value.each { if(it > 0) numberOfUsers++ }
+
+                def newExpenseAction = new Action(actionType: ActionType.findWhere(type: 'addExpenseCircle'), actor: expense.getResponsible(), circle: expense.getCircle(), expense: expense)
+                newExpenseAction.save()
+
                 for(String str : idsUsers){
+                    value[position] = value[position].round(2)
                     if( value[position] > 0 ){
                         User user = User.findById(Long.parseLong(str))
+                        if(numberOfUsers <= (position + 1))
+                            value[position] = (expense.getValue() - acc);
                         Debt debt = new Debt(value: value[position], user: user, expense: expense).save()
                         this.addToAssignedUsers(user)
                         RegisteredUser registeredUser = user.getRegisteredUser()
                         if(registeredUser && registeredUser.getId() == getResponsibleId()) {
                             new Payment(user: user, debt: debt, value: value[position], validationDate: new Date(), isValidated: true).save()
                             debt.setResolvedDate(new Date())
+                        }
+                        acc += value[position]
+
+                        if(user.getRegisteredUser()){
+                            def newExpenseNotification = new SystemNotification(action: newExpenseAction, registeredUser: user.getRegisteredUser())
+                            newExpenseNotification.secureSave()
                         }
                     }
                     position++;
@@ -309,8 +329,34 @@ class Expense {
         if(flag){
             new Payment(debt: debt, user: user, value: val).save()
         }else{
-            new Payment(debt: debt, user: user, value: val, validationDate: new Date(), isValidated: true).save()
-            debt.confirm()
+            withTransaction { status ->
+                try {
+                        Payment payment = new Payment(debt: debt, user: user, value: val, validationDate: new Date(), isValidated: true)
+                        payment.save()
+                        debt.confirm()
+
+                        // Save action and notification
+                        Expense debtExpense = debt.getExpense()
+                        User debtPayer = user
+                        Circle debtCircle = debtExpense.getCircle()
+                        RegisteredUser expenseResponsible = debtExpense.getResponsible()
+                        RegisteredUser debtPayerRegisteredUser = debtPayer.getRegisteredUser()
+
+                        def paymentAction = new Action(actionType: ActionType.findWhere(type: 'addPaymentExpense'), actor: debtPayerRegisteredUser, user: expenseResponsible.getUser(), payment: payment, circle: debtCircle, expense: debtExpense)
+                        paymentAction.save()
+
+                        def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: debtPayerRegisteredUser)
+                        paymentNotification.secureSave()
+
+                        // Save action and notification
+                        paymentAction = new Action(actionType: ActionType.findWhere(type: 'receivedPaymentExpense'), actor: expenseResponsible, user: debtPayer, payment: payment, circle: debtCircle, expense: debtExpense)
+                        paymentAction.save()
+
+                }catch(Exception ePayAndConfirm){
+                    ePayAndConfirm.printStackTrace()
+                    status.setRollbackOnly()
+                }
+            }
         }
     }
 

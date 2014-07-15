@@ -50,7 +50,7 @@ class CircleController extends RestrictedController  {
             def debtUser = it.debtOf(user.getId())
             if(debtUser){
                 list.add([it.getTitle(), it.getResponsible().getName(), it.amountPaidBy(user.getId()), it.getValue(),
-                          it.getInvoice()?.getPath(), it.getReceipt()?.getPath(), it.isResolved(), it.getId(),
+                          it.getInvoice()?.getId(), it.getReceipt()?.getId(), it.isResolved(), it.getId(),
                           it.getExpenseType().getCssClass(), it.getResponsible().getPhotoOrDefault(), it.getCircle().getCssClass(),
                           debtUser.getValue(), it.amountPaid()
                 ]);
@@ -115,7 +115,7 @@ class CircleController extends RestrictedController  {
             return
         }
 
-        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle, history: circleHistory]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle, history: circleHistory, active: 0]
     }
 
     def edit(Long id) {
@@ -126,7 +126,7 @@ class CircleController extends RestrictedController  {
                 [name: message(code: "com.billmate.circle.edit")]
         ]
 
-        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle, active: 0]
     }
 
     def updateProperty(Long id) {
@@ -246,7 +246,8 @@ class CircleController extends RestrictedController  {
         def list = []
         Circle circle = Circle.findById(id)
         RegularExpense.findAllByCircle(circle).each {
-            list.add([it.getTitle(), it.getResponsible().getName(), it.getValue(), BMDate.convertDateFormat(it.getBeginDate()), it.getId(), it.getExpenseType().getCssClass(), it.getResponsible().getPhotoOrDefault()])
+            if(it.isActive)
+                list.add([it.getTitle(), it.getResponsible().getName(), it.getValue(), BMDate.convertDateFormat(it.getBeginDate()), it.getId(), it.getExpenseType().getCssClass(), it.getResponsible().getPhotoOrDefault()])
         }
 
         def response = ['data': list]

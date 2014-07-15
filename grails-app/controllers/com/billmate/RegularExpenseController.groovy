@@ -3,7 +3,7 @@ package com.billmate
 import grails.converters.JSON
 
 class RegularExpenseController extends RestrictedController{
-    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"], show: "POST"]
+    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"], show: ["POST", "GET"]]
 
     def beforeInterceptor = [action: this.&checkSession]
 
@@ -19,7 +19,10 @@ class RegularExpenseController extends RestrictedController{
         }
         else {
             List<String> listOfFriends = params.getList("listOfFriends[]")
-            List<Double> listValuesUsers = params.getList("listValuesUsers[]")
+            List<Double> listValuesUsers = new LinkedList<>()
+            params.getList("listValuesUsers[]").each {
+                listValuesUsers.add(Double.parseDouble((String)it))
+            }
 
             RegularExpense regularExpense = setValuesRegularExpense(params)
 
@@ -41,7 +44,7 @@ class RegularExpenseController extends RestrictedController{
         render response as JSON
     }
 
-    def extractInts( String input ) {
+    def extractInts(String input) {
         input.findAll( /\d+/ )*.toInteger()
     }
 
@@ -70,6 +73,77 @@ class RegularExpenseController extends RestrictedController{
         regularExpense.setIntervalDays(day)
 
         return regularExpense
+    }
+
+    def show(Long id) {
+        def regularExpense = RegularExpense.findById(id)
+        def format = params.format
+
+        def breadcrumb = [
+                [href: createLink(controller: "dashboard", action: "circle", id: regularExpense.getCircleId()), name: regularExpense.getCircle().getName()],
+                [href: createLink(controller: "circle", action: "edit", id: regularExpense.getCircleId()), name: regularExpense.getTitle()],
+                [name: message(code: "com.billmate.regularexpense.edit")]
+        ]
+
+        if(format && format == "json"){
+            def responseData = [
+                    'error'  : true,
+                    'message': message(code: "com.billmate.regularExpense.cancel.success")
+            ]
+
+            if(regularExpense){
+                responseData.data = regularExpense.toJSON()
+                responseData.error = false
+                responseData.message = message(code: "com.billmate.regularExpense.cancel.success")
+            }
+
+            render responseData as JSON
+        }else{
+            return [breadcrumb: breadcrumb, user: authenticatedUser(), regularExpense: regularExpense, active: 1]
+        }
+    }
+
+    def updateProperty(Long id) {
+        def regularExpense = RegularExpense.findById(id)
+        def property = params.name
+        def value = params.value
+
+        def dates = ["beginDate", "endDate", "paymentDeadline", "receptionDeadline", "paymentDate", "receptionDate", "receptionBeginDate"]
+        def doubles = ["value"]
+
+        if(dates.contains(property)){
+            if(value){
+                value = new Date().parse("DD-MM-YYYY HH:mm", value)
+            }else{
+                value = null
+            }
+        }else if(doubles.contains(property)){
+            if(value){
+                value = Double.parseDouble(value)
+            }else{
+                value = null
+            }
+        }else if(property == "responsible"){
+            if(value && ((String)value).isLong()){
+                def idUser = Long.parseLong(value)
+                value = RegisteredUser.findById(idUser)
+            }
+        }
+
+        regularExpense.setProperty(property, value)
+        regularExpense.ajustValues()
+
+        def response = [
+                'error'  : false,
+                'message': message(code: "com.billmate.regularExpense.updateProperty.success")
+        ]
+
+        if(!regularExpense.secureSave()) {
+            response.error = true
+            response.message = message(error: regularExpense.getErrors().getAllErrors().first());
+        }
+
+        render response as JSON
     }
 
     def saveExpense(Long id) {
@@ -105,7 +179,7 @@ class RegularExpenseController extends RestrictedController{
 
         regularExpense.postpone()
 
-        if (!regularExpense.save()) {
+        if (!regularExpense.secureSave()) {
             responseData.error = true;
             if(regularExpense.getErrors().getErrorCount()){
                 responseData.message = message(error: regularExpense.getErrors().getAllErrors().first())
@@ -113,23 +187,6 @@ class RegularExpenseController extends RestrictedController{
                 responseData.message = message(code: "com.billmate.generic.error.message")
             }
 
-        }
-
-        render responseData as JSON
-    }
-
-    def show(Long id){
-        def responseData = [
-                'error'  : true,
-                'message': message(code: "com.billmate.regularExpense.cancel.success")
-        ]
-
-        RegularExpense regularExpense = RegularExpense.findById(id)
-
-        if(regularExpense){
-            responseData.data = regularExpense.toJSON()
-            responseData.error = false
-            responseData.message = message(code: "com.billmate.regularExpense.cancel.success")
         }
 
         render responseData as JSON
@@ -145,4 +202,94 @@ class RegularExpenseController extends RestrictedController{
 
         render response as JSON
     }
+
+    def unschedule(Long id){
+        def regularExpense = RegularExpense.get(id)
+
+        regularExpense.setIsActive(false)
+
+        if(regularExpense.secureSave()){
+            flash.message = "com.billmate.regularExpense.unschedule.success"
+            flash.m_default = "Expense unscheduled with success."
+
+            return redirect(controller: 'regularExpense', action: 'show', id: regularExpense.getId())
+        }else{
+            flash.error = "com.billmate.regularExpense.unschedule.failure"
+            flash.e_default = "Error unscheduling expense."
+
+            return redirect(controller: 'regularExpense', action: 'show', id: regularExpense.getId())
+        }
+    }
+
+    def delete(Long id) {
+        def expense = Expense.findById(id)
+
+        expense.setIsDeleted(true)
+
+        if(expense.save()){
+            flash.message = "com.billmate.expense.delete.success"
+            flash.m_default = "Expense deleted with success."
+
+            return redirect(controller: 'dashboard', action: 'circle', id: expense.getCircle().getId())
+        }else{
+            flash.error = "com.billmate.expense.delete.failure"
+            flash.e_default = "Error deleting expense."
+
+            return redirect(controller: 'expense', action: 'show', id: expense.getId())
+        }
+    }
+
+    def listUsersBy(Long id){
+        Set<User> userSet = RegularExpense.getFriendsOfRegularExpenseByTermFormated(params.q.toUpperCase(), id)
+        def response = [ 'data': userSet ]
+        render response as JSON
+    }
+
+    def adduser(Long id, Long id_regular_expense){
+        User user = User.findById(id)
+        def response = [
+                error: true,
+                message: message(code: "com.billmate.circle.user.add.insuccess")
+        ]
+        if(user){
+            RegularExpense.findById(id_regular_expense).addUsersAndAjustValues(id)
+
+            response.error = false
+            response.message = message(code: "com.billmate.circle.user.add.success")
+        }
+
+        render response as JSON
+    }
+
+    def deleteUser(Long id, Long id_regular_expense){
+        User user = User.findById(id)
+        def response = [
+                error: true,
+                message: message(code: "com.billmate.circle.user.delete.insuccess")
+        ]
+        if(user){
+            RegularExpense regularExpense = RegularExpense.findById(id_regular_expense)
+            regularExpense.removeUserAndAjustValues(user)
+            response.error = false
+            response.message = message(code: "com.billmate.circle.user.delete.success")
+        }
+
+        render response as JSON
+    }
+
+    def expenses(Long id){
+        def list = []
+        RegularExpense regularExpense = RegularExpense.findById(id)
+        if(regularExpense)
+        {
+            Expense.findAllByRegularExpense(regularExpense).each {
+                list.add([it.getTitle(), it.getResponsible().getName(), it.getValue(), BMDate.convertDateFormat(it.getBeginDate()), it.getId(), it.getExpenseType().getCssClass(), it.getResponsible().getPhotoOrDefault()])
+            }
+        }
+
+        def response = ['data': list]
+
+        render response as JSON
+    }
+
 }

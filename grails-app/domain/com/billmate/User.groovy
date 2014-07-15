@@ -135,13 +135,23 @@ class User {
     public List<Action> latestEvents(){
         Set<Action> latestEvents = new HashSet<>();
 
-        latestEvents.addAll( referencedActions )
-        circles.each{ latestEvents.addAll( it.getActions() ) }
-        expenses.each{ latestEvents.addAll( it.getActions() ) }
-        regularExpenses.each{ latestEvents.addAll( it.getActions() ) }
+        def importantActionsTypes = [
+                ActionTypeEnum.addExpenseCircle.toString(),
+                ActionTypeEnum.addRegularExpenseCircle.toString(),
+                ActionTypeEnum.addUserCircle.toString(),
+                ActionTypeEnum.addPaymentExpense.toString(),
+                ActionTypeEnum.removedFromCircle.toString(),
+                ActionTypeEnum.addCollective.toString(),
+                ActionTypeEnum.addHouse.toString()
+        ]
+
+        latestEvents.addAll( referencedActions.findAll { importantActionsTypes.contains(it.getActionType().getType()) } )
+        circles.each{ latestEvents.addAll( it.getActions().findAll { importantActionsTypes.contains(it.getActionType().getType()) } ) }
+        expenses.each{ latestEvents.addAll( it.getActions().findAll { importantActionsTypes.contains(it.getActionType().getType()) } ) }
+        regularExpenses.each{ latestEvents.addAll( it.getActions().findAll { importantActionsTypes.contains(it.getActionType().getType()) } ) }
 
         if(registeredUser){
-            latestEvents.addAll( registeredUser.latestResponsibleEvents() )
+            latestEvents.addAll( registeredUser.latestResponsibleEvents().findAll { importantActionsTypes.contains(it.getActionType().getType()) } )
         }
 
         latestEvents.toList()

@@ -450,7 +450,7 @@ $(document).ready(function() {
         fnRowCallback  : function( nRow, aData, iDisplayIndex ) {
             responsiveHelper.createExpandIcon(nRow);
             $(nRow).click(function(e){
-                document.location.href = "/BillMate/expense/show/" + aData[4];
+                document.location.href = "/BillMate/regularExpense/show/" + aData[4];
             });
         },
         fnDrawCallback : function (oSettings) {

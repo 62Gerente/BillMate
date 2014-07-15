@@ -19,12 +19,10 @@ class House{
     }
 
     public House() {
-        super()
         circle = new Circle()
     }
 
     public House(Map map) {
-        super(map)
         circle = new Circle(map)
     }
 

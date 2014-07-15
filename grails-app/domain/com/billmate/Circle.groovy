@@ -50,8 +50,8 @@ class Circle {
         total ? total : 0D
     }
 
-    public Double totalDebtOfUnresolvedExpenses(){
-        Double total = unresolvedExpenses().sum{ it.amountInDebt() }
+    public Double amountPaidOnUnresolvedExpense(){
+        Double total = unresolvedExpenses().sum{ it.amountPaid() }
         total ? total : 0D
     }
 
@@ -103,8 +103,11 @@ class Circle {
                 customExpenseType.persist()
                 expenseType = customExpenseType.getExpenseType()
             }
-            if(expenseType) addToExpenseTypes(expenseType)
-            expenseType.addToCircles(this)
+            if(expenseType)
+            {
+                addToExpenseTypes(expenseType)
+                expenseType.addToCircles(this)
+            }
         }
     }
 
@@ -156,7 +159,7 @@ class Circle {
                     action.setUser(user)
                 }
             }
-            if(action.getUserId().equals(sessionUser.getUserId()) == false) {
+            if(action.getUser() && action.getUserId().equals(sessionUser.getUserId()) == false) {
                 action.save()
                 actions.add(action)
             }
@@ -171,9 +174,19 @@ class Circle {
     public List<Action> latestEvents(){
         Set<Action> latestEvents = new HashSet<>();
 
-        latestEvents.addAll( actions )
-        expenses.each{ latestEvents.addAll( it.getActions() ) }
-        regularExpenses.each{ latestEvents.addAll( it.getActions() ) }
+        def importantActionsTypes = [
+                ActionTypeEnum.addExpenseCircle.toString(),
+                ActionTypeEnum.addRegularExpenseCircle.toString(),
+                ActionTypeEnum.addUserCircle.toString(),
+                ActionTypeEnum.addPaymentExpense.toString(),
+                ActionTypeEnum.removedFromCircle.toString(),
+                ActionTypeEnum.addCollective.toString(),
+                ActionTypeEnum.addHouse.toString()
+        ]
+
+        latestEvents.addAll( actions.findAll { importantActionsTypes.contains(it.getActionType().getType()) } )
+        expenses.each{ latestEvents.addAll( it.getActions().findAll { importantActionsTypes.contains(it.getActionType().getType()) } ) }
+        regularExpenses.each{ latestEvents.addAll( it.getActions().findAll { importantActionsTypes.contains(it.getActionType().getType()) } ) }
 
         latestEvents.toList()
     }

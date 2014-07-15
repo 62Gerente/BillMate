@@ -7,7 +7,7 @@
             <div class="pull-right home-button-primary-confirm">
                 <span class="label label-important">
                     <h5 class="text-white inline p-t-2">
-                        <g:formatNumber number="${circle.totalDebtOfResolvedExpenses()}" type="currency" currencyCode="EUR" />
+                        <g:formatNumber number="${circle.amountPaidOnUnresolvedExpense()}" type="currency" currencyCode="EUR" />
                         /
                         <span class="bold">
                             <g:formatNumber number="${circle.totalValueOfUnresolvedExpenses()}" type="currency" currencyCode="EUR" />

@@ -13,10 +13,11 @@ class ExpenseController extends RestrictedController {
     def show(Long id) {
         def expense = Expense.findById(id)
         def breadcrumb = [
+                [href: createLink(controller: "dashboard", action: "circle", id: expense.getCircleId()), name: expense.getCircle().getName()],
                 [name: expense.getTitle()]
         ]
 
-        return [breadcrumb: breadcrumb, user: authenticatedUser(), expense: expense]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), expense: expense, active: 1]
     }
 
     def updateProperty(Long id) {
@@ -109,23 +110,21 @@ class ExpenseController extends RestrictedController {
     def delete(Long id) {
         def expense = Expense.findById(id)
 
+        expense.setIsDeleted(true)
         if(expense.delete()){
             flash.message = "com.billmate.expense.delete.success"
             flash.m_default = "Expense deleted with success."
-
-            return redirect(controller: 'dashboard', action: 'circle', id: expense.getCircle().getId())
         }else{
             flash.error = "com.billmate.expense.delete.failure"
             flash.e_default = "Error deleting expense."
-
-            return redirect(controller: 'expense', action: 'show', id: expense.getId())
         }
+        return redirect(controller: 'dashboard', action: 'circle', id: expense.getCircle().getId())
     }
 
     def list(Long id){
         def list = []
         User user = User.findById(RegisteredUser.findById(id).getUserId());
-        Debt.findAllByUser(user).each {
+        Debt.findAllByUserAndExpenseIsNotNull(user).each {
             Expense expense = it.getExpense()
             Debt debt = expense.debtOf(user.getId())
             if(expense && !expense.getIsDeleted() && debt) {
@@ -175,7 +174,7 @@ class ExpenseController extends RestrictedController {
                     'code': message(code: "com.billmate.expense.save.success"),
                     'class': "alert alert-success form-modal-house-error"
             ]
-            if (!expense.create(listOfFriends, listValuesUsers, session.user.getId())) {
+            if (!expense.create(listOfFriends, listValuesUsers, authenticatedUser().getId())) {
                 response.error = true
                 response.code = message(code: "com.billmate.expense.save.insuccess")
                 response.class = "alert alert-error form-modal-house-error"

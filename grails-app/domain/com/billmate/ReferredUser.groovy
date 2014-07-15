@@ -13,12 +13,10 @@ class ReferredUser  {
     }
 
     public ReferredUser() {
-        super()
         user = new User()
     }
 
     public ReferredUser(Map map) {
-        super(map)
         user = new User(map)
     }
 

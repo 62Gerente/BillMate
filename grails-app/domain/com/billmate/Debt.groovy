@@ -14,6 +14,7 @@ class Debt {
     Double value
     Date resolvedDate
     Date createdAt = new Date()
+    Boolean deleted = false
 
     static constraints = {
         expense nullable: true
@@ -23,6 +24,11 @@ class Debt {
         value min: 0D, nullable: false
         resolvedDate nullable: true
         createdAt nullable: false
+    }
+
+    public Double amountPaidWithoutValidation(){
+        Double amount = notUnconfirmedWithoutValidationPayments().sum{ it.getValue() }
+        amount ? amount : 0D
     }
 
     public Double amountPaid(){
@@ -45,6 +51,10 @@ class Debt {
 
     public boolean isResolved(){
         resolvedDate
+    }
+
+    public Set<Payment> notUnconfirmedWithoutValidationPayments(){
+        payments.findAll{ it.getIsValidated() || it.getValidationDate() }
     }
 
     public Set<Payment> notUnconfirmedPayments(){

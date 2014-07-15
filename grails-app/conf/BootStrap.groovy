@@ -124,7 +124,7 @@ class BootStrap {
         }
 
         if(Expense.count == 0) {
-            def friday_dinner = new Expense(title: 'Friday Dinner', value: 25.25, expenseType: ExpenseType.findWhere(name: 'Meal'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, incidunt, provident, aut, numquam aspernatur ullam inventore perferendis amet quia animi dignissimos laborum nostrum voluptatibus natus deleniti voluptas veritatis perspiciatis quas?', beginDate: new Date())
+            /*def friday_dinner = new Expense(title: 'Friday Dinner', value: 25.25, expenseType: ExpenseType.findWhere(name: 'Meal'), circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Obcaecati, incidunt, provident, aut, numquam aspernatur ullam inventore perferendis amet quia animi dignissimos laborum nostrum voluptatibus natus deleniti voluptas veritatis perspiciatis quas?')
             friday_dinner.save()
 
             def fd_debt = new Debt(user: User.findWhere(email: 'pmcleite@gmail.com'), expense: friday_dinner, value: 5.05, resolvedDate: new Date())
@@ -200,7 +200,7 @@ class BootStrap {
             rbMaidPayment.save()
 
             def fnMaidPaymentAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addPaymentExpense.toString()), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), user: User.findWhere(email: 'andreccdr@gmail.com'), expense: maid, circle: House.first().getCircle(), payment: fnMaidPayment)
-            fnMaidPaymentAction.save()
+            fnMaidPaymentAction.save()*/
         }
 
         if(CircleType.count() == 0){
@@ -222,11 +222,17 @@ class BootStrap {
         }
 
         if(RegularExpense.count() == 0 ){
-            def electricity = new RegularExpense(title: 'Electricity', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Electricity'), receptionBeginDate: new Date(), value: 20, description: 'Descrição da despesa', beginDate: new Date())
-            electricity.save()
+            /*def electricity = new RegularExpense(title: 'Electricity', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Electricity'), receptionBeginDate: new Date(), value: 20, description: 'Descrição da despesa')
+            electricity.secureSave()
 
             electricity.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
             electricity.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
+            electricity.addToAssignedUsers(User.findWhere(email: '28.ricardobranco@gmail.com'))
+
+            new Debt(user: User.findWhere(email: 'fntneves@gmail.com'), regularExpense: electricity, value: 5).save()
+            new Debt(user: User.findWhere(email: 'andreccdr@gmail.com'), regularExpense: electricity, value: 5).save()
+            new Debt(user: User.findWhere(email: 'pmcleite@gmail.com'), regularExpense: electricity, value: 5).save()
+            new Debt(user: User.findWhere(email: '28.ricardobranco@gmail.com'), regularExpense: electricity, value: 5).save()
 
             def water = new RegularExpense(title: 'Water', circle: House.first().getCircle(), responsible: RegisteredUser.findWhere(user: User.findWhere(email: 'fntneves@gmail.com')), expenseType: ExpenseType.findWhere(name: 'Water'), receptionBeginDate: new Date(), value:30, beginDate: new Date())
             water.save()
@@ -238,11 +244,11 @@ class BootStrap {
             internet.save()
 
             internet.addToAssignedUsers(User.findWhere(email: 'andreccdr@gmail.com'))
-            internet.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))
+            internet.addToAssignedUsers(User.findWhere(email: 'pmcleite@gmail.com'))*/
         }
 
         if(Action.count() <= RegisteredUser.count()){
-            def addUserCircle = new Action(actionType: ActionType.findWhere(type: 'addUserCircle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), user: User.findWhere(email: 'andreccdr@gmail.com'), circle: House.first().getCircle())
+            /*def addUserCircle = new Action(actionType: ActionType.findWhere(type: 'addUserCircle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), user: User.findWhere(email: 'andreccdr@gmail.com'), circle: House.first().getCircle())
             addUserCircle.save()
 
             def addExpenseCircle = new Action(actionType: ActionType.findWhere(type: 'addExpenseCircle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')), circle: House.first().getCircle(), expense: Expense.findWhere(title: 'Maid'))
@@ -255,20 +261,20 @@ class BootStrap {
             addPaymentExpense.save()
 
             def addCircle = new Action(actionType: ActionType.findWhere(type: 'addCircle'), actor: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')), circle: Collective.first().getCircle())
-            addCircle.save()
+            addCircle.save()*/
         }
 
         if(SystemNotification.count() == 0){
-            def systemNotification = new SystemNotification(action: Action.first(), registeredUser: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')))
+            /*def systemNotification = new SystemNotification(action: Action.first(), registeredUser: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')))
             systemNotification.secureSave()
             systemNotification = new SystemNotification(action: Action.first(), registeredUser: RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com')))
             systemNotification.secureSave()
             systemNotification = new SystemNotification(action: Action.first(), registeredUser: RegisteredUser.findWhere(user: User.findWhere(email: 'pmcleite@gmail.com')))
-            systemNotification.secureSave()
+            systemNotification.secureSave()*/
         }
 
         if(Debt.count() == 0){
-            def expense1 = Expense.findByTitle("Friday Dinner")
+            /*def expense1 = Expense.findByTitle("Friday Dinner")
             def expense2 = Expense.findByTitle("Shopping")
             def expense3 = Expense.findByTitle("Maid")
             def user1 = User.findByEmail("andreccdr@gmail.com")
@@ -276,7 +282,7 @@ class BootStrap {
 
             new Debt(expense: expense1, user: user1, percentage: 20, value: 10).save()
             new Debt(expense: expense2, user: user1, percentage: 20, value: 20).save()
-            new Debt(expense: expense3, user: user1, percentage: 20, value: 30).save()
+            new Debt(expense: expense3, user: user1, percentage: 20, value: 30).save()*/
         }
     }
 

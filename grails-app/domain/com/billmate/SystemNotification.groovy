@@ -22,12 +22,10 @@ class SystemNotification{
     }
 
     public SystemNotification() {
-        super()
         notification = new Notification()
     }
 
     public SystemNotification(Map map) {
-        super(map)
         notification = new Notification(map)
     }
 

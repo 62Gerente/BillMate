@@ -38,7 +38,7 @@ class RegisteredUserController extends RestrictedController {
         def registeredUser = RegisteredUser.findById(id)
         def circles = registeredUser.getCircles()
 
-        return [breadcrumb: breadcrumb, user: authenticatedUser(), registeredUser: registeredUser, circles: circles]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), registeredUser: registeredUser, circles: circles, active: 0]
     }
 
     def updateProperty(Long id) {
@@ -153,7 +153,7 @@ class RegisteredUserController extends RestrictedController {
             return
         }
 
-        return [breadcrumb: breadcrumb, user: registeredUser, history: userHistory]
+        return [breadcrumb: breadcrumb, user: registeredUser, history: userHistory, active: 3]
     }
 
     def circles(Long id){

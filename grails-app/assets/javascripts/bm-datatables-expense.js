@@ -240,22 +240,30 @@ $(document).ready(function() {
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
+                    var value = full[3];
                     var text = 'text-danger';
-                    if(full[3] == full[12]){
+                    if(full[3] >= full[12]){
                         text = 'text-success';
+                        if(full[3] >= full[12]){
+                            value = full[12];
+                        }
                     }
-                    return "<span class=" + text + ">" + full[3].toFixed(2) + " € </span> / " + full[12].toFixed(2) + " €";
+                    return "<span class=" + text + ">" + value.toFixed(2) + " € </span> / " + full[12].toFixed(2) + " €";
                 },
                 'aTargets': [ 3 ]
             },
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
+                    var value = full[13];
                     var text = 'text-danger';
-                    if(full[13] == full[4]){
+                    if(full[13] >= full[4]){
                         text = 'text-success';
+                        if(full[13] >= full[4]){
+                            value = full[4];
+                        }
                     }
-                    return "<span class=" + text + ">" + full[13].toFixed(2) + " € </span> / " + full[4].toFixed(2) + " €";
+                    return "<span class=" + text + ">" + value.toFixed(2) + " € </span> / " + full[4].toFixed(2) + " €";
                 },
                 'aTargets': [ 4 ]
             },

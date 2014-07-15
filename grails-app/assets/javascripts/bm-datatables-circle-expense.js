@@ -164,6 +164,10 @@ $(document).ready(function() {
         phone : 480
     };
 
+    $("#btn-create-expense-regular").click(function(){
+        window.location.href=$(this).find("#link-to-expense-datatable").val();
+    });
+
     function propagateRowUpdates(context){
         var textInfo = context.text();
         if(context.find("i").length == 0)
@@ -171,15 +175,15 @@ $(document).ready(function() {
             if(textInfo == "")
                 context.empty().append("<i class='fa fa-file-pdf-o' style='opacity:0.3;margin-left:20px'></i>");
             else
-                context.empty().append("<a href='" + "" + "' style='text-decoration:none;color:inherit;margin-left:20px'><i class='fa fa-file-pdf-o'></i></a>");
+                context.empty().append("<a class='download-invoice' target='_blank' href='" + $("#url-pdf").val() + "/" +  textInfo + "' style='text-decoration:none;color:inherit;margin-left:15px'><i class='fa fa-file-pdf-o text-grey utility-icon hover-icon-blg'></i></a>");
         }
     }
 
     function updateAfterFill(){
         var invoice = $("#circle-datatable").find("tr.odd, tr.even");
         var receipt = $("#circle-datatable").find("tr.odd, tr.even");
-        var invoiceList = invoice.find("td:nth(4)");
-        var receiptList = receipt.find("td:nth(5)");
+        var invoiceList = invoice.find("td:nth(3)");
+        var receiptList = receipt.find("td:nth(4)");
         invoiceList.each(function(index){ propagateRowUpdates($(this)) });
         receiptList.each(function(index){ propagateRowUpdates($(this)) });
 
@@ -224,28 +228,27 @@ $(document).ready(function() {
         },
         "sPaginationType": "bootstrap",
         "aoColumnDefs": [
-            { 'aTargets': [ 3 ] },
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
-                    var text = 'text-danger';
-                    if(full[2] == full[11]){
-                        text = 'text-success';
-                    }
-                    return "<span class=" + text + ">" + full[2].toFixed(2) + " € </span> / " + full[11].toFixed(2) + " €";
+                    return full[4]
                 },
-                'aTargets': [ 2 ]
+                aTargets: [ 3,4 ]
             },
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
                     var text = 'text-danger';
-                    if(full[12] == full[3]){
+                    var value = full[12];
+                    if(full[12] >= full[3]){
                         text = 'text-success';
+                        if(full[12] > full[3]){
+                            value = full[3];
+                        }
                     }
-                    return "<span class='" + text + "'>" + full[12].toFixed(2) + " € </span> / " + full[3].toFixed(2) + " €";
+                    return "<span class='" + text + "'>" + value.toFixed(2) + " € </span> / " + full[3].toFixed(2) + " €";
                 },
-                'aTargets': [ 3 ]
+                'aTargets': [ 2 ]
             },
             {
                 "mData": null ,
@@ -261,7 +264,7 @@ $(document).ready(function() {
                 },
                 'aTargets': [ 1 ]
             },
-            { 'bSortable': false, 'aTargets': [ 4,5 ] }
+            { 'bSortable': false, 'aTargets': [ 3,4 ] }
         ],
         "aaSorting": [[ 0, "asc" ]],
         "oLanguage": {
@@ -278,15 +281,11 @@ $(document).ready(function() {
         },
         fnRowCallback  : function( nRow, aData, iDisplayIndex ) {
             responsiveHelper.createExpandIcon(nRow);
+            $(nRow).find("td:nth(3)").click(function(e){
+                e.stopPropagation();
+            });
             $(nRow).find("td:nth(4)").click(function(e){
                 e.stopPropagation();
-                if(aData[4] != null)
-                    window.open(aData[4],"_blank");
-            });
-            $(nRow).find("td:nth(5)").click(function(e){
-                e.stopPropagation();
-                if(aData[5] != null)
-                    window.open(aData[5],"_blank");
             });
             $(nRow).click(function(e){
                 document.location.href = "/BillMate/expense/show/" + aData[7];

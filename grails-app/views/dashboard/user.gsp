@@ -6,6 +6,7 @@
 <body>
     <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
         <g:render template="/shared/alert" model="[cssClass: 'col8-alert', display: 'none']"/>
+        <g:render template="/shared/active" model="[active: active]"/>
         <g:render template="/payment/widgets/confirm" model="[registeredUser: dashboard.getRegisteredUser(), whoHaveUnconfirmedPayments: dashboard.whoHaveUnconfirmedPayments()]" />
         <g:render template="/expense/widgets/whoIOwe" model="[user: dashboard.getUser(), totalDebt: dashboard.amountInDebt(), whoIOwe: dashboard.whoIOwe()]"/>
         <g:render template="/expense/widgets/whoOweMe" model="[registeredUser: dashboard.getRegisteredUser(), totalAsset: dashboard.amountInAsset(), whoOweMe: dashboard.whoOweMe()]"/>

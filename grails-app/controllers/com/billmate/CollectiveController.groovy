@@ -13,8 +13,8 @@ class CollectiveController extends RestrictedController {
         Set<String> friendsSet = friendsList.split(",")
 
         def collective = new Collective(name: params.collectiveName, description: params.collectiveDescription)
-        def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addCollective.toString()), actor: session.user, circle: collective.getCircle())
-        result = collective.addUsersAndExpenseTypes(friendsSet, expenseSet, action, session.user)
+        def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addCollective.toString()), actor: authenticatedUser(), circle: collective.getCircle())
+        result = collective.addUsersAndExpenseTypes(friendsSet, expenseSet, action, authenticatedUser())
 
         def response = [
                 'error': false,

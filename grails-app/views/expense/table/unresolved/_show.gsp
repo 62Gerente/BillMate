@@ -21,7 +21,6 @@
     </td>
     <g:if test="${user.getId() == registeredUser.getUserId() || user.getReferredUser()}">
         <td class="text-right td-settings">
-            <a class="dropdown-toggle text-grey" data-toggle="dropdown"><i class="fa fa-cog"></i></a>
             <ul class="dropdown-left dropdown-menu">
                 <g:if test="${user.getId() == registeredUser.getUserId()}">
                     <li><a href="#"><g:message code="com.billmate.payment.new" default="Pay it now" /></a></li>

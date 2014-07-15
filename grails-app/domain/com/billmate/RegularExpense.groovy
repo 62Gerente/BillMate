@@ -2,13 +2,14 @@ package com.billmate
 
 import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
 import groovy.time.TimeCategory
+import org.springframework.validation.ObjectError
 
 @LogicalDelete
 class RegularExpense {
-    static belongsTo = [DirectDebit, Circle, RegisteredUser, ExpenseType]
+    static belongsTo = [Circle, RegisteredUser, ExpenseType]
+    static hasOne = [directDebit: DirectDebit]
     static hasMany = [debts: Debt, actions: Action, assignedUsers: User, expenses: Expense]
 
-    DirectDebit directDebit
     RegisteredUser responsible
     ExpenseType expenseType
     Circle circle
@@ -54,6 +55,16 @@ class RegularExpense {
         isActive nullable: false
     }
 
+    public RegularExpense() {
+        directDebit = new DirectDebit()
+        directDebit.setRegularExpense(this)
+    }
+
+    public RegularExpense(Map map) {
+        directDebit = new DirectDebit(map)
+        directDebit.setRegularExpense(this)
+    }
+
     public String toString() {
         title
     }
@@ -91,9 +102,12 @@ class RegularExpense {
         withTransaction {status ->
             try{
                 RegularExpense regularExpense = save(flush: true, failOnError: true)
+                directDebit.save(flush: true, failOnError: true)
                 for(String str : idsUsers){
-                    if( Double.parseDouble(value[position]) > 0 ){
-                        regularExpense.addToAssignedUsers(User.findById(Long.parseLong(str)))
+                    if( value[position] > 0 ){
+                        User user = User.findById(Long.parseLong(str))
+                        regularExpense.addToAssignedUsers(user)
+                        new Debt(value: value[position], user: user, regularExpense: regularExpense).save()
                     }
                     position++;
                 }
@@ -134,5 +148,124 @@ class RegularExpense {
             }
         }
         return expense
+    }
+
+    public List<Action> latestEvents(){
+        actions.sort{ it.getActionDate() }
+    }
+
+    public Set<RegisteredUser> getAssignedRegisteredUsers(){
+        Set<RegisteredUser> registeredUsers = new HashSet<RegisteredUser>();
+        assignedUsers.each{
+            if(it.getRegisteredUser()){
+                registeredUsers.add(it.getRegisteredUser())
+            }
+        }
+        registeredUsers
+    }
+
+    def beforeValidate() {
+        directDebit.validate()
+        directDebit.errors.getAllErrors().each {
+            ObjectError objectError = (ObjectError) it
+            this.errors.reject(objectError.getCode(), objectError.toString())
+        }
+    }
+
+    public boolean secureSave(){
+        withTransaction { status ->
+            try {
+                save(flush: true, failOnError: true)
+                directDebit.save(flush: true, failOnError: true)
+                return true
+            }catch(Exception ignored){
+                status.setRollbackOnly()
+                return false
+            }
+        }
+    }
+
+    public static Set<User> getFriendsOfRegularExpenseByTerm(String term) {
+        Set<User> list = new HashSet<User>()
+        User.findAll().each { if(it.getName().toUpperCase().contains(term) || it.getEmail().toUpperCase().contains(term)) list.add(it) }
+        return list
+    }
+
+    public static Set<Object> getFriendsOfRegularExpenseByTermFormated(String term, Long id_regular_expense){
+        Boolean result = false
+        Set<Object> list = new HashSet<>()
+        RegularExpense regularExpense = RegularExpense.findById(id_regular_expense)
+        getFriendsOfRegularExpenseByTerm(term).each {
+            User user = it
+            result = false
+            regularExpense.getAssignedUsers().each { if(!result && it.getId() == user.getId()) result = true }
+            if(!result){
+                list.add([id  : it.getId(), faicon: it.getPhotoOrDefault(), name: it.getName()])
+            }
+        }
+        return list
+    }
+
+    public boolean ajustValues(){
+        boolean result = true
+        withTransaction {status ->
+            try{
+                propagateValues()
+            }
+            catch(Exception e){
+                result = false
+                status.setRollbackOnly()
+            }
+        }
+        return result
+    }
+
+    public void propagateValues(){
+        RegularExpense regularExpense = RegularExpense.findById(getId())
+        Set<Debt> setOfDebts = regularExpense.getDebts()
+        int size = setOfDebts.size()
+        Double value = regularExpense.getValue()
+        Double partialValue = value / size
+        setOfDebts.each {
+            it.setValue(partialValue)
+        }
+    }
+
+    public boolean addUsersAndAjustValues(Long id_user){
+        boolean result = true
+        withTransaction {status ->
+            try{
+                RegularExpense regularExpense = RegularExpense.findById(getId())
+                User user = User.findById(id_user)
+                user.addToRegularExpenses(regularExpense)
+                new Debt(regularExpense: regularExpense, resolvedDate: new Date(), user: user, value: 0).save()
+                propagateValues()
+                save()
+            }
+            catch(Exception e){
+                result = false
+                status.setRollbackOnly()
+            }
+        }
+        return result
+    }
+
+    public boolean removeUserAndAjustValues(User user){
+        boolean result = true
+        withTransaction {status ->
+            try{
+                Debt debt = Debt.findByRegularExpenseAndUser(this,user)
+                removeFromDebts(debt)
+                removeFromAssignedUsers(user)
+                user.removeFromDebts(debt)
+                debt.delete(physical: true)
+                propagateValues()
+            }
+            catch(Exception e){
+                result = false
+                status.setRollbackOnly()
+            }
+        }
+        return result
     }
 }

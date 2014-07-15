@@ -19,7 +19,7 @@ class SessionController extends BaseController {
             def registeredUser = RegisteredUser.findWhere(user: user)
 
             if (registeredUser && registeredUser.password == new Sha256Hash(params['password']).toHex()) {
-                session.user = registeredUser
+                session.user = registeredUser.getId()
                 flash.message = "com.billmate.session.save.success"
                 flash.m_default = "Signed in successfully."
                 return redirect(controller: 'dashboard', action: 'user')
@@ -32,7 +32,7 @@ class SessionController extends BaseController {
     }
 
     def delete = {
-        session.user = null
+        session.removeAttribute("user")
         return redirect(controller: 'session', action: 'create')
     }
 

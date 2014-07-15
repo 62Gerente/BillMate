@@ -9,6 +9,7 @@
 </head>
 
 <body>
+<g:render template="/shared/active" model="[active: active]"/>
 <div class="row">
     <div class="col-md-7">
         <g:render template="/registeredUser/edit/profile" model="[user: registeredUser]"/>

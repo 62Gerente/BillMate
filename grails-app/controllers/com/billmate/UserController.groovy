@@ -37,7 +37,7 @@ class UserController extends RestrictedController {
 
         RegisteredUser registeredUser = RegisteredUser.findById(id)
 
-        return [breadcrumb: breadcrumb, user: registeredUser]
+        return [breadcrumb: breadcrumb, user: registeredUser, active: 2]
     }
 
     def events(Long id, Long date) {
@@ -59,6 +59,6 @@ class UserController extends RestrictedController {
         def breadcrumb = [
                 [name: message(code: "com.billmate.sidebar.expenses")]
         ]
-        return [breadcrumb: breadcrumb, user: authenticatedUser()]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), active: 1]
     }
 }
