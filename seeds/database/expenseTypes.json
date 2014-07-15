@@ -1,0 +1,27 @@
+{
+  "expenseTypes": [
+    "Maid",
+    "Shopping",
+    "Meal",
+    "Fax",
+    "Travel",
+    "Financial",
+    "Advertising",
+    "Automobile",
+    "Bank account",
+    "Books",
+    "Gifts",
+    "Tax fees",
+    "Software",
+    "Alarms",
+    "Education",
+    "Internet",
+    "Fax",
+    "License",
+    "Parking",
+    "Telephone",
+    "Water",
+    "Electricity",
+    "Gas"
+  ]
+}
