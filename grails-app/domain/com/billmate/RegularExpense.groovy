@@ -2,13 +2,14 @@ package com.billmate
 
 import com.nanlabs.grails.plugin.logicaldelete.LogicalDelete
 import groovy.time.TimeCategory
+import org.springframework.validation.ObjectError
 
 @LogicalDelete
 class RegularExpense {
     static belongsTo = [DirectDebit, Circle, RegisteredUser, ExpenseType]
     static hasMany = [debts: Debt, actions: Action, assignedUsers: User, expenses: Expense]
 
-    DirectDebit directDebit
+    DirectDebit directDebit = new DirectDebit()
     RegisteredUser responsible
     ExpenseType expenseType
     Circle circle
@@ -136,6 +137,10 @@ class RegularExpense {
         return expense
     }
 
+    public List<Action> latestEvents(){
+        actions.sort{ it.getActionDate() }
+    }
+
     public Set<RegisteredUser> getAssignedRegisteredUsers(){
         Set<RegisteredUser> registeredUsers = new HashSet<RegisteredUser>();
         assignedUsers.each{
@@ -144,5 +149,26 @@ class RegularExpense {
             }
         }
         registeredUsers
+    }
+
+    def beforeValidate() {
+        directDebit.validate()
+        directDebit.errors.getAllErrors().each {
+            ObjectError objectError = (ObjectError) it
+            this.errors.reject(objectError.getCode(), objectError.toString())
+        }
+    }
+
+    public boolean secureSave(){
+        withTransaction { status ->
+            try {
+                directDebit.save(flush: true, failOnError: true)
+                save(flush: true, failOnError: true)
+                return true
+            }catch(Exception ignored){
+                status.setRollbackOnly()
+                return false
+            }
+        }
     }
 }
