@@ -41,7 +41,7 @@ class RegularExpenseController extends RestrictedController{
         render response as JSON
     }
 
-    def extractInts( String input ) {
+    def extractInts(String input) {
         input.findAll( /\d+/ )*.toInteger()
     }
 
@@ -71,6 +71,49 @@ class RegularExpenseController extends RestrictedController{
         regularExpense.setIntervalDays(day)
 
         return regularExpense
+    }
+
+    def show(Long id) {
+        def regularExpense = RegularExpense.findById(id)
+
+        return [user: authenticatedUser(), regularExpense: regularExpense]
+    }
+
+    def updateProperty(Long id) {
+        def regularExpense = RegularExpense.findById(id)
+        def property = params.name
+        def value = params.value
+
+        def dates = ["beginDate", "endDate", "paymentDeadline", "receptionDeadline", "paymentDate", "receptionDate", "receptionBeginDate"]
+        def doubles = ["value"]
+
+        if(dates.contains(property)){
+            if(value){
+                value = new Date().parse("DD-MM-YYYY HH:mm", value)
+            }else{
+                value = null
+            }
+        }else if(doubles.contains(property)){
+            if(value){
+                value = Double.parseDouble(value)
+            }else{
+                value = null
+            }
+        }
+
+        regularExpense.setProperty(property, value)
+
+        def response = [
+                'error'  : false,
+                'message': message(code: "com.billmate.regularExpense.updateProperty.success")
+        ]
+
+        if(!regularExpense.save()) {
+            response.error = true
+            response.message = message(error: regularExpense.getErrors().getAllErrors().first());
+        }
+
+        render response as JSON
     }
 
     def saveExpense(Long id) {

@@ -23,6 +23,8 @@ class RegularExpense {
     Date receptionBeginDate = new Date()
     Date receptionEndDate
     Date paymentBeginDate = new Date()
+
+    Date paymentBeginDate
     Date paymentEndDate
 
     Integer intervalDays = 0
@@ -143,5 +145,15 @@ class RegularExpense {
             }
         }
         return expense
+    }
+
+    public Set<RegisteredUser> getAssignedRegisteredUsers(){
+        Set<RegisteredUser> registeredUsers = new HashSet<RegisteredUser>();
+        assignedUsers.each{
+            if(it.getRegisteredUser()){
+                registeredUsers.add(it.getRegisteredUser())
+            }
+        }
+        registeredUsers
     }
 }
