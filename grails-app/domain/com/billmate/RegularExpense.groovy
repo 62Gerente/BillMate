@@ -76,14 +76,14 @@ class RegularExpense {
         }
     }
 
-    def toJSON(){
+    public toJSON(){
         return [name: getTitle(), description: getDescription(), id : getExpenseType().getId(), expenseTypeName: getExpenseType().getName(),
          expenseTypeCssClass: getExpenseType().getCssClass(), value: getValue(), paymentDeadline: BMDate.convertDateFormat(getPaymentDeadline()),
          receptionDeadline: BMDate.convertDateFormat(getReceptionDeadline()), receptionBeginDate: BMDate.convertDateFormat(getReceptionBeginDate()),
          beginDate: BMDate.convertDateFormat(getBeginDate()), endDate: BMDate.convertDateFormat(getEndDate())]
     }
 
-    def create(List<String> idsUsers, List<Double> value){
+    public create(List<String> idsUsers, List<Double> value){
         boolean result = false;
         int position = 0
         withTransaction {status ->
@@ -91,9 +91,7 @@ class RegularExpense {
                 RegularExpense regularExpense = save(flush: true, failOnError: true)
                 for(String str : idsUsers){
                     if( Double.parseDouble(value[position]) > 0 ){
-                        User user = User.findById(Long.parseLong(str))
-                        new Debt(value: value[position], user: user, regularExpense: regularExpense).save()
-                        regularExpense.addToAssignedUsers(user)
+                        regularExpense.addToAssignedUsers(User.findById(Long.parseLong(str)))
                     }
                     position++;
                 }
@@ -107,7 +105,7 @@ class RegularExpense {
         return result;
     }
 
-    Expense fromRegularExpenseToExpense(Expense expense, RegisteredUser registeredUser, Double value){
+    public Expense fromRegularExpenseToExpense(Expense expense, RegisteredUser registeredUser, Double value){
         expense.setRegularExpense(this)
         expense.setResponsible(getResponsible())
         expense.setExpenseType(getExpenseType())
