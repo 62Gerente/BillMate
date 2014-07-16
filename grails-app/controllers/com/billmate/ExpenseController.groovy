@@ -187,8 +187,6 @@ class ExpenseController extends RestrictedController {
         expense.setReceptionDeadline(BMDate.convertStringsToDate(params.receptionDeadline,false))
         expense.setBeginDate(BMDate.convertStringsToDate(params.beginDate,true))
         expense.setEndDate(BMDate.convertStringsToDate(params.endDate,false))
-        expense.setPaymentDate(BMDate.convertStringsToDate(params.paymentDate,false))
-        expense.setReceptionDate(BMDate.convertStringsToDate(params.receptionDate,false))
         expense.setRegularExpense(regularExpense)
         return expense
     }

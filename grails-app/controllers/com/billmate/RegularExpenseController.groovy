@@ -19,7 +19,7 @@ class RegularExpenseController extends RestrictedController{
         }
         else {
             List<String> listOfFriends = params.getList("listOfFriends[]")
-            List<String> listValuesUsers = params.getList("listValuesUsers[]")
+            List<Double> listValuesUsers = params.getList("listValuesUsers[]")
 
             RegularExpense regularExpense = setValuesRegularExpense(params)
 
@@ -58,8 +58,7 @@ class RegularExpenseController extends RestrictedController{
         regularExpense.setReceptionDeadline(BMDate.convertStringsToDate(params.receptionDeadline,false))
         regularExpense.setBeginDate(BMDate.convertStringsToDate(params.beginDate,true))
         regularExpense.setEndDate(BMDate.convertStringsToDate(params.endDate,false))
-        regularExpense.setReceptionEndDate(BMDate.convertStringsToDate(params.receptionEndDate,false))
-        regularExpense.setPaymentEndDate(BMDate.convertStringsToDate(params.paymentEndDate,false))
+        regularExpense.setReceptionBeginDate(BMDate.convertStringsToDate(params.receptionBeginDate,true))
 
 
         int year = extractInts(params.periodicity)[0]
@@ -86,7 +85,7 @@ class RegularExpenseController extends RestrictedController{
         Expense expense = new Expense()
 
         if (!regularExpense.fromRegularExpenseToExpense(expense, authenticatedUser(), value)) {
-            responseData.error = true;
+            responseData.error = true
             if(expense.getErrors().getErrorCount()){
                 responseData.message = message(code: "com.billmate.regularExpense.modal.createdUnsuccessfully")
             }else{

@@ -171,16 +171,17 @@ $(document).ready(function() {
         var value = parent.find("div.row:nth(2) input.value-debt").val();
         var description = parent.find("div.row:nth(3) textarea").val();
 
-        if(name == ""){ hasErrors = true; doAlertInput(parent.find("div.row:nth(0)"),parent.find("div.row:nth(0) input"),"error-control"); }
-        if(value == "") { hasErrors = true; doAlertInput(parent.find("div.row:nth(2) .input-group"),parent.find("div.row:nth(2) .input-group input"),"error-control"); }
-
         var dates = $(this).parents(".modal-footer").siblings(".modal-body").find(".advanced-options-form-regularExpense");
         var paymentDeadline = dates.find("input:nth(0)").val();
         var receptionDeadline = dates.find("input:nth(1)").val();
         var beginDate = dates.find("input:nth(2)").val();
         var endDate = dates.find("input:nth(3)").val();
-        var paymentDate = dates.find("input:nth(4)").val();
-        var receptionDate = dates.find("input:nth(5)").val();
+        var receptionBeginDate = parent.find(".row:nth(1) > div:nth(1) input").val();
+
+        if(value == "") { hasErrors = true; doAlertInput(parent.find("div.row:nth(2) .input-group"),parent.find("div.row:nth(2) .input-group input"),"error-control"); }
+        if(name == ""){ hasErrors = true; doAlertInput(parent.find("div.row:nth(0)"),parent.find("div.row:nth(0) input"),"error-control"); }
+        if(receptionBeginDate == ""){ hasErrors = true; doAlertInput(parent.find("div.row:nth(1) > div:nth(1)"),parent.find("div.row:nth(1) > div:nth(1) input"),"error-control"); }
+
 
         var listIDsUsers = [];
         var listValuesUsers = [];
@@ -191,8 +192,8 @@ $(document).ready(function() {
 
         var formData = {name: name, idCircle: idCircleRegularExpense, idExpenseType: idExpenseTypeExpense, value: value, description: description,
             idUser: idUserRegularExpense, listOfFriends: listIDsUsers, listValuesUsers: listValuesUsers, paymentDeadline: paymentDeadline,
-            receptionDeadline: receptionDeadline, beginDate: beginDate, endDate: endDate, paymentDate: paymentDate,
-            receptionDate: receptionDate, numberSelected: getNumberOfSelected(), regularExpenseID: idRegularExpense};
+            receptionDeadline: receptionDeadline, beginDate: beginDate, endDate: endDate,
+            receptionDate: receptionBeginDate, numberSelected: getNumberOfSelected(), regularExpenseID: idRegularExpense};
 
         if(!hasErrors){
             $.ajax({
@@ -269,12 +270,11 @@ $(document).ready(function() {
         $(".custom-multiselect-regularExpense-debt").select2("val", dataDebtRegularExpense[0].id);
         $(".custom-multiselect-regularExpense-debt").select2("enable", false);
 
-        if(dataDebtList.paymentDeadline) context.find(".row:nth(0) div:nth(0) .clockTimePaymentExpense").val(dataDebtList.paymentDeadline);
-        if(dataDebtList.receptionDeadline) context.find(".row:nth(0) div:nth(1) .clockTimePaymentExpense").val(dataDebtList.receptionDeadline);
-        if(dataDebtList.receptionBeginDate) context.find(".row:nth(1) div:nth(0) .clockTimePaymentExpense").val(dataDebtList.receptionBeginDate);
-        if(dataDebtList.receptionEndDate) context.find(".row:nth(1) div:nth(1) .clockTimePaymentExpense").val(dataDebtList.receptionEndDate);
-        if(dataDebtList.paymentBeginDate) context.find(".row:nth(2) div:nth(0) .clockTimePaymentExpense").val(dataDebtList.paymentBeginDate);
-        if(dataDebtList.paymentEndDate) context.find(".row:nth(2) div:nth(1) .clockTimePaymentExpense").val(dataDebtList.paymentEndDate);
+        if(dataDebtList.paymentDeadline) context.find(".row:nth(0) > div:nth(0) .clockTimePaymentExpense").val(dataDebtList.paymentDeadline);
+        if(dataDebtList.receptionDeadline) context.find(".row:nth(0) > div:nth(1) .clockTimePaymentExpense").val(dataDebtList.receptionDeadline);
+        if(dataDebtList.beginDate) context.find(".row:nth(1) > div:nth(0) .clockTimePaymentExpense").val(dataDebtList.beginDate);
+        if(dataDebtList.endDate) context.find(".row:nth(1) > div:nth(1) .clockTimePaymentExpense").val(dataDebtList.endDate);
+        if(dataDebtList.receptionBeginDate) $(".simple-options-form-regularExpense").find(".row:nth(1) > div:nth(1) .clockTimePaymentExpense").val(dataDebtList.receptionBeginDate);
     }
 
     function handleCircle(dataCircleRegularExpense){
@@ -306,19 +306,4 @@ $(document).ready(function() {
             initialized: fillListExpense
         });
     });
-
-    // Show/hide advanced options
-    $(".btn-options-form-regularExpense").click(function(){
-        $(this).ancestor(".modal-footer").siblings(".modal-body").find(".simple-options-form-regularExpense").slideToggle();
-        $(this).ancestor(".modal-footer").siblings(".modal-body").find(".advanced-options-form-regularExpense").slideToggle();
-    });
-
-    function getNumberOfSelected(){
-        var numberSelected = 0;
-        listElementsExpenses.forEach(function(entry){
-            if(entry.selectable == true)
-                numberSelected++;
-        });
-        return numberSelected;
-    }
 });

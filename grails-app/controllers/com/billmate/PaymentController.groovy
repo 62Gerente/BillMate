@@ -40,7 +40,7 @@ class PaymentController extends RestrictedController {
     }
 
     def confirmOne(int id){
-        //TODO pôr tudo nos domínios e colocar com transação
+        //TODO pôr tudo nos domínios e colocar com transação. Mudar o BuildConfig
         Debt debt = Debt.findById(id)
         new Payment(debt: debt, user: debt.getUser(), value: debt.getExpense().amountInDebtOf(debt.getUserId())).save()
         redirect(controller: "expense", action: "show", id: debt.getExpense().getId())

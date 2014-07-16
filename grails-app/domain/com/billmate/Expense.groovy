@@ -255,13 +255,14 @@ class Expense {
                     regularExpense.postpone()
                     regularExpense.save(flush: true, failOnError: true)
                 }
+                if(idsUsers.size() == 1) expense.setReceptionDate(new Date())
                 for(String str : idsUsers){
                     if( Double.parseDouble(value[position]) > 0 ){
                         User user = User.findById(Long.parseLong(str))
                         Debt debt = new Debt(value: Double.parseDouble(value[position]), user: user, expense: expense).save()
                         this.addToAssignedUsers(user)
                         RegisteredUser registeredUser = user.getRegisteredUser()
-                        if(registeredUser && registeredUser.getId() == id) {
+                        if(registeredUser && registeredUser.getId() == getResponsibleId()) {
                             new Payment(user: user, debt: debt, value: Double.parseDouble(value[position]), validationDate: new Date(), isValidated: true).save()
                             debt.setResolvedDate(new Date())
                         }
