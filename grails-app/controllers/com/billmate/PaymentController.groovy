@@ -43,6 +43,11 @@ class PaymentController extends RestrictedController {
         //TODO pôr tudo nos domínios e colocar com transação. Mudar o BuildConfig
         Debt debt = Debt.findById(id)
         new Payment(debt: debt, user: debt.getUser(), value: debt.getExpense().amountInDebtOf(debt.getUserId())).save()
+        if(debt.getExpense().amountInDebt() <= 0){
+            Expense exp = debt.getExpense()
+            exp.setReceptionDate(new Date())
+            exp.save()
+        }
         redirect(controller: "expense", action: "show", id: debt.getExpense().getId())
     }
 
@@ -53,7 +58,7 @@ class PaymentController extends RestrictedController {
         List<String> listValues = values.substring(1,values.length()-1).split(",")
         for(String ids : listExpenses){
             Long id = Long.parseLong(ids)
-            Long val = Long.parseLong(listValues[position])
+            Double val = Double.parseDouble(listValues[position])
             RegisteredUser registeredUser = User.findById(idUser).getRegisteredUser()
             Debt debt = Expense.findById(id).debtOf(registeredUser.getUserId())
             if(flag){
@@ -63,6 +68,11 @@ class PaymentController extends RestrictedController {
                 if (!debt.getResolvedDate() && debt.getValue() <= debt.amountPaid()) {
                     debt.setResolvedDate(new Date())
                     debt.save()
+                    if(debt.getExpense().amountInDebt() <= 0){
+                        Expense exp = debt.getExpense()
+                        exp.setReceptionDate(new Date())
+                        exp.save()
+                    }
                 }
             }
             position++

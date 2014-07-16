@@ -38,12 +38,12 @@ class Circle {
     }
 
     public Double totalValueOfUnresolvedExpenses(){
-        Double total = unresolvedExpenses().sum{ it.getValue() && !it.getIsDeleted() }
+        Double total = unresolvedExpenses().sum{ it.getValue() }
         total ? total : 0D
     }
 
     public Double totalDebtOfUnresolvedExpenses(){
-        Double total = unresolvedExpenses().sum{ it.amountInDebt() && !it.getIsDeleted() }
+        Double total = unresolvedExpenses().sum{ it.amountInDebt() }
         total ? total : 0D
     }
 

@@ -141,7 +141,7 @@ class Expense {
     }
 
     public boolean isResolved(){
-        receptionDate || amountInDebt() == 0
+        receptionDate
     }
 
     public Double amountAssignedTo(Long userID){
@@ -160,7 +160,7 @@ class Expense {
 
     public Double amountPaid(){
         Double amount = debts.sum{ it.amountPaid() }
-        amount ? amount : 0D
+        amount? amount : 0D
     }
 
     public Double amountPaidBy(Long userID){

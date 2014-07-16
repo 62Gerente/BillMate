@@ -153,7 +153,7 @@ class RegisteredUser {
     }
 
     public Set<Expense> unresolvedResponsibleExpensesBy(Long user_id) {
-        unresolvedResponsibleExpenses().findAll { !it.isResolvedBy(user_id) && !it.getIsDeleted() }
+        unresolvedResponsibleExpenses().findAll { !it.isResolvedBy(user_id) && !it.getIsDeleted() && it.amountInDebtOf(user_id)!=0 }
     }
 
     public Set<User> whoOweMe() {
@@ -164,6 +164,7 @@ class RegisteredUser {
 
     public Set<Payment> unconfirmedPaymentsOnResponsibleExpenses() {
         Set<Payment> unconfirmedPayments = new HashSet<>()
+        Set<Expense> expenseSet = unresolvedResponsibleExpenses()
         unresolvedResponsibleExpenses().each { unconfirmedPayments.addAll(it.unconfirmedPayments()) }
         unconfirmedPayments
     }
