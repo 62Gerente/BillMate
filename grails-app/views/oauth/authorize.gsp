@@ -29,6 +29,9 @@
                         <div class="controls">
                             <input name="password" id="password" type="password" class="form-control" placeholder="<g:message code="com.billmate.registered.user.password" default="Password "/>">
                         </div>
+                        <div class="controls">
+                            <input name="redirect" type="hidden" value="${redirect_path}"/>
+                        </div>
                     </div>
                 </div>
                 <div class="form-group col-md-12">

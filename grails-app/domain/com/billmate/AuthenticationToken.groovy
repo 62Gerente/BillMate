@@ -2,7 +2,7 @@ package com.billmate
 
 class AuthenticationToken {
 
-    String username
+    String email
     String token
 
     public boolean secureSave(){

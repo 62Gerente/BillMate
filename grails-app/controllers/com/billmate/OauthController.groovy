@@ -2,13 +2,13 @@ package com.billmate
 
 import org.apache.shiro.crypto.hash.Sha256Hash
 
-class OauthController{
+class OauthController {
     static layout = "session"
-    static allowedMethods = [authorize: "GET", save: "POST", delete: "DELETE"]
+    static allowedMethods = [authorize: "GET", save: "POST"]
 
     def authorize() {
-        redirect_path = params['redirect']
-        
+        def redirect_path = params['redirect']
+        return [redirect_path: redirect_path]
     }
 
 
@@ -17,26 +17,32 @@ class OauthController{
             return
         }
 
-        def user = User.findWhere(email: params['email'])
+        def user = User.findWhere(email: params.email)
         if (user) {
             def registeredUser = RegisteredUser.findWhere(user: user)
 
-            if (registeredUser && registeredUser.password == new Sha256Hash(params['password']).toHex()) {
-                session.user = registeredUser
+            if (registeredUser && registeredUser.password == new Sha256Hash(params.password).toHex()) {
                 flash.message = "com.billmate.session.save.success"
                 flash.m_default = "Signed in successfully."
-                return redirect(controller: 'dashboard', action: 'user')
+
+                def token = UUID.randomUUID().toString()
+
+                AuthenticationToken authenticationToken = new AuthenticationToken(email: user.email, token: token)
+                authenticationToken.secureSave()
+                def response = [
+                        token: token,
+                        id: registeredUser.getId(),
+                        email: registeredUser.getEmail()
+                ]
+
+                return redirect(uri: params.redirect, params: response)
             }
         }
 
         flash.error = "com.billmate.session.save.failure"
         flash.e_default = "Invalid email or password."
-        return redirect(controller: 'session', action: 'create')
-    }
+        return redirect(controller: 'oauth', action: 'authorize')
 
-    def delete = {
-        session.user = null
-        return redirect(controller: 'session', action: 'create')
     }
 
     private checkRequiredParams() {

@@ -6,15 +6,15 @@ import com.billmate.User
 import grails.converters.JSON
 import org.apache.shiro.crypto.hash.Sha256Hash
 
-import java.security.SecureRandom
-
 class SessionController {
     static allowedMethods = [create: "GET", save: "POST", delete: "DELETE"]
     static namespace = 'v1'
 
 
     def save() {
-        if(!checkRequiredParams()){ return }
+        if (!checkRequiredParams()) {
+            return
+        }
 
         def user = User.findWhere(email: params['email'])
 
@@ -24,20 +24,21 @@ class SessionController {
 
             if (registeredUser && registeredUser.password == new Sha256Hash(params['password']).toHex()) {
                 def token = UUID.randomUUID().toString()
-                AuthenticationToken authenticationToken = new AuthenticationToken(username: user.email, token: token)
+                AuthenticationToken authenticationToken = new AuthenticationToken(email: user.email, token: token)
                 authenticationToken.secureSave()
 
                 response = [
-                        'message': message(code: "com.billmate.session.save.success"),
-                        'error'  : true,
-                        'token': token
+                        'id'   : registeredUser.getId(),
+                        'token': token,
+                        'email': registeredUser.getEmail()
                 ]
                 render response as JSON
             }
         }
         response = [
-                'message': message(code: "com.billmate.session.save.failure"),
-                'error'  : false
+                'error': [
+                        'msg': message(code: "com.billmate.session.save.failure")
+                ]
         ]
         render response as JSON
     }
@@ -45,8 +46,9 @@ class SessionController {
     private checkRequiredParams() {
         if (!params['password'] || !params['email']) {
             def response = [
-                    message: message(code: "com.billmate.session.save.invalidParams"),
-                    error: false
+                    'error': [
+                            'msg': message(code: "com.billmate.session.save.invalidParams")
+                    ]
             ]
             render response as JSON
         }
