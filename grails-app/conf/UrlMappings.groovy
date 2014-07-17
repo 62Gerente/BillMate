@@ -3,6 +3,8 @@ class UrlMappings {
 
 	static mappings = {
 
+
+        "/oauth/authorize"(controller: "Oauth", action: "authorize")
         "/api/$namespace/login"(controller: "Session", action: "save")
         "/api/$namespace/register"(controller: "Register", action: "save")
 
