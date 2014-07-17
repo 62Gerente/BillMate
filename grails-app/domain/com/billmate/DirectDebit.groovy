@@ -10,6 +10,6 @@ class DirectDebit {
     static constraints = {
         regularExpense nullable: false
 
-        debitDate nullable: false
+        debitDate nullable: true
     }
 }

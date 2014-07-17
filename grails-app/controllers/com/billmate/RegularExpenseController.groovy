@@ -3,7 +3,7 @@ package com.billmate
 import grails.converters.JSON
 
 class RegularExpenseController extends RestrictedController{
-    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"], show: "POST"]
+    static allowedMethods = [saveExpense: "POST", postpone: ["POST", "GET"], show: ["POST", "GET"]]
 
     def beforeInterceptor = [action: this.&checkSession]
 
@@ -74,8 +74,24 @@ class RegularExpenseController extends RestrictedController{
 
     def show(Long id) {
         def regularExpense = RegularExpense.findById(id)
+        def format = params.format
 
-        return [user: authenticatedUser(), regularExpense: regularExpense]
+        if(format && format == "json"){
+            def responseData = [
+                    'error'  : true,
+                    'message': message(code: "com.billmate.regularExpense.cancel.success")
+            ]
+
+            if(regularExpense){
+                responseData.data = regularExpense.toJSON()
+                responseData.error = false
+                responseData.message = message(code: "com.billmate.regularExpense.cancel.success")
+            }
+
+            render responseData as JSON
+        }else{
+            return [user: authenticatedUser(), regularExpense: regularExpense]
+        }
     }
 
     def updateProperty(Long id) {
@@ -107,7 +123,7 @@ class RegularExpenseController extends RestrictedController{
                 'message': message(code: "com.billmate.regularExpense.updateProperty.success")
         ]
 
-        if(!regularExpense.securSsave()) {
+        if(!regularExpense.secureSave()) {
             response.error = true
             response.message = message(error: regularExpense.getErrors().getAllErrors().first());
         }
@@ -161,23 +177,6 @@ class RegularExpenseController extends RestrictedController{
         render responseData as JSON
     }
 
-    def show(Long id){
-        def responseData = [
-                'error'  : true,
-                'message': message(code: "com.billmate.regularExpense.cancel.success")
-        ]
-
-        RegularExpense regularExpense = RegularExpense.findById(id)
-
-        if(regularExpense){
-            responseData.data = regularExpense.toJSON()
-            responseData.error = false
-            responseData.message = message(code: "com.billmate.regularExpense.cancel.success")
-        }
-
-        render responseData as JSON
-    }
-
     def assignedUsers(){
         Set<Object> circleFriends = new HashSet<>()
         RegularExpense.findById(Long.parseLong(params.id_regular_expense)).getAssignedUsers().each {
@@ -187,5 +186,41 @@ class RegularExpenseController extends RestrictedController{
         def response = [ 'data': circleFriends ]
 
         render response as JSON
+    }
+
+    def unschedule(Long id){
+        def regularExpense = RegularExpense.get(id)
+
+        regularExpense.setIsActive(false)
+
+        if(regularExpense.secureSave()){
+            flash.message = "com.billmate.regularExpense.unschedule.success"
+            flash.m_default = "Expense unscheduled with success."
+
+            return redirect(controller: 'regularExpense', action: 'show', id: regularExpense.getId())
+        }else{
+            flash.error = "com.billmate.regularExpense.unschedule.failure"
+            flash.e_default = "Error unscheduling expense."
+
+            return redirect(controller: 'regularExpense', action: 'show', id: regularExpense.getId())
+        }
+    }
+
+    def delete(Long id) {
+        def expense = Expense.findById(id)
+
+        expense.setIsDeleted(true)
+
+        if(expense.save()){
+            flash.message = "com.billmate.expense.delete.success"
+            flash.m_default = "Expense deleted with success."
+
+            return redirect(controller: 'dashboard', action: 'circle', id: expense.getCircle().getId())
+        }else{
+            flash.error = "com.billmate.expense.delete.failure"
+            flash.e_default = "Error deleting expense."
+
+            return redirect(controller: 'expense', action: 'show', id: expense.getId())
+        }
     }
 }

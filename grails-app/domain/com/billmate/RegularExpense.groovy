@@ -6,10 +6,10 @@ import org.springframework.validation.ObjectError
 
 @LogicalDelete
 class RegularExpense {
-    static belongsTo = [DirectDebit, Circle, RegisteredUser, ExpenseType]
+    static belongsTo = [Circle, RegisteredUser, ExpenseType]
+    static hasOne = [directDebit: DirectDebit]
     static hasMany = [debts: Debt, actions: Action, assignedUsers: User, expenses: Expense]
 
-    DirectDebit directDebit = new DirectDebit()
     RegisteredUser responsible
     ExpenseType expenseType
     Circle circle
@@ -55,6 +55,18 @@ class RegularExpense {
         isActive nullable: false
     }
 
+    public RegularExpense() {
+        super()
+        directDebit = new DirectDebit()
+        directDebit.setRegularExpense(this)
+    }
+
+    public RegularExpense(Map map) {
+        super(map)
+        directDebit = new DirectDebit(map)
+        directDebit.setRegularExpense(this)
+    }
+
     public String toString() {
         title
     }
@@ -92,6 +104,7 @@ class RegularExpense {
         withTransaction {status ->
             try{
                 RegularExpense regularExpense = save(flush: true, failOnError: true)
+                directDebit.save(flush: true, failOnError: true)
                 for(String str : idsUsers){
                     if( Double.parseDouble(value[position]) > 0 ){
                         regularExpense.addToAssignedUsers(User.findById(Long.parseLong(str)))
@@ -162,8 +175,8 @@ class RegularExpense {
     public boolean secureSave(){
         withTransaction { status ->
             try {
-                directDebit.save(flush: true, failOnError: true)
                 save(flush: true, failOnError: true)
+                directDebit.save(flush: true, failOnError: true)
                 return true
             }catch(Exception ignored){
                 status.setRollbackOnly()
