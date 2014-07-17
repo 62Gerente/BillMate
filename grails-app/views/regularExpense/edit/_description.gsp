@@ -94,12 +94,24 @@
         </div>
     </div>
     <div class="row p-t-10">
-        <button class="btn btn-block btn-primary" type="button">
-            <g:message code="com.billmate.expense.new" default="Create expense" />
-        </button>
-        <button class="btn btn-block btn-white btn-danger-hover" type="button">
-            <g:message code="com.billmate.regularExpense.unchedule" default="Unschedule expense" />
-        </button>
+        <g:if test="${regularExpense.getIsActive()}">
+            <g:form data-confirm-cancel="${message(code: 'com.billmate.btn.cancel', default: 'Cancel')}" data-confirm-ok="${message(code: 'com.billmate.regularExpense.btn.unschedule', default: 'Unschedule')}" data-confirm-title="${message(code: 'com.billmate.pleaseConfirm', default: 'Please confirm')}" data-confirm-message="${message(code: 'com.billmate.regularExpense.unschedule.areYouSure', default: 'Are you sure you want to unschedule this expense ?')}" id="unscheduleExpense" class="p-t-5" url="[action:'unschedule',controller:'regularExpense',id:regularExpense.getId()]" method="DELETE">
+                <button class="btn btn-block btn-white btn-danger-hover" type="button">
+                    <g:message code="com.billmate.regularExpense.unschedule" default="Unschedule expense" />
+                </button>
+            </g:form>
+            <button class="btn btn-block btn-primary" type="button">
+                <g:message code="com.billmate.expense.new" default="Create expense" />
+            </button>
+        </g:if>
+        <g:else>
+            <button class="btn btn-block btn-white btn-danger-hover" type="button" disabled>
+                <g:message code="com.billmate.regularExpense.unschedule" default="Unschedule expense" />
+            </button>
+            <button class="btn btn-block btn-primary" type="button" disabled>
+                <g:message code="com.billmate.expense.new" default="Create expense" />
+            </button>
+        </g:else>
     </div>
 </div>
 <div class="clearfix"></div>
