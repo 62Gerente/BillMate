@@ -6,6 +6,7 @@
 include('includes/_env.php');
 include('includes/_loginUser.php');
 include('includes/_utilities.php');
+include('includes/_database.php');
 
 function sendHouseData($data, $returnResponse = false, $resource){
     return sendDataWithResource($data, $returnResponse, 'http://' . HOST . '/BillMate/house/save', $resource);
@@ -28,7 +29,7 @@ for($i = 0; $i < $circlesCount; $i++) {
     $position = rand(0, count($inputCirclesData[$type]) - 1);
     $circleData = array(
         ($type . 'Name') => $inputCirclesData[$type][$position],
-        ('friends' . ucfirst($type)) => implode( ',' , getFriendsOf($user, rand(1, 20))),
+        ('friends' . ucfirst($type)) => implode( ',' , getFriendsOf($user, rand(2, 20))),
         'expenseType' => implode( ',' , getRandomExpenseType(rand(1, 6)))
     );
 
@@ -37,7 +38,6 @@ for($i = 0; $i < $circlesCount; $i++) {
 
 // Add Circles
 $added = 0;
-$addedCircles = array('results' => array());
 echo "Inserting $circlesCount circles..." . PHP_EOL;
 foreach($allCircles['results'] as $user => $types){
     $userData = getUserData($user);
@@ -52,7 +52,6 @@ foreach($allCircles['results'] as $user => $types){
 
             if ($resultStatus) {
                 echo 'Circle \'' . $circle[$typeName . 'Name'] . '\' has been added to database.';
-                $addedCircles['results'][$user][$typeName][] = $circle;
                 $added++;
             } else {
                 echo 'Circle \'' . $circle[$typeName . 'Name'] . '\' raised an error';
@@ -64,6 +63,22 @@ foreach($allCircles['results'] as $user => $types){
     curl_close($resource);
 }
 
+// All Database Circles
+$addedCircles = array(
+        'house' => getAllFromTablesJoin(dbConnect(), 'house', 'circle', 'id'),
+        'collective' => getAllFromTablesJoin(dbConnect(), 'collective', 'circle', 'id')
+    );
+
+foreach($addedCircles['house'] as &$house){
+    $house['users'] = getAllFromTableWhere(dbConnect(), 'circle_users', 'circle_id=' . $house['circle_id']);
+    $house['expenseTypes'] = getAllFromTableWhere(dbConnect(), 'circle_expense_types', 'circle_id=' . $house['circle_id']);
+}
+
+foreach($addedCircles['collective'] as &$collective){
+    $collective['users'] = getAllFromTableWhere(dbConnect(), 'circle_users', 'circle_id=' . $collective['circle_id']);
+    $collective['expenseTypes'] = getAllFromTableWhere(dbConnect(), 'circle_expense_types', 'circle_id=' . $collective['circle_id']);
+}
+
 file_put_contents(OUTPUT_DIR . '/circles.json', json_encode($addedCircles));
 
-echo 'Finished. Inserted ' + $added + ' on database' . PHP_EOL;
+echo 'Finished. There are ' . (count($addedCircles['house']) + count($addedCircles['collective'])) . ' on database' . PHP_EOL;
