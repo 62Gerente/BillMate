@@ -55,7 +55,7 @@ for($requestIteration = 1; $requestIteration <= $requestsIterations; $requestIte
 	// Replace possible fields
 	$command = str_replace('$expenseID', getExpenseID(), $command);
 	$command = str_replace('$circleID', getCircleID(), $command);
-	$command = str_replace('$id', $user['id'], $command);
+	$command = str_replace('$id', $user['registered_id'], $command);
 
 	exec($command);
 

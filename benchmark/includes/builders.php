@@ -1,23 +1,27 @@
 <?php
 // Build User
 function getUserData(){
-	$userID = '13';
+	$userID = '';
+	$registeredID = '';
 
 	$userData = array(
 			'id' => $userID,
+			'registered_id' => $registeredID,
 			'email' => 'bill@mate.com',
 			'password' => '123456'
 		);
+
+	return $userData;
 }
 
 function getCircleID(){
-	$circleID = '298';
+	$circleID = '';
 
 	return $circleID;
 }
 
 function getExpenseID(){
-	$expenseID = '7201';
+	$expenseID = '';
 
 	return $expenseID;
 }
@@ -25,14 +29,14 @@ function getExpenseID(){
 // Build Expense
 function getExpenseData($userID){
 	$value = 70;
-	$circleID = '298';
-	$expenseTypeID = '301';
-	$userFriendsIDs = array('143','71', '185');
+	$circleID = '';
+	$expenseTypeID = '';
+	$userFriendsIDs = array('','', ''); // Note: These are user_id, not registered_user_id
 
 	$userFriendsIDsSize = count($userFriendsIDs);
 	$userFriendsValues = buildUsersValues($value, $userFriendsIDsSize);
 	$expenseData = array(
-		    'name' => 'Benchmark Expense',
+		    'name' => 'YABE - Yet Another Benchmark Expense',
 		    'idCircle' => $circleID,
 		    'idExpenseType' => $expenseTypeID,
 		    'description' => 'Just for benchmark',

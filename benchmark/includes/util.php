@@ -8,12 +8,11 @@ function writeLoginData($data, $cookieFile){
     curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($curl, CURLOPT_POST, true);
     curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-    if(file_exists($cookieFile)) {
-	    curl_setopt($curl, CURLOPT_COOKIEFILE, $cookieFile);
-    } else {
+    if(!file_exists($cookieFile)) {
 	    touch($cookieFile);
-	    curl_setopt($curl, CURLOPT_COOKIEJAR, $cookieFile);
-	}
+	  }
+    file_put_contents($cookieFile, '');
+    curl_setopt($curl, CURLOPT_COOKIEJAR, $cookieFile);
     curl_exec($curl);
     curl_setopt($curl, CURLOPT_POST, false);
 

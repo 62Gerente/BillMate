@@ -40,7 +40,7 @@ function prepareRequest($type, $nRequests, $concurrentRequests, $input, $output)
 			break;
 		case 'postExpenseFraction':
 				$postFile = getExpenseDataFileNameFrom($input);
-				$command = 'ab -k -n ' . $nRequests . ' -c ' . $concurrentRequests . ' -C ' . $cookie . ' -P ' . $postFile . ' -g ' . $output . ' ' . getRequestURL($type);
+				$command = 'ab -k -n ' . $nRequests . ' -c ' . $concurrentRequests . ' -C ' . $cookie . ' -p ' . $postFile . ' -T application/x-www-form-urlencoded -g ' . $output . ' ' . getRequestURL($type);
 			break;
 	}
 
