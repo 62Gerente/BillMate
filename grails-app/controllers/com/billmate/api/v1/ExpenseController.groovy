@@ -1,24 +1,19 @@
 package com.billmate.api.v1
 
 import com.billmate.AuthenticationToken
-import com.billmate.BMDate
 import com.billmate.Circle
 import com.billmate.Expense
 import com.billmate.ExpenseType
 import com.billmate.RegisteredUser
-import com.billmate.RegularExpense
-import com.billmate.User
 import grails.converters.JSON
 
 class ExpenseController {
-
-
-
-
+    static allowedMethods = [save: 'POST']
+    static namespace = "v1"
 
     def save(){
 
-        if (!checkToken() || !checkCircleId() || !checkEmail() || !checkValue()) {
+        if (!checkToken() || !checkCircleId() || !checkEmail() || !checkValue() || !checkName()) {
             return
         }
 
@@ -33,6 +28,7 @@ class ExpenseController {
                     ]
             ]
             render response as JSON
+            return
         }
 
         def user = RegisteredUser.findByEmail(params.email)
@@ -43,53 +39,62 @@ class ExpenseController {
                     ]
             ]
             render response as JSON
+            return
+        }
+        def user_circles = user.getCircles()*.id
+        def contains_circle = user_circles.contains(((String)params.circle_id).toLong())
+        if(!contains_circle){
+            response = [
+                    'error':[
+                            msg: message(code: "com.billmate.session.forbidden")
+                    ]
+            ]
+            render response as JSON
+            return
         }
 
+        def circle = Circle.findById(params.circle_id)
+        def listOfFriends = circle.getUsers()*.id
+        List<String> listOfFriends_strings = new LinkedList<>()
 
+        listOfFriends.each {
+            listOfFriends_strings.add(it.toString())
+        }
 
-        def listOfFriends = user.getCircles().get
+        def value = ((String) params.value).toDouble()
+        def valueSplit = value/listOfFriends.size()
+        double[] listValueSplit = new double[listOfFriends.size()]
+        Arrays.fill(listValueSplit, valueSplit)
 
-
-
-         = //Buscar elementos
-            List<String> listValuesUsers = //gerar array com valor/listoffriends.size
-            String regularExpenseID = params.regularExpenseID
-
-            Expense expense = setValuesExpenseType(null)
-
+        Expense expense = setValuesExpenseType(circle,user)
+        if(!expense.create(listOfFriends_strings,listValueSplit.toList(),user.getId())){
             response = [
-                    'error': false,
-                    'code': message(code: "com.billmate.expense.save.success"),
-                    'class': "alert alert-success form-modal-house-error"
+                    error: [
+                            msg: message(code: "com.billmate.expense.save.insuccess")
+                    ]
             ]
-            if (!expense.create(listOfFriends, listValuesUsers, session.user.getId())) {
-                response.error = true
-                response.code = message(code: "com.billmate.expense.save.insuccess")
-                response.class = "alert alert-error form-modal-house-error"
-            }
+            render response as JSON
+            return
+        }
 
-
+        response = [
+                name: expense.getTitle()
+        ]
         render response as JSON
+        return
     }
 
-    private Expense setValuesExpenseType(RegularExpense regularExpense){
-        Expense expense = new Expense()
 
+    private Expense setValuesExpenseType(Circle circle, RegisteredUser user){
+        Expense expense = new Expense()
         expense.setTitle(params.name)
-        expense.setDescription(params.description)
         expense.setValue(Double.parseDouble(params.value))
-        expense.setCircle(Circle.findById(Long.parseLong(params.idCircle)))
-        expense.setExpenseType(ExpenseType.findById(Long.parseLong(params.idExpenseType)))
-        expense.setResponsible(User.findById(Long.parseLong(params.idUser)).getRegisteredUser())
-        expense.setPaymentDeadline(BMDate.convertStringsToDate(params.paymentDeadline, false))
-        expense.setReceptionDeadline(BMDate.convertStringsToDate(params.receptionDeadline,false))
+        expense.setCircle(circle)
+        expense.setExpenseType(ExpenseType.findByName("Outros"))
+        expense.setResponsible(user)
         expense.setBeginDate(new Date())
-        expense.setRegularExpense(regularExpense)
         return expense
     }
-
-
-
     private checkToken(){
         def response = []
         if(!params['token']){
@@ -103,9 +108,22 @@ class ExpenseController {
         return true
     }
 
+    private checkName(){
+        def response = []
+        if(!params.token){
+            response = [
+                    error: [
+                            'msg': message(code: "com.billmate.Expense.name.nullable")
+                    ]
+            ]
+            render response as JSON
+        }
+        return true
+    }
+
     private checkCircleId(){
         def response = []
-        if(!((String)params.circle_id).isLong()){
+        if(!params.circle_id || !((String)params.circle_id).isLong()){
             response = [
                     error: [
                             'msg': message(code: "com.billmate.circle.id.nullable")
@@ -133,7 +151,7 @@ class ExpenseController {
         def response = []
         def value = (String)params.value
 
-        if(!value.isDouble()){
+        if(!params.value || !value.isDouble()){
             response = [
                     error: [
                             'msg': message(code: "com.billmate.Expense.value.nullable")

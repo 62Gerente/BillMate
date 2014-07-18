@@ -10,6 +10,7 @@ class UrlMappings {
 
         "/api/$namespace/user/$id/circles"(controller: "User", action: "circles")
         "/api/$namespace/circle/$id"(controller: "Circle", action: "show")
+        "/api/$namespace/expense/create"(controller: "Expense", action: "save")
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

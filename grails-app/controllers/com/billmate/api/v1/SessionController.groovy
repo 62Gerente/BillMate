@@ -16,13 +16,13 @@ class SessionController {
             return
         }
 
-        def user = User.findWhere(email: params['email'])
+        def user = User.findWhere(email: params.email)
 
         def response = []
         if (user) {
             def registeredUser = RegisteredUser.findWhere(user: user)
 
-            if (registeredUser && registeredUser.password == new Sha256Hash(params['password']).toHex()) {
+            if (registeredUser && registeredUser.password == new Sha256Hash(params.password).toHex()) {
                 def token = UUID.randomUUID().toString()
                 AuthenticationToken authenticationToken = new AuthenticationToken(email: user.email, token: token)
                 authenticationToken.secureSave()
@@ -44,7 +44,7 @@ class SessionController {
     }
 
     private checkRequiredParams() {
-        if (!params['password'] || !params['email']) {
+        if (!params.password || !params.email) {
             def response = [
                     'error': [
                             'msg': message(code: "com.billmate.session.save.invalidParams")

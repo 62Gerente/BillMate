@@ -121,6 +121,9 @@ class BootStrap {
 
             def fieldRentalType = new CustomExpenseType(name: 'Field Rental')
             fieldRentalType.secureSave()
+
+            def customType = new CustomExpenseType(name: 'Outros')
+            customType.secureSave()
         }
 
         if(Expense.count == 0) {
