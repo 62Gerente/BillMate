@@ -4,6 +4,7 @@ import com.billmate.AuthenticationToken
 import com.billmate.RegisteredUser
 import grails.converters.JSON
 
+
 class UserController {
 
     static allowedMethods = [circles: 'GET']
@@ -35,8 +36,8 @@ class UserController {
             render response as JSON
         }
 
-        def id = RegisteredUser.findById(params.id).getId()
-        if(id != user.getId()){
+        def id = RegisteredUser.findById(params.id)
+        if(!id || id.getId() != user.getId()){
             response = [
                     'error':[
                             'msg': message(code: "com.billmate.session.forbidden")
@@ -44,7 +45,10 @@ class UserController {
             ]
             render response as JSON
         }
-        response = user.getCircles()*.id
+
+        user.getCircles().each {
+            response.add(it.toJSON())
+        }
         render response as JSON
     }
 

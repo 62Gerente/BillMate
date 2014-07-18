@@ -37,10 +37,7 @@ class CircleController {
         }
 
         def circle = Circle.findById(params["id"])
-        response = [
-                id: circle.getId(),
-                name: circle.getName()
-        ]
+        response = circle.toJSON()
         render response as JSON
     }
 
