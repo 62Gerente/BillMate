@@ -9,18 +9,38 @@ class RegisteredUserReports {
         registeredUser.getUser()
     }
 
-    public Set<Expense> expenses(){
-        getUser().getExpenses()
+    public Set<Expense> expensesOfMonth(){
+        Date beginOfMonth = new Date()
+        beginOfMonth.set(date: 1)
+
+        getUser().getExpenses().findAll{ it.getBeginDate().after(beginOfMonth) }
     }
 
-    public Double totalValueOfExpenses(){
-        Double value = expenses().sum{ it.getValue() }
+    public Double totalValueOfExpensesOfMonth(){
+        Double value = expensesOfMonth().sum{ it.getValue() }
         value ? value : 0D
     }
 
-
-    public Double myQuotaOfTotalValue(){
-        Double value = expenses().sum{ it.amountAssignedTo(registeredUser.getUserId()) }
+    public Double myQuotaOfTotalValueOfMonth(){
+        Double value = expensesOfMonth().sum{ it.amountAssignedTo(registeredUser.getUserId()) }
         value ? value : 0D
+    }
+
+    public Set<House> houses(){
+        registeredUser.getHouses()
+    }
+
+    public Set<Collective> collectives(){
+        registeredUser.getCollectives()
+    }
+
+    public Set<ExpenseType> expenseTypes(){
+        Set<ExpenseType> expenseTypes = new HashSet<ExpenseType>()
+
+        registeredUser.getCircles().each {
+            expenseTypes.addAll(it.getExpenseTypes())
+        }
+
+        expenseTypes
     }
 }

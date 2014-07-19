@@ -5,10 +5,10 @@
 </head>
 <body>
     <div class="col-md-8 col-lg-8">
-        <g:render template="/expense/report" model="[registeredUser: user, expenses: userReports.expenses(), total: userReports.totalValueOfExpenses(), myTotal: userReports.myQuotaOfTotalValue()]"></g:render>
+        <g:render template="/expense/report" model="[registeredUser: user, expenses: userReports.expensesOfMonth(), total: userReports.totalValueOfExpensesOfMonth(), myTotal: userReports.myQuotaOfTotalValueOfMonth()]"></g:render>
     </div>
     <div class="col-md-4 col-lg-4">
-        <g:render template="/expense/report/filters"/>
+        <g:render template="/expense/report/filters" model="[expenseTypes: userReports.expenseTypes(), houses: userReports.houses(), collectives: userReports.collectives()]" />
         <div class="grid simple m-b-20">
             <div class="grid-body no-border">
                 <h3 class="m-t-20">Invoices</h3>
