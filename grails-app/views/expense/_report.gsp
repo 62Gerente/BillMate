@@ -26,6 +26,6 @@
 </div>
 <div class="row m-b-20" >
     <div class="col-md-4 p-b-5"><button class="btn btn-block btn-info" type="button"><i class="fa fa-print"></i>&nbsp;&nbsp;<g:message code="com.billmate.expense.report.print" default="Print report"/></button></div>
-    <div class="col-md-4 p-b-5"><button class="btn btn-block btn-success" type="button"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;<g:message code="com.billmate.expense.report.download.pdf" default="Download as PDF"/></button></div>
-    <div class="col-md-4 p-b-5"><button class="btn btn-block btn-primary" type="button"><i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;<g:message code="com.billmate.expense.report.download.csv" default="Download as CSV"/></button></div>
+    <div class="col-md-4 p-b-5"><button disabled class="btn btn-block btn-success" type="button"><i class="fa fa-file-pdf-o"></i>&nbsp;&nbsp;<g:message code="com.billmate.expense.report.download.pdf" default="Download as PDF"/></button></div>
+    <div class="col-md-4 p-b-5"><button disabled class="btn btn-block btn-primary" type="button"><i class="fa fa-file-excel-o"></i>&nbsp;&nbsp;<g:message code="com.billmate.expense.report.download.csv" default="Download as CSV"/></button></div>
 </div>
