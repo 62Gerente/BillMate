@@ -50,7 +50,7 @@ class CircleController extends RestrictedController  {
             def debtUser = it.debtOf(user.getId())
             if(debtUser){
                 list.add([it.getTitle(), it.getResponsible().getName(), it.amountPaidBy(user.getId()), it.getValue(),
-                          it.getInvoice()?.getPath(), it.getReceipt()?.getPath(), it.isResolved(), it.getId(),
+                          it.getInvoice()?.getId(), it.getReceipt()?.getId(), it.isResolved(), it.getId(),
                           it.getExpenseType().getCssClass(), it.getResponsible().getPhotoOrDefault(), it.getCircle().getCssClass(),
                           debtUser.getValue(), it.amountPaid()
                 ]);

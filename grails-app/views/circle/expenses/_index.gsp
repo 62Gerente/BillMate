@@ -5,6 +5,7 @@
         </div>
         <div class="notification-messages no-padding m-t-20">
             <div class="grid simple">
+                <input type="hidden" value="${createLink(controller: 'fileUploader', action: 'show')}" id="url-pdf"/>
                 <div class="grid-body no-border">
                     <g:hiddenField name="identifier-circle-expense" value="${circle.getId()}"/>
                     <g:hiddenField name="identifier-user-expense" value="${registeredUser.getId()}"/>

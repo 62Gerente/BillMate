@@ -171,7 +171,7 @@ $(document).ready(function() {
             if(textInfo == "")
                 context.empty().append("<i class='fa fa-file-pdf-o' style='opacity:0.3;margin-left:20px'></i>");
             else
-                context.empty().append("<a href='" + "" + "' style='text-decoration:none;color:inherit;margin-left:20px'><i class='fa fa-file-pdf-o'></i></a>");
+                context.empty().append("<a class='download-invoice' target='_blank' href='" + $("#url-pdf").val() + "/" +  textInfo + "' style='text-decoration:none;color:inherit;margin-left:15px'><i class='fa fa-file-pdf-o text-grey utility-icon hover-icon-blg'></i></a>");
         }
     }
 
@@ -280,13 +280,9 @@ $(document).ready(function() {
             responsiveHelper.createExpandIcon(nRow);
             $(nRow).find("td:nth(4)").click(function(e){
                 e.stopPropagation();
-                if(aData[4] != null)
-                    window.open(aData[4],"_blank");
             });
             $(nRow).find("td:nth(5)").click(function(e){
                 e.stopPropagation();
-                if(aData[5] != null)
-                    window.open(aData[5],"_blank");
             });
             $(nRow).click(function(e){
                 document.location.href = "/BillMate/expense/show/" + aData[7];
