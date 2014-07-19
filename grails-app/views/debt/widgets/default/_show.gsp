@@ -1,17 +1,23 @@
 <tr>
-    <td class="home-img-list-confs unseen">
+    <td class="home-img-list-confs">
         <div class="friend-profile-pic">
             <div class="user-profile-pic-normal">
                 <img width="35" height="35" src="${debt.getUser().getPhotoOrDefault()}" alt="">
             </div>
         </div>
     </td>
-    <td class="text-black unseen">
+    <td class="text-black">
         <p>${debt.getUser()}</p>
     </td>
-    <td class="text-right">
-        <a href="#" class="edit-property edit-property-sm edit_debt_value" data-emptytext="<g:message code="com.billmate.debt.value.xeditable.clickToDefine" default="Click to define debt value" />" data-name="value" data-type="number" data-step="any" data-min="0.01" data-pk="${debt.getId()}" data-url="${createLink(controller: 'debt', action: 'updateProperty', id: debt.getId())}">
-            ${debt.getValue()}
+    <td class="pull-right text-black">
+        <a href="#">
+            <g:formatNumber number="${debt.getValue()}" type="currency" currencyCode="EUR" />
+        </a>
+    </td>
+    <td class="text-right p-b-10">
+        <input type="hidden" value="${debt.getUserId()}"/>
+        <a href="#">
+            <i class="fa fa-sign-out selected text-grey"></i>
         </a>
     </td>
 </tr>

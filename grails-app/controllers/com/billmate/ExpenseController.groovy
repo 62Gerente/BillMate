@@ -123,7 +123,7 @@ class ExpenseController extends RestrictedController {
     def list(Long id){
         def list = []
         User user = User.findById(RegisteredUser.findById(id).getUserId());
-        Debt.findAllByUser(user).each {
+        Debt.findAllByUserAndExpenseIsNotNull(user).each {
             Expense expense = it.getExpense()
             Debt debt = expense.debtOf(user.getId())
             if(expense && !expense.getIsDeleted() && debt) {

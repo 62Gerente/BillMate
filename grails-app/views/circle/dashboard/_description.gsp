@@ -36,7 +36,9 @@
         </ul>
     </div>
     <div class="row p-t-5">
-        <button class="btn btn-block btn-primary" type="button"><g:message code="com.billmate.circleDashboard.actions.expenses" default="See expenses"/></button>
+        <button class="btn btn-block btn-primary" type="button" id="btn-create-expense-regular">
+            <g:message code="com.billmate.circleDashboard.actions.expenses" default="See expenses"/>
+        </button>
     </div>
 </div>
 <div class="clearfix"></div>

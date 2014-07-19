@@ -19,7 +19,10 @@ class RegularExpenseController extends RestrictedController{
         }
         else {
             List<String> listOfFriends = params.getList("listOfFriends[]")
-            List<Double> listValuesUsers = params.getList("listValuesUsers[]")
+            List<Double> listValuesUsers = new LinkedList<>()
+            params.getList("listValuesUsers[]").each {
+                listValuesUsers.add(Double.parseDouble((String)it))
+            }
 
             RegularExpense regularExpense = setValuesRegularExpense(params)
 
@@ -223,4 +226,27 @@ class RegularExpenseController extends RestrictedController{
             return redirect(controller: 'expense', action: 'show', id: expense.getId())
         }
     }
+
+    def listUsersBy(Long id){
+        Set<User> userSet = RegularExpense.getFriendsOfRegularExpenseByTermFormated(params.q.toUpperCase(), id)
+        def response = [ 'data': userSet ]
+        render response as JSON
+    }
+
+    def adduser(Long id, Long id_regular_expense){
+        User user = User.findById(id)
+        def response = [
+                error: true,
+                message: message(code: "com.billmate.circle.user.add.insuccess")
+        ]
+        if(user){
+            RegularExpense.findById(id_regular_expense).addUsersAndAjustValues(id)
+
+            response.error = false
+            response.message = message(code: "com.billmate.circle.user.add.success")
+        }
+
+        render response as JSON
+    }
+
 }
