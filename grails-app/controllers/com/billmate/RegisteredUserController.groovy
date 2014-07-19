@@ -203,4 +203,18 @@ class RegisteredUserController extends RestrictedController {
         render response as JSON
     }
 
+    def reports(Long id){
+        if (id != authenticatedUser().getId()) {
+            return withoutPermitions()
+        }
+
+        def breadcrumb = [
+                [name: message(code: "com.billmate.sidebar.report")]
+        ]
+
+        def registeredUser = RegisteredUser.findById(id)
+        def userReports = new RegisteredUserReports(registeredUser: registeredUser)
+
+        return [breadcrumb: breadcrumb, user: registeredUser, userReports: userReports]
+    }
 }

@@ -4,7 +4,7 @@ abstract class RestrictedController extends BaseController {
     private checkSession() {
 
         // TESTING
-        //session.user = RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com'))
+        session.user = RegisteredUser.findWhere(user: User.findWhere(email: 'andreccdr@gmail.com'))
 
         if(!session.user) {
             flash.error = "com.billmate.session.required"
