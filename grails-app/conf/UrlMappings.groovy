@@ -14,7 +14,9 @@ class UrlMappings {
         "/api/$namespace/circle/$id"(controller: "Circle", action: "show")
         //HOUSE
         //EXPENSE
-        "/api/$namespace/expense"(controller: "Expense", action: "save")
+        "/api/$namespace/expense"(controller: "Expense", action: "save"){
+            action = [POST:"save"]
+        }
 
 
         "/$controller/$action?/$id?(.$format)?"{
