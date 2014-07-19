@@ -255,7 +255,7 @@ $(document).ready(function() {
         var formData = {name: name, idCircle: idCircleRegularExpense, idExpenseType: idExpenseTypeExpense, value: value, description: description,
             idUser: idUserRegularExpense, listOfFriends: listIDsUsers, listValuesUsers: listValuesUsers, paymentDeadline: paymentDeadline,
             receptionDeadline: receptionDeadline, beginDate: beginDate, endDate: endDate, numberSelected: getNumberOfSelected(), periodicity: periodicity,
-            receptionBeginDate: receptionBeginDate, paymentEndDate: paymentEndDate, format: "json"};
+            receptionBeginDate: receptionBeginDate, format: "json"};
 
         if(!hasErrors){
             $.ajax({

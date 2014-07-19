@@ -109,17 +109,15 @@ class ExpenseController extends RestrictedController {
     def delete(Long id) {
         def expense = Expense.findById(id)
 
+        expense.setIsDeleted(true)
         if(expense.delete()){
             flash.message = "com.billmate.expense.delete.success"
             flash.m_default = "Expense deleted with success."
-
-            return redirect(controller: 'dashboard', action: 'circle', id: expense.getCircle().getId())
         }else{
             flash.error = "com.billmate.expense.delete.failure"
             flash.e_default = "Error deleting expense."
-
-            return redirect(controller: 'expense', action: 'show', id: expense.getId())
         }
+        return redirect(controller: 'dashboard', action: 'circle', id: expense.getCircle().getId())
     }
 
     def list(Long id){
