@@ -1,7 +1,16 @@
+
 class UrlMappings {
 
 	static mappings = {
 
+
+        "/oauth/authorize"(controller: "Oauth", action: "authorize")
+        "/api/$namespace/login"(controller: "Session", action: "save")
+        "/api/$namespace/register"(controller: "Register", action: "save")
+
+        "/api/$namespace/user/$id/circles"(controller: "User", action: "circles")
+        "/api/$namespace/circle/$id"(controller: "Circle", action: "show")
+        "/api/$namespace/expense/create"(controller: "Expense", action: "save")
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

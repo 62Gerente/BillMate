@@ -239,13 +239,13 @@ class Expense {
                     regularExpense.save(flush: true, failOnError: true)
                 }
                 for(String str : idsUsers){
-                    if( Double.parseDouble(value[position]) > 0 ){
+                    if( value[position] > 0 ){
                         User user = User.findById(Long.parseLong(str))
-                        Debt debt = new Debt(value: Double.parseDouble(value[position]), user: user, expense: expense).save()
+                        Debt debt = new Debt(value: value[position], user: user, expense: expense).save()
                         this.addToAssignedUsers(user)
                         RegisteredUser registeredUser = user.getRegisteredUser()
                         if(registeredUser && registeredUser.getId() == id) {
-                            new Payment(user: user, debt: debt, value: Double.parseDouble(value[position]), validationDate: new Date(), isValidated: true).save()
+                            new Payment(user: user, debt: debt, value: value[position], validationDate: new Date(), isValidated: true).save()
                             debt.setResolvedDate(new Date())
                         }
                     }

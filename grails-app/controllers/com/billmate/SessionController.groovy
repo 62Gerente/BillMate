@@ -1,5 +1,6 @@
 package com.billmate
 
+import grails.converters.JSON
 import org.apache.shiro.crypto.hash.Sha256Hash
 
 class SessionController extends BaseController {

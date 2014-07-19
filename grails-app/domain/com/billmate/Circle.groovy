@@ -20,6 +20,17 @@ class Circle {
         createdAt nullable: false
     }
 
+
+
+    public Map toJSON(){
+        def res = [
+               id: id,
+               name: name,
+               description: description
+        ]
+        res
+    }
+
     public String toString(){
         name
     }
