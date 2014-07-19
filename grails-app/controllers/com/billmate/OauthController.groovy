@@ -35,7 +35,7 @@ class OauthController {
                         email: registeredUser.getEmail()
                 ]
 
-                return redirect(uri: params.redirect, params: response)
+                return redirect(uri: params.redirect+"?token="+response.token+"&user_id="+response.id+"&email="+response.email)
             }
         }
 
