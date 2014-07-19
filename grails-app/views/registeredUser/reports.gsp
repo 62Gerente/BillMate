@@ -2,6 +2,8 @@
 <html>
 <head>
     <title><g:message code="com.billmate.user.reports.page.title" default="BillMate - Reports"/></title>
+
+    <asset:stylesheet href="bm-reports.css"/>
 </head>
 <body>
     <div class="col-md-8 col-lg-8">

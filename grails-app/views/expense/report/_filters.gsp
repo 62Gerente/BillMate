@@ -1,4 +1,4 @@
-<div class="grid simple m-b-20">
+<div class="grid simple m-b-20 no-print">
     <div class="grid-body no-border">
         <h3 class="m-t-20">
             <g:message code="com.billmate.expense.report.filters" default="Filters"/>
