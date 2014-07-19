@@ -84,7 +84,6 @@ class ExpenseController {
         return
     }
 
-
     private Expense setValuesExpenseType(Circle circle, RegisteredUser user){
         Expense expense = new Expense()
         expense.setTitle(params.name)
@@ -95,6 +94,7 @@ class ExpenseController {
         expense.setBeginDate(new Date())
         return expense
     }
+
     private checkToken(){
         def response = []
         if(!params['token']){

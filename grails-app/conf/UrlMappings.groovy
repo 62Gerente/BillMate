@@ -8,9 +8,14 @@ class UrlMappings {
         "/api/$namespace/login"(controller: "Session", action: "save")
         "/api/$namespace/register"(controller: "Register", action: "save")
 
+        //USER
         "/api/$namespace/user/$id/circles"(controller: "User", action: "circles")
+        //CIRCLE
         "/api/$namespace/circle/$id"(controller: "Circle", action: "show")
-        "/api/$namespace/expense/create"(controller: "Expense", action: "save")
+        //HOUSE
+        //EXPENSE
+        "/api/$namespace/expense"(controller: "Expense", action: "save")
+
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {
