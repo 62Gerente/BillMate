@@ -1,0 +1,227 @@
+%%%%%%%%%%%%%%
+%% Run LaTeX on this file several times to get Table of Contents,
+%% cross-references, and citations.
+
+%% If you have font problems, you may edit the w-bookps.sty file
+%% to customize the font names to match those on your system.
+
+%% w-bksamp.tex. Current Version: Feb 16, 2012
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%  Sample file for
+%  Wiley Book Style, Design No.: SD 001B, 7x10
+%  Wiley Book Style, Design No.: SD 004B, 6x9
+%
+%
+%  Prepared by Amy Hendrickson, TeXnology Inc.
+%  http://www.texnology.com
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%
+\documentclass{wileySev}
+
+\usepackage{graphicx}
+
+%%%%%%%
+%% for times math: However, this package disables bold math (!)
+%% \mathbf{x} will still work, but you will not have bold math
+%% in section heads or chapter titles. If you don't use math
+%% in those environments, mathptmx might be a good choice.
+
+% \usepackage{mathptmx}
+
+% For PostScript text
+\usepackage{w-bookps}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Other packages you might want to use:
+
+% for chapter bibliography made with BibTeX
+% \usepackage{chapterbib}
+
+% for multiple indices
+% \usepackage{multind}
+
+% for answers to problems
+% \usepackage{answers}
+
+\usepackage[svgnames]{xcolor} % Required to specify font color
+\usepackage[utf8]{inputenc}
+\usepackage[portuguese]{babel}
+
+\usepackage{indentfirst}
+
+\usepackage{listings} % Required for inserting code snippets
+\usepackage[usenames,dvipsnames]{} % Required for specifying custom colors and referring to colors by name
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Change options here if you want:
+%%
+%% How many levels of section head would you like numbered?
+%% 0= no section numbers, 1= section, 2= subsection, 3= subsubsection
+%%==>>
+\setcounter{secnumdepth}{3}
+
+%% How many levels of section head would you like to appear in the
+%% Table of Contents?
+%% 0= chapter titles, 1= section titles, 2= subsection titles,
+%% 3= subsubsection titles.
+%%==>>
+\setcounter{tocdepth}{2}
+
+\newcommand{\VT}[1]{\ensuremath{{V_{T#1}}}}
+
+%% use a box to expand the macro before we put it into the section head:
+
+\newbox\sectsavebox
+\setbox\sectsavebox=\hbox{\boldmath\VT{xyz}}
+
+\newcommand*{\plogo}{\hspace*{-1cm}\includegraphics[width=400px,height=200px]{images/logo2}} % Generic publisher logo
+
+%----------------------------------------------------------------------------------------
+%	TITLE PAGE
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\titleGP}{\begingroup % Create the command for including the title page in the document
+\centering % Center all text
+\vspace*{\baselineskip} % White space at the top of the page
+
+\rule{\textwidth}{1.6pt}\vspace*{-\baselineskip}\vspace*{2pt} % Thick horizontal line
+\rule{\textwidth}{0.4pt}\\[\baselineskip] % Thin horizontal line
+
+{\normalsize Projeto Integrado}\\[0.2\baselineskip] {\LARGE BILL MATE \\[0.3\baselineskip]} {\large Engenharia de Aplicações 13/14}\\[0.2\baselineskip] % Title
+
+\rule{\textwidth}{0.4pt}\vspace*{-\baselineskip}\vspace{3.2pt} % Thin horizontal line
+\rule{\textwidth}{1.6pt}\\[\baselineskip] % Thick horizontal line
+
+\scshape % Small caps
+A partilha de despesas nunca foi tão fácil \\ % Tagline(s) or further description
+[\baselineskip] % Tagline(s) or further description
+{\itshape Universidade do Minho\par} % Editor affiliation
+
+\vspace*{\baselineskip} % Whitespace between location/year and editors
+
+\vfill % Whitespace between editor names and publisher logo
+
+\plogo \\[\baselineskip] % Publisher logo
+%\vspace*{2\baselineskip} % Whitespace
+\vfill
+Braga,  2013--2014\par % Location and year
+
+\endgroup}
+
+%----------------------------------------------------------------------------------------
+%	SNIPPETS CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+
+
+\definecolor{DarkGreen}{rgb}{0.0,0.4,0.0} % Comment color
+\definecolor{highlight}{RGB}{255,251,204} % Code highlight color
+
+\lstdefinestyle{Style1}{ % Define a style for your code snippet, multiple definitions can be made if, for example, you wish to insert multiple code snippets using different programming languages into one document
+%language=Perl, % Detects keywords, comments, strings, functions, etc for the language specified
+backgroundcolor=\color{highlight}, % Set the background color for the snippet - useful for highlighting
+basicstyle=\footnotesize\ttfamily, % The default font size and style of the code
+breakatwhitespace=false, % If true, only allows line breaks at white space
+breaklines=true, % Automatic line breaking (prevents code from protruding outside the box)
+captionpos=b, % Sets the caption position: b for bottom; t for top
+commentstyle=\usefont{T1}{pcr}{m}{sl}\color{DarkGreen}, % Style of comments within the code - dark green courier font
+deletekeywords={}, % If you want to delete any keywords from the current language separate them by commas
+%escapeinside={\%}, % This allows you to escape to LaTeX using the character in the bracket
+firstnumber=1, % Line numbers begin at line 1
+frame=single, % Frame around the code box, value can be: none, leftline, topline, bottomline, lines, single, shadowbox
+frameround=tttt, % Rounds the corners of the frame for the top left, top right, bottom left and bottom right positions
+keywordstyle=\color{Blue}\bf, % Functions are bold and blue
+morekeywords={}, % Add any functions no included by default here separated by commas
+numbers=left, % Location of line numbers, can take the values of: none, left, right
+numbersep=10pt, % Distance of line numbers from the code box
+numberstyle=\tiny\color{Gray}, % Style used for line numbers
+rulecolor=\color{black}, % Frame border color
+showstringspaces=false, % Don't put marks in string spaces
+showtabs=false, % Display tabs in the code as lines
+stepnumber=5, % The step distance between line numbers, i.e. how often will lines be numbered
+stringstyle=\color{Purple}, % Strings are purple
+tabsize=2, % Number of spaces per tab in the code
+}
+
+% Create a command to cleanly insert a snippet with the style above anywhere in the document
+\newcommand{\insertcode}[2]{\begin{itemize}\item[]\lstinputlisting[caption=#2,label=#1,style=Style1]{#1}\end{itemize}} % The first argument is the script location/filename and the second is a caption for the listing
+
+
+%----------------------------------------------------------------------------------------
+%	BLANK DOCUMENT
+%----------------------------------------------------------------------------------------
+
+\newcommand*{\titleTH}{\begingroup
+\raggedleft
+\vspace*{\baselineskip}
+
+{\Large Universidade do Minho}\\[0.167\textheight]
+{\LARGE\bfseries Projeto Integrado}\\[\baselineskip]
+{\Huge Bill Mate}\\[\baselineskip]
+{\Large \textit{Engenharia de Aplicações 13/14}}\par
+
+\vfill
+
+\large{André Santos pg25329\\Pedro Leite pg25330\\Francisco Neves pg25334\\Ricardo Branco pg25339}\par
+
+\vspace*{3\baselineskip}
+\endgroup}
+
+\begin{document}
+
+\titleGP % This command includes the title page
+
+\booktitle{BILLMATE}
+\subtitle{Partilha de Despesas}
+
+\authors{André Santos PG25329\\
+		\affil{Universidade do Minho}
+		Pedro Leite PG25330\\
+		\affil{Universidade do Minho}
+		Francisco Neves PG25334\\
+		\affil{Universidade do Minho}
+		Ricardo Branco PG25339\\
+		\affil{Universidade do Minho}
+}
+
+\titlepage
+
+\input{sections/resumo}
+
+\contentsinbrief
+\tableofcontents
+\listoffigures
+\listoftables
+
+\input{sections/prefacio}
+\input{sections/acronimos}
+\input{sections/glossario}
+
+\setcounter{page}{1}
+\pagestyle{headings}
+
+\input{sections/introduction}
+\input{sections/motivation}
+\input{sections/studyCases}
+\input{sections/planning}
+\input{sections/requirementsAnalysis}
+\input{sections/infrastructure}
+\input{sections/modeling}
+\input{sections/interface}
+\input{sections/implementation}
+\input{sections/benchmarking}
+\input{sections/futurework}
+\input{sections/conclusion}
+
+\input{sections/bibliografia}
+\input{sections/www}
+\input{sections/appendix}
+
+%\input{sections/howto}
+
+
+\printindex
+\end{document}
+

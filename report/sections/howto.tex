@@ -1,0 +1,358 @@
+\chapter[How to?]
+{Howto}
+
+\section{Equações}
+
+\begin{equation}
+ABC {\cal DEF} \alpha\beta\Gamma\Delta\sum^{abc}_{def}
+\end{equation}
+
+
+\section{Referenciar a bibliografia}
+
+zhamming - \cite{hamming} e ainda zHu - \cite{zHu}
+
+\section{Inserir Imagem}
+
+\begin{figure}[ht]
+\centerline{\includegraphics[width=.5\textwidth]{images/dium}}
+\caption{Legenda.}
+\end{figure}
+
+\pagebreak
+
+Aqui está outra, mas inseri uma quebra de página para se conseguir separar as duas:
+
+\begin{figure}[ht]
+\vskip2pt
+\centerline{\includegraphics[width=.5\textwidth]{images/dium}}
+\caption{Oscillograph for  memory address access operations,
+showing 500 ps
+address access time and superimposed signals
+of address access in 1 kbit
+memory plane.}
+\end{figure}
+
+
+\pagebreak
+
+\section{Inserir Tabela}
+
+\begin{table}[ht]
+\caption{Small Table}
+\centering
+\begin{tabular}{cccc}
+\hline
+one&two&three&four\\
+\hline
+C&D&E&F\\
+\hline
+\end{tabular}
+\end{table}
+
+
+\section{Inserir um Exemplo}
+\vskip6pt
+\begin{example}[Titulo do Exemplo]
+Apresentar um exemplo de qualquer coisa.
+\end{example}
+
+
+\section{2 imagens lado a lado}
+
+\begin{figure}[ht]
+\sidebyside{
+\includegraphics[width=.5\textwidth]{images/dium}
+\caption{Imagem da Esquerda}
+}
+{
+\includegraphics[width=.5\textwidth]{images/dium}
+\caption{Imagem da Direita}
+}
+\end{figure}
+
+
+\section{Inserir Tabela de outro estilo}
+
+\begin{table}[ht]
+\caption{Effects of the two types of $\alpha\beta\sum^A_B$ scaling proposed by Dennard \newline
+and
+co-workers$^{a,b}$}
+\begin{tabular*}{\textwidth}{@{\extracolsep{\fill}}lcc}
+\hline
+Parameter& $\kappa$ Scaling & $\kappa$, $\lambda$ Scaling\cr
+\hline
+Dimension&$\kappa^{-1}$&$\lambda^{-1}$\cr
+Voltage&$\kappa^{-1}$&$\kappa^{-1}$\cr
+Currant&$\kappa^{-1}$&$\lambda/\kappa^{2}$\cr
+Dopant Concentration&$\kappa$&$\lambda^2/\kappa$\cr
+\hline
+\end{tabular*}
+\begin{tablenotes}
+$^a$Refs.~19 and 20.
+
+$^b\kappa, \lambda>1$.
+\end{tablenotes}
+\end{table}
+
+
+\section{Inserir Tabela lado a lado}
+
+Tabelas lado a lado
+
+ \begin{table}[ht]
+ \sidebyside{
+\caption{Table Caption} 
+\begin{tabular}{cccc}
+one&two&three&four\\
+a &little&sample&table
+\end{tabular}
+}
+ {
+\caption{Table Caption}
+\begin{tabular}{cccc}
+A&B&C&D\\
+a &second little& sample&table
+\end{tabular}
+}
+ \end{table}
+
+
+\section{Usar Verbatim}
+
+\begin{verbatim}
+ \begin{table} 
+ \sidebyside{\caption{Table Caption}\label{tab1}
+ first table}
+ {\caption{Table Caption}\label{tab2} second table}
+ \end{table}
+\end{verbatim}
+
+
+
+\section{Colocar Snippets}
+	
+\insertcode{snippets/example.pl}{Nena would be proud.}
+
+
+\section{Colocar Algoritmo}
+
+\begin{algorithm}
+{\bf state\_transition algorithm} $\{$
+\        for each neuron $j\in\{0,1,\ldots,M-1\}$
+\        $\{$   
+\            calculate the weighted sum $S_j$ using Eq. (6);
+\            if ($S_j>t_j$)
+\                    $\{$turn ON neuron; $Y_1=+1\}$   
+\            else if ($S_j<t_j$)
+\                    $\{$turn OFF neuron; $Y_1=-1\}$   
+\            else
+\                    $\{$no change in neuron state; $y_j$ remains %
+unchanged;$\}$ 
+\        $\}$   
+$\}$   
+\end{algorithm}
+
+\section{Inserir Citação}
+
+\begin{quote}
+	This is a sample of extract or quotation.
+\end{quote}
+
+
+\section{Criar Listas}
+
+Tipo 1 \newline\newline
+
+\begin{enumerate}
+\item
+This is the first item in the numbered list.
+
+\item
+This is the second item in the numbered list.
+This is the second item in the numbered list.
+This is the second item in the numbered list.
+\end{enumerate}
+
+Tipo 2 \newline\newline
+
+\begin{itemize}
+\item
+This is the first item in the itemized list.
+
+\item
+This is the first item in the itemized list.
+This is the first item in the itemized list.
+This is the first item in the itemized list.
+\end{itemize}
+
+Tipo 3 \newline\newline
+
+\begin{itemize}
+\item[]
+This is the first item in the itemized list.
+
+\item[]
+This is the first item in the itemized list.
+This is the first item in the itemized list.
+This is the first item in the itemized list.
+\end{itemize}
+
+
+\section{Criar Problemas}
+
+\begin{problems}
+\prob
+For Hooker's data, Problem 1.2, use the Box and Cox and Atkinson procedures to determine a appropriate transformation of PRES
+in the regression of PRES on TEMP. find $\hat\lambda$, $\tilde\lambda$,
+the score test, and the added variable plot for the score. 
+Summarize the results.
+
+\prob
+The following data were collected in a study of the effect of dissolved sulfur
+on the surface tension of liquid copper (Baes and Killogg, 1953).
+
+{\centering
+\vskip6pt
+\begin{tabular}{rlcc}
+\hline
+&&\multicolumn2c{$Y$= Decrease in Surface Tension}\\
+\multicolumn2c{$x$ = Weight \% sulfur}
+&\multicolumn2c{(dynes/cm), two Replicates}\\
+\hline
+0.&034&301&316\\
+0.&093&430&422\\
+0.&30&593&586\\
+\hline
+\end{tabular}
+\vskip6pt
+}
+
+
+\subprob
+Find the transformations of $X$ and $Y$ sot that in the transformed scale 
+the regression is linear.
+
+\subprob
+Assuming that $X$ is transformed to $\ln(X)$, which choice of $Y$ gives 
+better results,
+$Y$ or $\ln(Y)$? (Sclove, 1972).
+
+\sidebysidesubprob{In the case of $\alpha_1$?}{In the case of $\alpha_2$?}
+
+\prob
+Examine the Longley data, Problem 3.3, for applicability of assumptions of the
+linear model.
+
+\sidebysideprob{In the case of $\Gamma_1$?}{In the case of $\Gamma_2$?}
+
+\end{problems}
+
+
+\section{Criar Exercícios}
+
+
+\begin{exercises}
+\exer
+For Hooker's data, Exercise 1.2, use the Box and Cox and Atkinson procedures to determine a appropriate transformation of PRES
+in the regression of PRES on TEMP. find $\hat\lambda$, $\tilde\lambda$,
+the score test, and the added variable plot for the score. 
+Summarize the results.
+
+\exer
+The following data were collected in a study of the effect of dissolved sulfur
+on the surface tension of liquid copper (Baes and Killogg, 1953).
+
+{\centering
+\vskip6pt
+\begin{tabular}{rlcc}
+\hline
+&&\multicolumn2c{$Y$= Decrease in Surface Tension}\\
+\multicolumn2c{$x$ = Weight \% sulfur}
+&\multicolumn2c{(dynes/cm), two Replicates}\\
+\hline
+0.&034&301&316\\
+0.&093&430&422\\
+0.&30&593&586\\
+\hline
+\end{tabular}
+\vskip6pt
+}
+
+
+\subexer
+Find the transformations of $X$ and $Y$ sot that in the transformed scale 
+the regression is linear.
+
+\subexer
+Assuming that $X$ is transformed to $\ln(X)$, which choice of $Y$ gives 
+better results,
+$Y$ or $\ln(Y)$? (Sclove, 1972).
+
+\sidebysidesubexer{In the case of $\Delta_1$?}{In the case of $\Delta_2$?}
+
+\exer
+Examine the Longley data, Problem 3.3, for applicability of assumptions of the
+linear model.
+
+\sidebysideexer{In the case of $\Gamma_1$?}{In the case of $\Gamma_2$?}
+
+\end{exercises}
+
+
+\section{Criar Apêndice com o título}
+
+\chapappendix{Titulo do Apêndice}
+Aqui mete-se a descrição. Nota: O NOME DA LABEL FICA DIFERENTE, REALÇANDO QUE É UM APÊNDICE. EXEMPLO: FICA FIGURA 4-A.1
+\begin{equation}
+\alpha\beta\Gamma\Delta
+\end{equation}
+
+
+\begin{figure}[ht]
+\caption{This is an appendix figure caption.}
+\end{figure}
+
+\begin{table}[ht]
+\caption{This is an appendix table caption}
+\centering
+\let\hline\savehline
+\begin{tabular}{@{\vrule height 11pt depth 4pt width0pt}|l|p{.65\textwidth}|c}
+\hline
+{\bf Date} & \multicolumn1{c|}{\bf Event} \\
+\hline \hline
+1867 & Maxwell speculated the existence of electromagnetic waves.\\
+1887 & Hertz showed the existence of electromagnetic waves. \\
+1890 & Branly developed technique for detecting radio waves. \\
+1896 & Marconi demonstrated wireless telegraph. \\
+1897 & Marconi patented wireless telegraph.  \\
+1898 & Marconi awarded patent for tuned communication. \\
+1898 & Wireless telegraphic connection between England and France established. \\
+\hline
+\end{tabular}
+\end{table}
+
+
+
+\section{Criar Índice Remissivo}
+
+pedro leite \index{pedro leite}.
+andre santos \index{andre santos}.
+francisco neves \index{francisco neves}.
+ricardo branco \index{ricardo branco}.
+Universidade do Minho \index{Universidade do Minho}.
+Departamento de Informática \index{Universidade do Minho!Departamento de Informática}.
+Departamento de Produção e Sistemas \index{Universidade do Minho!Departamento de Produção e Sistemas}.
+Engenharia Informática \index{Departamento de Informática!Engenharia Informática}.
+
+
+\begin{verbatim}
+	pedro leite \index{pedro leite}.
+	andre santos \index{andre santos}.
+	francisco neves \index{francisco neves}.
+	ricardo branco \index{ricardo branco}.
+	Universidade do Minho \index{Universidade do Minho}.
+	Departamento de Informática \index{Universidade do Minho!Departamento de Informática}.
+	Departamento de Produção e Sistemas \index{Universidade do Minho!Departamento de Produção e Sistemas}.
+	Engenharia Informática \index{Departamento de Informática!Engenharia Informática}.
+\end{verbatim}

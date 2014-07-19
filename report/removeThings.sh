@@ -1,0 +1,9 @@
+rm W-BKSAMP.aux
+rm W-BKSAMP.idx
+rm W-BKSAMP.lof
+rm W-BKSAMP.log
+rm W-BKSAMP.lot
+rm W-BKSAMP.toc
+rm W-BKSAMP.pdf
+rm W-BKSAMP.idx
+rm W-BKSAMP.ind
