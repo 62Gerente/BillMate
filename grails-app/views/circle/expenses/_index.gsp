@@ -14,7 +14,6 @@
                         <tr>
                             <th><g:message code="com.billmate.circle.expense.name" default="Name" /></th>
                             <th data-hide="phone,tablet"><g:message code="com.billmate.circle.expense.responsible" default="Responsible" /></th>
-                            <th><g:message code="com.billmate.circle.expense.payvalue" default="Paid value" /></th>
                             <th><g:message code="com.billmate.circle.expense.total" default="Total" /></th>
                             <th data-hide="phone,tablet"><g:message code="com.billmate.circle.expense.invoice" default="Invoice" /></th>
                             <th data-hide="phone,tablet"><g:message code="com.billmate.circle.expense.receipt" default="Receipt" /></th>

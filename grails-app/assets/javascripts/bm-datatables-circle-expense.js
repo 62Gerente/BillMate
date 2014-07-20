@@ -178,8 +178,8 @@ $(document).ready(function() {
     function updateAfterFill(){
         var invoice = $("#circle-datatable").find("tr.odd, tr.even");
         var receipt = $("#circle-datatable").find("tr.odd, tr.even");
-        var invoiceList = invoice.find("td:nth(4)");
-        var receiptList = receipt.find("td:nth(5)");
+        var invoiceList = invoice.find("td:nth(3)");
+        var receiptList = receipt.find("td:nth(4)");
         invoiceList.each(function(index){ propagateRowUpdates($(this)) });
         receiptList.each(function(index){ propagateRowUpdates($(this)) });
 
@@ -224,21 +224,19 @@ $(document).ready(function() {
         },
         "sPaginationType": "bootstrap",
         "aoColumnDefs": [
-            { 'aTargets': [ 3 ] },
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
-                    var value = full[2];
-                    var text = 'text-danger';
-                    if(full[2] >= full[11]){
-                        text = 'text-success';
-                        if(full[2] > full[11]){
-                            value = full[11];
-                        }
-                    }
-                    return "<span class=" + text + ">" + value.toFixed(2) + " € </span> / " + full[11].toFixed(2) + " €";
+                    return full[4]
                 },
-                'aTargets': [ 2 ]
+                aTargets: [ 3 ]
+            },
+            {
+                "mData": null ,
+                "mRender" : function ( data, type, full ) {
+                    return full[5]
+                },
+                aTargets: [ 4 ]
             },
             {
                 "mData": null ,
@@ -253,7 +251,7 @@ $(document).ready(function() {
                     }
                     return "<span class='" + text + "'>" + value.toFixed(2) + " € </span> / " + full[3].toFixed(2) + " €";
                 },
-                'aTargets': [ 3 ]
+                'aTargets': [ 2 ]
             },
             {
                 "mData": null ,
@@ -269,7 +267,7 @@ $(document).ready(function() {
                 },
                 'aTargets': [ 1 ]
             },
-            { 'bSortable': false, 'aTargets': [ 4,5 ] }
+            { 'bSortable': false, 'aTargets': [ 3,4 ] }
         ],
         "aaSorting": [[ 0, "asc" ]],
         "oLanguage": {
@@ -286,10 +284,10 @@ $(document).ready(function() {
         },
         fnRowCallback  : function( nRow, aData, iDisplayIndex ) {
             responsiveHelper.createExpandIcon(nRow);
-            $(nRow).find("td:nth(4)").click(function(e){
+            $(nRow).find("td:nth(3)").click(function(e){
                 e.stopPropagation();
             });
-            $(nRow).find("td:nth(5)").click(function(e){
+            $(nRow).find("td:nth(4)").click(function(e){
                 e.stopPropagation();
             });
             $(nRow).click(function(e){
