@@ -21,7 +21,7 @@
                 <g:render template="/expenseType/selectGroup" model="[expenseTypes: expenseTypes]"/>
             </select>
             <select name="dateInterval" class="filter-select pull-right m-b-10" style="width: 100%">
-                <option value="all"><g:message code="com.billmate.date.all_time" default="All time"/></option>
+                <option value=""><g:message code="com.billmate.date.all_time" default="All time"/></option>
                 <option value="year"><g:message code="com.billmate.date.this_year" default="This year"/></option>
                 <option value="month" selected><g:message code="com.billmate.date.this_month" default="This month"/></option>
                 <option value="week"><g:message code="com.billmate.date.this_week" default="This week"/></option>
