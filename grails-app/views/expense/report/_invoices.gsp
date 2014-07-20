@@ -2,7 +2,7 @@
     <div class="grid-body no-border">
         <h3 class="m-t-20"><g:message code="com.billmate.expense.report.invoices" default="Invoices and Receipts"/></h3>
         <p class="p-b-10">
-            <g:message code="com.billmate.expense.report.invoices.explanation" default="Download all of your expenses's invoices or receipts in one document."/>
+            <g:message code="com.billmate.expense.report.invoices.explanation" default="Consult and download all of your expenses's invoices or receipts in one document."/>
         </p>
         <table id="invoices-table" class="table">
             <thead>

@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title><g:message code="com.billmate.user.reports.page.title" default="BillMate - Reports"/></title>
+    <title><g:message code="com.billmate.registeredUser.reports.page.title" default="BillMate - Reports"/></title>
 
     <asset:stylesheet href="bm-reports.css"/>
 </head>

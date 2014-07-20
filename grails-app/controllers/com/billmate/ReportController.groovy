@@ -19,7 +19,7 @@ class ReportController extends RestrictedController {
         def expenses = userReports.filteredExpensesJSON()
 
         if(expenses.isEmpty()){
-            response = ['error': g.message(code: "com.billmate.user.expense.report.empty", default: "No expenses found for defined filters.")]
+            response = ['error': g.message(code: "com.billmate.expense.report.empty", default: "No expenses found for defined filters.")]
         }else{
             response = ['expenses': expenses]
         }

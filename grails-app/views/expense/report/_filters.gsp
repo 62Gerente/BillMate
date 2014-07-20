@@ -5,6 +5,7 @@
         </h3>
         <p class="p-b-10">
             <g:message code="com.billmate.expense.report.filters.explanation" default="Filter the expenses you want to include in report."/>
+            <br>
             <small>
                 <g:message code="com.billmate.expense.report.filters.explanation.update" default="The report will be updated automatically."/>
             </small>

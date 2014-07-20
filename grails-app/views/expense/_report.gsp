@@ -1,4 +1,4 @@
-<div id="report" class="grid simple" style="margin-bottom: 10px">
+<div id="report" class="grid simple" style="margin-bottom: 20px">
     <div class="grid-body no-border invoice-body"> <br>
         <div class="pull-left">
             <span style="margin-left: -15px">
