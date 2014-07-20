@@ -228,11 +228,15 @@ $(document).ready(function() {
             {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
+                    var value = full[2];
                     var text = 'text-danger';
-                    if(full[2] == full[11]){
+                    if(full[2] >= full[11]){
                         text = 'text-success';
+                        if(full[2] > full[11]){
+                            value = full[11];
+                        }
                     }
-                    return "<span class=" + text + ">" + full[2].toFixed(2) + " € </span> / " + full[11].toFixed(2) + " €";
+                    return "<span class=" + text + ">" + value.toFixed(2) + " € </span> / " + full[11].toFixed(2) + " €";
                 },
                 'aTargets': [ 2 ]
             },
@@ -240,10 +244,14 @@ $(document).ready(function() {
                 "mData": null ,
                 "mRender" : function ( data, type, full ) {
                     var text = 'text-danger';
-                    if(full[12] == full[3]){
+                    var value = full[12];
+                    if(full[12] >= full[3]){
                         text = 'text-success';
+                        if(full[12] > full[3]){
+                            value = full[3];
+                        }
                     }
-                    return "<span class='" + text + "'>" + full[12].toFixed(2) + " € </span> / " + full[3].toFixed(2) + " €";
+                    return "<span class='" + text + "'>" + value.toFixed(2) + " € </span> / " + full[3].toFixed(2) + " €";
                 },
                 'aTargets': [ 3 ]
             },
