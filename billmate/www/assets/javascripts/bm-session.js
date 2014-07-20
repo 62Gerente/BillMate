@@ -1,10 +1,4 @@
 $(document).ready(function() {
-
-    bm_token = window.localStorage.getItem("bm_token");
-    if (bm_token) {
-        window.location.replace("sucesso.html")
-    };
-
     $("#login-form :submit").on('click', function(event) {
         event.preventDefault();
         var form = $(this).closest("#login-form");
@@ -69,13 +63,14 @@ $(document).ready(function() {
                     $("body").unblock();
                 },
                 success: function(data) {
-                    if (data.error === false) {
+                    if (data.hasOwnProperty('error')) {
                         $("#password").parent().removeClass('success-control').addClass('error-control');
                         $("#password").val("");
                     } else {
-                        window.localStorage.clear();
                         window.localStorage.setItem("bm_token", data.token);
-                        window.location.replace("sucesso.html");
+                        window.localStorage.setItem("bm_user_id", data.id);
+                        window.localStorage.setItem("bm_email", data.email);
+                        window.location.replace("dashboard.html");
                     }
                 },
                 error: function(data) {
@@ -165,8 +160,7 @@ $(document).ready(function() {
                     $("body").unblock();
                 },
                 success: function(data) {
-                    console.log(data);
-                    if (data.error === false) {
+                    if (data.hasOwnProperty('error')) {
                         $("#password").parent().removeClass('success-control').addClass('error-control');
                         $("#password").val("");
                         $("#c_password").parent().removeClass('success-control').addClass('error-control');
@@ -174,7 +168,9 @@ $(document).ready(function() {
                     } else {
                         window.localStorage.clear();
                         window.localStorage.setItem("bm_token", data.token);
-                        window.location.replace("sucesso.html");
+                        window.localStorage.setItem("bm_user_id", data.id);
+                        window.localStorage.setItem("bm_email", data.email);
+                        window.location.replace("dashboard.html");
                     }
                 },
                 error: function(data) {

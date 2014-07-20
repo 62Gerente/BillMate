@@ -1,0 +1,1221 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+    <meta charset="utf-8" />
+    <title>BillMate - Painel do Utilizador</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta content="" name="description" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <link rel="stylesheet" href="assets/stylesheets/bm-application.css" />
+    <script src="assets/javascripts/bm-host.js?compile=false" type="text/javascript" ></script>
+    <script src="assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-ui/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-unveil/jquery.unveil.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/breakpoints.js" type="text/javascript"></script>
+    <script src="assets/plugins/blockUI/jquery.blockUI.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap-select2/select2.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap-tag/bootstrap-tagsinput.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/js/jquery.dataTables.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-datatable/extra/js/dataTables.tableTools.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/datatables-responsive/js/datatables.responsive.js" type="text/javascript"></script>
+    <script src="assets/plugins/datatables-responsive/js/lodash.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/kayalshri-tableExport/tableExport.js" type="text/javascript"></script>
+    <script src="assets/plugins/kayalshri-tableExport/jquery.base64.js" type="text/javascript"></script>
+    <script src="assets/plugins/kayalshri-tableExport/html2canvas.js" type="text/javascript"></script>
+    <script src="assets/plugins/kayalshri-tableExport/jspdf/libs/sprintf.js" type="text/javascript"></script>
+    <script src="assets/plugins/kayalshri-tableExport/jspdf/jspdf.js" type="text/javascript"></script>
+    <script src="assets/plugins/kayalshri-tableExport/jspdf/libs/base64.js" type="text/javascript"></script>
+    <script src="assets/javascripts/core.js" type="text/javascript"></script>
+    <script src="assets/plugins/pace/pace.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-slider/jquery.sidr.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-inputmask/jquery.inputmask.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/fullcalendar/moment.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/fullcalendar/fullcalendar.min.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-user-calendar.js" type="text/javascript"></script>
+    <script src="assets/plugins/image-picker-master/image-picker/image-picker.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-ajax-notifications.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-links.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-form-elements-house.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-form-elements-collective.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-datatables-expense.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-form-elements-expense.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-form-elements-regularExpense.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-form-elements-newRegularExpense.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-datatables-circle-expense.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-application.js" type="text/javascript"></script>
+</head>
+
+<body>
+    <div class="visible-xs">
+        <div class="navbar-fixed-bottom bottom-navbar">
+            <div class="navbar-inner">
+                <div class="header-seperation">
+                    <div class="row xs-p-t-10 xs-p-l-10 xs-p-r-10">
+                        <div class="col-xs-3 text-center">
+                            <a href="#">
+                                <i class="fa fa-money fa-2x"></i>
+                                <br>Despesas
+                            </a>
+                        </div>
+                        <div class="col-xs-3 text-center">
+                            <a href="#">
+                                <i class="fa fa-clock-o fa-2x"></i>
+                                <br>Histórico
+                            </a>
+                        </div>
+                        <div class="col-xs-3 text-center">
+                            <a href="#">
+                                <i class="fa fa-bar-chart-o fa-2x"></i>
+                                <br>Estatísticas
+                            </a>
+                        </div>
+                        <div class="col-xs-3 text-center">
+                            <a href="#">
+                                <i class="fa fa-file-text-o fa-2x"></i>
+                                <br>Relatórios
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="header navbar navbar-inverse ">
+        <div class="navbar-inner">
+            <div class="header-seperation">
+                <ul class="nav pull-left notifcation-center" id="main-menu-toggle-wrapper">
+                    <li class="dropdown">
+                        <a id="main-menu-toggle" href="#" class="">
+                            <div class="iconset top-menu-toggle-white"></div>
+                        </a>
+                    </li>
+                </ul>
+                <a href="/BillMate/dashboard/user">
+                    <img src="assets/images/logo-full.svg" class="logo" alt="BillMate" onerror="this.src=assets/images/logo-full.png">
+                </a>
+                <ul class="nav pull-right notifcation-center">
+                    <li class="dropdown" id="portrait-chat-toggler">
+                        <a href="#" class="chat-menu-toggle">
+                            <div class="iconset top-chat-white "></div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="header-quick-nav">
+                <div class="pull-left">
+                    <ul class="nav quick-section">
+                        <li class="quicklinks">
+                            <a href="#" class="" id="layout-condensed-toggle">
+                                <div class="iconset top-menu-toggle-dark"></div>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav quick-section">
+                        <li class="m-r-10 input-prepend inside search-form no-boarder">
+                            <span class="add-on">
+                                <span class="iconset top-search"></span>
+                            </span>
+                            <input type="text" class="no-boarder" placeholder=Procurar...>
+                        </li>
+                    </ul>
+                </div>
+                <div class="pull-right">
+                    <div class="chat-toggler">
+                        <a href="#" class="dropdown-toggle" id="my-task-list" data-placement="bottom" data-content="" data-toggle="dropdown" data-original-title="">
+                            <div class="user-details">
+                                <div class="username">
+                                    Ricardo Branco
+                                </div>
+                            </div>
+                            <div class="iconset top-down-arrow"></div>
+                        </a>
+                        <div id="notification-list" style="display:none">
+                            <div>
+                                <div class="single-notification-messages">
+                                    <a href="/BillMate/registeredUser/edit/25"><i class="fa fa-user p-r-15"></i>
+                                    Perfil
+                                </a>
+                                </div>
+                                <div class="single-notification-messages">
+                                    <form action="/BillMate/session/delete" method="post">
+                                        <input type="hidden" name="_method" value="DELETE" id="_method" />
+                                        <button class="logout-header" type="submit">
+                                            <i class="fa fa-sign-out p-r-15"></i>
+                                            Sair
+                                        </button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profile-pic">
+                            <img class="profile-photo-img" src="http://localhost:8080/BillMate/assets/default-user.png" width="35" height="35">
+                        </div>
+                    </div>
+                    <ul class="nav quick-section ">
+                        <li class="quicklinks">
+                            <span class="h-seperate"></span>
+                        </li>
+                        <li class="quicklinks">
+                            <a id="chat-menu-toggle" href="#sidr" class="chat-menu-toggle">
+                                <div class="iconset top-chat-dark ">
+
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div id="sidr" class="chat-window-wrapper">
+        <div id="main-chat-wrapper">
+            <div class="fadeIn" id="chat-users">
+                <div class="alert alert-error error-notification">
+                    <button class="close" data-dismiss="alert"></button>
+                </div>
+                <div class="side-widget">
+                    <div class="header-seperation">
+                        <div class="side-widget-title text-white bold inline p-t-20">
+                            Notificações
+                        </div>
+                        <div class="inline">
+                            <a href="/BillMate/registeredUser/markNotificationsAsRead/25"></a>
+                            <i class="text-grey fa">
+                            <span class="inline mark-read-notification">
+                                Marcar como lidas
+                            </span>
+                        </i>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+
+
+    <div class="page-container row-fluid">
+        <script type='text/javascript'>
+        var dataDebt = [];
+        var setsDebt = [];
+        var dataUser = [];
+        var setsUser = [];
+        var objJSONData = '[{"class":"com.billmate.ExpenseType","id":33,"circles":[],"cssClass":"fa fa-shopping-cart","customExpenseType":null,"defaultExpenseType":{"class":"com.billmate.DefaultExpenseType","id":34},"expenses":[],"name":"Shopping","regularExpenses":[]},{"class":"com.billmate.ExpenseType","id":35,"circles":[],"cssClass":"fa fa-cutlery","customExpenseType":null,"defaultExpenseType":{"class":"com.billmate.DefaultExpenseType","id":36},"expenses":[],"name":"Meal","regularExpenses":[]},{"class":"com.billmate.ExpenseType","id":43,"circles":[],"cssClass":"fa fa-tag","customExpenseType":{"class":"com.billmate.CustomExpenseType","id":44},"defaultExpenseType":null,"expenses":[],"name":"Maid","regularExpenses":[]}]';
+        var parsedJSONData = eval(objJSONData);
+        for (var i = 0; i < parsedJSONData.length; i++) {
+            var value = parsedJSONData[i];
+            dataDebt[i] = {
+                id: value.id,
+                text: value.name,
+                faicon: value.cssClass
+            };
+        }
+
+        var objJSONData = '[{"class":"com.billmate.User","id":12,"circles":[{"class":"com.billmate.Circle","id":31},{"class":"com.billmate.Circle","id":29}],"createdAt":"2014-07-14T18:36:38Z","debts":[],"email":"bill@mate.com","expenses":[],"name":"Bill Mates","payments":[],"referencedActions":[],"referredUser":null,"registeredUser":{"class":"com.billmate.RegisteredUser","id":13},"regularExpenses":[]},{"class":"com.billmate.User","id":21,"circles":[{"class":"com.billmate.Circle","id":31}],"createdAt":"2014-07-14T18:36:38Z","debts":[],"email":"fntneves@gmail.com","expenses":[],"name":"Francisco Neves","payments":[],"referencedActions":[],"referredUser":null,"registeredUser":{"class":"com.billmate.RegisteredUser","id":22},"regularExpenses":[]},{"class":"com.billmate.User","id":18,"circles":[{"class":"com.billmate.Circle","id":31},{"class":"com.billmate.Circle","id":29}],"createdAt":"2014-07-14T18:36:38Z","debts":[],"email":"pmcleite@gmail.com","expenses":[],"name":"Pedro Leite","payments":[],"referencedActions":[],"referredUser":null,"registeredUser":{"class":"com.billmate.RegisteredUser","id":19},"regularExpenses":[]},{"class":"com.billmate.User","id":15,"circles":[{"class":"com.billmate.Circle","id":31},{"class":"com.billmate.Circle","id":29}],"createdAt":"2014-07-14T18:36:38Z","debts":[],"email":"andreccdr@gmail.com","expenses":[],"name":"André Santos","payments":[],"referencedActions":[],"referredUser":null,"registeredUser":{"class":"com.billmate.RegisteredUser","id":16},"regularExpenses":[]}]';
+        var parsedJSONData = eval(objJSONData);
+        for (var i = 0; i < parsedJSONData.length; i++) {
+            var value = parsedJSONData[i];
+            dataUser[i] = {
+                id: value.id,
+                text: value.name + "###" + value.email,
+                faicon: value.cssClass
+            };
+        }
+
+        var unknownUser = 'http://localhost:8080/BillMate/assets/default-user.png';
+        </script>
+
+
+
+        <script type='text/javascript'>
+        var dataDebtCollective = [];
+        var setsDebtCollective = [];
+        var dataUserCollective = [];
+        var setsUserCollective = [];
+        var objJSONDataCollective = '[{"class":"com.billmate.ExpenseType","id":35,"circles":[],"cssClass":"fa fa-cutlery","customExpenseType":null,"defaultExpenseType":{"class":"com.billmate.DefaultExpenseType","id":36},"expenses":[],"name":"Meal","regularExpenses":[]},{"class":"com.billmate.ExpenseType","id":43,"circles":[],"cssClass":"fa fa-tag","customExpenseType":{"class":"com.billmate.CustomExpenseType","id":44},"defaultExpenseType":null,"expenses":[],"name":"Maid","regularExpenses":[]}]';
+        var parsedJSONDataCollective = eval(objJSONDataCollective);
+        for (var i = 0; i < parsedJSONDataCollective.length; i++) {
+            var value = parsedJSONDataCollective[i];
+            dataDebtCollective[i] = {
+                id: value.id,
+                text: value.name,
+                faicon: value.cssClass
+            };
+        }
+
+        var objJSONDataCollective = '[{"class":"com.billmate.User","id":12,"circles":[{"class":"com.billmate.Circle","id":31},{"class":"com.billmate.Circle","id":29}],"createdAt":"2014-07-14T18:36:38Z","debts":[],"email":"bill@mate.com","expenses":[],"name":"Bill Mates","payments":[],"referencedActions":[],"referredUser":null,"registeredUser":{"class":"com.billmate.RegisteredUser","id":13},"regularExpenses":[]},{"class":"com.billmate.User","id":21,"circles":[{"class":"com.billmate.Circle","id":31}],"createdAt":"2014-07-14T18:36:38Z","debts":[],"email":"fntneves@gmail.com","expenses":[],"name":"Francisco Neves","payments":[],"referencedActions":[],"referredUser":null,"registeredUser":{"class":"com.billmate.RegisteredUser","id":22},"regularExpenses":[]},{"class":"com.billmate.User","id":18,"circles":[{"class":"com.billmate.Circle","id":31},{"class":"com.billmate.Circle","id":29}],"createdAt":"2014-07-14T18:36:38Z","debts":[],"email":"pmcleite@gmail.com","expenses":[],"name":"Pedro Leite","payments":[],"referencedActions":[],"referredUser":null,"registeredUser":{"class":"com.billmate.RegisteredUser","id":19},"regularExpenses":[]},{"class":"com.billmate.User","id":15,"circles":[{"class":"com.billmate.Circle","id":31},{"class":"com.billmate.Circle","id":29}],"createdAt":"2014-07-14T18:36:38Z","debts":[],"email":"andreccdr@gmail.com","expenses":[],"name":"André Santos","payments":[],"referencedActions":[],"referredUser":null,"registeredUser":{"class":"com.billmate.RegisteredUser","id":16},"regularExpenses":[]}]';
+        var parsedJSONDataCollective = eval(objJSONDataCollective);
+        for (var i = 0; i < parsedJSONDataCollective.length; i++) {
+            var value = parsedJSONDataCollective[i];
+            dataUserCollective[i] = {
+                id: value.id,
+                text: value.name + "###" + value.email,
+                faicon: value.cssClass
+            };
+        }
+
+        var unknownUserCollective = 'http://localhost:8080/BillMate/assets/default-user.png';
+        </script>
+
+        <div class="modal fade" id="collectiveCreateModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="" style="display: none">
+                    <button class="close"></button>
+                    <div></div>
+                </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <br>
+                        <i class="fa fa-users fa-7x"></i>
+                        <h4 id="myModalLabel" class="semi-bold">Criar novo grupo</h4>
+                        <p class="no-margin">Preenche os campos com a informação do novo grupo</p>
+                        <br>
+                    </div>
+                    <form action="/BillMate/collective/save" method="post" class="collectiveForm">
+                        <div class="modal-body">
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <div class="controls">
+                                        <input type="text" name="collectiveName" placeholder="Nome do grupo" class="form-control collectiveName" value="" id="collectiveName" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <input type="text" name="expenseType" placeholder="Tipos de despesa" class="custom-multiselect-collective-debt select2-offscreen expenseType" value="" id="expenseType" />
+                                </div>
+                            </div>
+                            <div class="row form-row p-t-10">
+                                <div class="col-md-12">
+                                    <input type="text" name="friendsCollective" placeholder="Amigos do grupo" class="custom-multiselect-collective-user select2-offscreen friendsCollective" value="" id="friendsCollective" />
+                                </div>
+                            </div>
+                            <div class="row form-row p-t-10">
+                                <div class="col-md-12">
+                                    <textarea name="collectiveDescription" rows="5" placeholder="Descrição do grupo" class="form-control collectiveDescription" id="collectiveDescription"></textarea>
+                                </div>
+                            </div>
+                            <div class="row form-row p-t-10">
+                                <div class="col-md-12 m-l-5 m-b-10">
+                                    <a href="#" class="expand-more-add-friends">
+                                        <span>Adicionar amigos não registados? Clica aqui</span>
+                                    </a>
+                                </div>
+                                <div class="add-more-friends-collective">
+                                    <div class="col-md-10">
+                                        <input type="text" placeholder="Email" />
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="button" class="btn btn-default addNewReferredUserCollective">
+                                            Adicionar
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <input type="submit" name="createGroup" value="Criar novo grupo" class="btn btn-primary" id="createGroup" />
+                            <input type="hidden" name="identifier" value="24" id="identifier" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="expenseCreateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="" style="display: none">
+                    <button class="close"></button>
+                    <div></div>
+                </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <br>
+                        <i class="fa fa-money fa-7x"></i>
+                        <h4 id="myModalLabel" class="semi-bold">Criar uma nova despesa</h4>
+                        <p class="no-margin">Preenche os campos com a informação da nova despesa</p>
+                        <br>
+                    </div>
+                    <div class="modal-body">
+                        <div class="simple-options-form-debt">
+                            <input type="hidden" value="25" />
+                            <input type="hidden" value="24" />
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <input type="text" class="form-control" placeholder="Nome da despesa" />
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-12">
+                                    <input type="hidden" class="custom-multiselect-expense-circle" placeholder="Círculo" style="width:100%" class="select2-offscreen" />
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6">
+                                    <input type="hidden" class="custom-multiselect-expense-debt" placeholder="Tipo de despesa" style="width:100%" class="select2-offscreen" />
+                                    <input type="hidden" id="expense-type-link-expense" value="/BillMate/circle/expenseTypes" />
+                                    <input type="hidden" id="circle-link-expense" value="/BillMate/registeredUser/circles" />
+                                    <input type="hidden" id="users-link-expense" value="/BillMate/circle/assignedUsers" />
+                                    <input type="hidden" id="submit-link-expense" value="/BillMate/expense/save" />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group transparent">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-euro"></i>
+                                        </span>
+                                        <input id="valueExpense" class="form-control value-debt" type="number" step="any" name="value" value="" placeholder="Valor" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <textarea name="houseDescription" rows="5" placeholder="Descrição da despesa" class="form-control houseDescription" id="houseDescription"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="photos-options-form-debt">
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <select class="image-picker limit_callback show-html select-list-users" multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="advanced-options-form-debt m-t-10" style="display: none">
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data limite para pagares" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data para limite para te pagarem" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data da despesa" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data final da despesa" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data em que pagaste" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data em que te pagaram" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-left">
+                            <button type="button" class="btn btn-default btn-options-form-debt">Opções avançadas</button>
+                        </div>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary btn-submit-new-debt">
+                                Adicionar Despesa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="regularExpenseCreateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="" style="display: none">
+                    <button class="close"></button>
+                    <div></div>
+                </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <br>
+                        <i class="fa fa-money fa-7x"></i>
+                        <h4 id="myModalLabel" class="semi-bold">Criar uma nova despesa</h4>
+                        <p class="no-margin">Preenche os campos com a informação da nova despesa</p>
+                        <br>
+                    </div>
+                    <div class="modal-body">
+                        <div class="simple-options-form-regularExpense">
+                            <input type="hidden" value="25" />
+                            <input type="hidden" value="24" />
+                            <input type="hidden" id="users-link-FillRegularExpense" value="/BillMate/regularExpense/assignedUsers" />
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <input type="hidden" value="24" />
+                                    <input type="text" class="form-control" placeholder="Nome da despesa" value="" />
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-12">
+                                    <input type="hidden" value="24" />
+                                    <input type="hidden" class="custom-multiselect-regularExpense-circle" placeholder="Círculo" style="width:100%" class="select2-offscreen" />
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6">
+                                    <input type="hidden" class="custom-multiselect-regularExpense-debt" placeholder="Tipo de despesa" style="width:100%" class="select2-offscreen" />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group transparent">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-euro"></i>
+                                        </span>
+                                        <input id="valueRegularExpense" class="form-control value-debt" type="number" step="any" name="value" value="" placeholder="Valor" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <textarea name="houseDescription" rows="5" placeholder="Descrição da despesa" class="form-control houseDescription" id="houseDescription"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="photos-options-form-regularExpense">
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <select class="image-picker limit_callback show-html select-list-users-expense" multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="advanced-options-form-regularExpense m-t-10" style="display: none">
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data limite para pagares" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data para limite para te pagarem" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data da despesa" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data final da despesa" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data em que pagaste" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data em que te pagaram" class="form-control input-small clockTimePaymentExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-left">
+                            <button type="button" class="btn btn-default btn-options-form-regularExpense">Opções avançadas</button>
+                        </div>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary btn-submit-new-regularExpense">
+                                Adicionar Despesa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="newRegularExpenseCreateModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="" style="display: none">
+                    <button class="close"></button>
+                    <div></div>
+                </div>
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <br>
+                        <i class="fa fa-money fa-7x"></i>
+                        <h4 id="myModalLabel" class="semi-bold">Nova despesa regular</h4>
+                        <p class="no-margin">Preenche os campos com a informação da despesa regular</p>
+                        <br>
+                    </div>
+                    <div class="modal-body">
+                        <div class="simple-options-form-newRegularExpense">
+                            <input type="hidden" value="25" />
+                            <input type="hidden" value="24" />
+                            <input type="hidden" id="users-link-newRegularExpense" value="/BillMate/circle/assignedUsers" />
+                            <input type="hidden" id="circle-link-newRegularExpense" value="/BillMate/circle/circles" />
+                            <input type="hidden" id="expense-type-link-newRegularExpense" value="/BillMate/circle/expenseTypes" />
+                            <input type="hidden" id="submit-link-newRegularExpense" value="/BillMate/regularExpense/save" />
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <input type="hidden" value="24" />
+                                    <input type="text" class="form-control" placeholder="Nome da despesa regular" value="" />
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-12">
+                                    <input type="hidden" value="24" />
+                                    <input type="hidden" class="custom-multiselect-newRegularExpense-circle" placeholder="Círculo" style="width:100%" class="select2-offscreen" />
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6">
+                                    <input type="hidden" class="custom-multiselect-newRegularExpense-debt" placeholder="Tipo de despesa regular" style="width:100%" class="select2-offscreen" />
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="input-group transparent">
+                                        <span class="input-group-addon">
+                                            <i class="fa fa-euro"></i>
+                                        </span>
+                                        <input id="valueNewRegularExpense" class="form-control value-debt" type="number" step="any" name="value" value="" placeholder="Valor" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <textarea name="houseDescription" rows="5" placeholder="Descrição da despesa regular" class="form-control houseDescription" id="houseDescription"></textarea>
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-12">
+                                    <input type="hidden" value="24" />
+                                    <input type="text" class="form-control periodicity" placeholder="Agendar repetições" value="" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="photos-options-form-newRegularExpense m-t-10">
+                            <div class="row form-row">
+                                <div class="col-md-12">
+                                    <select class="image-picker limit_callback show-html select-list-users-newRegularexpense" multiple="multiple">
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="advanced-options-form-newRegularExpense m-t-10" style="display: none">
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data limite para pagares" class="form-control input-small clockTimeRegularExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data para limite para te pagarem" class="form-control input-small clockTimeRegularExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data da despesa" class="form-control input-small clockTimeRegularExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Data final da despesa" class="form-control input-small clockTimeRegularExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row form-row m-b-10">
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Quando pagaste?" class="form-control input-small clockTimeRegularExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-lg-6">
+                                    <div class="input-append success date" style="width: 86%;">
+                                        <input type="text" placeholder="Quando te pagaram?" class="form-control input-small clockTimeRegularExpense">
+                                        <span class="add-on">
+                                            <span class="arrow"></span><i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="pull-left">
+                            <button type="button" class="btn btn-default btn-options-form-newRegularExpense">Opções Avançadas</button>
+                        </div>
+                        <div class="pull-right">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                            <button type="button" class="btn btn-primary btn-submit-new-newRegularExpense">
+                                Adicionar Despesa
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="page-sidebar" id="main-menu">
+            <div class="page-sidebar-wrapper" id="main-menu-wrapper">
+                <div class="user-info-wrapper">
+                    <div class="profile-wrapper">
+                        <a href="/BillMate/registeredUser/edit/25">
+                            <img class="profile-photo-img" src="http://localhost:8080/BillMate/assets/default-user.png">
+                        </a>
+                    </div>
+                    <div class="user-info" style="margin-top: 12px">
+                        <div class="greeting">Bem-vindo</div>
+                        <a href="/BillMate/registeredUser/edit/25">
+                            <div class="username">Ricardo Branco</div>
+                        </a>
+                    </div>
+                </div>
+                <p class="menu-title"></p>
+                <ul class="hidden-xs">
+                    <li class="start active ">
+                        <a href="/BillMate/dashboard/user"> <i class="fa fa-dashboard"></i>
+                            <span class="title">
+                                Painel do Utilizador
+                            </span>
+                            <span class="selected"></span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/BillMate/user/expenses/25"> <i class="fa fa-money"></i>
+                            <span class="title">
+                                Despesas
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/BillMate/user/calendar/25"> <i class="fa fa-calendar"></i>
+                            <span class="title">
+                                Calendário
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/BillMate/registeredUser/history/25"> <i class="fa fa-clock-o"></i>
+                            <span class="title">
+                                Histórico
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="fa fa-bar-chart-o"></i>
+                            <span class="title">
+                                Estatísticas
+                            </span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#"> <i class="fa fa-file-text-o"></i>
+                            <span class="title">
+                                Relatórios
+                            </span>
+                        </a>
+                    </li>
+
+                </ul>
+                <div class="side-bar-widgets">
+                    <p class="menu-title">Casas
+                        <span class="pull-right">
+                            <a href="create_house.html" class="btn-create-circle-sidebar">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </span>
+                    </p>
+
+
+
+                </div>
+                <div class="side-bar-widgets">
+                    <p class="menu-title">Grupos
+                        <span class="pull-right">
+                            <a href="create_circle.html" class="btn-create-circle-sidebar">
+                                <i class="fa fa-plus"></i>
+                            </a>
+                        </span>
+                    </p>
+
+                    <ul class="folders xs-p-b-60">
+
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer Games
+                            </a>
+                        </li>
+                        <li>
+                            <a href="/BillMate/dashboard/circle/31">
+                                <div class="status-icon blue"></div>
+                                CeSIUM Soccer GamesOLA
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+        <a href="#" class="scrollup"></a>
+        <div class="footer-widget">
+            <!--<button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#expenseCreateModal">-->
+            <button type="button" class="btn btn-primary btn-cons" data-toggle="modal" data-target="#newRegularExpenseCreateModal">
+                Adicionar Despesa
+            </button>
+            <button type="button" id="btn-advanced-options-regularExpense" class="btn btn-primary btn-cons hidden" data-toggle="modal" data-target="#regularExpenseCreateModal"></button>
+        </div>
+
+        <div class="page-content">
+            <div class="clearfix"></div>
+            <div class="content xs-p-b-60">
+                <ul class="breadcrumb">
+                    <li>
+                        <a href="dashboard.html">
+                            <i class="fa fa-home"></i>
+                        </a>
+                    </li>
+
+                    <li>
+
+                        Painel do Utilizador
+
+                    </li>
+                </ul>
+
+
+
+                <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
+                    <div class="alert alert-danger alert-dismissable col8-alert" id="" style="display:none;">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+
+                    </div>
+
+
+
+                    <div class="row tiles-container tiles white hidden-xlg m-b-20 expenses-widget-more-details unselectable">
+                        <div class="col-md-12 b-grey b-r no-padding widget-table-adjust-right-margin">
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <h4 class="text-black bold inline uppercase">
+                                    A quem deves
+                                </h4>
+                                <div class="pull-right">
+                                    <span class="label label-important">
+                                        <h5 class="text-white bold inline p-t-2">
+                                            0,00 €
+                                        </h5>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="p-l-20 p-r-20 p-t-20">
+                                <h4 class="text-center">Sem dívidas. Bom trabalho!</h4>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                    <div class="row tiles-container tiles white hidden-xlg m-b-20 unselectable">
+                        <div class="col-md-12 b-grey b-r no-padding widget-table-adjust-right-margin">
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <h4 class="text-black bold inline uppercase">
+                                    Quem te deve
+                                </h4>
+                                <div class="pull-right p-t-2">
+                                    <span class="label label-success">
+                                        <h5 class="text-white bold inline">
+                                            0,00 €
+                                        </h5>
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="p-l-20 p-r-20 p-t-20">
+                                <h4 class="text-center">Ninguém te deve dinheiro. Bom trabalho!</h4>
+                            </div>
+
+
+                        </div>
+                    </div>
+
+
+                    <div class="tiles white m-t-15">
+                        <div class="tiles-body no-padding">
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <h4 class="text-black bold inline uppercase">Gastos mensais</h4>
+                            </div>
+                            <div class="notification-messages no-padding">
+                                <div class="grid simple">
+                                    <div class="grid-body no-border">
+                                        <div class="tiles-title text-black"></div>
+                                        <br>
+                                        <div id="monthlySpending"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <script>
+                    $(document).ready(function() {
+
+
+                        var data = [
+
+                        ];
+
+                        $.plot($("#monthlySpending"), data, {
+                            xaxis: {
+                                min: 1391024645621,
+                                max: 1406659445621,
+                                mode: "time",
+                                timeformat: "%b",
+                                tickLength: 0
+                            },
+                            grid: {
+                                borderColor: '#f0f0f0'
+                            }
+                        });
+                    });
+                    </script>
+
+                </div>
+                <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
+                    <div class="row m-b-20">
+                        <div class="col-md-12 col-xs-6 col-sm-6 col-lg-6 debts-friend-widget-green">
+                            <div class="tiles green added-margin">
+                                <div class="tiles-body">
+                                    <div class="tiles-title" style="font-size: 11px">
+                                        Ativos
+                                    </div>
+                                    <div class="heading">
+                                        0,00 €
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12 col-xs-6 col-sm-6 col-lg-6 debts-friend-widget-red">
+                            <div class="tiles red added-margin">
+                                <div class="tiles-body">
+                                    <div class="tiles-title" style="font-size: 11px">
+                                        Dívidas
+                                    </div>
+                                    <div class="heading">
+                                        0,00 €
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="alert alert-danger alert-dismissable col4-alert" id="" style="display:none;">
+                        <button type="button" class="close" aria-hidden="true">&times;</button>
+
+                    </div>
+
+
+                    <div class="tiles white m-b-20 p-b-10">
+                        <div class="tiles-body no-padding">
+                            <div class="p-l-20 p-r-20 p-b-10 p-t-10 b-b b-grey">
+                                <h4 class="text-black bold inline uppercase">
+                                    Últimos eventos
+                                </h4>
+                            </div>
+                            <br>
+
+                            <div class="m-l-20 notification-messages">
+                                Nenhum evento para apresentar.
+                            </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <script src="assets/plugins/jquery-flot/jquery.flot.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-flot/jquery.flot.time.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-flot/jquery.flot.selection.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-flot/jquery.flot.animator.min.js" type="text/javascript"></script>
+    <script src="assets/plugins/jquery-flot/jquery.flot.orderBars.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-flot-chart.js" type="text/javascript"></script>
+    <script src="assets/javascripts/support_ticket.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-widget-dashboard.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-widgets.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-ajax-upcoming-expenses.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-ajax-confirm-payments.js" type="text/javascript"></script>
+    <script src="assets/javascripts/bm-dashboard.js" type="text/javascript"></script>
+</body>
+
+</html>

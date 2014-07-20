@@ -20,6 +20,7 @@ var app = {
     // Application Constructor
     initialize: function() {
         this.bindEvents();
+
     },
     // Bind Event Listeners
     //
@@ -45,5 +46,13 @@ var app = {
         receivedElement.setAttribute('style', 'display:block;');
 
         console.log('Received Event: ' + id);
+    }
+    checkAuth = function() {
+        bm_token = window.localStorage.getItem("bm_token");
+        if (!bm_token) {
+            window.location.replace("login.html");
+        } else {
+            window.location.replace("dashboard.html");
+        };
     }
 };

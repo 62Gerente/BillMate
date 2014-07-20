@@ -1198,7 +1198,7 @@ body.menu-non-fixed .page-sidebar {
   background-color: transparent;
   padding: 0px !important;
   border: none !important;
-  margin-bottom: 0px;
+  /*margin-bottom: 0px;*/
 }
 .page-content .breadcrumb a {
   margin-left: 10px;

@@ -1,0 +1,13 @@
+#ToolTables_users-debt_0{
+    height: 35px;
+}
+
+#users-debt tbody td .checkbox label::after{
+    left: 3px;
+    top: 1px;
+}
+
+#users-debt tbody td:hover{
+    cursor: pointer;
+    cursor: hand;
+}

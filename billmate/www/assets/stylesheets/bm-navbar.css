@@ -1,0 +1,13 @@
+.bottom-navbar a {
+border-top-color:transparent!important;
+color:#fff;
+border:none
+}
+
+.page-sidebar-wrapper .side-bar-widgets .xs-p-b-60{
+padding-bottom: 60px;
+}
+
+.page-content .xs-p-b-60{
+  padding-bottom: 60px;
+}

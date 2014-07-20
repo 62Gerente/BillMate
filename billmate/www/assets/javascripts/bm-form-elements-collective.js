@@ -52,8 +52,9 @@ $(document).ready(function() {
     $(".collectiveForm :submit").on('click', function(event) {
         event.preventDefault();
         var form = $(this).closest(".collectiveForm");
-        var link = form.attr('action');
+        var link = host + "/api/v1/collective";
         var data = form.serialize();
+        data += "&token=" + encodeURIComponent(window.localStorage.getItem("bm_token")) + "&email=" + encodeURIComponent(window.localStorage.getItem("bm_email"));
         var context = form.parents(".modal-dialog");
 
         form.validate({
@@ -103,16 +104,15 @@ $(document).ready(function() {
                     $("body").unblock();
                 },
                 success: function(data) {
-                    console.log(data);
                     context.children("div").first().show();
                     context.children("div").first().removeClass();
                     context.children("div").first().addClass(data.class);
-                    context.children("div").first().find("div").text(data.code);
-                    if (data.error === false) {
+                    if (data.hasOwnProperty('error')) {
+                        context.children("div").first().find("div").text("alert alert-success form-modal-house-success");
                         form.find(".collectiveName").empty();
                         form.find(".collectiveDescription").empty();
-                        form.delay(2000);
-                        window.location.reload();
+                    } else {
+                        window.location.replace("dashboard.html");
                     }
                 },
                 error: function(data) {

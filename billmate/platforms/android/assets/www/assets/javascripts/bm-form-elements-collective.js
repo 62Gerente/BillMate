@@ -1,55 +1,60 @@
-$(document).ready(function(){
+$(document).ready(function() {
     var unknownDebt = "fa fa-tag";
 
     function formatIcon(state) {
         var icon;
-        if(state && state.faicon) icon = state.faicon;
+        if (state && state.faicon) icon = state.faicon;
         else icon = unknownDebt;
         return "<i class='" + icon + "'></i>&nbsp;" + $("<div>").html(state.text).text();
     }
 
     function formatImage(state) {
         var image;
-        if(state && state.faicon) image = state.faicon;
+        if (state && state.faicon) image = state.faicon;
         else image = unknownUserCollective;
         return "<div class='inline p-r-5'><img src='" + image + "' style='width:17px; height:17px;'/></div>" + state.text.split('###')[0];
     }
 
     $(".custom-multiselect-collective-debt").select2({
-        createSearchChoice:function(term, data){
-            if($(data).filter(function() { return this.text.localeCompare(term)===0; }).length===0){
-                return{
-                    id:term,
-                    text:term
+        createSearchChoice: function(term, data) {
+            if ($(data).filter(function() {
+                return this.text.localeCompare(term) === 0;
+            }).length === 0) {
+                return {
+                    id: term,
+                    text: term
                 };
             }
         },
         multiple: true,
         formatResult: formatIcon,
         formatSelection: formatIcon,
-        data:dataDebtCollective
+        data: dataDebtCollective
     });
     $(".custom-multiselect-collective-debt").select2("val", setsDebtCollective);
 
     $(".custom-multiselect-collective-user").select2({
-        createSearchChoice:function(term, data){},
-        formatNoMatches: function () {return ""},
+        createSearchChoice: function(term, data) {},
+        formatNoMatches: function() {
+            return ""
+        },
         multiple: true,
         formatResult: formatImage,
         formatSelection: formatImage,
-        data:dataUserCollective
+        data: dataUserCollective
     });
     $(".custom-multiselect-collective-user").select2("val", setsUserCollective);
 
-    $("#collectiveCreateModal").find(".close").click(function(){
-        $(this).parent().css('display','none');
+    $("#collectiveCreateModal").find(".close").click(function() {
+        $(this).parent().css('display', 'none');
     });
 
-    $(".collectiveForm :submit").on('click', function (event) {
+    $(".collectiveForm :submit").on('click', function(event) {
         event.preventDefault();
         var form = $(this).closest(".collectiveForm");
-        var link = form.attr('action');
+        var link = host + "/api/v1/collective";
         var data = form.serialize();
+        data += "&token=" + encodeURIComponent(window.localStorage.getItem("bm_token")) + "&email=" + encodeURIComponent(window.localStorage.getItem("bm_email"));
         var context = form.parents(".modal-dialog");
 
         form.validate({
@@ -61,55 +66,56 @@ $(document).ready(function(){
                 }
             },
 
-            invalidHandler: function (event, validator) {
-            },
+            invalidHandler: function(event, validator) {},
 
-            errorPlacement: function (error, element) {
+            errorPlacement: function(error, element) {
                 var parent = $(element).parent('.input');
                 parent.removeClass('success-control').addClass('error-control');
             },
 
-            highlight: function (element) {
+            highlight: function(element) {
                 var parent = $(element).parent();
                 parent.removeClass('success-control').addClass('error-control');
             },
 
-            unhighlight: function (element) {
+            unhighlight: function(element) {
                 var parent = $(element).parent();
                 parent.removeClass('error-control').addClass('success-control');
             },
 
-            success: function (label, element) {
+            success: function(label, element) {
                 var parent = $(element).parent('.input');
                 parent.removeClass('error-control').addClass('success-control');
             }
         });
 
-        if(form.valid()) {
+        if (form.valid()) {
             $.ajax({
                 url: link,
                 type: "POST",
                 dataType: 'json',
                 data: data,
-                beforeSend: function () {
-                    $("body").block({ message: null });
+                beforeSend: function() {
+                    $("body").block({
+                        message: null
+                    });
                 },
-                complete: function () {
+                complete: function() {
                     $("body").unblock();
                 },
-                success: function (data) {
+                success: function(data) {
                     context.children("div").first().show();
                     context.children("div").first().removeClass();
                     context.children("div").first().addClass(data.class);
-                    context.children("div").first().find("div").text(data.code);
-                    if (data.error === false) {
+                    if (data.hasOwnProperty('error')) {
+                        context.children("div").first().find("div").text("alert alert-success form-modal-house-success");
                         form.find(".collectiveName").empty();
                         form.find(".collectiveDescription").empty();
-                        form.delay(2000);
-                        window.location.reload();
+                    } else {
+                        window.location.replace("dashboard.html");
                     }
                 },
-                error: function (data) {
+                error: function(data) {
                     context.children("div").first().show();
                     context.children("div").first().removeClass();
                     context.children("div").first().addClass(data.class);
@@ -131,16 +137,18 @@ $(document).ready(function(){
         }
     });
 
-    $(".addNewReferredUserCollective").click(function(){
+    $(".addNewReferredUserCollective").click(function() {
         var email = $(this).closest(".add-more-friends-collective").find("div:nth(0) :input").val();
         var name = email.split("@")[0];
         var validEmail = isValidEmailAddress(email);
 
-        if(email == "" || !validEmail){
-                $(this).parent().siblings("div:nth(0)").children("input").removeClass().addClass("error");
-        }else{
+        if (email == "" || !validEmail) {
+            $(this).parent().siblings("div:nth(0)").children("input").removeClass().addClass("error");
+        } else {
             setsUserCollective = [];
-            var list = $(this).closest(".modal-body").children("div:nth(2)").find("li.select2-search-choice div:not('.inline')").map(function() { return $(this).text(); });
+            var list = $(this).closest(".modal-body").children("div:nth(2)").find("li.select2-search-choice div:not('.inline')").map(function() {
+                return $(this).text();
+            });
 
             var sizeList = list.length;
             var sizeDataUser = dataUserCollective.length;
@@ -148,31 +156,37 @@ $(document).ready(function(){
             for (i = 0; i < sizeList; i++) {
                 for (j = 0; j < sizeDataUser; j++) {
                     var userAlreadyRegisted = dataUserCollective[j].text.split("###")[0];
-                    if(list[i] == userAlreadyRegisted){
+                    if (list[i] == userAlreadyRegisted) {
                         setsUserCollective[setsUserCollective.length] = dataUserCollective[j].id;
                     }
                 }
             }
-            dataUserCollective[dataUserCollective.length] = {id: name+"###"+email, text: name+"###"+email, faicon: unknownUserCollective};
-            setsUserCollective[setsUserCollective.length] = name+"###"+email;
+            dataUserCollective[dataUserCollective.length] = {
+                id: name + "###" + email,
+                text: name + "###" + email,
+                faicon: unknownUserCollective
+            };
+            setsUserCollective[setsUserCollective.length] = name + "###" + email;
             $(".custom-multiselect-collective-user").select2({
-                createSearchChoice:function(term, data){},
-                formatNoMatches: function () {return ""},
+                createSearchChoice: function(term, data) {},
+                formatNoMatches: function() {
+                    return ""
+                },
                 multiple: true,
                 formatResult: formatImage,
                 formatSelection: formatImage,
-                data:dataUserCollective
+                data: dataUserCollective
             });
             $(".custom-multiselect-collective-user").select2("val", setsUserCollective);
             $(this).closest(".add-more-friends-collective").find("div:nth(0) :input").val("");
         }
     });
 
-    $('.add-more-friends-collective input.error').live('input',function(){
+    $('.add-more-friends-collective input.error').live('input', function() {
         $(this).removeClass().addClass('success');
     });
 
-    $(".expand-more-add-friends").click(function(){
+    $(".expand-more-add-friends").click(function() {
         $(this).parent().siblings(".add-more-friends-collective").toggle();
     });
 
@@ -180,8 +194,7 @@ $(document).ready(function(){
         return validateEmail(emailAddress);
     };
 
-    function validateEmail(email)
-    {
-        return email.match( /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
+    function validateEmail(email) {
+        return email.match(/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/);
     }
 });

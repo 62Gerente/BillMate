@@ -12,7 +12,6 @@ $("#subscribe-form").submit(function (event) {
             type: "POST",
             dataType: 'json',
             success: function (data) {
-                console.log(data);
                 if (data.error === true)
                     alert.addClass("alert-danger");
                 else {

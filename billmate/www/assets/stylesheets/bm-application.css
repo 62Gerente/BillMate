@@ -1,11 +1,15 @@
 @import url('../plugins/pace/pace-theme-flash.css');
 @import url('../plugins/jquery-slider/css/jquery.sidr.light.css');
+@import url('../plugins/bootstrap-datepicker/css/datepicker.css');
 @import url('../plugins/boostrapv3/css/bootstrap.min.css');
 @import url('../plugins/boostrapv3/css/bootstrap-theme.min.css');
 @import url('../plugins/font-awesome/css/font-awesome.min.css');
 @import url('../plugins/bootstrap-tag/bootstrap-tagsinput.css');
 @import url('../plugins/bootstrap-select2/select2.css');
+@import url('../plugins/image-picker-master/image-picker/image-picker.css');
+@import url('../plugins/boostrapv3/css/bootstrap.min.css');
 @import url('animate.min.css');
+@import url('../plugins/image-picker-master/image-picker/image-picker.css');
 @import url('style.css');
 @import url('responsive.css');
 @import url('magic_space.css');
@@ -14,3 +18,4 @@
 @import url('bm-dashboard.css');
 @import url('bm-formSidebar-select2.css');
 @import url('bm-sidebar.css');
+@import url('bm-navbar.css');

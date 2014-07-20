@@ -1,0 +1,28 @@
+.cbp_tmtimeline>li .cbp_tmicon {
+    width: 48px;
+    height: 48px;
+    margin: 0 0 0 -29px;
+}
+
+.cbp_tmtimeline:before {
+    display: none;
+}
+
+.cbp_tmtimeline>li::before{
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: -15px;
+    width: 10px;
+    background: #f2f4f6;
+    left: 20%;
+    margin-left: -10px;
+}
+
+.cbp_tmtimeline>li:last-child::before{
+    display: none;
+}
+
+.fa-1-2x {
+    font-size: 1.6em;
+}
