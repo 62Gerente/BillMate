@@ -1,8 +1,8 @@
 <?php
 // Build User
 function getUserData(){
-	$userID = '';
-	$registeredID = '';
+	$userID = '12';
+	$registeredID = '13';
 
 	$userData = array(
 			'id' => $userID,
@@ -15,13 +15,13 @@ function getUserData(){
 }
 
 function getCircleID(){
-	$circleID = '';
+	$circleID = '769';
 
 	return $circleID;
 }
 
 function getExpenseID(){
-	$expenseID = '';
+	$expenseID = '2864';
 
 	return $expenseID;
 }
@@ -29,9 +29,9 @@ function getExpenseID(){
 // Build Expense
 function getExpenseData($userID){
 	$value = 70;
-	$circleID = '';
-	$expenseTypeID = '';
-	$userFriendsIDs = array('','', ''); // Note: These are user_id, not registered_user_id
+	$circleID = '769';
+	$expenseTypeID = '772';
+	$userFriendsIDs = array('271','100', '340'); // Note: These are user_id, not registered_user_id
 
 	$userFriendsIDsSize = count($userFriendsIDs);
 	$userFriendsValues = buildUsersValues($value, $userFriendsIDsSize);
@@ -68,26 +68,25 @@ function buildUsersValues($value, $size){
 
 // Build House
 function getHouseData($userID){
-	$expenseTypes = array('','','');
-	$houseMembers = array('','', ''); // Note: These are user_id, not registered_user_id
+	$expenseTypes = array('YABET','YYABET','YYYABET');
+	$houseMembers = array('70','97', '154'); // Note: These are user_id, not registered_user_id
 
 	$houseData = array(
 		    'houseName' => 'YABC - Yet Another Benchmark Circle',
 		    'houseDescription' => 'Just for benchmark',
 		    'expenseType' => implode(',', $expenseTypes),
-		    'friendsHouse' => implode(',', $houseMembers)
+		    'friendsHouse' => implode(',', $houseMembers),
+		    'identifier' => $userID
 		);
-
-	$houseMembers[] = $userID;
 
 	return $houseData;
 }
 
 // Build Payment
 function getPaymentData($userID){
-	$payerID = '';
-	$expenseIDs = array('','','');
-	$values = array('','', '');
+	$payerID = '139';
+	$expenseIDs = array('2864');
+	$values = array('7.5');
 
 	$paymentData = array(
 		    'idsExpense' => '[' . implode(',', $expenseIDs) . ']',

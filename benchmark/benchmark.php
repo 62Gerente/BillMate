@@ -44,7 +44,7 @@ if($totalPercentage !== 1){
 $user = getUserData();
 writeLoginData($user, getcwd() . '/tmp/login.cookie');
 writeExpenseData(getExpenseData($user['id']), getcwd() . '/tmp/expense.dat');
-writeHouseData(getExpenseData($user['id']), getcwd() . '/tmp/house.dat');
+writeHouseData(getHouseData($user['id']), getcwd() . '/tmp/house.dat');
 writePaymentData(getPaymentData($user['id']), getcwd() . '/tmp/payment.dat');
 
 for($requestIteration = 1; $requestIteration <= $requestsIterations; $requestIteration++) {
@@ -56,14 +56,13 @@ for($requestIteration = 1; $requestIteration <= $requestsIterations; $requestIte
 			$requestsPerIteration,
 			$requestsConcurrency,
 			getcwd() . '/tmp',
-			getcwd() . '/output/' . $requestType . '-' . $requestIteration . '-' . $requestsPerIteration . '-' . $requestsConcurrency . '.dat'
+			getcwd() . '/output/' . date("d-M-Y-h:i:s") . '-' . $requestIteration . '-' . $requestsPerIteration . '-' . $requestsConcurrency . '.dat'
 		);
 
 	// Replace possible fields
 	$command = str_replace('$expenseID', getExpenseID(), $command);
 	$command = str_replace('$circleID', getCircleID(), $command);
 	$command = str_replace('$id', $user['registered_id'], $command);
-
 	echo $command, PHP_EOL; exit(1);
 	exec($command);
 
