@@ -5,19 +5,19 @@ class UrlMappings {
 
 
         "/oauth/authorize"(controller: "Oauth", action: "authorize")
+
         "/api/$namespace/login"(controller: "Session", action: "save")
         "/api/$namespace/register"(controller: "Register", action: "save")
 
+
+
+        "/api/$namespace/$controller/$id?"{
+            action = [GET:"show", PUT:"update", DELETE:"delete", POST:"save"]
+        }
+
         //USER
         "/api/$namespace/user/$id/circles"(controller: "User", action: "circles")
-        //CIRCLE
-        "/api/$namespace/circle/$id"(controller: "Circle", action: "show")
-        //HOUSE
-        "/api/$namespace/house"
-        //EXPENSE
-        "/api/$namespace/expense"(controller: "Expense"){
-            action = [POST:"save"]
-        }
+
 
 
         "/$controller/$action?/$id?(.$format)?"{
