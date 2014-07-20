@@ -187,7 +187,15 @@
 }
 
 .pull-right .chat-toggler{
-    margin-right: -45px;
+    margin-right: -30px;
+}
+
+.page-sidebar.mini #home-sidebar-menu{
+    margin-left: -15px;
+}
+
+.page-sidebar.mini #home-sidebar-menu li{
+    padding: 5px 0;
 }
 
 .page-sidebar.mini,

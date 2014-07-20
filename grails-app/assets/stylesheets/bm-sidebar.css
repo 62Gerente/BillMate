@@ -121,7 +121,3 @@ ul.thumbnails.image_picker_selector li .thumbnail.selected{
     color: green;
     padding: 0;
 }
-
-ul.thumbnails li{
-    position: relative;
-}

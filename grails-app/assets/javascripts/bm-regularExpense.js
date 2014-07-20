@@ -39,6 +39,9 @@ $(document).ready(function() {
             }else{
                 $(this).empty();
             }
+        },
+        success: function(response, newValue) {
+            window.location.reload();
         }
     });
 

@@ -13,7 +13,7 @@
         </div>
         <p class="menu-title"></p>
         <ul id="home-sidebar-menu">
-            <li class="start active ">
+            <li class="start">
                 <a href="${createLink(controller: "dashboard", action: "user")}"> <i class="fa fa-dashboard"></i>
                     <span class="title">
                         <g:message code="com.billmate.sidebar.dashboard" default="Dashboard"/>

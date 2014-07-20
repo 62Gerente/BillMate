@@ -117,9 +117,15 @@ class RegularExpenseController extends RestrictedController{
             }else{
                 value = null
             }
+        }else if(property == "responsible"){
+            if(value && ((String)value).isLong()){
+                def idUser = Long.parseLong(value)
+                value = RegisteredUser.findById(idUser)
+            }
         }
 
         regularExpense.setProperty(property, value)
+        regularExpense.ajustValues()
 
         def response = [
                 'error'  : false,
