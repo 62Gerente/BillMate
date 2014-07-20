@@ -26,3 +26,7 @@ function getAllFromTableWhere($resource, $table = 'registered_user', $where = '1
 function getAllFromTwoTablesJoin($resource, $table1 = 'registered_user', $table2 = 'user', $field1 = 'id', $field2 = 'id'){
     return pg_fetch_all ( pg_query( 'SELECT * from ' . $table1 . ', ' . $table2 . ' WHERE ' . $table2 . '.' . $field2 . '=' . $table1 . '.' . $field1 ) );
 }
+
+function getExpenseAndResponsibles($resource){
+    return pg_fetch_all ( pg_query( "SELECT e.id, e.responsible_id, e.value, u.user_id FROM expense e, registered_user u WHERE e.responsible_id = u.id" ) );
+}

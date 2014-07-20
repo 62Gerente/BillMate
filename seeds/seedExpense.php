@@ -16,7 +16,7 @@ function chooseRandomUsersAndValuesWithout($value, $users, $userID){
     $valueUsers = array();
     for($i = 0; $i < $nUsers;){
         $position = rand(0, count($users) - 1);
-        if($users[$position]['user_id'] != $userID){
+        if($users[$position]['user_id'] != $userID && !in_array($users[$position]['user_id'], $userCircles)){
             $userCircles[] = $users[$position]['user_id'];
             $valueUsers[] = $eqValue;
             $i++;
@@ -88,7 +88,10 @@ foreach($allExpense as $expense){
 }
 
 // All Database Expense
-$addedExpense = getAllFromTwoTablesJoin(dbConnect(), 'expense', 'registered_user', 'responsible_id', 'id');
+$addedExpense = getExpenseAndResponsibles(dbConnect());
+for($i=0; $i < count($addedExpense); $i++){
+    $addedExpense[$i]['debt'] = getAllFromTableWhere(dbConnect(), 'debt', 'expense_id='.$addedExpense[$i]['id']);
+}
 
 file_put_contents(OUTPUT_DIR . '/expense.json', json_encode($addedExpense));
 

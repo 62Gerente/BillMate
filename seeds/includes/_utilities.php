@@ -71,6 +71,25 @@ function getFriendsOf($friend, $n = 10) {
 	return $result;
 }
 
+function getFriendsOfAndHimself($friend, $n = 10) {
+	$users = json_decode(file_get_contents('output/users.json'), true);
+	$result = array();
+
+	$n--;
+	for($i = 0; $i < $n;) {
+		$position = rand(0, count($users) - 1);
+		$user = $users[$position];
+		if($friend['email'] != $users[$position]['email']) {
+			$result[] = $user['email'];
+			$i++;
+		}
+	}
+
+	$result[] = $friend['email'];
+
+	return $result;
+}
+
 function getRandomExpenseType($n = 10) {
 	$inputExpenseTypesData = json_decode(file_get_contents('database/expenseTypes.json'), true);
 	$expenses = &$inputExpenseTypesData['expenseTypes'];

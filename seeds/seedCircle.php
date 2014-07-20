@@ -29,7 +29,7 @@ for($i = 0; $i < $circlesCount; $i++) {
     $position = rand(0, count($inputCirclesData[$type]) - 1);
     $circleData = array(
         ($type . 'Name') => $inputCirclesData[$type][$position],
-        ('friends' . ucfirst($type)) => implode( ',' , getFriendsOf($user, rand(2, 20))),
+        ('friends' . ucfirst($type)) => implode( ',' , getFriendsOfAndHimself($user, rand(3, 8))),
         'expenseType' => implode( ',' , getRandomExpenseType(rand(1, 6)))
     );
 
