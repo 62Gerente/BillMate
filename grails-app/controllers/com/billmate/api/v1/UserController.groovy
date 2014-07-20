@@ -7,7 +7,7 @@ import grails.converters.JSON
 
 class UserController {
 
-    static allowedMethods = [circles: 'GET']
+    static allowedMethods = [circles: 'GET', houses: 'GET', collectives: 'GET']
     static namespace = "v1"
 
     def circles(){
@@ -51,7 +51,88 @@ class UserController {
         }
         render response as JSON
     }
+    def houses(){
 
+        if (!checkToken() || !checkId() || !checkEmail()) {
+            return
+        }
+
+        def response = []
+        def atoken = AuthenticationToken.findByTokenAndEmail(params.token,params.email)
+        if(!atoken){
+            response = [
+                    'error':[
+                            msg: message(code: "com.billmate.authenticationtoken.token.invalid")
+                    ]
+            ]
+            render response as JSON
+        }
+        def user = RegisteredUser.findByEmail(params.email)
+        if(!user){
+            response = [
+                    'error':[
+                            'msg': message(code: "com.billmate.user.email.null")
+                    ]
+            ]
+            render response as JSON
+        }
+
+        def id = RegisteredUser.findById(params.id)
+        if(!id || id.getId() != user.getId()){
+            response = [
+                    'error':[
+                            'msg': message(code: "com.billmate.session.forbidden")
+                    ]
+            ]
+            render response as JSON
+        }
+        def houses = user.getHouses()
+        houses.each {
+            response.add(it.toJSON())
+        }
+        render response as JSON
+    }
+    def collectives(){
+
+        if (!checkToken() || !checkId() || !checkEmail()) {
+            return
+        }
+
+        def response = []
+        def atoken = AuthenticationToken.findByTokenAndEmail(params.token,params.email)
+        if(!atoken){
+            response = [
+                    'error':[
+                            msg: message(code: "com.billmate.authenticationtoken.token.invalid")
+                    ]
+            ]
+            render response as JSON
+        }
+        def user = RegisteredUser.findByEmail(params.email)
+        if(!user){
+            response = [
+                    'error':[
+                            'msg': message(code: "com.billmate.user.email.null")
+                    ]
+            ]
+            render response as JSON
+        }
+
+        def id = RegisteredUser.findById(params.id)
+        if(!id || id.getId() != user.getId()){
+            response = [
+                    'error':[
+                            'msg': message(code: "com.billmate.session.forbidden")
+                    ]
+            ]
+            render response as JSON
+        }
+        def collectives = user.getCollectives()
+        collectives.each {
+            response.add(it.toJSON())
+        }
+        render response as JSON
+    }
 
     private checkToken(){
         def response = []
