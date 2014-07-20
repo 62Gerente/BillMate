@@ -249,4 +249,35 @@ class RegularExpenseController extends RestrictedController{
         render response as JSON
     }
 
+    def deleteUser(Long id, Long id_regular_expense){
+        User user = User.findById(id)
+        def response = [
+                error: true,
+                message: message(code: "com.billmate.circle.user.delete.insuccess")
+        ]
+        if(user){
+            RegularExpense regularExpense = RegularExpense.findById(id_regular_expense)
+            regularExpense.removeUserAndAjustValues(user)
+            response.error = false
+            response.message = message(code: "com.billmate.circle.user.delete.success")
+        }
+
+        render response as JSON
+    }
+
+    def expenses(Long id){
+        def list = []
+        RegularExpense regularExpense = RegularExpense.findById(id)
+        if(regularExpense)
+        {
+            Expense.findAllByRegularExpense(regularExpense).each {
+                list.add([it.getTitle(), it.getResponsible().getName(), it.getValue(), BMDate.convertDateFormat(it.getBeginDate()), it.getId(), it.getExpenseType().getCssClass(), it.getResponsible().getPhotoOrDefault()])
+            }
+        }
+
+        def response = ['data': list]
+
+        render response as JSON
+    }
+
 }

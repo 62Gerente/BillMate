@@ -56,13 +56,11 @@ class RegularExpense {
     }
 
     public RegularExpense() {
-        super()
         directDebit = new DirectDebit()
         directDebit.setRegularExpense(this)
     }
 
     public RegularExpense(Map map) {
-        super(map)
         directDebit = new DirectDebit(map)
         directDebit.setRegularExpense(this)
     }
@@ -243,6 +241,25 @@ class RegularExpense {
                 new Debt(regularExpense: regularExpense, resolvedDate: new Date(), user: user, value: 0).save()
                 propagateValues()
                 save()
+            }
+            catch(Exception e){
+                result = false
+                status.setRollbackOnly()
+            }
+        }
+        return result
+    }
+
+    public boolean removeUserAndAjustValues(User user){
+        boolean result = true
+        withTransaction {status ->
+            try{
+                Debt debt = Debt.findByRegularExpenseAndUser(this,user)
+                removeFromDebts(debt)
+                removeFromAssignedUsers(user)
+                user.removeFromDebts(debt)
+                debt.delete(physical: true)
+                propagateValues()
             }
             catch(Exception e){
                 result = false

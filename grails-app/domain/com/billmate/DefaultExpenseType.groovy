@@ -15,12 +15,10 @@ class DefaultExpenseType{
     }
 
     public DefaultExpenseType() {
-        super()
         expenseType = new ExpenseType()
     }
 
     public DefaultExpenseType(Map map) {
-        super(map)
         expenseType = new ExpenseType(map)
     }
 

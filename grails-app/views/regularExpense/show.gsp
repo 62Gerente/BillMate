@@ -13,10 +13,11 @@
 </div>
 <div class="col-md-8 col-xs-12 col-sm-12 col-lg-8">
     <g:render template="/debt/widgets/default" model="[registeredUser: user, debts: regularExpense.getDebts(), regularExpense: regularExpense]"/>
+    <g:render template="/regularExpense/edit/expense" model="[registeredUser: user, regularExpense: regularExpense]"/>
+    <g:render template="/regularExpense/edit/directDebit" model="[directDebit: regularExpense.getDirectDebit()]"/>
 </div>
 <div class="col-md-4 col-xs-12 col-sm-12 col-lg-4">
     <g:render template="/regularExpense/edit/description" model="[registeredUser: user, regularExpense: regularExpense]"/>
-    <g:render template="/regularExpense/edit/directDebit" model="[directDebit: regularExpense.getDirectDebit()]"/>
     <g:render template="/action/widgets/latest" model="[latestEvents: regularExpense.latestEvents()]"/>
 </div>
 <asset:javascript src="bm-dashboard.js"/>

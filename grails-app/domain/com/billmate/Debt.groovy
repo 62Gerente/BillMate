@@ -14,6 +14,7 @@ class Debt {
     Double value
     Date resolvedDate
     Date createdAt = new Date()
+    Boolean deleted = false
 
     static constraints = {
         expense nullable: true

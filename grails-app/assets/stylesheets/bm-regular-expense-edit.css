@@ -5,3 +5,8 @@
 .table-home-box.table-edit-user-regular-expense tr td{
     vertical-align: top;
 }
+
+#expense-circles-btnNew{
+    cursor: hand;
+    cursor: pointer;
+}

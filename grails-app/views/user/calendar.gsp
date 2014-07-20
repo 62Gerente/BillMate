@@ -1,9 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <asset:stylesheet src="../plugins/fullcalendar/jquery-ui.min.css"/>
-    <asset:stylesheet src="../plugins/fullcalendar/fullcalendar.css"/>
-    <asset:stylesheet src="../plugins/fullcalendar/fullcalendar.print.css" media='print'/>
+    <asset:stylesheet src="bm-app-calendar.css"/>
 </head>
 
 <body>

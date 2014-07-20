@@ -14,13 +14,11 @@ class CustomExpenseType{
     }
 
     public CustomExpenseType() {
-        super()
         expenseType = new ExpenseType()
         setCssClass()
     }
 
     public CustomExpenseType(Map map) {
-        super(map)
         expenseType = new ExpenseType(map)
         setCssClass()
     }

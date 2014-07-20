@@ -100,16 +100,10 @@
                     <g:message code="com.billmate.regularExpense.unschedule" default="Unschedule expense" />
                 </button>
             </g:form>
-            <button class="btn btn-block btn-primary" type="button">
-                <g:message code="com.billmate.expense.new" default="Create expense" />
-            </button>
         </g:if>
         <g:else>
             <button class="btn btn-block btn-white btn-danger-hover" type="button" disabled>
                 <g:message code="com.billmate.regularExpense.unschedule" default="Unschedule expense" />
-            </button>
-            <button class="btn btn-block btn-primary" type="button" disabled>
-                <g:message code="com.billmate.expense.new" default="Create expense" />
             </button>
         </g:else>
     </div>

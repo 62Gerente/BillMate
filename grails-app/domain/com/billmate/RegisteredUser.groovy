@@ -28,12 +28,10 @@ class RegisteredUser {
     }
 
     public RegisteredUser() {
-        super()
         user = new User()
     }
 
     public RegisteredUser(Map map) {
-        super(map)
         user = new User(map)
     }
 

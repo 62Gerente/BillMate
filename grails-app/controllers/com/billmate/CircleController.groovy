@@ -246,7 +246,8 @@ class CircleController extends RestrictedController  {
         def list = []
         Circle circle = Circle.findById(id)
         RegularExpense.findAllByCircle(circle).each {
-            list.add([it.getTitle(), it.getResponsible().getName(), it.getValue(), BMDate.convertDateFormat(it.getBeginDate()), it.getId(), it.getExpenseType().getCssClass(), it.getResponsible().getPhotoOrDefault()])
+            if(it.isActive)
+                list.add([it.getTitle(), it.getResponsible().getName(), it.getValue(), BMDate.convertDateFormat(it.getBeginDate()), it.getId(), it.getExpenseType().getCssClass(), it.getResponsible().getPhotoOrDefault()])
         }
 
         def response = ['data': list]
