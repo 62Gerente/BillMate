@@ -4,6 +4,9 @@ class RegisteredUserReports {
     static mapWith = "none"
 
     RegisteredUser registeredUser
+    Long expenseTypeID
+    Long circleID
+    String dateInterval
 
     public User getUser(){
         registeredUser.getUser()
@@ -42,5 +45,58 @@ class RegisteredUserReports {
         }
 
         expenseTypes
+    }
+
+    public Set<Expense> filteredExpenses(){
+        Set<Expense> expenses = getUser().getExpenses()
+
+        expenses.findAll {
+            Boolean status = true
+
+            if(expenseTypeID && it.getExpenseTypeId() != expenseTypeID){
+                status = false
+            }
+            if(circleID && it.getCircleId() != circleID){
+                status = false
+            }
+            if(dateInterval){
+                Date date = new Date()
+                switch (dateInterval) {
+                    case "week":
+                        date.set(date: date[Calendar.DATE] - date[Calendar.DAY_OF_WEEK]) //FIX THIS
+                        break
+                    case "month":
+                        date.set(date: 1)
+                        break
+                    case "year":
+                        date.set(date: 1, month: 1)
+                        break
+                }
+                if(it.getBeginDate().before(date)){
+                    status = false
+                }
+            }
+
+            status
+        }
+
+    }
+
+    public List filteredExpensesJSON(){
+        List json = []
+
+        filteredExpenses().each {
+            json.add([
+                cssClass: it.getExpenseType().getCssClass(),
+                title: it.getTitle(),
+                total: it.getValue(),
+                myQuota: it.amountAssignedTo(registeredUser.getUserId()),
+                invoice: it.getInvoice() ? it.getInvoice().getId() : false,
+                receipt: it.getReceipt() ? it.getReceipt().getId() : false,
+                beginDate: it.getBeginDate().format("dd-MM-yyyy")
+            ])
+        }
+
+        json
     }
 }

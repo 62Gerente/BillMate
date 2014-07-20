@@ -10,7 +10,7 @@
         <g:render template="/expense/report" model="[registeredUser: user, expenses: userReports.expensesOfMonth(), total: userReports.totalValueOfExpensesOfMonth(), myTotal: userReports.myQuotaOfTotalValueOfMonth()]"></g:render>
     </div>
     <div class="col-md-4 col-lg-4">
-        <g:render template="/expense/report/filters" model="[expenseTypes: userReports.expenseTypes(), houses: userReports.houses(), collectives: userReports.collectives()]" />
+        <g:render template="/expense/report/filters" model="[registeredUser: user, expenseTypes: userReports.expenseTypes(), houses: userReports.houses(), collectives: userReports.collectives()]" />
         <g:render template="/expense/report/invoices" model="[expenses: userReports.expensesOfMonth()]"/>
     </div>
 <asset:javascript src="../plugins/jquery-print/jquery.printElement.js"/>

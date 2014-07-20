@@ -1,4 +1,4 @@
-<tr>
+<tr class="invoices-table-row">
     <td>
         ${expense}
     </td>

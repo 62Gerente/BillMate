@@ -1,4 +1,4 @@
-<table class="table m-t-50">
+<table id="report-table" class="table m-t-50">
     <thead>
     <tr>
         <th class="text-left"><g:message code="com.billmate.expense" default="Expense"/></th>
@@ -20,10 +20,10 @@
                         <g:message code="com.billmate.expense.total" default="Total"/>
                     </strong>
                 </td>
-                <td class="text-right">
+                <td class="text-right" id="report-table-my-total">
                     <g:formatNumber number="${myTotal}" type="currency" currencyCode="EUR" />
                 </td>
-                <td class="text-right">
+                <td class="text-right" id="report-table-total">
                     <g:formatNumber number="${total}" type="currency" currencyCode="EUR" />
                 </td>
             </tr>

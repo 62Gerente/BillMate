@@ -4,7 +4,7 @@
         <p class="p-b-10">
             <g:message code="com.billmate.expense.report.invoices.explanation" default="Download all of your expenses's invoices or receipts in one document."/>
         </p>
-        <table class="table">
+        <table id="invoices-table" class="table">
             <thead>
             <tr>
                 <th class="text-left"><g:message code="com.billmate.expense" default="Expense"/></th>
