@@ -12,7 +12,7 @@ class DashboardController extends RestrictedController {
         ]
         def userDashboard = new RegisteredUserDashboard(registeredUser: authenticatedUser())
 
-        return [breadcrumb: breadcrumb, user: authenticatedUser(), dashboard: userDashboard]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), dashboard: userDashboard, active: 0]
     }
 
     def circle(Long id) {
@@ -23,6 +23,6 @@ class DashboardController extends RestrictedController {
 
         def circleDashboard = new CircleDashboard(registeredUser: authenticatedUser(), circle: circle)
 
-        return [breadcrumb: breadcrumb, user: authenticatedUser(), dashboard: circleDashboard]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), dashboard: circleDashboard, active: 0]
     }
 }

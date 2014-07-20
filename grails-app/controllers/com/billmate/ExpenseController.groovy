@@ -13,10 +13,11 @@ class ExpenseController extends RestrictedController {
     def show(Long id) {
         def expense = Expense.findById(id)
         def breadcrumb = [
+                [href: createLink(controller: "dashboard", action: "circle", id: expense.getCircleId()), name: expense.getCircle().getName()],
                 [name: expense.getTitle()]
         ]
 
-        return [breadcrumb: breadcrumb, user: authenticatedUser(), expense: expense]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), expense: expense, active: 1]
     }
 
     def updateProperty(Long id) {

@@ -1,1 +1,1 @@
-<g:render template="/expense/default/index"/>
+<g:render template="/expense/default/index" model="[active: active]"/>

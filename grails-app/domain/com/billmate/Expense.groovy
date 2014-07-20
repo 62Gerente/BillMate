@@ -248,6 +248,7 @@ class Expense {
     }
 
     public boolean create(List<String> idsUsers, List<Double> value, Long id){
+        Double acc = 0
         boolean result = false;
         int position = 0
         withTransaction {status ->
@@ -261,6 +262,8 @@ class Expense {
                 for(String str : idsUsers){
                     if( value[position] > 0 ){
                         User user = User.findById(Long.parseLong(str))
+                        if(idsUsers.size() <= (position + 1))
+                            value[position] = (expense.getValue() - acc);
                         Debt debt = new Debt(value: value[position], user: user, expense: expense).save()
                         this.addToAssignedUsers(user)
                         RegisteredUser registeredUser = user.getRegisteredUser()
@@ -268,6 +271,7 @@ class Expense {
                             new Payment(user: user, debt: debt, value: value[position], validationDate: new Date(), isValidated: true).save()
                             debt.setResolvedDate(new Date())
                         }
+                        acc += value[position]
                     }
                     position++;
                 }

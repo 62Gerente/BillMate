@@ -6,6 +6,7 @@
 </head>
 
 <body>
+<g:render template="/shared/active" model="[active: active]"/>
 <form id="history-filter-form" action="${createLink(action: 'history', params: [id: history.getRegisteredUser().getId()])}" method="POST">
     <input type="hidden" name="alt" value="json">
     <input type="hidden" name="page" value="1">

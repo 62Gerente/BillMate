@@ -57,7 +57,6 @@ class PaymentController extends RestrictedController {
                 User user = User.findById(idUser)
                 Expense expense = Expense.findById(id)
                 Debt debt = expense.debtOf(user.getId())
-                if(listValues[position] < debt.getValue() && (listValues[position] + 0.1) >= debt.getValue()) listValues[position]+=0.1
                 expense.payAndConfirmExpense(listValues[position], debt, flag, user)
                 position++
                 result = true

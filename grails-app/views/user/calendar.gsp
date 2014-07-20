@@ -6,6 +6,7 @@
 
 <body>
 <div class="row-fluid">
+    <g:render template="/shared/active" model="[active: active]"/>
     <div class="row">
         <div class="row tiles-container red no-padding">
             <div class="col-md-12 tiles white no-padding">

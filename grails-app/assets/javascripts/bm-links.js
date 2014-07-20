@@ -17,4 +17,7 @@ $(document).ready(function(){
     $(".upcoming-regular-expense .regular-expense-advanced-options").click(function(){
         $("#btn-advanced-options-regularExpense").trigger("click");
     });
+
+    $("#home-sidebar-menu li").removeClass("active");
+    $("#home-sidebar-menu li:nth(" + $("#select-active-sidebar").val() + ")").addClass("active");
 });

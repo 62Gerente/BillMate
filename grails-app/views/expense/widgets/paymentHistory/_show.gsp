@@ -11,12 +11,22 @@
                 <h6 class="inline p-t-2">
                     <g:if test="${expense.haveUnvalidatedPayments(user.getId())}">
                         <span class="text-warning">
-                            <g:formatNumber number="${expense.amountPaidBy(user.getId())}" type="currency" currencyCode="EUR" />
+                            <g:if test="${expense.amountPaidBy(user.getId()) > expense.amountAssignedTo(user.getId())}">
+                                <g:formatNumber number="${expense.amountAssignedTo(user.getId())}" type="currency" currencyCode="EUR" />
+                            </g:if>
+                            <g:else>
+                                <g:formatNumber number="${expense.amountPaidBy(user.getId())}" type="currency" currencyCode="EUR" />
+                            </g:else>
                         </span>
                     </g:if>
                     <g:elseif test="${expense.isResolvedBy(user.getId())}">
                         <span class="text-success">
-                            <g:formatNumber number="${expense.amountPaidBy(user.getId())}" type="currency" currencyCode="EUR" />
+                            <g:if test="${expense.amountPaidBy(user.getId()) > expense.amountAssignedTo(user.getId())}">
+                                <g:formatNumber number="${expense.amountAssignedTo(user.getId())}" type="currency" currencyCode="EUR" />
+                            </g:if>
+                            <g:else>
+                                <g:formatNumber number="${expense.amountPaidBy(user.getId())}" type="currency" currencyCode="EUR" />
+                            </g:else>
                         </span>
                     </g:elseif>
                     <g:else>

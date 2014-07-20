@@ -79,6 +79,12 @@ class RegularExpenseController extends RestrictedController{
         def regularExpense = RegularExpense.findById(id)
         def format = params.format
 
+        def breadcrumb = [
+                [href: createLink(controller: "dashboard", action: "circle", id: regularExpense.getCircleId()), name: regularExpense.getCircle().getName()],
+                [href: createLink(controller: "circle", action: "edit", id: regularExpense.getCircleId()), name: message(code: "com.billmate.circle.edit")],
+                [name: message(code: "com.billmate.regularexpense.edit")]
+        ]
+
         if(format && format == "json"){
             def responseData = [
                     'error'  : true,
@@ -93,7 +99,7 @@ class RegularExpenseController extends RestrictedController{
 
             render responseData as JSON
         }else{
-            return [user: authenticatedUser(), regularExpense: regularExpense]
+            return [breadcrumb: breadcrumb, user: authenticatedUser(), regularExpense: regularExpense, active: 1]
         }
     }
 

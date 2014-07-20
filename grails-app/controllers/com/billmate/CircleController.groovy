@@ -115,7 +115,7 @@ class CircleController extends RestrictedController  {
             return
         }
 
-        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle, history: circleHistory]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle, history: circleHistory, active: 0]
     }
 
     def edit(Long id) {
@@ -126,7 +126,7 @@ class CircleController extends RestrictedController  {
                 [name: message(code: "com.billmate.circle.edit")]
         ]
 
-        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle]
+        return [breadcrumb: breadcrumb, user: authenticatedUser(), circle: circle, active: 0]
     }
 
     def updateProperty(Long id) {
