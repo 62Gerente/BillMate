@@ -24,7 +24,7 @@ class CircleController {
             ]
             render response as JSON
         }
-        def user = RegisteredUser.findByEmail(token.getEmail())
+        def user = RegisteredUser.findByEmail(token.getEmail()).getUser().getId()
         def user_circles = user.getCircles()*.id
         def contains_circle = user_circles.contains(((String)params.id).toLong())
         if(!contains_circle){

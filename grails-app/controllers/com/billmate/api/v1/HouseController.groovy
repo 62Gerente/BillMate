@@ -17,10 +17,6 @@ class HouseController {
         if (!checkToken() || !checkEmail()) {
             return
         }
-        String friendsList = ((params.friendsHome != "") ? params.friendsHome + "," : "") + params.identifier
-        Set<String> expenseSet = params.expenseType.split(",")
-        Set<String> friendsSet = friendsList.split(",")
-
         def token = AuthenticationToken.findByTokenAndEmail(params.token, params.email)
         if (!token) {
             response = [
@@ -31,8 +27,11 @@ class HouseController {
             render response as JSON
             return
         }
-        def user = RegisteredUser.findByEmail(token.getEmail())
 
+        def user = RegisteredUser.findByEmail(token.getEmail())
+        String friendsList = ((params.friendsHome != "") ? params.friendsHome + "," : "") + user.getUser().getId()
+        Set<String> expenseSet = params.expenseType.split(",")
+        Set<String> friendsSet = friendsList.split(",")
 
         def house = new House(name: params.houseName, description: params.houseDescription)
         def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addHouse.toString()), actor: user, circle: house.getCircle())

@@ -18,9 +18,7 @@ class CollectiveController {
         if (!checkToken() || !checkEmail()) {
             return
         }
-        String friendsList = ((params.friendsHome != "") ? params.friendsHome + "," : "") + params.identifier
-        Set<String> expenseSet = params.expenseType.split(",")
-        Set<String> friendsSet = friendsList.split(",")
+
 
         def token = AuthenticationToken.findByTokenAndEmail(params.token, params.email)
         if (!token) {
@@ -33,7 +31,9 @@ class CollectiveController {
             return
         }
         def user = RegisteredUser.findByEmail(token.getEmail())
-
+        String friendsList = ((params.friendsHome != "") ? params.friendsHome + "," : "") + user.getUser().getId()
+        Set<String> expenseSet = params.expenseType.split(",")
+        Set<String> friendsSet = friendsList.split(",")
 
         def collective = new Collective(name: params.collectiveName, description: params.collectiveDescription)
         def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addCollective.toString()), actor: user, circle: collective.getCircle())
