@@ -65,3 +65,36 @@ function buildUsersValues($value, $size){
 
 	return $userFriendsValues;
 }
+
+// Build House
+function getHouseData($userID){
+	$expenseTypes = array('','','');
+	$houseMembers = array('','', ''); // Note: These are user_id, not registered_user_id
+
+	$houseData = array(
+		    'houseName' => 'YABC - Yet Another Benchmark Circle',
+		    'houseDescription' => 'Just for benchmark',
+		    'expenseType' => implode(',', $expenseTypes),
+		    'friendsHouse' => implode(',', $houseMembers)
+		);
+
+	$houseMembers[] = $userID;
+
+	return $houseData;
+}
+
+// Build Payment
+function getPaymentData($userID){
+	$payerID = '';
+	$expenseIDs = array('','','');
+	$values = array('','', '');
+
+	$paymentData = array(
+		    'idsExpense' => '[' . implode(',', $expenseIDs) . ']',
+		    'values' => '[' . implode(',', $values) . ']',
+		    'idUser' => $payerID,
+		    'flag' => 'false'
+		);
+
+	return $paymentData;
+}

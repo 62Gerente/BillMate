@@ -32,6 +32,28 @@ function writeExpenseData($expenseData, $output){
     file_put_contents($output, $query);
 }
 
+// Random House Billmate
+function writeHouseData($houseData, $output){
+    $query = http_build_query($houseData);
+
+    if(file_exists($output) === FALSE) {
+      touch($output);
+    }
+
+    file_put_contents($output, $query);
+}
+
+// Random House Billmate
+function writePaymentData($paymentData, $output){
+    $query = http_build_query($paymentData);
+
+    if(file_exists($output) === FALSE) {
+      touch($output);
+    }
+
+    file_put_contents($output, $query);
+}
+
 // Chooses type of request by geometrical probability:
 //
 //                  0.75 0.9

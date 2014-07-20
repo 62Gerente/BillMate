@@ -1,0 +1,8 @@
+{
+    "getDashboardUserFraction": "0.55",
+    "getDashboardCircleFraction": "0.05",
+    "getExpenseRequestFraction": "0.15",
+    "postExpenseFraction": "0.05",
+    "postCircleFraction": "0.05",
+    "postPaymentFraction": "0.15"
+}
