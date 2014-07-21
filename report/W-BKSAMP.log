@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.2.27)  21 JUL 2014 14:19
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.2.27)  21 JUL 2014 14:37
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -551,8 +551,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 26--27
 
  []
 
-[10]) (./sections/acronimos.tex [11]) (./sections/glossario.tex [12])
-(./sections/introduction.tex
+[10]) (./sections/acronimos.tex [11]) (./sections/glossario.tex
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [12]
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[13]) (./sections/introduction.tex
 Cap\'{\i }tulo 1.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 2.
@@ -614,23 +621,23 @@ Overfull \hbox (10.0pt too wide) in paragraph at lines 1--1
 
 ) [16]) (./W-BKSAMP.ind) (./W-BKSAMP.aux) ) 
 Here is how much of TeX's memory you used:
- 4673 strings out of 493315
- 64146 string characters out of 6137904
+ 4674 strings out of 493315
+ 64154 string characters out of 6137904
  148518 words of memory out of 5000000
- 7881 multiletter control sequences out of 15000+600000
+ 7882 multiletter control sequences out of 15000+600000
  56066 words of font info for 104 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 39i,6n,35p,492b,264s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,6n,35p,675b,264s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/
 fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/urw
 /helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvet
 ic/uhvr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8a.
 pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/
 local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on W-BKSAMP.pdf (28 pages, 78559 bytes).
+Output written on W-BKSAMP.pdf (29 pages, 82249 bytes).
 PDF statistics:
- 120 PDF objects out of 1000 (max. 8388607)
- 80 compressed objects within 1 object stream
+ 123 PDF objects out of 1000 (max. 8388607)
+ 82 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
