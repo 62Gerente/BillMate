@@ -164,6 +164,10 @@ $(document).ready(function() {
         phone : 480
     };
 
+    $("#btn-create-expense-regular").click(function(){
+        window.location.href=$(this).find("#link-to-expense-datatable").val();
+    });
+
     function propagateRowUpdates(context){
         var textInfo = context.text();
         if(context.find("i").length == 0)
@@ -229,14 +233,7 @@ $(document).ready(function() {
                 "mRender" : function ( data, type, full ) {
                     return full[4]
                 },
-                aTargets: [ 3 ]
-            },
-            {
-                "mData": null ,
-                "mRender" : function ( data, type, full ) {
-                    return full[5]
-                },
-                aTargets: [ 4 ]
+                aTargets: [ 3,4 ]
             },
             {
                 "mData": null ,

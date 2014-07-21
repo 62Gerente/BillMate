@@ -37,6 +37,7 @@
     </div>
     <div class="row p-t-5">
         <button class="btn btn-block btn-primary" type="button" id="btn-create-expense-regular">
+            <input type="hidden" value="${createLink(controller: 'user', action: 'expenses', id: registeredUser.getId())}" id="link-to-expense-datatable" />
             <g:message code="com.billmate.circleDashboard.actions.expenses" default="See expenses"/>
         </button>
     </div>

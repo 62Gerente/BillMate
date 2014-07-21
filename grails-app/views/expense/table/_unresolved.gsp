@@ -31,8 +31,8 @@
         </g:if>
         </tbody>
     </table>
-    <div class="m-b-10 home-button-divida-secondary-confirm">
-        <button type="button" class="btn btn-white btn-small width-btn-payment">
+    <div class="m-b-10">
+        <button type="button" class="btn btn-white btn-small width-btn-payment home-button-divida-secondary-confirm show-expense" data-value="<g:createLink controller='expense' action='show' id='${expense.getId()}'/>">
             <g:message code="com.billmate.expense.show" default="Show expense" />
         </button>
     </div>
