@@ -7,39 +7,42 @@
 \contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{1}
 \contentsline {chapter}{\numberline {2}Motiva\IeC {\c c}\IeC {\~a}o}{3}
 \contentsline {chapter}{\numberline {3}Casos de estudo}{4}
-\contentsline {chapter}{\numberline {4}Planeamento}{5}
-\contentsline {section}{\numberline {4.1}Estudo do mercado}{5}
-\contentsline {section}{\numberline {4.2}Gest\IeC {\~a}o do Projeto}{5}
-\contentsline {section}{\numberline {4.3}Plataformas}{5}
-\contentsline {chapter}{\numberline {5}An\IeC {\'a}lise de requisitos}{6}
-\contentsline {section}{\numberline {5.1}Entidades}{6}
-\contentsline {section}{\numberline {5.2}Funcionalidades}{6}
-\contentsline {section}{\numberline {5.3}Pressupostos}{6}
-\contentsline {chapter}{\numberline {6}Infraestrutura}{7}
-\contentsline {section}{\numberline {6.1}Requisitos}{7}
-\contentsline {section}{\numberline {6.2}Componentes}{7}
-\contentsline {section}{\numberline {6.3}Implementa\IeC {\c c}\IeC {\~a}o}{7}
-\contentsline {chapter}{\numberline {7}Modela\IeC {\c c}\IeC {\~a}o}{8}
-\contentsline {section}{\numberline {7.1}Diagrama de Use Case}{8}
-\contentsline {section}{\numberline {7.2}Diagrama de Modelo de Dom\IeC {\'\i }nio}{8}
-\contentsline {section}{\numberline {7.3}Diagrama de Classes}{8}
-\contentsline {chapter}{\numberline {8}Interface}{9}
-\contentsline {section}{\numberline {8.1}Prototipagem}{9}
-\contentsline {section}{\numberline {8.2}Responsiveness}{9}
-\contentsline {section}{\numberline {8.3}Mockups}{9}
-\contentsline {subsection}{\numberline {8.3.1}Web}{9}
-\contentsline {subsection}{\numberline {8.3.2}Mobile}{9}
-\contentsline {chapter}{\numberline {9}Implementa\IeC {\c c}\IeC {\~a}o}{10}
-\contentsline {section}{\numberline {9.1}Tecnologias}{10}
-\contentsline {subsection}{\numberline {9.1.1}Servidor}{10}
-\contentsline {subsection}{\numberline {9.1.2}Cliente}{10}
-\contentsline {section}{\numberline {9.2}Componentes}{10}
-\contentsline {chapter}{\numberline {10}An\IeC {\'a}lise de desempenho}{11}
-\contentsline {section}{\numberline {10.1}Povoa\IeC {\c c}\IeC {\~a}o da base de dados}{11}
-\contentsline {section}{\numberline {10.2}Rotina}{11}
-\contentsline {section}{\numberline {10.3}Itera\IeC {\c c}\IeC {\~o}es}{11}
-\contentsline {section}{\numberline {10.4}Conclus\IeC {\~o}es finais}{11}
-\contentsline {chapter}{\numberline {11}Trabalho futuro}{12}
-\contentsline {chapter}{\numberline {12}Conclus\IeC {\~a}o}{13}
-\contentsline {achapter}{A\hskip 2pt \ \hskip 1em\relax Web dashboard}{16}
-\contentsline {achapter}{B\hskip 2pt \ \hskip 1em\relax Mobile dashboard}{17}
+\contentsline {section}{\numberline {3.1}Caso 1 - Habita\IeC {\c c}\IeC {\~a}o}{4}
+\contentsline {section}{\numberline {3.2}Caso 2 - Boleias}{4}
+\contentsline {section}{\numberline {3.3}Caso 3 - Jantar}{5}
+\contentsline {chapter}{\numberline {4}Planeamento}{6}
+\contentsline {section}{\numberline {4.1}Estudo do mercado}{6}
+\contentsline {section}{\numberline {4.2}Gest\IeC {\~a}o do Projeto}{6}
+\contentsline {section}{\numberline {4.3}Plataformas}{6}
+\contentsline {chapter}{\numberline {5}An\IeC {\'a}lise de requisitos}{7}
+\contentsline {section}{\numberline {5.1}Entidades}{7}
+\contentsline {section}{\numberline {5.2}Funcionalidades}{7}
+\contentsline {section}{\numberline {5.3}Pressupostos}{7}
+\contentsline {chapter}{\numberline {6}Infraestrutura}{8}
+\contentsline {section}{\numberline {6.1}Requisitos}{8}
+\contentsline {section}{\numberline {6.2}Componentes}{8}
+\contentsline {section}{\numberline {6.3}Implementa\IeC {\c c}\IeC {\~a}o}{8}
+\contentsline {chapter}{\numberline {7}Modela\IeC {\c c}\IeC {\~a}o}{9}
+\contentsline {section}{\numberline {7.1}Diagrama de Use Case}{9}
+\contentsline {section}{\numberline {7.2}Diagrama de Modelo de Dom\IeC {\'\i }nio}{9}
+\contentsline {section}{\numberline {7.3}Diagrama de Classes}{9}
+\contentsline {chapter}{\numberline {8}Interface}{10}
+\contentsline {section}{\numberline {8.1}Prototipagem}{10}
+\contentsline {section}{\numberline {8.2}Responsiveness}{10}
+\contentsline {section}{\numberline {8.3}Mockups}{10}
+\contentsline {subsection}{\numberline {8.3.1}Web}{10}
+\contentsline {subsection}{\numberline {8.3.2}Mobile}{10}
+\contentsline {chapter}{\numberline {9}Implementa\IeC {\c c}\IeC {\~a}o}{11}
+\contentsline {section}{\numberline {9.1}Tecnologias}{11}
+\contentsline {subsection}{\numberline {9.1.1}Servidor}{11}
+\contentsline {subsection}{\numberline {9.1.2}Cliente}{11}
+\contentsline {section}{\numberline {9.2}Componentes}{11}
+\contentsline {chapter}{\numberline {10}An\IeC {\'a}lise de desempenho}{12}
+\contentsline {section}{\numberline {10.1}Povoa\IeC {\c c}\IeC {\~a}o da base de dados}{12}
+\contentsline {section}{\numberline {10.2}Rotina}{12}
+\contentsline {section}{\numberline {10.3}Itera\IeC {\c c}\IeC {\~o}es}{12}
+\contentsline {section}{\numberline {10.4}Conclus\IeC {\~o}es finais}{12}
+\contentsline {chapter}{\numberline {11}Trabalho futuro}{13}
+\contentsline {chapter}{\numberline {12}Conclus\IeC {\~a}o}{14}
+\contentsline {achapter}{A\hskip 2pt \ \hskip 1em\relax Web dashboard}{17}
+\contentsline {achapter}{B\hskip 2pt \ \hskip 1em\relax Mobile dashboard}{18}
