@@ -340,13 +340,16 @@ class Expense {
                         User debtPayer = user
                         Circle debtCircle = debtExpense.getCircle()
                         RegisteredUser expenseResponsible = debtExpense.getResponsible()
-                        RegisteredUser debtPayerRegisteredUser = debtPayer.getRegisteredUser()
+                        def paymentAction
 
-                        def paymentAction = new Action(actionType: ActionType.findWhere(type: 'addPaymentExpense'), actor: debtPayerRegisteredUser, user: expenseResponsible.getUser(), payment: payment, circle: debtCircle, expense: debtExpense)
-                        paymentAction.save()
+                        if(debtPayer.getRegisteredUser()){
+                            RegisteredUser debtPayerRegisteredUser = debtPayer.getRegisteredUser()
+                            paymentAction = new Action(actionType: ActionType.findWhere(type: 'addPaymentExpense'), actor: debtPayerRegisteredUser, user: expenseResponsible.getUser(), payment: payment, circle: debtCircle, expense: debtExpense)
+                            paymentAction.save()
 
-                        def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: debtPayerRegisteredUser)
-                        paymentNotification.secureSave()
+                            def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: debtPayerRegisteredUser)
+                            paymentNotification.secureSave()
+                        }
 
                         // Save action and notification
                         paymentAction = new Action(actionType: ActionType.findWhere(type: 'receivedPaymentExpense'), actor: expenseResponsible, user: debtPayer, payment: payment, circle: debtCircle, expense: debtExpense)

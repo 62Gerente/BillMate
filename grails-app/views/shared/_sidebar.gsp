@@ -49,13 +49,6 @@
                     </span>
                 </a>
             </li>
-            <li>
-                <a href="#"> <i class="fa fa-bar-chart-o"></i>
-                    <span class="title">
-                        <g:message code="com.billmate.sidebar.stats" default="Statistics"/>
-                    </span>
-                </a>
-            </li>
         </ul>
         <g:render template="/house/sidebar" model="[houses: user.getHouses()]"/>
         <g:render template="/collective/sidebar" model="[collectives: user.getCollectives()]"/>

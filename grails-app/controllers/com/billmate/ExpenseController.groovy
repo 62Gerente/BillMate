@@ -13,6 +13,7 @@ class ExpenseController extends RestrictedController {
     def show(Long id) {
         def expense = Expense.findById(id)
         def breadcrumb = [
+                [href: createLink(controller: "user", action: "expenses", id: expense.getResponsibleId()), name: message(code: "com.billmate.sidebar.expenses")],
                 [href: createLink(controller: "dashboard", action: "circle", id: expense.getCircleId()), name: expense.getCircle().getName()],
                 [name: expense.getTitle()]
         ]

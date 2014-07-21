@@ -19,7 +19,7 @@
                 </div></a>
             </li>
             <li>
-                <a href="#"><div>
+                <a href="${createLink([controller: "registeredUser", action: "reports", id: registeredUser.getId()])}"><div>
                     <i class="fa fa-file-text-o"></i> <g:message code="com.billmate.circleDashboard.actions.reports" default="Expense reports"/>
                 </div></a>
             </li>

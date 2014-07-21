@@ -215,6 +215,6 @@ class RegisteredUserController extends RestrictedController {
         def registeredUser = RegisteredUser.findById(id)
         def userReports = new RegisteredUserReports(registeredUser: registeredUser)
 
-        return [breadcrumb: breadcrumb, user: registeredUser, userReports: userReports]
+        return [breadcrumb: breadcrumb, user: registeredUser, userReports: userReports, active: 4]
     }
 }

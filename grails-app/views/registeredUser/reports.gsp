@@ -6,6 +6,7 @@
     <asset:stylesheet href="bm-reports.css"/>
 </head>
 <body>
+    <g:render template="/shared/active" model="[active: active]"/>
     <div class="col-md-8 col-lg-8">
         <g:render template="/expense/report" model="[registeredUser: user, expenses: userReports.expensesOfMonth(), total: userReports.totalValueOfExpensesOfMonth(), myTotal: userReports.myQuotaOfTotalValueOfMonth()]"></g:render>
     </div>
