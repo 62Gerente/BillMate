@@ -1,9 +1,9 @@
 \select@language {portuguese}
-\contentsline {schapter}{Lista de Figuras}{vii}
-\contentsline {schapter}{Lista de Tabelas}{viii}
-\contentsline {schapter}{Prefácio}{ix}
-\contentsline {schapter}{Acrónimos}{x}
-\contentsline {schapter}{Glossário}{xi}
+\contentsline {schapter}{Lista de Figuras}{viii}
+\contentsline {schapter}{Lista de Tabelas}{ix}
+\contentsline {schapter}{Prefácio}{x}
+\contentsline {schapter}{Acrónimos}{xi}
+\contentsline {schapter}{Glossário}{xii}
 \contentsline {chapter}{\numberline {1}Introdu\IeC {\c c}\IeC {\~a}o}{1}
 \contentsline {chapter}{\numberline {2}Motiva\IeC {\c c}\IeC {\~a}o}{2}
 \contentsline {chapter}{\numberline {3}Casos de estudo}{3}
