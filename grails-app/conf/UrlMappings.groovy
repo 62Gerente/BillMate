@@ -18,7 +18,7 @@ class UrlMappings {
         //USER
         "/api/$namespace/user/$id/circles"(controller: "User", action: "circles")
         "/api/$namespace/user/$id/houses"(controller: "User", action: "houses")
-        "/api/$namespace/user/$id/collectives"(controller: "User", action: "houses")
+        "/api/$namespace/user/$id/collectives"(controller: "User", action: "collectives")
 
         "/$controller/$action?/$id?(.$format)?"{
             constraints {

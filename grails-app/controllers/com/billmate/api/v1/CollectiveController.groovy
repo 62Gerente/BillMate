@@ -31,14 +31,13 @@ class CollectiveController {
             return
         }
         def user = RegisteredUser.findByEmail(token.getEmail())
-        String friendsList = ((params.friendsHome != "") ? params.friendsHome + "," : "") + user.getUser().getId()
+        String friendsList = ((params.friendsHome != "") ? params.friendsHome + "," : "") + user.getUserId()
         Set<String> expenseSet = params.expenseType.split(",")
         Set<String> friendsSet = friendsList.split(",")
 
         def collective = new Collective(name: params.collectiveName, description: params.collectiveDescription)
         def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addCollective.toString()), actor: user, circle: collective.getCircle())
         def result = collective.addUsersAndExpenseTypes(friendsSet, expenseSet, action, user)
-
 
         def response = []
         if (result) {

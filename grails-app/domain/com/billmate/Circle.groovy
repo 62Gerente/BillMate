@@ -106,8 +106,10 @@ class Circle {
                 customExpenseType.persist()
                 expenseType = customExpenseType.getExpenseType()
             }
-            if(expenseType) addToExpenseTypes(expenseType)
-            expenseType.addToCircles(this)
+            if(expenseType){
+                addToExpenseTypes(expenseType)
+                expenseType.addToCircles(this)
+            }
         }
     }
 
