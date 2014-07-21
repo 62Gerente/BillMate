@@ -26,6 +26,11 @@ class Debt {
         createdAt nullable: false
     }
 
+    public Double amountPaidWithoutValidation(){
+        Double amount = notUnconfirmedWithoutValidationPayments().sum{ it.getValue() }
+        amount ? amount : 0D
+    }
+
     public Double amountPaid(){
         Double amount = notUnconfirmedPayments().sum{ it.getValue() }
         amount ? amount : 0D
@@ -46,6 +51,10 @@ class Debt {
 
     public boolean isResolved(){
         resolvedDate
+    }
+
+    public Set<Payment> notUnconfirmedWithoutValidationPayments(){
+        payments.findAll{ it.getIsValidated() || it.getValidationDate() }
     }
 
     public Set<Payment> notUnconfirmedPayments(){

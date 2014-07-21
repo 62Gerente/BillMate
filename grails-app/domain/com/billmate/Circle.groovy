@@ -50,8 +50,8 @@ class Circle {
         total ? total : 0D
     }
 
-    public Double totalDebtOfUnresolvedExpenses(){
-        Double total = unresolvedExpenses().sum{ it.amountInDebt() }
+    public Double amountPaidOnUnresolvedExpense(){
+        Double total = unresolvedExpenses().sum{ it.amountPaid() }
         total ? total : 0D
     }
 

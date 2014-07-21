@@ -237,19 +237,22 @@ class RegisteredUser {
                         debt.save()
                     }
 
-                    // Save action and notification
-                    def paymentAction = new Action(actionType: ActionType.findWhere(type: 'addPaymentExpense'), actor: it.getUser().getRegisteredUser(), user: responsible.getUser(), payment: it, circle: circle, expense: expense)
+                    Expense debtExpense = debt.getExpense()
+                    User debtPayer = debt.getUser()
+                    Circle debtCircle = debtExpense.getCircle()
+                    RegisteredUser expenseResponsible = debtExpense.getResponsible()
+                    RegisteredUser debtPayerRegisteredUser = debtPayer.getRegisteredUser()
+
+                    def paymentAction = new Action(actionType: ActionType.findWhere(type: 'addPaymentExpense'), actor: debtPayerRegisteredUser, user: expenseResponsible.getUser(), payment: it, circle: debtCircle, expense: debtExpense)
                     paymentAction.save()
 
-                    //def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: expense.getResponsible())
-                    //paymentNotification.secureSave()
-
-                    def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: it.getUser().getRegisteredUser())
-                    paymentNotification.secureSave()
+                    def paymentNotification = new SystemNotification(action: paymentAction, registeredUser: debtPayerRegisteredUser)
+                    paymentNotification.persist()
 
                     // Save action and notification
-                    paymentAction = new Action(actionType: ActionType.findWhere(type: 'receivedPaymentExpense'), actor: responsible, user: it.getUser(), payment: it, circle: circle, expense: expense)
+                    paymentAction = new Action(actionType: ActionType.findWhere(type: 'receivedPaymentExpense'), actor: expenseResponsible, user: debtPayer, payment: it, circle: debtCircle, expense: debtExpense)
                     paymentAction.save()
+
                 }
             } catch (Exception eConfirmPayment) {
                 eConfirmPayment.printStackTrace()

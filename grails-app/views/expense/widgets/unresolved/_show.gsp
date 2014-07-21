@@ -11,7 +11,7 @@
         <div class="col-md-3 pull-right no-padding m-t-10 price-widget-dashboard widget-payments-price m-t-13">
             <span class="label label-default label-grey-background">
                 <h6 class="inline p-t-2">
-                    <g:formatNumber number="${expense.amountInDebt()}" type="currency" currencyCode="EUR" />
+                    <g:formatNumber number="${expense.amountPaid()}" type="currency" currencyCode="EUR" />
                     /
                     <span class="bold">
                         <g:formatNumber number="${expense.getValue()}" type="currency" currencyCode="EUR" />

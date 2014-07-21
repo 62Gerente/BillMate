@@ -81,7 +81,7 @@ class RegularExpenseController extends RestrictedController{
 
         def breadcrumb = [
                 [href: createLink(controller: "dashboard", action: "circle", id: regularExpense.getCircleId()), name: regularExpense.getCircle().getName()],
-                [href: createLink(controller: "circle", action: "edit", id: regularExpense.getCircleId()), name: message(code: "com.billmate.circle.edit")],
+                [href: createLink(controller: "circle", action: "edit", id: regularExpense.getCircleId()), name: regularExpense.getTitle()],
                 [name: message(code: "com.billmate.regularexpense.edit")]
         ]
 
