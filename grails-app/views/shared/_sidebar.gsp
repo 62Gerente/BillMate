@@ -43,13 +43,6 @@
                 </a>
             </li>
             <li>
-                <a href="#"> <i class="fa fa-bar-chart-o"></i>
-                    <span class="title">
-                        <g:message code="com.billmate.sidebar.stats" default="Statistics"/>
-                    </span>
-                </a>
-            </li>
-            <li>
                 <a href="#"> <i class="fa fa-file-text-o"></i>
                     <span class="title">
                         <g:message code="com.billmate.sidebar.report" default="Reports"/>

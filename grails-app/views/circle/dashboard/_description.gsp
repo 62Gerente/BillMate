@@ -20,11 +20,6 @@
             </li>
             <li>
                 <a href="#"><div>
-                    <i class="fa fa-bar-chart-o"></i> <g:message code="com.billmate.circleDashboard.actions.stats" default="Group stats"/>
-                </div></a>
-            </li>
-            <li>
-                <a href="#"><div>
                     <i class="fa fa-file-text-o"></i> <g:message code="com.billmate.circleDashboard.actions.reports" default="Expense reports"/>
                 </div></a>
             </li>

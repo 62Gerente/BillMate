@@ -16,7 +16,7 @@ class RegisterController extends BaseController {
         def registeredUser = new RegisteredUser(name: params['name'], email: params['email'], password: params['password'])
         def signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: registeredUser)
         if(registeredUser.secureSave(signUpAction)){
-            session.user = registeredUser
+            session.user = registeredUser.getId()
             flash.message = "com.billmate.register.save.success"
             flash.m_default = "You have been successfully registered and logged in."
             return redirect(controller: 'dashboard', action: 'user')

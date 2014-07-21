@@ -134,6 +134,10 @@ class Expense {
         }
     }
 
+    public List<Action> getActionsWithoutType(ActionType type){
+
+    }
+
     public Set<Payment> unvalidatedPayments(Long userID){
         debtOf(userID)?.getPayments().findAll{ !it.getIsValidated() }
     }
@@ -261,6 +265,10 @@ class Expense {
                 }
                 if(idsUsers.size() == 1) expense.setReceptionDate(new Date())
                 value.each { if(it > 0) numberOfUsers++ }
+
+                def newExpenseAction = new Action(actionType: ActionType.findWhere(type: 'addExpenseCircle'), actor: expense.getResponsible(), circle: expense.getCircle(), expense: expense)
+                newExpenseAction.save()
+
                 for(String str : idsUsers){
                     value[position] = value[position].round(2)
                     if( value[position] > 0 ){
@@ -275,6 +283,11 @@ class Expense {
                             debt.setResolvedDate(new Date())
                         }
                         acc += value[position]
+
+                        if(user.getRegisteredUser()){
+                            def newExpenseNotification = new SystemNotification(action: newExpenseAction, registeredUser: user.getRegisteredUser())
+                            newExpenseNotification.secureSave()
+                        }
                     }
                     position++;
                 }

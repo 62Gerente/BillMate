@@ -31,7 +31,7 @@ class PaymentController extends RestrictedController {
         if(params.list('payment[]').isEmpty()){
             response.error = true
             response.message = message(code: "com.billmate.registeredUser.cancelPayments.empty")
-        }else if(!authenticatedUser().cancelPayments(params.list('payment[]'), session.user)){
+        }else if(!authenticatedUser().cancelPayments(params.list('payment[]'), authenticatedUser())){
             response.error = true
             response.message = message(code: "com.billmate.registeredUser.cancelPayments.error")
         }
