@@ -258,3 +258,7 @@ a {
     width: 15px;
     font-size: 10px;
 }
+
+#users-debt tbody tr td a i{
+    margin-top: -5px
+}
