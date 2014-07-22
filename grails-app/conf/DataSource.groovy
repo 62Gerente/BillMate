@@ -33,7 +33,7 @@ environments {
     production {
         dataSource {
             dbCreate = "update"
-            url = "jdbc:postgresql://localhost:5432/billmate"
+            url = "jdbc:postgresql://10.0.0.50:5432/billmate"
         }
     }
 }
