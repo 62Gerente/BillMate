@@ -1,2 +1,44 @@
 \section{Componentes}
 
+As componentes que fazem parte da infraestrutura correm serviços que os tornam essenciais para o bom funcionamento da aplicação. Desta forma, serão descritos os serviços que nestas correm para uma melhor compreensão da sua interoperabilidade.
+
+\subsection{Storage}
+
+\begin{itemize}
+	\item \textbf{DRBD} como uma \emph{storage} distribuída e replicada que promove a alta disponibilidade. De certa forma, comporta-se como um \emph{RAID}, mas sobre a rede;
+	\item \textbf{iSCSI Target} como um protocolo de transporte de comandos \emph{SCSI}, que disponibiliza dispositivos físicos para uso remoto.
+\end{itemize}
+
+\subsection{Service Cluster}
+\begin{itemize}
+	\item \textbf{iSCSI Initiator} para permitir a conexão de dispositivos remotos, como se de físicos se tratassem;
+	\item \textbf{NFS Server} que disponibiliza um sistema de ficheiros distribuído de um dispositivo, sobre a rede;
+	\item \textbf{Linux DM MultiPath} é um serviço que fornece a capacidade de obter vários caminhos para um dispositivo (mapeamento). Fornece, por isso, \emph{fail-over} de modo a tornar disponível os dispositivos pretendidos.
+\end{itemize}
+
+\subsection{Application}
+	\subsubsection{Application Cache Servers}
+		\begin{itemize}
+			\item \textbf{Redis} como uma \emph{key-value store} que permite, opcionalmente, a persistência de dados. De modo geral, mantém os dados em memória, para serem acedidos de uma forma mais rápida e eficiente. Fornece replicação \emph{master-slave} de uma forma assíncrona, contribuindo para a tolerância a faltas. Na infraestrutura, como são usados para \emph{cache} de sessões comum, a perda de algumas sessões, no caso de ainda não terem sido replicadas nos servidores \emph{slave}, não traz transtorno significativo;
+			\item \textbf{Redis Sentinel} é um sistema distribuído que tem como objetivo gerir as instâncias \emph{redis}. Possui a capacidade de despoletar \emph{fail-over} de acordo com votação da maioria dos servidores, denominado \emph{quorum};
+			\item \textbf{HAProxy} é uma solução que oferece alta disponibilidade, balanceamento de carga e uso de \emph{proxies} para aplicações baseadas em \emph{TCP}. É dotado da capacidade de reencaminhar pedidos através de uma ordem de servidores descrita num ficheiro de configuração, ou seja, em casos onde um pedido é enviado ao servidor \emph{slave}, este serviço reencaminha-o para o \emph{master}.
+		\end{itemize}
+	\subsubsection{Application Servers}
+		\begin{itemize}
+			\item \textbf{NFS Client} para montar um sistema de ficheiros disponibilizado por um \emph{NFS Server};
+			\item \textbf{Apache Tomcat} é um servidor aplicacional responsável por gerir toda a componente aplicacional que a ele foi associado, desde o tratamento de pedidos \emph{HTTP} à gestão de sessões.
+		\end{itemize}
+
+\subsection{Web Servers}
+	\begin{itemize}
+		\item \textbf{Apache HTTP} é um servidor \emph{web}, capaz de interpretar pedidos \emph{HTTP};
+		\item \textbf{Apache Tomcat Connector} transmite pedidos \emph{HTTP} para o \emph{Apache Tomcat}, de modo a que este os interprete da forma pretendida.
+	\end{itemize}
+
+\subsection{Load Balancers}
+\begin{itemize}
+	\item \textbf{Pulse Hearbeat} é um serviço de comunicação entre servidores que trabalham em conjunto de modo a proporcionar o mecanismo de \emph{fail-over}. Consiste na troca de uma pequena quantidade de dados com o objetivo de registar atividade, daí o nome \emph{hearbeat};
+	\item \textbf{Piranha} oferece uma interface gráfica para gerir o balanceamento de carga e reencaminhamento de pedidos para vários servidores.
+\end{itemize}
+
+
