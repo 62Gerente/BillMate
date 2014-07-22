@@ -1,0 +1,52 @@
+This is ApacheBench, Version 2.3 <$Revision: 655654 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 192.168.0.100 (be patient)
+Completed 100 requests
+Completed 200 requests
+Completed 300 requests
+Completed 400 requests
+Completed 500 requests
+Finished 500 requests
+
+
+Server Software:        Apache/2.2.15
+Server Hostname:        192.168.0.100
+Server Port:            80
+
+Document Path:          /BillMate/dashboard/user
+Document Length:        522106 bytes
+
+Concurrency Level:      8
+Time taken for tests:   413.285 seconds
+Complete requests:      500
+Failed requests:        1
+   (Connect: 0, Receive: 0, Length: 1, Exceptions: 0)
+Write errors:           0
+Non-2xx responses:      1
+Keep-Alive requests:    0
+Total transferred:      260618128 bytes
+HTML transferred:       260532634 bytes
+Requests per second:    1.21 [#/sec] (mean)
+Time per request:       6612.553 [ms] (mean)
+Time per request:       826.569 [ms] (mean, across all concurrent requests)
+Transfer rate:          615.82 [Kbytes/sec] received
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        1    3   2.1      2      15
+Processing:  1446 6568 529.5   6506    8880
+Waiting:     1445 6427 514.3   6376    8787
+Total:       1448 6571 529.4   6509    8882
+
+Percentage of the requests served within a certain time (ms)
+  50%   6509
+  66%   6704
+  75%   6838
+  80%   6933
+  90%   7148
+  95%   7480
+  98%   7852
+  99%   8116
+ 100%   8882 (longest request)

@@ -15,13 +15,13 @@ function getUserData(){
 }
 
 function getCircleID(){
-	$circleID = '769';
+	$circleID = '1641';
 
 	return $circleID;
 }
 
 function getExpenseID(){
-	$expenseID = '2864';
+	$expenseID = '8830';
 
 	return $expenseID;
 }
@@ -29,9 +29,9 @@ function getExpenseID(){
 // Build Expense
 function getExpenseData($userID){
 	$value = 70;
-	$circleID = '769';
-	$expenseTypeID = '772';
-	$userFriendsIDs = array('271','100', '340'); // Note: These are user_id, not registered_user_id
+	$circleID = '1641';
+	$expenseTypeID = '1644';
+	$userFriendsIDs = array('214','376','12'); // Note: These are user_id, not registered_user_id
 
 	$userFriendsIDsSize = count($userFriendsIDs);
 	$userFriendsValues = buildUsersValues($value, $userFriendsIDsSize);
@@ -84,9 +84,9 @@ function getHouseData($userID){
 
 // Build Payment
 function getPaymentData($userID){
-	$payerID = '139';
-	$expenseIDs = array('2864');
-	$values = array('7.5');
+	$payerID = '214';
+	$expenseIDs = array('8830');
+	$values = array('20');
 
 	$paymentData = array(
 		    'idsExpense' => '[' . implode(',', $expenseIDs) . ']',

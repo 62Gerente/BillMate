@@ -1,6 +1,6 @@
 <?php
 
-define('HOST', 'localhost:8080');
+define('HOST', '192.168.0.100');
 
 include('includes/util.php');
 include('includes/requests.php');
@@ -13,9 +13,9 @@ if(isset($argv[1]) && $argv[1] === 'help'){
 }
 
 $scenario = $argc > 1 ? $argv[1] : 'default';
-$requestsPerIteration = $argc > 2 ? $argv[2] : 100000;
-$requestsConcurrency = $argc > 3 ? $argv[3] : 64;
-$requestsIterations = $argc > 4 ? $argv[4] : 4;
+$requestsPerIteration = $argc > 2 ? $argv[2] : 500;
+$requestsConcurrency = $argc > 3 ? $argv[3] : 8;
+$requestsIterations = $argc > 4 ? $argv[4] : 3;
 
 // Set percentage of requests' type
 $requestTypes = array(
@@ -51,20 +51,26 @@ for($requestIteration = 1; $requestIteration <= $requestsIterations; $requestIte
 	$requestTypeIndex = chooseWithProbability(array_values($requestTypes));
 	$requestType = array_keys($requestTypes)[$requestTypeIndex];
 
+	$filename = getcwd() . '/output/' . $scenario . '_' . @date("d-M-Y-h:i:s") . '-' . $requestIteration . '-' . $requestsPerIteration . '-' . $requestsConcurrency;
+
 	$command = prepareRequest(
 			$requestType,
 			$requestsPerIteration,
 			$requestsConcurrency,
 			getcwd() . '/tmp',
-			getcwd() . '/output/' . date("d-M-Y-h:i:s") . '-' . $requestIteration . '-' . $requestsPerIteration . '-' . $requestsConcurrency . '.dat'
+			$filename . '.dat'
 		);
 
 	// Replace possible fields
 	$command = str_replace('$expenseID', getExpenseID(), $command);
 	$command = str_replace('$circleID', getCircleID(), $command);
 	$command = str_replace('$id', $user['registered_id'], $command);
-	echo $command, PHP_EOL; exit(1);
-	exec($command);
+
+	echo $command;
+
+	exec($command . ' > ' . $filename . '.out 2>&1');
+
+	sleep(15);
 
 	// Duplicate number of concurrent requests at each iteration
 	$requestsConcurrency *= 2;
