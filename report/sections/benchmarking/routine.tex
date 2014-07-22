@@ -1,1 +1,13 @@
 \section{Rotina}
+
+Como se referiu anteriormente, foi seguida uma rotina para a execução do \emph{benchmark}, que consiste na tomada de vários passos para obter os resultados do desempenho do sistema. Antes de iniciar a rotina, é reposto o estado inicial da base de dados, ou seja, o estado final após a geração de dados.
+
+Fez-se uso da ferramenta \emph{Apache Bench}, cujo objectivo, como o nome indica, é efetuar um determinado número de pedidos ao \emph{URL} que lhe é passado, neste caso o da \emph{dashboard} do utilizador, onde o custo de carregamento de todos os \emph{widgets} nela incluídos se torna interessante de pôr em questão. Os passos tomados na rotina foram os seguintes:
+
+\begin{itemize}
+	\item Execução de um aquecimento prévio da base de dados;
+	\item Execução do \emph{Apache Bench} para 500 pedidos com 8 clientes concorrentes;
+	\item Execução do \emph{Apache Bench} para 500 pedidos com 16 clientes concorrentes;
+	\item Execução do \emph{Apache Bench} para 500 pedidos com 32 clientes concorrentes;
+	\item Geração de gráficos.
+\end{itemize}

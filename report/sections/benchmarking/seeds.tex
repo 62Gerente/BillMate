@@ -1,1 +1,35 @@
 \section{Povoação da base de dados}
+
+Por forma a incluir alguma carga de registos no serviço, tais como utilizadores, círculos, despesas e pagamentos, optou-se por implementar um \emph{script} na linguagem \emph{PHP}.
+
+
+A linha de pensamento seguida foi:
+\begin{itemize}
+	\item \textbf{Adicionar utilizadores no sistema} \\
+		\indent A adição de utilizadores é necessária, visto que todo o resto do procedimento de geração de dados se torna dependente destes. Para obter a lista de utilizadores, recorreu-se à \emph{API} do \emph{www.randomuser.me}. Para registar utilizadores no sistema, usou-se o seguinte comando:
+		\begin{verbatim}
+			php seedRegisteredUser.php <quantity>
+		\end{verbatim}
+
+	\item \textbf{Adicionar círculos de utilizadores} \\
+		\indent Tendo em conta que, no sistema, os círculos são os pontos de encontro de utilizadores, torna-se essencial gerar alguns de modo a que possam interagir através da adição de despesas e os respetivos pagamentos.
+		\begin{verbatim}
+			php seedCircle.php <quantity>
+		\end{verbatim}
+
+	\item \textbf{Adicionar despesas aos círculos} \\
+		\indent Tendo em conta que, no sistema, os círculos são os pontos de encontro de utilizadores, torna-se essencial gerar alguns de modo a que possam interagir através da adição de despesas e os respetivos pagamentos.
+		\begin{verbatim}
+			php seedExpense.php <quantity_per_circle>
+		\end{verbatim}
+
+	\item \textbf{Adicionar pagamentos de despesas} \\
+		\indent Para simular algum estado com algumas alterações, foram simulados pagamentos de despesa, de modo a verificar diferentes estados da aplicação.
+		\begin{verbatim}
+			php seedPayment.php
+		\end{verbatim}
+\end{itemize}
+
+Note que os estados intermédios de cada comando são recolhidos do estado da base de dados e guardados localmente, no formato \emph{JSON}.
+
+Desta forma, depois de inseridos os estados, pode dar-se início à rotina de recolha de dados sobre o comportamento do sistema face às cargas a que é sujeito, que será explicada de seguida.
