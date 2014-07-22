@@ -30,7 +30,8 @@ for($i = 0; $i < $circlesCount; $i++) {
     $circleData = array(
         ($type . 'Name') => $inputCirclesData[$type][$position],
         ('friends' . ucfirst($type)) => implode( ',' , getFriendsOfAndHimself($user, rand(3, 8))),
-        'expenseType' => implode( ',' , getRandomExpenseType(rand(1, 6)))
+        'expenseType' => implode( ',' , getRandomExpenseType(rand(1, 6))),
+        'identifier' => $user['id']
     );
 
     $allCircles['results'][$user['email']][$type][] = $circleData;

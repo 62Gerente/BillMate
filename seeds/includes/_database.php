@@ -4,7 +4,7 @@
  */
 
 function dbConnect(){
-    return pg_connect("host=localhost port=5432 dbname=billmate");
+    return pg_connect("host=10.0.0.50 port=5432 dbname=billmate user=postgres");
 }
 
 function getNameFromTableWhere($resource, $table = 'registered_user', $where = '1=1'){
