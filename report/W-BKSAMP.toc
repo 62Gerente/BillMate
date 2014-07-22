@@ -49,6 +49,6 @@
 \contentsline {section}{\numberline {10.3}Itera\IeC {\c c}\IeC {\~o}es}{28}
 \contentsline {section}{\numberline {10.4}Conclus\IeC {\~o}es finais}{28}
 \contentsline {chapter}{\numberline {11}Trabalho futuro}{29}
-\contentsline {chapter}{\numberline {12}Conclus\IeC {\~a}o}{30}
+\contentsline {chapter}{\numberline {12}Conclus\IeC {\~a}o e trabalho futuro}{30}
 \contentsline {achapter}{A\hskip 2pt \ \hskip 1em\relax Web dashboard}{33}
 \contentsline {achapter}{B\hskip 2pt \ \hskip 1em\relax Mobile dashboard}{34}
