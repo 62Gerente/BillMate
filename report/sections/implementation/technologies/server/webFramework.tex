@@ -1,6 +1,4 @@
-\subsubsection{Framework Web - Grails} 
-
-\newline
+\subsection{Framework Web - Grails} 
 
 Nesta secção pretende-se descrever as características da \textit{framework web Grails}, e explicitar as razões que levaram à escolha da mesma para o desenvolvimento da plataforma \textit{BillMate}.
 
@@ -8,41 +6,42 @@ O \textit{Grails} é uma \textit{framework web}, de código aberto, que incorpor
 
 O \textit{Grails} é construido sobre a linguagem \textit{Java}. Essa característica permite que a sua integração com bibliotecas e \textit{frameworks} \textit{Java} seja natural.
 
-Uma das principais vantagens na sua utilização é o grande conjunto de \textit{plugins} que esta disponibiliza e que permitem acelerar significativamente o processo de desenvolvimento.
+Uma das principais vantagens na sua utilização é o grande conjunto de \textit{plugins} que esta disponibiliza e que permitem acelerar significativamente o processo de desenvolvimento.\\
 
-\paragraph{Groovy}
+\textbf{\large{Groovy}}\\
 
-O \textit{Groovy} é uma linguagem de programação orientada aos objetos desenvolvida como alternativa à linguagem de programação \textit{Java} e que apresenta características do \textit{Python}, \textit{Ruby} e \textit{Smalltalk}. É uma linguagem que pretende oferecer mecanismos que não estão presentes no \textit{Java} e melhorar a legibilidade do código produzido.
+O \textit{Groovy} é uma linguagem de programação orientada aos objetos desenvolvida como alternativa à linguagem de programação \textit{Java} e que apresenta características do \textit{Python}, \textit{Ruby} e \textit{Smalltalk}. É uma linguagem que pretende oferecer mecanismos que não estão presentes no \textit{Java} e melhorar a legibilidade do código produzido.\\
 
-\paragraph{Arquitetura}
+\textbf{\textit{Arquitetura}}\\
 
 \begin{figure}[ht]
 \centerline{\includegraphics[width=.5\textwidth]{images/implementation/architecture_grails}}
 \caption{Arquitetura Grails}
+\label{fig:arqgrails}
 \end{figure}
 
-\paragraph{Estrutura}
+\hspace{1cm}
 
-Os principais componentes da estrutura de uma aplicação \textit{Grails} são:
+A figura \ref{fig:arqgrails} apresenta a arquitetura de uma aplicação \textit{Grails}. A sua estrutura será indicada na seguinte lista com mais detalhe.
 
-\begin{description}
-  \item[Domain classes]
+\begin{itemize}
+    \item \textbf{\textit{Domain classes}}\\
 
     As \textit{domain classes} são dos componentes mais importantes de uma aplicação \textit{web} em \textit{Grails}. Cada \textit{domain class} vai corresponder a uma entidade do sistema, estas entidades são normalmente persistidas e estão associadas a uma tabela da base de dados.
 
     No contexto de uma aplicação \textit{Java Enterprise Edition (JEE)} e utilizando componentes \textit{Enterprise Java Beans (EJB)}, as \textit{domain classes} poderiam representar \textit{entity beans}. 
 
-  \item[Controllers]
+    \item \textbf{\textit{Controllers}}\\
 
     Os controladores, à semelhança de outras \textit{frameworks web MVC}, são responsáveis por enviar e receber dados das \textit{views} e gerir redirecionamentos e respostas. Estas classes comunicam com as \textit{domain classes}, com os \textit{services} e com as \textit{views}.
 
-  \item[Views]
+    \item \textbf{\textit{Views}}\\
 
     As \textit{views} são os componentes responsáveis por apresentar dados ao utilizador.
 
     Para facilitar a integração de conteúdo dinâmico com conteúdo estático, o \textit{Grails} utiliza \textit{Groovy Server Pages (GSP)} que é uma linguagem de apresentação semelhante ao \textit{Java Server Pages (JSP)}.
 
-  \item[Services]
+    \item \textbf{\textit{Services}}\\
 
     O \textit{Grails} utiliza os \textit{services} para separar a lógica de negócio dos restantes componentes.
 
@@ -50,21 +49,21 @@ Os principais componentes da estrutura de uma aplicação \textit{Grails} são:
 
     No contexto de uma aplicação \textit{Java Enterprise Edition (JEE)} e utilizando componentes \textit{Enterprise Java Beans (EJB)}, as \textit{domain classes} poderiam representar \textit{session beans}.  
 
-  \item[Tag libraries]
+    \item \textbf{\textit{Tag libraries}}\\
 
     As \textit{tag libraries} são classes que funcionam como \textit{helpers} para a geração de conteúdo dinâmico nas \textit{views}.
 
-\end{description}
+\end{itemize}
 
-\paragraph{Spring}
+\textbf{\large{Spring}}\\
 
   Como referido anteriormente o \textit{Grails} tem a \textit{framework} \textit{Spring} embebida. 
 
-  Este acaba por se definir como uma aplicação \textit{Spring MVC} \"disfarçada\", tal como é indicado na sua documentação oficial.
+  Este acaba por se definir como uma aplicação \textit{Spring MVC} "disfarçada", tal como é indicado na sua documentação oficial.
 
   Consequentemente a \textit{framework} utiliza os mecanismos de gestão de \textit{beans} do \textit{Spring}.
 
-  \subparagraph{Spring beans}
+  \textbf{\textit{Spring beans}}\\
   
   Por omissão os \textit{spring beans} são \textit{singletons}, ou melhor, apenas uma instância de cada \textit{bean} é criada.
 
@@ -95,7 +94,9 @@ Os principais componentes da estrutura de uma aplicação \textit{Grails} são:
 
   \end{itemize}
 
-\paragraph{Hbernate e GORM}
+\pagebreak
+
+\textbf{\large{Hibernate e GORM}}\\
 
   Como referido anteriormente o \textit{Grails} tem a \textit{framework Hibernate} integrada.
 

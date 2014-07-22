@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.2.27)  22 JUL 2014 19:28
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013) (format=pdflatex 2014.2.27)  22 JUL 2014 22:39
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -392,19 +392,19 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (./W-BKSAMP.aux)
 \openout1 = `W-BKSAMP.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 172.
-LaTeX Font Info:    ... okay on input line 172.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 172.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 174.
+LaTeX Font Info:    ... okay on input line 174.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 174.
 
  (/usr/local/texlive/2013/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
@@ -474,15 +474,15 @@ e
 <images/logo.png, id=1, 489.83pt x 109.40875pt>
 File: images/logo.png Graphic file (type png)
  <use images/logo.png>
-Package pdftex.def Info: images/logo.png used on input line 174.
+Package pdftex.def Info: images/logo.png used on input line 176.
 (pdftex.def)             Requested size: 200.75073pt x 44.8395pt.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <24.88> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 189.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 191.
 
 <images/dium.png, id=3, 80.3pt x 40.15pt>
 File: images/dium.png Graphic file (type png)
  <use images/dium.png>
-Package pdftex.def Info: images/dium.png used on input line 189.
+Package pdftex.def Info: images/dium.png used on input line 191.
 (pdftex.def)             Requested size: 80.30223pt x 40.15111pt.
  [1{/usr/local/texlive/2013/texmf-var/fonts/map/pdftex/updmap/pdftex.map} <./im
 ages/logo.png>]
@@ -526,7 +526,7 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 
  [3])
 (./W-BKSAMP.toc) [4] (./W-BKSAMP.toc [5]
-Underfull \vbox (badness 1102) has occurred while \output is active []
+Underfull \vbox (badness 1642) has occurred while \output is active []
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
@@ -746,37 +746,154 @@ Cap\'{\i }tulo 8.
 [22]
 Cap\'{\i }tulo 9.
 (./sections/implementation/technologies.tex
-(./sections/implementation/technologies/server.tex)
-(./sections/implementation/technologies/client.tex))
-(./sections/implementation/components.tex)) (./sections/benchmarking.tex
-[23]
+(./sections/implementation/technologies/server.tex
+(./sections/implementation/technologies/server/webFramework.tex
+Underfull \hbox (badness 10000) in paragraph at lines 9--10
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 13--14
+
+ []
+
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+ [23]
+Underfull \hbox (badness 10000) in paragraph at lines 15--16
+
+ []
+
+
+<images/implementation/architecture_grails.png, id=133, 749.80125pt x 503.8825p
+t>
+File: images/implementation/architecture_grails.png Graphic file (type png)
+ <use images/implementation/architecture_grails.png>
+Package pdftex.def Info: images/implementation/architecture_grails.png used on 
+input line 18.
+(pdftex.def)             Requested size: 180.0pt x 120.95734pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 28--29
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 34--35
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 38--39
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 44--45
+
+ []
+
+
+Overfull \hbox (1.70645pt too wide) in paragraph at lines 48--49
+[]\OT1/ptm/m/n/10 Os \OT1/ptm/m/it/10 ser-vi-ces \OT1/ptm/m/n/10 po-dem fa-cil-
+mente fa-zer uso de fun-ci-o-na-li-da-des de inje[][]ao de de-pend[]encias
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[24 <./images/implementation/architecture_grails.png>]
+Underfull \hbox (badness 10000) in paragraph at lines 52--53
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 58--59
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 66--67
+
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[25]
+Underfull \hbox (badness 10000) in paragraph at lines 99--100
+
+ []
+
+) (./sections/implementation/technologies/server/database.tex))
+(./sections/implementation/technologies/client.tex
+(./sections/implementation/technologies/client/web.tex
+Underfull \hbox (badness 10000) in paragraph at lines 6--7
+
+ []
+
+
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 11--12
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 16--17
+
+ []
+
+) (./sections/implementation/technologies/client/mobile.tex
+Underfull \hbox (badness 10000) in paragraph at lines 21--1
+
+ []
+
+)))) (./sections/benchmarking.tex
+Underfull \hbox (badness 10000) has occurred while \output is active
+[]
+ []
+
+[27]
 Cap\'{\i }tulo 10.
 (./sections/benchmarking/seeds.tex) (./sections/benchmarking/routine.tex)
 (./sections/benchmarking/iterations.tex) (./sections/benchmarking/final.tex))
-(./sections/futurework.tex [24]
+(./sections/futurework.tex [28]
 Cap\'{\i }tulo 11.
-) (./sections/conclusion.tex [25]
+) (./sections/conclusion.tex [29]
 Cap\'{\i }tulo 12.
-) (./sections/bibliografia.tex [26] [27]) (./sections/www.tex)
-(./sections/appendix.tex [28] (./sections/appendix/apendice1.tex
+) (./sections/bibliografia.tex [30] [31]) (./sections/www.tex)
+(./sections/appendix.tex [32] (./sections/appendix/apendice1.tex
 Overfull \hbox (10.0pt too wide) in paragraph at lines 1--1
  [] 
  []
 
-) [29] (./sections/appendix/apendice2.tex
+) [33] (./sections/appendix/apendice2.tex
 Overfull \hbox (10.0pt too wide) in paragraph at lines 1--1
  [] 
  []
 
-) [30]) (./W-BKSAMP.ind) (./W-BKSAMP.aux) ) 
+) [34]) (./W-BKSAMP.ind) (./W-BKSAMP.aux) ) 
 Here is how much of TeX's memory you used:
- 4731 strings out of 493315
- 65409 string characters out of 6137904
- 152542 words of memory out of 5000000
- 7914 multiletter control sequences out of 15000+600000
- 59132 words of font info for 108 fonts, out of 8000000 for 9000
+ 4754 strings out of 493315
+ 66220 string characters out of 6137904
+ 152619 words of memory out of 5000000
+ 7924 multiletter control sequences out of 15000+600000
+ 60239 words of font info for 109 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 39i,9n,35p,773b,336s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 39i,10n,35p,795b,338s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2013/texmf-dist/
 fonts/enc/dvips/base/8r.enc}</usr/local/texlive/2013/texmf-dist/fonts/type1/urw
 /helvetic/uhvb8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/helvet
@@ -784,10 +901,10 @@ ic/uhvr8a.pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmb8a.
 pfb></usr/local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmbi8a.pfb></usr
 /local/texlive/2013/texmf-dist/fonts/type1/urw/times/utmr8a.pfb></usr/local/tex
 live/2013/texmf-dist/fonts/type1/urw/times/utmri8a.pfb>
-Output written on W-BKSAMP.pdf (43 pages, 1214770 bytes).
+Output written on W-BKSAMP.pdf (47 pages, 1471832 bytes).
 PDF statistics:
- 181 PDF objects out of 1000 (max. 8388607)
- 118 compressed objects within 2 object streams
+ 195 PDF objects out of 1000 (max. 8388607)
+ 126 compressed objects within 2 object streams
  0 named destinations out of 1000 (max. 500000)
- 26 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 31 words of extra memory for PDF output out of 10000 (max. 10000000)
 
