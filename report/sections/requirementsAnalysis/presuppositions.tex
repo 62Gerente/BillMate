@@ -1,1 +1,15 @@
 \section{Pressupostos}
+
+Durante a fase do levantamento e análise de requisitos, é preciso começar a tirar conclusões e a resolver problemas que vão sendo identificados. Nesta fase começa a ser necessário haver pressupostos, que irão influenciar a modelação do sistema.
+
+\begin{itemize}
+\item Um grupo não tem um responsável, e todos os que estiverem nesse grupo podem desempenhar funções de administrador.
+\item O utilizador em sessão pode criar uma despesa sem se incluir a ele próprio.
+\item O aviso de notificação aparece 5 dias antes da data de pagamento.
+\item Ao criar um grupo é possível adicionar utilizadores referenciados à mesma. O nome do referenciado é o prefixo do email que tem de ser inserido.
+\item Só é possível adicionar utilizadores à despesa regular, caso eles estejam no círculo.
+\item O utilizador pode fechar a despesa caso ainda não hajam pagamentos.
+\item O utilizador só pode sair do grupo ou da despesa caso tenha as suas dívidas resolvidas.
+\item O utilizador só pode fechar o grupo, caso todas as dívidas estejam resolvidas.
+\item Se a despesa tiver débito direto, cria automaticamente a despesa e envia as notificações aos colegas da casa, sem o responsável da despesa ter qualquer trabalho.
+\end{itemize}
