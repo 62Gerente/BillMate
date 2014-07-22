@@ -53,7 +53,6 @@
 
 \usepackage{listings} % Required for inserting code snippets
 \usepackage[usenames,dvipsnames]{} % Required for specifying custom colors and referring to colors by name
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% Change options here if you want:
 %%
@@ -154,6 +153,11 @@ tabsize=2, % Number of spaces per tab in the code
 %----------------------------------------------------------------------------------------
 %	BLANK DOCUMENT
 %----------------------------------------------------------------------------------------
+
+\newcommand{\specialcell}[2][c]{%
+  \begin{tabular}[#1]{@{}c@{}}#2\end{tabular}
+  }
+
 
 \newcommand*{\titleTH}{\begingroup
 \raggedleft
