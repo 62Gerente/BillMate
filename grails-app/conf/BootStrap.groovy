@@ -59,6 +59,10 @@ class BootStrap {
             def signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: signUpUser)
             signUpUser.secureSave(signUpAction)
 
+            signUpUser = new RegisteredUser(name: 'Pedro Leite', email: 'pmcleite@gmail.com', password: '123456')
+            signUpAction = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.signUp.toString()), actor: signUpUser)
+            signUpUser.secureSave(signUpAction)
+
         }
 
         if(DefaultExpenseType.count() == 0){
