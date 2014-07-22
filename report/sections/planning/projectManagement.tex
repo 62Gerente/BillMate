@@ -1,1 +1,18 @@
 \section{Gestão do Projeto}
+
+Para a melhor organização do grupo, foram delineadas algumas estratégias para que o trabalho individual possa surtir efeito, sem serem realizadas tarefas redundantes. Apesar do trabalho ser sempre realizado em grupo, no final de cada semana é realizada uma reunião para delinear objetivos e definir prioridades. Serão ainda definidas as \textit{deadlines} para as tarefas.
+
+Deste modo, serão realizadas regularmente reuniões de grupo, para que seja feito o ponto de situação, e além disso serão definidas \textit{deadlines} para as tarefas. A atribuição de prazos tem por base o auxílio do diagrama de gantt que foi previamente realizado.
+
+Apesar do trabalho ser feito diariamente de forma presencial com todo o grupo, utilizaram-se ferramentas que auxiliaram a organização do trabalho. Ferramentas como o \textit{Trello} e o \textit{Git} foram indispensáveis para a boa execução do projeto. O \textit{Git} é uma ferramenta de controlo de versões muito poderosa, que permite que cada utilizador trabalhe de forma independente, e que o \textit{merge} do trabalho seja feito de forma quase transparente.
+O desenvolvimento seguiu o paradigma \textit{feature branch workflow}, que indica que cada nova \textit{feature} seja realizada em \textit{branches} independentes. No final de cada \textit{feature} estar terminada, é feito um \textit{pull request}, com as alterações realizadas. Este é verificado por todos os elementos do grupo, e só quando todos aceitarem, é que se pode propagar estas alterações no repositório principal.
+
+Um ponto fundamental para o sucesso de qualquer aplicação, centra-se na escolha das ferramentas a utilizar. Neste caso existem muitas escolhas que devem ser bem ponderadas, porque os recursos necessários são elevados.
+
+No começo do planeamento de um projeto, é preciso estruturar e modelar o problema. Assim, para a sua modelação optou-se pelo visual paradigm, porque é uma das melhores ferramentas de modelação existentes no mercado, e permite que após a modelação seja possível gerar a base de dados e o código de uma forma muito rápida. Além disto, é preciso ainda criar-se os mockups que serão desenvolvidos em \textit{Balsamiq Mockups}.
+
+Durante a fase de desenvolvimento será utilizado o IntelliJ como IDE, porque é uma ferramenta que tem muita potencialidade para um projeto desta dimensão, e possui a vantagem de permitir a integração com o visual paradigm, permitindo realizar várias operações de modelação diretamente no IDE.
+
+Antes de começar a desenvolver o código para a aplicação é preciso construir uma infraestrutura que suporte a mesma. Assim, para a fase de desenvolvimento, esta será criada nos computadores pessoais utilizando a vmware com máquinas virtuais de CentOS. Ainda na fase de implementação da mesma, é preciso instalar vários serviços, contudo, um serviço fundamental será o motor de base de dados. Para esta optou-se pela utilização do PostgreSQL.
+
+Relativamente à estrutura da aplicação, esta será realizada de acordo com um modelo em 3 camadas (camada de dados, de negócio e de apresentação), sendo que para cada uma destas será utilizada uma framework. De acordo com um estudo realizado anteriormente pelo grupo, a melhor framework para a camada de dados é o Hibernate, para a camada de negócio é o Spring Framework e para a camada de apresentação é o Grails.
