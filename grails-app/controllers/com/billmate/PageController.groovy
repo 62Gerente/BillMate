@@ -5,5 +5,8 @@ class PageController extends BaseController {
     static allowedMethods = [create: "GET"]
 
     def landing = {
+        if(session.user){
+            return redirect(controller: 'dashboard', action: 'user')
+        }
     }
 }
