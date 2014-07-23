@@ -2,11 +2,11 @@
     <table class="table table-home-box">
         <thead>
         <tr>
-            <th class="text-left text-primary uppercase"><g:message code="com.billmate.expense" default="Expense" /></th>
+            <th class="text-left text-primary uppercase" style="overflow: hidden; text-overflow: ellipsis; wrap"><g:message code="com.billmate.expense" default="Expense" /></th>
             <th class="text-left unseen text-primary uppercase"><g:message code="com.billmate.circle" default="Circle" /></th>
             <th class="text-left unseen text-primary uppercase"><g:message code="com.billmate.payment.date" default="Payment date" /></th>
             <th class="text-right text-primary uppercase"><g:message code="com.billmate.expense.value" default="Value" /></th>
-            <th class="text-right text-primary uppercase"></th>
+            <th class="text-right text-primary uppercase" style="width: 0px"></th>
         </tr>
         </thead>
         <tbody>

@@ -1,5 +1,5 @@
 <tr class="invoices-table-row">
-    <td>
+    <td style="white-space: nowrap">
         ${expense}
     </td>
     <td class="text-center">

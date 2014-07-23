@@ -15,7 +15,7 @@
 </head>
 <body>
     <g:render template="/shared/header" model="[user: user]"/>
-    <g:render template="/systemNotification/index" model="[registeredUser: user, notifications: user.getSystemNotifications()]"/>
+    <g:render template="/systemNotification/index" model="[registeredUser: user, notifications: user.getSystemNotifications().take(5)]"/>
 
     <div class="page-container row-fluid">
     <g:render template="/house/modal/index" model="[users: user.getFriendsOfAllCircles(), expenseTypes: user.getExpenseTypeByHouse(), path: user.getPathToDefaultPhoto(), user: user.getUser().getId()]"/>

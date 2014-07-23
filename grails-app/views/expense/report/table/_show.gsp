@@ -1,5 +1,5 @@
 <tr class="report-table-row">
-    <td>
+    <td style="white-space: nowrap">
         <i class="${expense.getExpenseType().getCssClass()}" style="width:20px"></i>
         ${expense}
     </td>
