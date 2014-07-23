@@ -14,7 +14,7 @@ zhamming - \cite{hamming} e ainda zHu - \cite{zHu}
 
 \section{Inserir Imagem}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{\includegraphics[width=.5\textwidth]{images/dium}}
 \caption{Legenda.}
 \end{figure}
@@ -23,7 +23,7 @@ zhamming - \cite{hamming} e ainda zHu - \cite{zHu}
 
 Aqui está outra, mas inseri uma quebra de página para se conseguir separar as duas:
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \vskip2pt
 \centerline{\includegraphics[width=.5\textwidth]{images/dium}}
 \caption{Oscillograph for  memory address access operations,
@@ -60,7 +60,7 @@ Apresentar um exemplo de qualquer coisa.
 
 \section{2 imagens lado a lado}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \sidebyside{
 \includegraphics[width=.5\textwidth]{images/dium}
 \caption{Imagem da Esquerda}
@@ -102,7 +102,7 @@ Tabelas lado a lado
 
  \begin{table}[ht]
  \sidebyside{
-\caption{Table Caption} 
+\caption{Table Caption}
 \begin{tabular}{cccc}
 one&two&three&four\\
 a &little&sample&table
@@ -121,7 +121,7 @@ a &second little& sample&table
 \section{Usar Verbatim}
 
 \begin{verbatim}
- \begin{table} 
+ \begin{table}
  \sidebyside{\caption{Table Caption}\label{tab1}
  first table}
  {\caption{Table Caption}\label{tab2} second table}
@@ -131,7 +131,7 @@ a &second little& sample&table
 
 
 \section{Colocar Snippets}
-	
+
 \insertcode{snippets/example.pl}{Nena would be proud.}
 
 
@@ -140,17 +140,17 @@ a &second little& sample&table
 \begin{algorithm}
 {\bf state\_transition algorithm} $\{$
 \        for each neuron $j\in\{0,1,\ldots,M-1\}$
-\        $\{$   
+\        $\{$
 \            calculate the weighted sum $S_j$ using Eq. (6);
 \            if ($S_j>t_j$)
-\                    $\{$turn ON neuron; $Y_1=+1\}$   
+\                    $\{$turn ON neuron; $Y_1=+1\}$
 \            else if ($S_j<t_j$)
-\                    $\{$turn OFF neuron; $Y_1=-1\}$   
+\                    $\{$turn OFF neuron; $Y_1=-1\}$
 \            else
 \                    $\{$no change in neuron state; $y_j$ remains %
-unchanged;$\}$ 
-\        $\}$   
-$\}$   
+unchanged;$\}$
+\        $\}$
+$\}$
 \end{algorithm}
 
 \section{Inserir Citação}
@@ -205,7 +205,7 @@ This is the first item in the itemized list.
 \prob
 For Hooker's data, Problem 1.2, use the Box and Cox and Atkinson procedures to determine a appropriate transformation of PRES
 in the regression of PRES on TEMP. find $\hat\lambda$, $\tilde\lambda$,
-the score test, and the added variable plot for the score. 
+the score test, and the added variable plot for the score.
 Summarize the results.
 
 \prob
@@ -230,11 +230,11 @@ on the surface tension of liquid copper (Baes and Killogg, 1953).
 
 
 \subprob
-Find the transformations of $X$ and $Y$ sot that in the transformed scale 
+Find the transformations of $X$ and $Y$ sot that in the transformed scale
 the regression is linear.
 
 \subprob
-Assuming that $X$ is transformed to $\ln(X)$, which choice of $Y$ gives 
+Assuming that $X$ is transformed to $\ln(X)$, which choice of $Y$ gives
 better results,
 $Y$ or $\ln(Y)$? (Sclove, 1972).
 
@@ -256,7 +256,7 @@ linear model.
 \exer
 For Hooker's data, Exercise 1.2, use the Box and Cox and Atkinson procedures to determine a appropriate transformation of PRES
 in the regression of PRES on TEMP. find $\hat\lambda$, $\tilde\lambda$,
-the score test, and the added variable plot for the score. 
+the score test, and the added variable plot for the score.
 Summarize the results.
 
 \exer
@@ -281,11 +281,11 @@ on the surface tension of liquid copper (Baes and Killogg, 1953).
 
 
 \subexer
-Find the transformations of $X$ and $Y$ sot that in the transformed scale 
+Find the transformations of $X$ and $Y$ sot that in the transformed scale
 the regression is linear.
 
 \subexer
-Assuming that $X$ is transformed to $\ln(X)$, which choice of $Y$ gives 
+Assuming that $X$ is transformed to $\ln(X)$, which choice of $Y$ gives
 better results,
 $Y$ or $\ln(Y)$? (Sclove, 1972).
 
@@ -309,7 +309,7 @@ Aqui mete-se a descrição. Nota: O NOME DA LABEL FICA DIFERENTE, REALÇANDO QUE
 \end{equation}
 
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \caption{This is an appendix figure caption.}
 \end{figure}
 

@@ -1,8 +1,8 @@
-\subsection{Framework Web - Grails} 
+\subsection{Framework Web - Grails}
 
 Nesta secção pretende-se descrever as características da \textit{framework web Grails}, e explicitar as razões que levaram à escolha da mesma para o desenvolvimento da plataforma \textit{BillMate}.
 
-O \textit{Grails} é uma \textit{framework web}, de código aberto, que incorpora o padrão de desenvolvimento \textit{MVC} e que defende o paradigma de convenção em detrimento da configuração, para a linguagem \textit{Groovy}. O seu principal objetivo é ser uma \textit{framework} de alta produtividade, e para isso utiliza as \textit{frameworks} \textit{Hibernate} e \textit{Spring}. 
+O \textit{Grails} é uma \textit{framework web}, de código aberto, que incorpora o padrão de desenvolvimento \textit{MVC} e que defende o paradigma de convenção em detrimento da configuração, para a linguagem \textit{Groovy}. O seu principal objetivo é ser uma \textit{framework} de alta produtividade, e para isso utiliza as \textit{frameworks} \textit{Hibernate} e \textit{Spring}.
 
 O \textit{Grails} é construido sobre a linguagem \textit{Java}. Essa característica permite que a sua integração com bibliotecas e \textit{frameworks} \textit{Java} seja natural.
 
@@ -14,7 +14,7 @@ O \textit{Groovy} é uma linguagem de programação orientada aos objetos desenv
 
 \textbf{\textit{Arquitetura}}\\
 
-\begin{figure}[ht]
+\begin{figure}[H]
 \centerline{\includegraphics[width=.5\textwidth]{images/implementation/architecture_grails}}
 \caption{Arquitetura Grails}
 \label{fig:arqgrails}
@@ -29,7 +29,7 @@ A figura \ref{fig:arqgrails} apresenta a arquitetura de uma aplicação \textit{
 
     As \textit{domain classes} são dos componentes mais importantes de uma aplicação \textit{web} em \textit{Grails}. Cada \textit{domain class} vai corresponder a uma entidade do sistema, estas entidades são normalmente persistidas e estão associadas a uma tabela da base de dados.
 
-    No contexto de uma aplicação \textit{Java Enterprise Edition (JEE)} e utilizando componentes \textit{Enterprise Java Beans (EJB)}, as \textit{domain classes} poderiam representar \textit{entity beans}. 
+    No contexto de uma aplicação \textit{Java Enterprise Edition (JEE)} e utilizando componentes \textit{Enterprise Java Beans (EJB)}, as \textit{domain classes} poderiam representar \textit{entity beans}.
 
     \item \textbf{\textit{Controllers}}\\
 
@@ -47,7 +47,7 @@ A figura \ref{fig:arqgrails} apresenta a arquitetura de uma aplicação \textit{
 
     Os \textit{services} podem facilmente fazer uso de funcionalidades de injeção de dependências e são facilmente acessíveis a partir dos controladores.
 
-    No contexto de uma aplicação \textit{Java Enterprise Edition (JEE)} e utilizando componentes \textit{Enterprise Java Beans (EJB)}, as \textit{domain classes} poderiam representar \textit{session beans}.  
+    No contexto de uma aplicação \textit{Java Enterprise Edition (JEE)} e utilizando componentes \textit{Enterprise Java Beans (EJB)}, as \textit{domain classes} poderiam representar \textit{session beans}.
 
     \item \textbf{\textit{Tag libraries}}\\
 
@@ -57,17 +57,17 @@ A figura \ref{fig:arqgrails} apresenta a arquitetura de uma aplicação \textit{
 
 \textbf{\large{Spring}}\\
 
-  Como referido anteriormente o \textit{Grails} tem a \textit{framework} \textit{Spring} embebida. 
+  Como referido anteriormente o \textit{Grails} tem a \textit{framework} \textit{Spring} embebida.
 
   Este acaba por se definir como uma aplicação \textit{Spring MVC} "disfarçada", tal como é indicado na sua documentação oficial.
 
   Consequentemente a \textit{framework} utiliza os mecanismos de gestão de \textit{beans} do \textit{Spring}.
 
   \textbf{\textit{Spring beans}}\\
-  
+
   Por omissão os \textit{spring beans} são \textit{singletons}, ou melhor, apenas uma instância de cada \textit{bean} é criada.
 
-  No entanto esta omissão nem sempre é a mais indicada, principalmente quando queremos \textit{beans} mutáveis, pelo que é possível definir um \textit{scope} para o referido \textit{bean}.  
+  No entanto esta omissão nem sempre é a mais indicada, principalmente quando queremos \textit{beans} mutáveis, pelo que é possível definir um \textit{scope} para o referido \textit{bean}.
 
   O Spring suporta cinco \textit{scopes}:
 
