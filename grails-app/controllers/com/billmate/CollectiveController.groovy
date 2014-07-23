@@ -8,9 +8,10 @@ class CollectiveController extends RestrictedController {
 
     def save(){
         boolean result
-        String friendsList = ((params.friendsCollective != "")? params.friendsCollective + "," : "") + params.identifier
+        String friendsList = (params.friendsCollective != "")? params.friendsCollective : ""
         Set<String> expenseSet = params.expenseType.split(",")
         Set<String> friendsSet = friendsList.split(",")
+        if(params.identifier != null) friendsSet.add(params.identifier)
 
         def collective = new Collective(name: params.collectiveName, description: params.collectiveDescription)
         def action = new Action(actionType: ActionType.findWhere(type: ActionTypeEnum.addCollective.toString()), actor: authenticatedUser(), circle: collective.getCircle())
