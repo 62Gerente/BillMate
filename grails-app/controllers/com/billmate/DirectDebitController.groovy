@@ -14,7 +14,7 @@ class DirectDebitController extends RestrictedController {
 
         if(dates.contains(property)){
             if(value){
-                value = new Date().parse("DD-MM-YYYY HH:mm", value)
+                value = new Date().parse("dd-MM-yyyy HH:mm", value)
             }else{
                 value = null
             }
